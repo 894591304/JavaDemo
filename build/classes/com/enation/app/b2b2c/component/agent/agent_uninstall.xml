@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dbsolution>
+	<action>
+		<command>alter</command>
+		<table>adminuser</table>
+		<field type="drop"><name>isagent</name></field>
+	</action>
+	
+	<action>
+		<command>alter</command>
+		<table>goods</table>
+		<field type="drop"><name>agentid</name></field>
+		<field type="drop"><name>thirdPlatform</name></field>
+	</action>
+	
+	<action>
+		<command>drop</command>
+		<table>agentuser</table>
+	</action>	
+</dbsolution>

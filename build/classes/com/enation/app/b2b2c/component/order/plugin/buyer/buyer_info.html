@@ -1,0 +1,36 @@
+<#assign permssion="com.enation.app.base.core.directive.PermssionDirective"?new() > 
+<#assign dateformat="com.enation.framework.directive.DateformateDirective"?new() > 
+<#if ticketDetail?exists>
+<table cellspacing="0" cellpadding="0" border="0">
+	<tbody>
+		<tr>
+			<th style="width: 120px">收货人姓名：</th>
+			<td>${ticketDetail.recname!'' }</td>
+		</tr>
+		<tr>
+			<th>收货人电话：</th>
+			<td>${ticketDetail.rectel!'' }</td>
+		</tr>
+		<tr>
+			<th>收货地址：</th>
+			<td>${ticketDetail.recaddress!'' }</td>
+		</tr>
+		<tr>
+			<th>备注：</th>
+			<td>${ticketDetail.remark!'' }</td>
+		</tr>
+		<tr>
+			<th>提货券号：</th>
+			<td>${ticketDetail.ticketcode!'' }</td>
+		</tr>
+		<tr>
+			<th>提货券有效期：</th>
+			<td><@dateformat pattern="yyyy-MM-dd" time="${(ticketDetail.startdate/1000)?c}" /> ~ <@dateformat pattern="yyyy-MM-dd" time="${ (ticketDetail.enddate/1000)?c}" /></td>
+		</tr>
+		<tr>
+			<th>提货券状态：</th>
+			<td><#if ticketDetail.status==1>已使用</#if><#if ticketDetail.status==0>未使用</#if></td>
+		</tr>
+	</tbody>
+</table>
+</#if> 

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="商品企业组件" version="1.0" javashop_version="3.0.0"
+	author="Javashop">
+	<plugins>
+		<plugin name="商品代理价格插件" id="goodsAgentPricePlugin">
+			<bundle id="goodsPluginBundle"></bundle>
+		</plugin>
+	</plugins>
+</component>

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<!-- 后台action -->
+	<package name="ext" extends="shop_default" namespace="/shop/ext">
+	
+		<action name="mobile" class="mobileAction">
+			<result name="json_message" type="freemarker">
+				<param name="location"  >/admin/json_message.html</param>
+			</result>
+		</action>
+	
+		<action name="mobileMember" class="mobileMemberAction">
+			<result name="json_message" type="freemarker">
+				<param name="location"  >/admin/json_message.html</param>
+			</result>
+		</action>
+		
+		<action name="follow" class="followAction">
+			<result name="json_message" type="freemarker">
+				<param name="location"  >/admin/json_message.html</param>
+			</result>
+			<result name="login" type="freemarker">
+				<param name="location"  >/login.html</param>
+			</result>
+		</action>
+		
+		<action name="credit" class="creditAction">
+			<result name="json_message" type="freemarker">
+				<param name="location"  >/admin/json_message.html</param>
+			</result>
+		</action>
+		
+		<action name="memberShop" class="memberShopAction">
+			<result name="json_message" type="freemarker">
+				<param name="location"  >/admin/json_message.html</param>
+			</result>
+		</action>
+		
+		<action name="goodsAgent" class="goodsAgentAction">
+			<result name="json_message" type="freemarker">
+				<param name="location"  >/admin/json_message.html</param>
+			</result>
+		</action>
+		
+		<action name="proxyCart" class="proxyCartAction">
+			<result name="json_message" type="freemarker">
+				<param name="location"  >/admin/json_message.html</param>
+			</result>
+		</action>
+		
+		<action name="history" class="historyAction">
+			<result name="json_message" type="freemarker">
+				<param name="location"  >/admin/json_message.html</param>
+			</result>
+		</action>
+		
+		<action name="changeSet" class="changeSetAction">
+			<result name="json_message" type="freemarker">
+				<param name="location"  >/admin/json_message.html</param>
+			</result>
+		</action>	
+		
+		<action name="collect" class="collectAction">
+			<result name="json_message" type="freemarker">
+				<param name="location"  >/admin/json_message.html</param>
+			</result>
+		</action>	
+		
+		<action name="proxy" class="proxyAction">
+			<result name="json_message" type="freemarker">
+				<param name="location"  >/admin/json_message.html</param>
+			</result>
+		</action>
+		
+		<action name="address" class="addressAction">
+			<result name="json_message" type="freemarker">
+				<param name="location"  >/admin/json_message.html</param>
+			</result>
+		</action>	
+		<action name="voucher" class="voucherAction">
+			<result name="json_message" type="freemarker">
+				<param name="location"  >/admin/json_message.html</param>
+			</result>
+		</action>	
+		<action name="wap" class="wapAction">
+			<result name="json_message" type="freemarker">
+				<param name="location"  >/admin/json_message.html</param>
+			</result>
+		</action>
+		<action name="ticketGive" class="ticketGiveAction">
+			<result name="json_message" type="freemarker">
+				<param name="location"  >/admin/json_message.html</param>
+			</result>
+		</action>
+		<action name="bankInfo" class="bankInfoAction">
+			<result name="json_message" type="freemarker">
+				<param name="location"  >/admin/json_message.html</param>
+			</result>
+		</action>
+		<action name="proxyVip" class="proxyVipAction">
+			<result name="json_message" type="freemarker">
+				<param name="location"  >/admin/json_message.html</param>
+			</result>
+		</action>
+		<action name="vipInfo" class="vipInfoAction">
+			<result name="json_message" type="freemarker">
+				<param name="location"  >/admin/json_message.html</param>
+			</result>
+		</action>
+		<action name="discountTicket" class="discountTicketAction">
+			<result name="json_message" type="freemarker">
+				<param name="location"  >/admin/json_message.html</param>
+			</result>
+		</action>
+	</package>
+</struts>

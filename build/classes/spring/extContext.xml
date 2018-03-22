@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-2.5.xsd" default-autowire="byName" default-lazy-init="false">
+	<!-- 定义此应用的组件扫描包 -->
+	<context:component-scan base-package="com.enation.app.ext.component" />
+	<context:component-scan base-package="com.enation.app.ext.core" />
+	
+	<!-- action配置 -->
+	<bean id="mobileAction" class="com.enation.app.ext.component.mobile.action.MobileAction" scope="prototype" />
+	<bean id="userMsgAction" class="com.enation.app.ext.component.usermsg.action.UserMsgAction" scope="prototype" />
+	<bean id="mobileMemberAction" class="com.enation.app.ext.core.action.MobileMemberAction" scope="prototype" />
+	<bean id="followAction" class="com.enation.app.ext.component.follow.action.FollowAction" scope="prototype" />
+	<bean id="creditAction" class="com.enation.app.ext.component.credit.action.CreditAction" scope="prototype" />
+	<bean id="memberShopAction" class="com.enation.app.ext.component.membershop.action.MemberShopAction" scope="prototype" />
+	<bean id="goodsAgentAction" class="com.enation.app.ext.component.goodsagent.action.GoodsAgentAction" scope="prototype" />
+	<bean id="proxyCartAction" class="com.enation.app.ext.component.proxycart.action.ProxyCartAction" scope="prototype" />
+	<bean id="historyAction" class="com.enation.app.ext.component.history.action.HistoryAction" scope="prototype" />
+	<bean id="changeSetAction" class="com.enation.app.ext.core.action.ChangeSetAction" scope="prototype" />
+	<bean id="collectAction" class="com.enation.app.ext.component.collect.action.CollectAction" scope="prototype" />
+	<bean id="proxyAction" class="com.enation.app.ext.component.proxy.action.ProxyAction" scope="prototype" />
+	<bean id="addressAction" class="com.enation.app.ext.component.address.action.AddressAction" scope="prototype" />
+	<bean id="voucherAction" class="com.enation.app.ext.core.action.VoucherAction" scope="prototype" />
+	<bean id="wapAction" class="com.enation.app.ext.component.newpayment.action.alipay.wap.WapAction" scope="prototype" />
+	<bean id="ticketGiveAction" class="com.enation.app.ext.component.ticketgive.action.TicketGiveAction" scope="prototype" />
+	<bean id="bankInfoAction" class="com.enation.app.ext.component.proxyMemberBankInfo.action.BankInfoAction" scope="prototype" />
+	<bean id="proxyVipAction" class="com.enation.app.ext.component.memberproxyvip.action.ProxyVipAction" scope="prototype" />
+	<bean id="vipInfoAction" class="com.enation.app.ext.component.vipleveldetail.action.VipInfoAction" scope="prototype" />
+	<bean id="discountTicketAction" class="com.enation.app.ext.component.goodsdiscountticketdetail.action.DiscountTicketAction" scope="prototype" />
+	
+	<!-- manager配置 -->	
+	<bean id="userMsgManager" class="com.enation.app.ext.component.usermsg.service.UserMsgManager"  parent="baseSupport"  />
+	<bean id="mobileManager" class="com.enation.app.ext.component.mobile.service.impl.MobileManager"  parent="baseSupport"  />
+	<bean id="mobileMemberManager" class="com.enation.app.ext.component.mobile.service.impl.MobileMemberManager"  parent="baseSupport"  />
+	<bean id="memberShopManager" class="com.enation.app.ext.component.membershop.service.impl.MemberShopManager" parent="baseSupport" />
+	<bean id="followManager" class="com.enation.app.ext.component.follow.service.impl.FollowManager" parent="baseSupport" />
+	<bean id="creditManager" class="com.enation.app.ext.component.credit.service.impl.CreditManager" parent="baseSupport" />
+	<bean id="proxyManager" class="com.enation.app.ext.component.proxy.service.impl.ProxyManager" parent="baseSupport" />
+	<bean id="goodsAgentManager" class="com.enation.app.ext.component.goodsagent.service.impl.GoodsAgentManager" parent="baseSupport" />
+	<bean id="userAccountManager" class="com.enation.app.ext.component.useraccount.service.impl.UserAccountManager" parent="baseSupport" />
+	<bean id="proxyCartManager" class="com.enation.app.ext.component.proxycart.service.impl.ProxyCartManager" parent="baseSupport" />
+	<bean id="cartExtManager" class="com.enation.app.ext.core.service.impl.CartExtManager" parent="baseSupport" />
+	<bean id="goodsProxyManager" class="com.enation.app.ext.core.service.impl.GoodsProxyManager" parent="baseSupport" />
+	<bean id="memberExtManager" class="com.enation.app.ext.core.service.impl.MemberExtManager" parent="baseSupport" />
+	<bean id="historyManager" class="com.enation.app.ext.component.history.service.impl.HistoryManager" parent="baseSupport" />
+	<bean id="collectManager" class="com.enation.app.ext.component.collect.service.impl.CollectManager" parent="baseSupport" />
+	<bean id="newCartManager" class="com.enation.app.ext.core.service.impl.NewCartManager" parent="baseSupport" />
+	<bean id="newOrderItemsManager" class="com.enation.app.ext.component.proxyorder.service.impl.NewOrderItemsManager" parent="baseSupport" />
+	<bean id="newOrderManager" class="com.enation.app.ext.component.proxyorder.service.impl.NewOrderManager" parent="baseSupport" />
+	<bean id="proxyOrderManager" class="com.enation.app.ext.component.proxyorder.service.impl.ProxyOrderManager" parent="baseSupport" />
+	<bean id="addressManager" class="com.enation.app.ext.component.address.service.impl.AddressManager" parent="baseSupport" />
+	<bean id="proxyCountManager" class="com.enation.app.ext.component.proxycount.service.impl.ProxyCountManager" parent="baseSupport" />
+	<bean id="newGoodsCatManager" class="com.enation.app.ext.core.service.impl.NewGoodsCatManager" parent="baseSupport" />
+	<bean id="ticketGiveManager" class="com.enation.app.ext.component.ticketgive.service.impl.TicketGiveManager" parent="baseSupport" />
+	
+	<!-- 二期manager配置 -->
+	<bean id="proxyMemberBankInfoManager" class="com.enation.app.ext.component.proxyMemberBankInfo.service.impl.ProxyMemberBankInfoManager" parent="baseSupport" />
+	<bean id="bankSelectManager" class="com.enation.app.ext.component.bankselect.service.impl.BankSelectManager" parent="baseSupport" />
+	<bean id="memberProxyVipManager" class="com.enation.app.ext.component.memberproxyvip.service.impl.MemberProxyVipManager" parent="baseSupport" />
+	<bean id="zsyDetailManager" class="com.enation.app.ext.component.zsydetail.service.impl.ZsyDetailManager" parent="baseSupport" />
+	<bean id="vipLevelDetailManager" class="com.enation.app.ext.component.vipleveldetail.service.impl.VipLevelDetailManager" parent="baseSupport" />
+	<bean id="goodsDiscountTicketDetailManager" class="com.enation.app.ext.component.goodsdiscountticketdetail.service.impl.GoodsDiscountTicketDetailManager" parent="baseSupport" />
+	<bean id="bankInfoManager" class="com.enation.app.ext.component.bankinfo.service.impl.BankInfoManager" parent="baseSupport" />
+	
+	<!-- plugin配置 -->
+	<bean id="goodsAgentPricePlugin" class="com.enation.app.ext.component.goodsagent.plugin.GoodsAgentPricePlugin"></bean>
+	
+	<bean id="paymentPluginBundle" class="com.enation.app.shop.core.plugin.payment.PaymentPluginBundle"></bean>
+	<bean id="weChatPayPlugin" class="com.enation.app.ext.component.newpayment.plugin.wechat.WeChatPayPlugin"></bean>
+		
+	<!-- 配置调度工厂 -->
+	<bean id="myJob" class="com.enation.app.ext.core.job.CallBackInjectResultJob" />
+	<bean id="myJob2" class="com.enation.app.ext.core.job.CallBackInjectResultJob2" />
+	<bean id="myJob3" class="com.enation.app.ext.core.job.CallBackInjectResultJob3" />
+	
+	<bean id="tastDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+    	<property name="targetObject">
+    		<ref bean="myJob"/>
+    	</property>
+   		<property name="targetMethod"> 
+   			<value>execute</value> 
+   		</property>
+    	<property name="concurrent">
+    		<value>false</value>
+    	</property>
+    </bean>
+    
+    <bean id="tastDetail2" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+    	<property name="targetObject">
+    		<ref bean="myJob2"/>
+    	</property>
+   		<property name="targetMethod"> 
+   			<value>execute</value> 
+   		</property>
+    	<property name="concurrent">
+    		<value>false</value>
+    	</property>
+    </bean>
+    
+    <bean id="tastDetail3" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+    	<property name="targetObject">
+    		<ref bean="myJob3"/>
+    	</property>
+   		<property name="targetMethod"> 
+   			<value>execute</value> 
+   		</property>
+    	<property name="concurrent">
+    		<value>false</value>
+    	</property>
+    </bean>
+    
+    <!-- vip有效期定时任务 -->
+    <bean id="myJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+    	<property name="jobDetail">
+    		<ref local="tastDetail"/>
+    	</property>
+     	<property name="cronExpression">
+        	<value>0 0 0/1 * * ?</value>
+        	<!-- 每小时执行一次 -->
+     	</property>
+    </bean>
+    
+    <bean id="myJobTrigger2" class="org.springframework.scheduling.quartz.CronTriggerBean">
+    	<property name="jobDetail">
+    		<ref local="tastDetail2"/>
+    	</property>
+     	<property name="cronExpression">
+        	<value>0 0/1 * * * ?</value>
+        	<!--<value>0 0 0/1 * * ?</value>-->
+        	<!-- 每分钟执行一次 -->
+     	</property>
+    </bean>
+    
+    <bean id="myJobTrigger3" class="org.springframework.scheduling.quartz.CronTriggerBean">
+    	<property name="jobDetail">
+    		<ref local="tastDetail3"/>
+    	</property>
+     	<property name="cronExpression">
+        	<value>0 0 0 1,11,21 * ?</value>
+        	<!--<value>0 0 0/1 * * ?</value>-->
+        	<!-- 1，11，21号三天同步 -->
+     	</property>
+    </bean>
+    
+    <bean lazy-init="false" autowire="no" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="triggers">
+            <list>
+                <ref local="myJobTrigger" /><!-- vip有效期定时任务 -->
+                <ref local="myJobTrigger2" />
+                <ref local="myJobTrigger3" /><!-- 中顺易定时任务 -->
+            </list>
+        </property>
+        <property name="autoStartup">
+        	<value>true</value>
+        </property>
+        <property name="quartzProperties">  
+            <props>  
+                <prop key="org.quartz.threadPool.threadCount">3</prop><!-- 设置线程并发数 -->  
+            </props>  
+        </property>
+    </bean>   
+</beans>

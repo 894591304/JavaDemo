@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dbsolution>
+	<!-- 新增商品企业表 -->
+	<action>
+		<command>create</command>
+		<table>es_goodsticket</table>
+		<field><name>goods_id</name><type>int</type><size>8</size><option>11</option></field>
+		<field><name>title</name><type>varchar</type><size>100</size><option>00</option></field>
+		<field><name>pre</name><type>varchar</type><size>50</size><option>00</option></field>
+		<field><name>num</name><type>int</type><size>8</size><option>00</option></field>
+		<field><name>startdate</name><type>long</type><size>20</size><option>00</option></field>
+		<field><name>enddate</name><type>long</type><size>20</size><option>00</option></field>
+	</action>
+	
+	<action>
+		<command>create</command>
+		<table>es_ticketdetail</table>
+		<field><name>id</name><type>int</type><size>8</size><option>11</option></field>
+		<field><name>goods_id</name><type>int</type><size>8</size><option>00</option></field>
+		<field><name>ticketCode</name><type>varchar</type><size>100</size><option>00</option></field>
+		<field><name>status</name><type>int</type><size>2</size><option>00</option></field>
+		<field><name>startdate</name><type>long</type><size>20</size><option>00</option></field>
+		<field><name>enddate</name><type>long</type><size>20</size><option>00</option></field>
+		<field><name>recName</name><type>varchar</type><size>100</size><option>00</option></field>
+		<field><name>recTel</name><type>varchar</type><size>20</size><option>00</option></field>
+		<field><name>recAddress</name><type>varchar</type><size>255</size><option>00</option></field>
+		<field><name>remark</name><type>varchar</type><size>255</size><option>00</option></field>
+	</action>
+</dbsolution>

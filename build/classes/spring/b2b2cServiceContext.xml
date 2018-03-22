@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-2.5.xsd" default-autowire="byName" default-lazy-init="false">
+	<!-- 定义此应用的组件扫描包 -->
+	<context:component-scan base-package="com.enation.app.b2b2c.component" />
+
+	<!-- action -->
+	<bean id="agentAction" class="com.enation.app.b2b2c.component.agent.action.AgentAction" scope="prototype"/>
+	<bean id="brokerageAction" class="com.enation.app.b2b2c.component.brokerage.action.BrokerageAction" scope="prototype"/>
+	<bean id="creditMemberAction" class="com.enation.app.b2b2c.component.creditmember.action.CreditMemberAction" scope="prototype"/>
+	<bean id="goodsTicketAction" class="com.enation.app.b2b2c.component.goods.action.GoodsTicketAction" scope="prototype"/>
+	<bean id="orderExtAction" class="com.enation.app.b2b2c.component.order.action.OrderExtAction" scope="prototype"/>
+	<bean id="shopIndexItemsExtAction" class="com.enation.app.b2b2c.component.index.action.ShopIndexItemExtAction" scope="prototype"></bean>
+	<bean id="creditMemberBankAction" class="com.enation.app.b2b2c.component.creditmember.action.CreditMemberBankAction" scope="prototype"></bean>
+	<bean id="creditMemberVipAction" class="com.enation.app.b2b2c.component.creditmember.action.CreditMemberVipAction" scope="prototype"></bean>
+	<bean id="goodsRulesAction" class="com.enation.app.b2b2c.component.goods.action.GoodsRulesAction" scope="prototype"></bean>
+	<!-- manger -->
+	<bean id="agentManager" class="com.enation.app.b2b2c.component.agent.service.impl.AgentManager" parent="baseSupport"></bean>
+	<bean id="brokerageManager" class="com.enation.app.b2b2c.component.brokerage.service.impl.BrokerageManager" parent="baseSupport"></bean>
+	<bean id="goodsExtManager" class="com.enation.app.b2b2c.component.agent.service.impl.GoodsExtManager" parent="baseSupport"></bean>
+	<bean id="findManager" class="com.enation.app.b2b2c.component.find.service.impl.FindManager" parent="baseSupport"></bean>
+	<bean id="creditMemberManager" class="com.enation.app.b2b2c.component.creditmember.service.impl.CreditMemberManager" parent="baseSupport"></bean>
+	<bean id="goodsTicketManager" class="com.enation.app.b2b2c.component.goods.service.impl.GoodsTicketManager" parent="baseSupport"></bean>
+	<bean id="orderExtManager" class="com.enation.app.b2b2c.component.order.service.impl.OrderExtManager" parent="baseSupport"></bean>
+	<bean id="indexItemsExtManager" class="com.enation.app.b2b2c.component.index.service.impl.IndexItemsExtManager" parent="baseSupport"></bean>
+	<bean id="ticketDetailManager" class="com.enation.app.b2b2c.component.goods.service.impl.TicketDetailManager" parent="baseSupport"></bean>
+	<bean id="goodsRulesManager" class="com.enation.app.b2b2c.component.goods.service.impl.GoodsRulesManager" parent="baseSupport"></bean>
+	
+	
+	<!-- plugin -->
+	<bean id="adminUserDeletePlugin" class="com.enation.app.b2b2c.component.agent.plugin.adminuser.AdminUserDeletePlugin"></bean>
+	<bean id="brokerageUserDeletePlugin" class="com.enation.app.b2b2c.component.brokerage.plugin.adminuser.BrokerageUserDeletePlugin"></bean>
+	<bean id="goodAgentPlugin" class="com.enation.app.b2b2c.component.agent.plugin.goods.GoodAgentPlugin"></bean>
+	<bean id="goodsAgentSearchPlugin" class="com.enation.app.b2b2c.component.agent.plugin.goods.GoodsAgentSearchPlugin"></bean>
+	<bean id="buyerOrderPlugin" class="com.enation.app.b2b2c.component.order.plugin.buyer.BuyerOrderPlugin"></bean>
+</beans>

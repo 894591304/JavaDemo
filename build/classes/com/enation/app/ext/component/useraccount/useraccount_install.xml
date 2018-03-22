@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dbsolution>
+	<action>
+		<command>create</command>
+		<table>useraccount</table>
+		<field><name>id</name><type>int</type><size>8</size><option>11</option></field>
+		<field><name>memberId</name><type>int</type><size>8</size><option>00</option></field>
+		<field><name>accountId</name><type>varchar</type><size>32</size><option>00</option></field>
+		<field><name>creditLevel</name><type>int</type><size>2</size><option>00</option></field>
+		<field><name>credit</name><type>decimal</type><size>20,2</size><option>00</option></field>
+		<field><name>remainCredit</name><type>decimal</type><size>20,2</size><option>00</option></field>
+		<field><name>repay</name><type>decimal</type><size>20,2</size><option>00</option></field>
+		<field><name>repayTime</name><type>varchar</type><size>32</size><option>00</option></field>
+		<field><name>waitCash</name><type>decimal</type><size>20,2</size><option>00</option></field>
+		<field><name>waitMoney</name><type>decimal</type><size>20,2</size><option>00</option></field>
+		<field><name>addEarn</name><type>decimal</type><size>20,2</size><option>00</option></field>
+	</action>
+</dbsolution>

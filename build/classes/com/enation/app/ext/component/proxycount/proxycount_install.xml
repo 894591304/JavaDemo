@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dbsolution>
+	<action>
+		<command>create</command>
+		<table>proxycount</table>
+		<field><name>id</name><type>int</type><size>8</size><option>11</option></field>
+		<field><name>goodsId</name><type>int</type><size>8</size><option>00</option></field>
+		<field><name>proxyTimeCount</name><type>int</type><size>8</size><option>00</option></field>
+		<field><name>sellCount</name><type>int</type><size>8</size><option>00</option></field>
+		<field><name>proxyAllCount</name><type>int</type><size>8</size><option>00</option></field>
+	</action>
+</dbsolution>

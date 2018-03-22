@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="代理订单组件"  version="1.0" javashop_version="3.0.0" author="Javashop">
+	<plugins>
+		<plugin name="代理订单创建插件" id="proxyOrderCreatePlugin">
+			<bundle id="orderPluginBundle"></bundle>
+		</plugin>
+	</plugins>
+</component>

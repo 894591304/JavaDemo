@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="商品企业(代理商)组件"  version="1.0" javashop_version="3.0.0" author="Javashop">
+	<plugins>
+		<plugin name="会员删除插件" id="adminUserDeletePlugin">
+			<bundle id="adminUserPluginBundle"></bundle>
+		</plugin>
+		<plugin name="商品所属会员插件" id="goodAgentPlugin">
+			<bundle id="goodsPluginBundle"></bundle>
+		</plugin>
+		<plugin name="商品搜索过滤商品企业插件" id="goodsAgentSearchPlugin">
+			<bundle id="goodsPluginBundle"></bundle>
+		</plugin>
+	</plugins>
+</component>

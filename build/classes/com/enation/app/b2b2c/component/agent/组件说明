@@ -1,0 +1,19 @@
+组件说明：
+企业账户理论上也是管理员，只不过是只拥有部分权限的管理员，所以，默认企业账户也是一种管理员，维护管理员表即可。
+
+新增表：
+	es_agent --- 企业账户
+		userid -- 用户id 同 es_adminuser内的userid一致
+		agent_name --- 企业名称
+		agent_tel --- 企业联系方式
+		agent_addr --- 企业地址
+		agent_email --- 企业邮箱
+
+更新表：
+	es_adminuser
+		isagent --- 是否企业账户
+		
+新增数据：
+	菜单新增企业账户
+	
+	

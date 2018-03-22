@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="订单扩展组件（汇聚优选）"  version="1.0" javashop_version="3.0.0" author="Javashop">
+	<plugins>
+		<plugin name="收货人信息插件" id="buyerOrderPlugin">
+			<bundle id="orderPluginBundle"></bundle>
+		</plugin>
+	</plugins>
+</component>

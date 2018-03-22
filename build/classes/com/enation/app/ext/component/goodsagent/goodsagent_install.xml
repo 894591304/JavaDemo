@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dbsolution>
+	<action>
+		<command>create</command>
+		<table>goods_agent</table>
+		<field><name>goodsId</name><type>int</type><size>8</size><option>11</option></field>
+		<!-- 市场价 -->
+		<field><name>mktprice</name><type>decimal</type><size>20,2</size><option>00</option></field>
+		<!-- 优选价 -->
+		<field><name>price</name><type>decimal</type><size>20,2</size><option>00</option></field>
+		<!-- 金卡价 -->
+		<field><name>goldPrice</name><type>decimal</type><size>20,2</size><option>00</option></field>
+		<!-- 白金价 -->
+		<field><name>platinumPrice</name><type>decimal</type><size>20,2</size><option>00</option></field>
+		<!-- 黑卡价 -->
+		<field><name>blackPrice</name><type>decimal</type><size>20,2</size><option>00</option></field>
+		<!-- 供货价 -->
+		<field><name>cost</name><type>decimal</type><size>20,2</size><option>00</option></field>
+		<!-- 无违约代理价 -->
+		<field><name>defaultPrice</name><type>decimal</type><size>20,2</size><option>00</option></field>
+		<!-- 销售期限选项 -->
+		<field><name>timeOption</name><type>varchar</type><size>32</size><option>00</option></field>
+		<!-- 现金券选项 -->
+		<field><name>ticketOption</name><type>varchar</type><size>32</size><option>00</option></field>
+		<!-- 现金券说明 -->
+		<field><name>ticketCaption</name><type>varchar</type><size>255</size><option>00</option></field>
+	</action>
+</dbsolution>

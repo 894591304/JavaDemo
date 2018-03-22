@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="会员信息组件"  version="1.0" javashop_version="3.0.0" author="Javashop">
+	<plugins>
+		<plugin name="支付订单会员信息插件" id="userMsgPlugin">
+			<bundle id="orderPluginBundle"></bundle>
+		</plugin>
+		<plugin name="创建订单会员信息插件" id="userTestMsgPlugin">
+			<bundle id="orderPluginBundle"></bundle>
+		</plugin>
+	</plugins>
+</component>

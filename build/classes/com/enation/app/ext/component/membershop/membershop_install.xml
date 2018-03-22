@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dbsolution>
+	<action>
+		<command>create</command>
+		<table>membershop</table>
+		<field><name>id</name><type>int</type><size>8</size><option>11</option></field>
+		<field><name>memberId</name><type>int</type><size>8</size><option>00</option></field>
+		<field><name>shopName</name><type>varchar</type><size>255</size><option>00</option></field>
+		<field><name>label</name><type>varchar</type><size>255</size><option>00</option></field>
+		<field><name>shopIntro</name><type>varchar</type><size>255</size><option>00</option></field>
+		<field><name>memberImg</name><type>varchar</type><size>64</size><option>00</option></field>
+		<field><name>shopImg</name><type>varchar</type><size>64</size><option>00</option></field>
+		<field><name>mobile</name><type>varchar</type><size>16</size><option>00</option></field>
+		<field><name>qq</name><type>varchar</type><size>16</size><option>00</option></field>
+		<field><name>level</name><type>int</type><size>8</size><option>00</option></field>
+		<field><name>createTime</name><type>varchar</type><size>32</size><option>00</option></field>
+		<field><name>proxyNum</name><type>int</type><size>8</size><option>00</option></field>
+		<field><name>agencyId</name><type>int</type><size>8</size><option>00</option></field>
+		<field><name>showOrHide</name><type>int</type><size>1</size><option>00</option></field>
+	</action>
+</dbsolution>

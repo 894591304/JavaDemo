@@ -1,0 +1,87 @@
+<style>
+	td {
+		text-align: left;
+	}
+</style>
+<script type="text/javascript" src="${staticserver }/js/memberprice.js"></script>
+<div>
+	<table id="pricebox" class="form-table">
+		<tbody>
+			<input type="hidden" maxlength="25" style="width: 60px;" class="input_text" name="weight" id="weight" autocomplete="off" value="${(goods.weight!0)?c}">
+			<tr>
+				<th>优选价：</th>
+				<td><input type="text" maxlength="25" style="width: 60px;" name="price" id="price" class="input_text easyui-validatebox validatebox-text" validtype="money" isrequired="true" autocomplete="off" value="${(goods.price!0)?c}"> 元
+				</td>
+			</tr>
+			<tr>
+				<th>金卡价：</th>
+				<td><input type="text" maxlength="25" style="width: 60px;" name="goldPrice" id="goldPrice" class="input_text easyui-validatebox validatebox-text" validtype="money" isrequired="true" autocomplete="off" value="0"> 元
+				</td>
+			</tr>
+			<tr>
+				<th>白金卡价：</th>
+				<td><input type="text" maxlength="25" style="width: 60px;" name="platinumPrice" id="platinumPrice" class="input_text easyui-validatebox validatebox-text" validtype="money" isrequired="true" autocomplete="off" value="0"> 元
+				</td>
+			</tr>
+			<tr>
+				<th>黑卡价：</th>
+				<td><input type="text" maxlength="25" style="width: 60px;" name="blackPrice" id="blackPrice" class="input_text easyui-validatebox validatebox-text" validtype="money" isrequired="true" autocomplete="off" value="0"> 元
+				</td>
+			</tr>
+			<tr>
+				<th>无违约代理价：</th>
+				<td><input type="text" maxlength="25" style="width: 60px;" name="defaultPrice" id="defaultPrice" class="input_text easyui-validatebox validatebox-text" validtype="money" isrequired="true" autocomplete="off" value="0"> 元
+				</td>
+			</tr>
+			<tr>
+				<th>供货价：</th>
+				<td><input type="text" style="width: 60px;" maxlength="30" name="cost" id="cost" class="input_text easyui-validatebox validatebox-text" validtype="money" isrequired="true" autocomplete="off" value="0"> 元
+				</td>
+			</tr>
+			<tr>
+				<th>代理期限：</th>
+				<td><input type="text" style="width: 60px;" maxlength="30" name="timeOption" id="timeOption" class="input_text easyui-validatebox validatebox-text" isrequired="true" autocomplete="off" value="0"> 天
+				</td>
+			</tr>
+			<tr>
+				<th>现金券选项：</th>
+				<td><input type="text" maxlength="30" name="ticketOption" id="ticketOption" class="input_text easyui-validatebox validatebox-text" isrequired="true" autocomplete="off" value="">(用”/”分割，不超过三个选项)
+				</td>
+			</tr>
+			<tr>
+				<th>现金券说明：</th>
+				<td><textarea maxlength="500" name="ticketCaption" id="ticketCaption" class="input_text easyui-validatebox validatebox-text" style="width: 300px; height: 100px"></textarea>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<#if goods.goods_id?exists>
+		<script>
+			$(function() {
+				//初始化商品代理价
+				$.ajax({
+					url:'${ctx}/shop/ext/goodsAgent!getGoodsAgent.do?goods_id=${goods.goods_id}',
+					dataType:'json',
+					success:function(result){
+						if(result.result==1){
+							var priceData = result.priceData;
+							if(priceData.price)$("#price").val(priceData.price);
+							if(priceData.goldPrice)$("#goldPrice").val(priceData.goldPrice);
+							if(priceData.platinumPrice)$("#platinumPrice").val(priceData.platinumPrice);
+							if(priceData.blackPrice)$("#blackPrice").val(priceData.blackPrice);
+							if(priceData.defaultPrice)$("#defaultPrice").val(priceData.defaultPrice);
+							if(priceData.cost)$("#cost").val(priceData.cost);
+							if(priceData.timeOption)$("#timeOption").val(priceData.timeOption);
+							if(priceData.ticketOption)$("#ticketOption").val(priceData.ticketOption);
+							if(priceData.ticketCaption)$("#ticketCaption").val(priceData.ticketCaption);
+						}
+					},
+					error:function(e){
+						console.log("初始化商品代理价失败",e);
+					}
+				});
+			})
+		</script>
+	</#if>
+</div>

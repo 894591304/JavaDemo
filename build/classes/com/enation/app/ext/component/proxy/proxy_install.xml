@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dbsolution>
+	<action>
+		<command>create</command>
+		<table>proxy</table>
+		<field><name>id</name><type>int</type><size>8</size><option>11</option></field>
+		<field><name>memberId</name><type>int</type><size>8</size><option>00</option></field>
+		<field><name>goodsId</name><type>int</type><size>8</size><option>00</option></field>
+		<field><name>goodsAmount</name><type>int</type><size>8</size><option>00</option></field>
+		<field><name>onSale</name><type>int</type><size>8</size><option>00</option></field>
+		<field><name>sale</name><type>int</type><size>8</size><option>00</option></field>
+		<field><name>frozenDeposit</name><type>decimal</type><size>20,2</size><option>00</option></field>
+		<field><name>frozenCredit</name><type>decimal</type><size>20,2</size><option>00</option></field>
+		<field><name>ticketFrozenCredit</name><type>decimal</type><size>20,2</size><option>00</option></field>
+		<field><name>frozenEarn</name><type>decimal</type><size>20,2</size><option>00</option></field>
+		<field><name>proxyBeginTime</name><type>varchar</type><size>32</size><option>00</option></field>
+		<field><name>proxyTestTime</name><type>varchar</type><size>32</size><option>00</option></field>
+		<field><name>proxyEndTime</name><type>varchar</type><size>32</size><option>00</option></field>
+		<field><name>goodsCategory</name><type>varchar</type><size>255</size><option>00</option></field>
+		<field><name>goodsLabel</name><type>varchar</type><size>255</size><option>00</option></field>
+		<field><name>status</name><type>int</type><size>8</size><option>00</option></field>
+	</action>
+</dbsolution>
