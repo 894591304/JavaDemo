@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+		<link rel="stylesheet" href="${ctx}/themes/default/shop/css/reset.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/shop/css/common.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/shop/css/SHOP.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/login/css/loginPage.css" />
+		<script type="text/javascript" src="${ctx}/themes/default/shop/js/jquery-3.1.0.min.js" ></script>
+		<script type="text/javascript" src="${ctx}/themes/default/shop/js/distpicker.data.js" ></script>
+		<script type="text/javascript" src="${ctx}/themes/default/shop/js/distpicker.js" ></script>
+		<script src="${ctx}/themes/default/js/jquery-form.js"  type="text/javascript"></script>
+		<title>我的银行信息</title>
+	</head>
+<#if member?? >
+<#-- 创建用户基本信息标签 -->
+<#assign userBaseDataTag= newTag("userBaseDataTag") >
+<#-- 调用标签获取用户基本信息 -->
+<#assign user= userBaseDataTag() >
+	<body>
+	<#if user.isCredit==1>
+	<#-- 创建用户基本信息标签 -->
+	<#assign bankInfoTag= newTag("bankInfoTag") >
+	<#-- 调用标签获取用户基本信息 -->
+	<#assign bankinfo= bankInfoTag() >
+
+	<#assign bankInfoListTag= newTag("bankInfoListTag") >
+	<#assign bankInfoList= bankInfoListTag() >
+	<#assign banklist= bankInfoList.banklist>
+	<#if bankinfo.re==1>
+		<div class="publicHeader">
+			<span class="headIcon f_l">
+				<a href="javascript:" onclick="self.location=document.referrer;">
+					<img src="${ctx}/themes/default/img/2.png" alt="">
+				</a>
+			</span>
+				银行信息<#if bankinfo.infoid==0>录入<#else>修改</#if>
+		</div>
+        <form action="" class="addAdressInput" method="post" id="shopinfo_form">
+        	<input type="hidden" id="infoid" name="infoid" value="${bankinfo.infoid}" />
+        	<input type="hidden" id="payeebankcard" name="payeebankcard" value="${bankinfo.cardnum}" />
+        	<input type="hidden" id="payeebankaccounttype" name="payeebankaccounttype" value="${bankinfo.type}" />
+        	<input type="hidden" id="payeebanknum" name="payeebanknum" value="${bankinfo.banknum}" />
+        	<input type="hidden" id="payeebankprovincename" name="payeebankprovincename" value="${bankinfo.provincename}" />
+        	<input type="hidden" id="payeebankcityname" name="payeebankcityname" value="${bankinfo.cityname}" />
+        	<input type="hidden" id="payeecardholder" name="payeecardholder" value="${bankinfo.holder}" />
+        	<input type="hidden" id="payeebankbranchname" name="payeebankbranchname" value="${bankinfo.branchname}" />
+        	<input type="hidden" id="defaultc" name="defaultc" value="0" />
+        	<a style="color:#ff222e;padding-left:16px;font-size: 13px;"><#if bankinfo.infoid==0>请先绑定本人储蓄卡，请认真填写相应信息，否则有可能无法提现成功！<#else>请仔细审核录入信息，并进行修改，否则有可能无法提现成功！</#if></a>
+        </form>
+	<div id="newAddress">
+		<div class="GPeopleDetail">
+			<div class="GPDText">
+				银行卡号码
+			</div>
+			<div class="GPDInput">
+				<input type="number" id="bankcard" value="${bankinfo.cardnum}"/>
+			</div>
+		</div>
+		<div class="GPeopleDetail">
+			<div class="GPDText">
+				银行账户名
+			</div>
+			<div class="GPDInput">
+				<input type="text" id="cardholder" value="${bankinfo.holder}"/>
+			</div>
+		</div>
+		<div class="GPeopleDetail">
+			<div class="GPDText">
+				银行名称
+			</div>
+			<div class="GPDInput">
+				<div  class="addressGetBox" style="text-align:left;">
+                    <select style="width:50%;" class="addressGet" id="banknum">
+<#list banklist as bank>                    
+                    	<option value="${bank.banknum}" >${bank.bankname}</option>
+</#list>                    	
+                    </select>
+                </div>
+			</div>
+		</div>
+		<div class="GPeopleDetail">
+			<div class="GPDText">
+				银行账户类型
+			</div>
+			<div class="GPDInput">
+				<div  class="addressGetBox" style="text-align:left;">
+                    <select style="width:50%;" class="addressGet" id="bankaccounttype">
+                    	<option value="1" <#if bankinfo.type==1>selected = "selected"</#if> >个人账户</option>
+  						<option value="2" <#if bankinfo.type==2>selected = "selected"</#if> >企业账户</option>
+                    </select>
+                </div>
+			</div>
+		</div>
+		<div class="GPeopleDetail">
+			<div class="GPDText">
+				开户行名称
+			</div>
+			<div class="GPDInput">
+				<input type="text" id="bankbranchname" value="${bankinfo.branchname}"/>
+			</div>
+		</div>
+		<div class="GPeopleDetail">
+			<div class="GPDText">
+				开户行地址
+			</div>
+			<div class="GPDInput">
+				<div data-toggle="distpicker" class="addressGetBox">
+                    <select class="addressGet" id="bankprovincename"></select>
+                    <select style="width:68%;" class="addressGet" id="bankcityname" ></select>
+                </div>
+			</div>
+		</div>
+		<#if bankinfo.defaultc==0>
+		<div class="GPeopleDetail">
+			<div class="GPDText" style="width:0%;">
+			</div>
+			设为默认银行卡&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<div class="GPDInput1" style="padding-top: 3px;">
+				<input style="width:15px;height:15px;" id="dcard" type="checkbox"/>
+			</div>
+		</div>
+		<#else>
+			<input style="display:none;" id="dcard" type="checkbox"/>
+		</#if>
+		<div class="GPeopleDetail" style="margin-top: 20px; margin-bottom: 10px;">
+			<a style="color:#999;padding-left:0px;padding-right:0px;font-size: 13px;">请输入验证码，手机号为注册的机号<a1 style="color:#1296db;font-size: 13px;">${user.mobile}</a1>，如该号已注销请联系客服进行变更。</a>
+		</div>
+		<div class="pubInput" id="verifyCodebox">
+			<input class="inputCheck" style="border-left-width: 16px;margin-left: 16px;width:50%!important;margin-right: 35px;" type="text" id="reg_checkcode" name="checkcode" fun="checkMsg" placeholder="请输入验证码" />
+			<a href="javascript:;" class="checkBt" id="sendCode">发送验证码</a>
+		</div>
+	</div>
+	<div class="getBt" style="text-align:-webkit-center;margin-bottom: 30px;">
+		<a id="save">保存信息</a>
+	</div>
+<script type="text/javascript">
+$(function(){
+	$("#save").click(function(){
+		if($('#dcard').is(':checked')) {
+			$("#defaultc").val(1);
+		}else{
+			$("#defaultc").val(0);
+		}
+		var payeebankcard = $('#bankcard').val();
+		var payeecardholder = $('#cardholder').val();
+		var payeebankaccounttype = $('#bankaccounttype').val();
+		var payeebanknum = $('#banknum').val();
+		var payeebankprovincename = $('#bankprovincename').val();
+		var payeebankcityname = $('#bankcityname').val();
+		var payeebankbranchname = $('#bankbranchname').val();
+		if($("#bankcard").val()==null||$("#bankcard").val()==""){
+			alert('请输入银行卡号码！');
+			return false;
+		}else{
+			$("#payeebankcard").val(payeebankcard);
+		}
+		if($("#cardholder").val()==null||$("#cardholder").val()==""){
+			alert('请输入账户名！');
+			return false;
+		}else{
+			$("#payeecardholder").val(payeecardholder);
+		}
+		if($("#bankaccounttype").val()==null||$("#bankaccounttype").val()==""){
+			alert('请选择银行账户类型！');
+			return false;
+		}else{
+			$("#payeebankaccounttype").val(payeebankaccounttype);
+		}
+		if($("#banknum").val()==null||$("#banknum").val()==""){
+			alert('请选择银行名称！');
+			return false;
+		}else{
+			$("#payeebanknum").val(payeebanknum);
+		}
+		if($("#bankbranchname").val()==null||$("#bankbranchname").val()==""){
+			alert('请输入开户支行名称！');
+			return false;
+		}else{
+			$("#payeebankbranchname").val(payeebankbranchname);
+		}
+		if($("#bankprovincename").val()==null||$("#bankprovincename").val()==""||$("#bankprovincename").val()=="—— 省 ——"){
+			alert('请选择开户行省！');
+			return false;
+		}else{
+			$("#payeebankprovincename").val(payeebankprovincename);
+		}
+		if($("#bankcityname").val()==null||$("#bankcityname").val()==""||$("#bankcityname").val()=="—— 市 ——"){
+			alert('请选择开户行市！');
+			return false;
+		}else{
+			$("#payeebankcityname").val(payeebankcityname);
+		}
+		var code=$("#reg_checkcode").val();
+		$.ajax({
+			url:"${ctx}/shop/ext/mobile!checkCode.do",
+			type:"POST",
+			data:"&checkNum="+code,
+			dataType:"json",
+			success:function(json){
+				if(json.result==0){
+					alert("您输入的验证码有误或超时！");
+					return false;
+				}else{
+					if(confirm("请仔细核对卡号和对应银行名称等信息，出现错误有可能造成无法提现或提现到他人账户的问题！是否继续保存？")){
+						$('#shopinfo_form').ajaxSubmit(options);
+					}
+				}
+			}		
+		});
+	});
+	var options = {
+			url : "${ctx}/shop/ext/bankInfo!saveBankInfo.do",
+			type : "POST",
+			dataType : 'json',
+			success : function(data) {				
+				if(data.result==2){
+					alert("请先登录！");
+					window.location.reload();
+				}else if(data.result==1){
+					location.href="addCardSuccess.html";
+				}else if(data.result==3){
+					alert("请先去申请授信！");
+					location.href="user.html";
+				}else if(data.result==4){
+					alert("您没有权限修改这个银行卡信息！");
+					location.href="user.html";
+				}else if(data.result==5){
+					location.href="updateCardSuccess.html";
+				}else{
+					alert(data.message);
+				}
+			},
+			error : function(e) {
+				alert("出现错误 ，请重试!");
+			}
+	};
+	var allowSend = true,
+	time = 60,
+	sendFn = null
+	//发送验证码
+	$("#sendCode").click(function(){	
+	$.ajax({
+			url:"${ctx}/shop/ext/mobile!sendCode.do",
+			type:"POST",
+			dataType:"json",
+			success:function(json){
+				if(json.result==0){
+					alert("发送失败");
+				}else{
+				}
+			}				
+		});
+	sendAjax();
+	});
+	//发送倒计时ajax
+	function sendAjax(){
+		allowSend = false;
+		sendTimeDown();//可删除
+	};
+	//倒计时
+	function sendTimeDown(){
+		sendFn = setInterval(function(){
+			if(time<=0){//倒计时结束
+				$('#sendCode').text('获取验证码').css('background','#ff875a');
+				clearInterval(sendFn);
+				time = 60;
+				allowSend = true;
+			}else{
+				time--;
+				$('#sendCode').text(time+'后再获取').css('background','#999999');
+			}
+		},1000);
+	};
+});
+onload=function(){ 
+	setTimeout(change, 1);
+}; 
+function change(){ 
+	document.getElementById("banknum")[${bankinfo.banknum}-1].selected=true;
+	//$("#bankprovincename option[value='${bankinfo.provincename}']").attr("selected",true);
+	//$("#bankcityname option[value='${bankinfo.cityname}']").attr("selected",true);
+} 
+</script>
+	<#else>
+	对不起，您没有权限修改这个银行卡信息！
+<script type="text/javascript"> 
+onload=function(){ 
+	setTimeout(go, 1);
+}; 
+function go(){ 
+	location.href="user.html"; 
+} 
+</script>
+	</#if>
+<#else>
+您需要首先完成授信，才能进行银行信息录入！
+<script type="text/javascript"> 
+onload=function(){ 
+	setTimeout(go, 1);
+}; 
+function go(){ 
+	location.href="user.html"; 
+} 
+</script>
+</#if>
+	</body>
+<#else>
+<script type="text/javascript"> 
+onload=function(){ 
+	setTimeout(go, 1);
+}; 
+function go(){ 
+	location.href="login.html"; 
+} 
+</script>
+</#if>
+</html>

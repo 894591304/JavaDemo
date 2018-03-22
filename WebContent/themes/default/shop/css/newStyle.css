@@ -1,0 +1,1828 @@
+html,body{height: 100%;}
+.hide{display: none;}
+.wrap{
+  padding: 3rem 0 3.5rem 0;
+  background: #f0f0f0;
+  font-size: 1rem;
+}
+
+/* æˆ‘çš„ VIP */
+
+.mylevel{
+    background: #f0f0f0;
+    font-size: 1rem;
+}
+.mylevel .head{background: #fff;border-top: 1px solid #fff;padding-bottom: 1.5rem;margin-bottom: 0.5rem;}
+.mylevel .head .img{
+    width: 5rem;
+    height: 5rem;
+    margin: 1.5rem auto 1rem;
+}
+.mylevel .head .img img{
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+.mylevel .head .txt{
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+.mylevel .head .txt span{}
+.mylevel .head .txt span:first-child{}
+.mylevel .head .txt span:last-child{
+    color: #ff6a10;
+}
+
+.mylevel .intro{
+    background: #fff;
+    padding: 2rem;
+    margin-bottom: 0.5rem;
+}
+.mylevel .intro .title{
+    color: #ff4215;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+.mylevel .intro .txt{}
+
+.mylevel .shop{
+}
+.mylevel .shop .top{
+    background: #fff;
+    margin-bottom: 0.5rem;
+    display: flex;
+    padding: 0.5rem 1rem;
+    justify-content: flex-start;
+    align-items: center;
+}
+.mylevel .shop .top .img{
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 0.5rem;
+}
+.mylevel .shop .top .img img{
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+.mylevel .shop .top .title{
+    font-weight: 700;
+}
+.mylevel .shop .bottom{
+}
+.mylevel .shop .bottom ul{}
+.mylevel .shop .bottom ul li{
+    background: #fff;
+    margin-bottom: 0.5rem;
+    display: flex;
+    padding: 1rem 2rem;
+    align-items: center;
+}
+.mylevel .shop .bottom ul li .l{
+    width: 4rem;
+    height: 4rem;
+    margin-right: 1rem;
+}
+.mylevel .shop .bottom ul li .l img{
+    display: block;
+}
+.mylevel .shop .bottom ul li .r{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.mylevel .shop .bottom ul li .r .title{
+    font-weight: 700;
+    margin-bottom: 0.2rem;
+}
+.mylevel .shop .bottom ul li .r .tig{
+    display: flex;
+}
+.mylevel .shop .bottom ul li .r .tig span{
+    white-space: nowrap;
+    margin-right: 1rem;
+    font-size: 0.8rem;
+    color: #999;
+}
+
+/* è¾¾äººå¡ä¿¡æ¯ */
+
+.myDaren{
+    padding-bottom: 0;
+}
+.myDaren .head{}
+.myDaren .head .box{
+    background: #fff;
+    padding: 0.8rem 1rem;
+    border-bottom: 1px solid #f0f0f0;
+}
+.myDaren .head .box .t{
+    font-size: 0.8rem;
+    color: #aaa;
+    margin-bottom: 0.3rem;
+}
+.myDaren .head .box .b{
+    font-size: 1.1rem;
+}
+.myDaren .head .box .b span{}
+.myDaren .head .box .b span:first-child{
+    margin-right: 1rem;
+}
+.myDaren .head .box .b span:last-child{}
+
+.myDaren .card{
+    margin: 0.5rem;
+    background: #fd4768  url(../images/card_bg.png) no-repeat center 60px;
+    border-radius: 0.4rem;
+    display: flex;
+    flex-direction: column;
+    background-size: 100%;
+}
+.myDaren .card .img{
+    width: 4rem;
+    border: 1px solid #fff;
+    height: 4rem;
+    border-radius: 5rem;
+    margin: 1rem 0 0 1rem;
+}
+.myDaren .card .img img{
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+.myDaren .card .num{
+    padding: 1.2rem 1.2rem .7rem;
+    color: #fff;
+    font-size: 2.2rem;
+    display: flex;
+    font-weight: 200;
+    justify-content: space-between;
+}
+.myDaren .card .num span{
+    /* flex: 1; */
+    text-align: center;
+    line-height: 1;
+}
+.myDaren .card .ename{
+    padding: 0 1.2rem;
+    color: #fff;
+    line-height: 1;
+    font-size: .9rem;
+}
+.myDaren .card .bottom{
+    color: rgba(0,0,0,0.6);
+    padding: 2rem 1.3rem .7rem;
+    display: flex;
+}
+.myDaren .card .bottom span{}
+.myDaren .card .bottom span:nth-child(1){
+    margin-right: 1rem;
+}
+.myDaren .card .bottom span:nth-child(2){
+    flex: 1;
+}
+.myDaren .card .bottom span:nth-child(3){}
+
+.myDaren .info{}
+.myDaren .info ul{}
+.myDaren .info ul li{
+    display: flex;
+    padding: .5rem 1rem 0 0;
+    justify-content: center;
+    align-items: center;
+}
+.myDaren .info ul li .underLine{
+    border-bottom: 1px solid #ccc;
+    padding-bottom: .7rem;
+}
+.myDaren .info ul li .l{
+    width: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 3rem;
+}
+.myDaren .info ul li .l img{
+    width: 2rem;
+}
+.myDaren .info ul li .r{
+    flex: 1;
+    height: 3.5rem;
+}
+.myDaren .info ul li .r .full{
+    display: block;
+    box-sizing: border-box;
+}
+.myDaren .info ul li .r .full .t{
+    margin-bottom: .5rem;
+    color: #aaa;
+    font-size: 0.8rem;
+    line-height: 1;
+}
+.myDaren .info ul li .r .full .b{
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+.myDaren .info ul li .r .fullSub{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 100%;
+}
+.myDaren .info ul li .r .fullSub .sl{
+    flex: 1;
+    color: #999;
+    font-size: 1.1rem;
+    margin-right: 1rem;
+}
+.myDaren .info ul li .r .fullSub .sr{
+    display: flex;
+    flex: 1.5;
+    align-items: center;
+}
+.myDaren .info ul li .r .fullSub .sr .srImg{}
+.myDaren .info ul li .r .fullSub .sr .srImg img{
+    width: 2rem;
+}
+.myDaren .info ul li .r .fullSub .sr .srTxt{
+    flex: 1;
+    margin-left: 1rem;
+    color: #999;
+    font-size: 1.1rem;
+}
+
+/* æˆ‘çš„é“¶è¡Œå¡ */
+
+.myBankCard{}
+.myBankCard .list{
+    margin-bottom: 0.5rem;
+}
+.myBankCard .list ul{
+    background: #fff;
+    margin-bottom: .5rem;
+}
+.myBankCard .list ul li{
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #f0f0f0;
+    padding: 0.8rem 1rem;
+}
+.myBankCard .list ul li .img{
+    width: 1.7rem;
+    height: 1.7rem;
+    margin-right: .8rem;
+}
+.myBankCard .list ul li .img img{}
+.myBankCard .list ul li .title{
+    flex: 1;
+}
+.myBankCard .list ul li .tig{
+    font-size: .8rem;
+    color: #1296db;
+}
+.myBankCard .list ul li .tigShow{}
+.myBankCard .list ul li .tigHide{
+    display: none;
+}
+.myBankCard .list ul li .check{
+    width: 1.3rem;
+    height: 1.3rem;
+    margin-left: 2rem;
+}
+.myBankCard .list ul li .checkShow{}
+.myBankCard .list ul li .checkHide{
+    display: none;
+}
+.myBankCard .btn{
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #f0f0f0;
+    padding: 0.8rem 1rem;
+    background: #fff;
+    justify-content: space-between;
+}
+.myBankCard .btn span{}
+.myBankCard .btn span:first-child{
+    color: #1296db;
+}
+.myBankCard .btn span:last-child{
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+
+/* æ”¶å…¥æçŽ° */
+
+.withdrawals{
+    padding-bottom: 0;
+}
+.withdrawals .card{
+    margin: 0.6rem;
+    height: 13rem;
+    background: #519eef url(../images/card_bg.png) no-repeat center 55px;
+    border-radius: 0.4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-size: 100%;
+}
+.withdrawals .card .title{
+    margin-bottom: 0.8rem;
+    color: #254e79;
+}
+.withdrawals .card .money{
+    color: #fff;
+    line-height: 1;
+    font-size: 2rem;
+    font-weight: 200;
+    margin-bottom: 60px;
+}
+.withdrawals .add{
+    margin-bottom: 0.5rem;
+    background: #fff;
+}
+.withdrawals .add .t{
+    padding: 0.8rem 1rem;
+    display: flex;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: .8rem;
+}
+.withdrawals .add .t span{}
+.withdrawals .add .t span:nth-child(1){
+    flex: 1;
+    color: #bbb;
+}
+.withdrawals .add .t span:nth-child(2){
+    flex: 1;
+    color: #1296db;
+}
+.withdrawals .add .t span:nth-child(3){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: .4;
+}
+.withdrawals .add .t span:nth-child(3) img{
+    width: auto;
+    height: auto;
+}
+.withdrawals .add .b{
+    display: flex;
+    padding: 0.8rem 1rem;
+    align-items: center;
+}
+.withdrawals .add .b .img{
+    width: 1.6rem;
+    height: 1.6rem;
+    margin-right: 1rem;
+}
+.withdrawals .add .b .img img{}
+.withdrawals .add .b .txt{}
+.withdrawals .box{
+    background: #fff;
+    padding: 1rem 2rem;
+}
+.withdrawals .box .top{
+    font-size: .7rem;
+    font-weight: 700;
+}
+.withdrawals .box .inputWrap{
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #ccc;
+    padding: 1rem 0;
+    font-size: 1.9rem;
+    line-height: 1;
+}
+.withdrawals .box .inputWrap .icon{
+    margin-right: .5rem;
+}
+.withdrawals .box .inputWrap .input{
+    flex: 1;
+}
+.withdrawals .box .inputWrap .input input{
+    width: 100%;
+    border: none;
+}
+.withdrawals .box .btnAllWrap{
+    margin: .8rem 0;
+}
+.withdrawals .box .btnAllWrap a{
+    color: #1296db;
+    font-size: .7rem;
+}
+.withdrawals .box .tig{
+    margin-bottom: .8rem;
+}
+.withdrawals .box .tig p{
+    font-size: .6rem;
+    line-height: 1.5;
+    color: #999;
+}
+.withdrawals .box .tig p span{
+    color: #1296db;
+}
+.withdrawals .box .bottom{
+    display: flex;
+}
+.withdrawals .box .bottom .l{
+    flex: 1;
+}
+.withdrawals .box .bottom .l input{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: #f0f0f0;
+    border-radius: 0.3rem;
+    padding-left: 1rem;
+    box-sizing: border-box;
+}
+.withdrawals .box .bottom .r{
+    width: 7rem;
+    margin-left: .8rem;
+    height: auto;
+}
+.withdrawals .box .bottom .r a{
+    /* width: 20rem; */
+    display: block;
+    background: #f9a11a;
+    color: #fff;
+    border-radius: 0.2rem;
+    text-align: center;
+    padding: .5rem 0;
+    font-size: .7rem;
+}
+.withdrawals .box .submit{}
+.withdrawals .box .submit a{
+    background: #ff0655;
+    color: #fff;
+    margin: 2rem auto;
+    display: block;
+    width: 9rem;
+    text-align: center;
+    height: 2rem;
+    line-height: 2rem;
+    border-radius: 1rem;
+    font-size: .9rem;
+}
+
+/* æˆ‘çš„çŽ°é‡‘åˆ¸ */
+.mineCoupon{
+    padding-bottom: 0;
+}
+.mineCoupon .banner{    height: 10rem;
+    overflow: hidden;
+    margin-bottom: 0.5rem;}
+.mineCoupon .banner img{
+    height: auto;
+}
+.mineCoupon .tab{    display: flex;}
+.mineCoupon .tab .tabBtn{    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 3rem;
+    background: #ffb11e;
+    color: #fff;}
+.mineCoupon .tab a:first-child{
+    margin-right: 0.4rem;
+}
+.mineCoupon .tab a:last-child{}
+.mineCoupon .tab a.gray{
+    background: #bbb;
+}
+.mineCoupon .list{
+    margin-top: 0.5rem;
+}
+.mineCoupon .list ul{}
+.mineCoupon .list ul li{
+    background: #fff;
+    margin-bottom: 0.4rem;
+    display: flex;
+    padding: 1rem;
+    flex-direction: row;
+}
+.mineCoupon .list ul li .l{
+    width: 4rem;
+    height: 4rem;
+    border-radius: 0.3rem;
+    overflow: hidden;
+    background: #eee;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+}
+.mineCoupon .list ul li .l .t{
+    flex: 1;
+    background: #ffa907;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+.mineCoupon .list ul li .l .t span{
+    line-height: 1;
+    margin-top: 0.6rem;
+    font-weight: 200;
+}
+.mineCoupon .list ul li .l .t span:first-child{}
+.mineCoupon .list ul li .l .t span:last-child{
+    font-size: 1.8rem;
+}
+.mineCoupon .list ul li .l .b{
+    background: #ff084b;
+    text-align: center;
+    font-size: 0.5rem;
+    padding: 0.1rem 0;
+}
+.mineCoupon .list ul li .c{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-left: 1rem;
+}
+.mineCoupon .list ul li .c .t{}
+.mineCoupon .list ul li .c .b{
+    font-size: 0.6rem;
+    color: #ccc;
+}
+.mineCoupon .list ul li .r{
+    display: flex;
+    align-items: flex-end;
+    width: auto;
+}
+.mineCoupon .list ul li .r a{
+    white-space: nowrap;
+    color: #fff;
+    background: #ff094b;
+    font-size: 0.6rem;
+    padding: 0.1rem 0.3rem;
+    border-radius: 0.3rem;
+}
+
+
+/* éŠ·å”®ä¿¡æ¯ */
+.mineSaleInfo{padding-bottom: 0;}
+.mineSaleInfo .top{
+    background: #fff;
+    margin-bottom: 1px;
+    display: flex;
+    padding: 20px 30px;
+    justify-content: center;
+    align-items: center;
+}
+.mineSaleInfo .top .l{
+    width: 50px;
+    height: 50px;
+    background: #4ba6e6;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 26px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.mineSaleInfo .top .c{
+    flex: 1;
+    margin-left: 15px;
+}
+.mineSaleInfo .top .c p{}
+.mineSaleInfo .top .c p:first-child{
+    font-size: 20px;
+    margin-bottom: 2px;
+}
+.mineSaleInfo .top .c p:last-child{
+    font-size: 12px;
+    color: #999;
+    margin-bottom: 5px;
+}
+.mineSaleInfo .top .r{
+    color: #999;
+    width: auto;
+    height: auto;
+}
+.mineSaleInfo .main{
+    background: #fff;
+    margin-bottom: 5px;
+    padding: 20px 30px;
+}
+.mineSaleInfo .main .t{
+    margin-bottom: 20px;
+}
+.mineSaleInfo .main .t p{}
+.mineSaleInfo .main .t p span{
+    color: #4ba6e6;
+}
+.mineSaleInfo .main .b{
+    line-height: 1.5;
+}
+.mineSaleInfo .main .b span{
+    color: #4ba6e6;
+}
+.mineSaleInfo .banner{}
+.mineSaleInfo .banner img{
+    display: block;
+}
+
+
+/* æ·»åŠ é“¶è¡Œå¡ */
+.mineAddCard{
+    background: #fff url(../images/card_bg.png) center bottom no-repeat fixed;
+    min-height: 100%;
+    padding-bottom: 0;
+    background-size: 100%;
+}
+.mineAddCard .box{}
+.mineAddCard .icon{
+    padding-top: 150px;
+}
+.mineAddCard .icon p{
+    width: 80px;
+    height: 80px;
+    margin: 0 auto;
+}
+.mineAddCard .icon p img{
+    display: block;
+}
+.mineAddCard .info{
+    text-align: center;
+    padding: 40px 0 70px;
+    font-size: 30px;
+    word-spacing: 20px;
+    color: #4099ed;
+    line-height: 1;
+}
+.mineAddCard .btn{}
+.mineAddCard .btn a{
+    width: 169px;
+    height: 40px;
+    line-height: 40px;
+    background: #4099ed;
+    color: #fff;
+    display: block;
+    margin: auto;
+    text-align: center;
+    border-radius: 50px;
+}
+
+/* æ·»åŠ é“¶è¡Œå¡ */
+.paySucsess{
+    background: #fff url(../images/card_bg.png) center bottom no-repeat fixed;
+    min-height: 100%;
+    padding-bottom: 0;
+    background-size: 100%;
+}
+.paySucsess .box{}
+.paySucsess .icon{
+    padding-top: 50px;
+}
+.paySucsess .icon p{
+    width: 80px;
+    height: 80px;
+    margin: 0 auto;
+}
+.paySucsess .icon p img{
+    display: block;
+}
+.paySucsess .info{
+    text-align: center;
+    padding: 25px 0 55px;
+    font-size: 30px;
+    word-spacing: 20px;
+    color: #ff9f2e;
+    line-height: 1;
+    border-bottom: 1px solid #eee;
+    margin: 0 40px;
+}
+.paySucsess .price{
+    padding: 40px 70px 45px;
+}
+.paySucsess .price p{line-height: 1;}
+.paySucsess .price p:first-child{
+    margin-bottom: 20px;
+    margin-left: 8px;
+}
+.paySucsess .price p:last-child{
+    font-size: 40px;
+}
+.paySucsess .btn{}
+.paySucsess .btn a{
+    width: 169px;
+    height: 40px;
+    line-height: 40px;
+    background: #ff9f2e;
+    color: #fff;
+    display: block;
+    margin: auto;
+    text-align: center;
+    border-radius: 50px;
+}
+
+
+/* çŽ°é‡‘åˆ¸ */
+.cashCoupon{}
+.cashCoupon .top{
+    background: #fff;
+    margin-bottom: 1px;
+    padding: 16px 35px;
+}
+.cashCoupon .top p{}
+.cashCoupon .top p:first-child{
+    color: #499cf5;
+    margin-bottom: 5px;
+}
+.cashCoupon .top p:last-child{
+    color: #aaa;
+    font-size: 12px;
+    line-height: 1;
+}
+.cashCoupon .list{}
+.cashCoupon .list li{
+    background: #fff;
+    margin-bottom: 1px;
+    /* padding: 10px 35px; */
+}
+.cashCoupon .list li .t{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 38px;
+    padding: 10px 35px;
+}
+.cashCoupon .list li .t p{}
+.cashCoupon .list li .t p:nth-child(1){}
+.cashCoupon .list li .t p:nth-child(2).send{
+    color: #3b91f9;
+}
+.cashCoupon .list li .t p:nth-child(2){
+    font-size: 12px;
+}
+.cashCoupon .list li .t p:nth-child(3){
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+}
+.cashCoupon .list li .t p span{
+    display: block;
+    width: 10px;
+    height: 10px;
+    background: #ccc;
+    border: 1px solid #999;
+    border-radius: 10px;
+    margin-right: 5px;
+}
+.cashCoupon .list li .b{
+    padding: 15px 35px 30px;
+    background: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.cashCoupon .list li .b a{
+    background: #5b9cec;
+    color: #fff;
+    border-radius: 50px;
+    font-size: 13px;
+    width: 40%;
+    height: 35px;
+    line-height: 35px;
+    text-align: center;
+}
+.cashCoupon .list li .b a:first-child{
+    margin-right: 30px;
+}
+.cashCoupon .list li .b a:last-child{
+    background: #ff133e;
+}
+
+/* çŽ°é‡‘åˆ¸è¯¦æƒ… */
+.cashCouponDetail{
+    padding-bottom: 0;
+}
+.cashCouponDetail .box{
+    margin: 15px 20px;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+}
+.cashCouponDetail .box .img{
+    /* min-height: 370px; */
+    overflow: hidden;
+}
+.cashCouponDetail .box .img img{
+    display: block;
+    height: auto;
+}
+.cashCouponDetail .boxWrap{
+    padding: 15px 20px 50px;
+}
+.cashCouponDetail .boxWrap .title{
+    color: #222;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 13px;
+}
+.cashCouponDetail .boxWrap .price{
+    color: #e2013e;
+    margin-bottom: 10px;
+}
+.cashCouponDetail .boxWrap .time{
+    font-size: 12px;
+    color: #ccc;
+    margin-bottom: 16px;
+}
+.cashCouponDetail .boxWrap .btnTop{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 20px;
+}
+.cashCouponDetail .boxWrap .btnTop a{
+    padding: 6px 0;
+    background: #5b9cec;
+    color: #fff;
+    border-radius: 50px;
+    font-size: 13px;
+    width: 100px;
+    text-align: center;
+}
+.cashCouponDetail .boxWrap .btnTop a:first-child{
+    margin-right: 21px;
+}
+.cashCouponDetail .boxWrap .btnTop a:last-child{
+    background: #ffab2d;
+}
+.cashCouponDetail .boxWrap .btnBottom{
+    text-align: center;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 30px;
+    margin-bottom: 26px;
+}
+.cashCouponDetail .boxWrap .btnBottom p{
+    margin-bottom: 20px;
+    color: #ccc;
+    font-size: 13px;
+}
+.cashCouponDetail .boxWrap .btnBottom p span{
+    color: #222;
+    font-weight: 700;
+    font-size: 16px;
+    margin-left: 15px;
+}
+.cashCouponDetail .boxWrap .btnBottom a{
+    padding: 6px 45px;
+    background: #ff305a;
+    color: #fff;
+    border-radius: 50px;
+    font-size: 13px;
+}
+.cashCouponDetail .boxWrap .intro{}
+.cashCouponDetail .boxWrap .intro .t{
+    margin-bottom: 25px;
+}
+.cashCouponDetail .boxWrap .intro .b{
+    color: #aaa;
+}
+.cashCouponDetail .boxWrap .intro .b p{
+    margin-bottom: 5px;
+}
+
+
+/* æˆ‘çš„ä¼šå‘˜ */
+.mineVip{}
+.mineVip .search{
+    background: #fff;
+    display: flex;
+    margin-bottom: 5px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+.mineVip .search .l{
+    flex: 1;
+}
+.mineVip .search .l input{
+    display: block;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 30px;
+    padding-left: 25px;
+    height: 32px;
+    line-height: 32px;
+    font-size: 13px;
+}
+.mineVip .search .r{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: auto;
+}
+.mineVip .search .r a{
+    display: block;
+    width: 24px;
+    height: 24px;
+}
+.mineVip .search .r a img{}
+.mineVip .banner{
+    margin-bottom: 7px;
+}
+.mineVip .banner img{
+    display: block;
+}
+.mineVip .memlist{
+    background: #fff;
+    margin-bottom: 5px;
+}
+.mineVip .memlist li{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #eee;
+    padding: 12px 40px;
+}
+.mineVip .memlist li span{}
+.mineVip .memlist li span:nth-child(1){
+    width: 24px;
+    height: 24px;
+}
+.mineVip .memlist li span:nth-child(1) img{
+    display: block;
+}
+.mineVip .memlist li span:nth-child(2){
+    flex: 1;
+    margin-left: 10px;
+    color: #aaa;
+    font-size: 12px;
+}
+.mineVip .memlist li span:nth-child(3){}
+.mineVip .checkList{}
+.mineVip .checkList .top{
+    background: #fff;
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 60px;
+    padding: 0 15px;
+}
+.mineVip .checkList .top p{
+    display: flex;
+    align-items: center;
+}
+.mineVip .checkList .top p span{
+    display: block;
+    width: 13px;
+    height: 13px;
+    background: #ddd;
+    border: 1px solid #999;
+    box-sizing: border-box;
+    border-radius: 3px;
+    margin-right: 5px;
+}
+.mineVip .checkList .bottom{
+}
+.mineVip .checkList .bottom li{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background: #fff;
+    margin-bottom: 5px;
+    padding: 13px 30px;
+}
+.mineVip .checkList .bottom li .l{
+    width: 50px;
+    height: 50px;
+}
+.mineVip .checkList .bottom li .l img{
+    display: block;
+}
+.mineVip .checkList .bottom li .c{
+    flex: 1;
+    margin-left: 20px;
+    font-weight: 700;
+}
+.mineVip .checkList .bottom li .r{
+    width: auto;
+    height: auto;
+}
+.mineVip .checkList .bottom li .r span{
+    font-size: 12px;
+}
+.mineVip .checkList .bottom li .r span.textBlue{
+    color: #259ef7;
+}
+.mineVip .checkList .bottom li .r span.textYellow{
+    color: #ff8f2c;
+}
+.mineVip .checkList .bottom li .r span.textGray{
+    color: #bbb;
+}
+.mineVip .checkList .bottom li .r span.textRed{
+    color: #ff1313;
+}
+.mineVip .checkList .bottom li .r span:first-child{
+    margin-right: 12px;
+}
+.mineVip .checkList .bottom li .r span:last-child{}
+
+.mineVip .checkList .bottom li .rn{
+    font-size: 12px;
+    margin-left: 20px;
+}
+.mineVip .checkList .bottom li .rn a{
+    display: flex;
+    align-items: center;
+}
+.mineVip .checkList .bottom li .rn a span{
+    display: block;
+    width: 10px;
+    height: 10px;
+    background: #ccc;
+    border: 1px solid #999;
+    border-radius: 10px;
+    margin-right: 5px;
+}
+.mineVip .checkList .bottom li .rn a span.check{background: #ff0e42;}
+
+
+/* æˆ‘çš„ä»£ç† */
+.mineAgent{}
+.mineAgent .checkList{
+    background: #fff;
+    margin-bottom: 5px;
+}
+.mineAgent .checkList .title{
+    padding: 15px 0 0 33px;
+    color: #29a0e8;
+}
+.mineAgent .checkList .top{
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 46px;
+    padding: 0 15px;
+}
+.mineAgent .checkList .top p{
+    display: flex;
+    align-items: center;
+}
+.mineAgent .checkList .top p .icon{
+    display: block;
+    width: 13px;
+    height: 13px;
+    background: #ddd;
+    border: 1px solid #999;
+    box-sizing: border-box;
+    border-radius: 3px;
+    margin-right: 5px;
+}
+.mineAgent .main{
+    background: #fff;
+    padding: 15px 33px;
+}
+.mineAgent .main .top{
+    display: flex;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 10px;
+}
+.mineAgent .main .top .l{}
+.mineAgent .main .top .r{
+    width: auto;
+    height: auto;
+    flex: 1;
+    margin-left: 30px;
+}
+.mineAgent .main .top .r li{
+    margin-bottom: 7px;
+}
+.mineAgent .main .top .r li a{
+    display: flex;
+    align-items: center;
+    color: #aaa;
+    font-size: 12px;
+}
+.mineAgent .main .top .r li a span{
+    display: block;
+    width: 10px;
+    height: 10px;
+    background: #ccc;
+    border: 1px solid #999;
+    border-radius: 10px;
+    margin-right: 5px;
+}
+.mineAgent .main .top .r li a span.check{
+    background: #ff0e42;
+}
+.mineAgent .main .intro{
+    font-size: 12px;
+    color: #aaa;
+}
+.mineAgent .btn{
+    text-align: center;
+    padding: 34px 0;
+}
+.mineAgent .btn a{
+    padding: 6px 53px;
+    background: #f54d6e;
+    color: #fff;
+    border-radius: 50px;
+    font-size: 13px;
+    margin: 0 auto;
+}
+
+
+/* æçŽ°æˆåŠŸ */
+.tixianSucsess{}
+.tixianSucsess .info{
+    border-bottom: none;
+    padding-bottom: 0px;
+}
+.tixianSucsess .subInfo{
+    padding: 20px 0;
+    margin: 0 30px;
+    font-size: 14px;
+    color: #aaa;
+    border-bottom: 1px solid #eee;
+}
+.tixianSucsess .btn a{
+    background: #f82858;
+}
+
+/* æˆ‘çš„é“¶è¡Œå¡ */
+.mineBnak{}
+.mineBnak .title{
+    color: #ff222e;
+    padding: 20px 0 8px 30px;
+    font-size: 13px;
+}
+.mineBnak .bind{
+    background: #fff;
+    margin-bottom: 5px;
+}
+.mineBnak .bind li{
+    padding: 0 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 45px;
+    border-bottom: 1px solid #eee;
+}
+.mineBnak .bind li .l{
+    width: 74px;
+}
+.mineBnak .bind li .r{
+    width: auto;
+    height: 26px;
+    flex: 1;
+}
+.mineBnak .bind li .r input{
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    border: none;
+}
+.mineBnak .box{
+    background: #fff;
+    padding: 20px 30px;
+}
+.mineBnak .box .tig{
+    margin-bottom: .8rem;
+}
+.mineBnak .box .tig p{
+    font-size: .6rem;
+    line-height: 1.5;
+    color: #999;
+}
+.mineBnak .box .tig p span{
+    color: #1296db;
+}
+.mineBnak .box .bottom{
+    display: flex;
+}
+.mineBnak .box .bottom .l{
+    flex: 1;
+}
+.mineBnak .box .bottom .l input{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: #f0f0f0;
+    border-radius: 0.3rem;
+    padding-left: 1rem;
+    box-sizing: border-box;
+}
+.mineBnak .box .bottom .r{
+    width: 7rem;
+    margin-left: .8rem;
+    height: auto;
+}
+.mineBnak .box .bottom .r a{
+    display: block;
+    background: #f9a11a;
+    color: #fff;
+    border-radius: 0.2rem;
+    text-align: center;
+    padding: .5rem 0;
+    font-size: .7rem;
+}
+.mineBnak .submit{}
+.mineBnak .submit a{
+    background: #589ee6;
+    color: #fff;
+    margin: 2rem auto;
+    display: block;
+    width: 9rem;
+    text-align: center;
+    height: 2rem;
+    line-height: 2rem;
+    border-radius: 1rem;
+    font-size: .9rem;
+}
+
+
+/* æˆ‘çš„ä»£ç†3 */
+.mineAgent3{}
+.mineAgent3 .top{
+    background: #fff;
+    margin-bottom: 0.5rem;
+    padding: 1.5rem 2rem;
+}
+.mineAgent3 .top .detail{
+    margin-bottom: 0.5rem;
+}
+.mineAgent3 .top .detail li{
+    border-bottom: 1px solid #eee;
+    padding: 0.8rem 0;
+    display: flex;
+}
+.mineAgent3 .top .detail li .l{}
+.mineAgent3 .top .detail li .r{
+    flex: 1;
+    height: auto;
+}
+.mineAgent3 .top .detail li .r.title{
+    color: #45a7fd;
+}
+.mineAgent3 .top .b{}
+.mineAgent3 .top .b .tig{
+    color: #fb8035;
+}
+.mineAgent3 .top .b .choice{
+    background: #fff;
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 39px;
+    padding: 0;
+}
+.mineAgent3 .top .b .choice p{
+    display: flex;
+    align-items: center;
+    margin-right: 2rem;
+}
+.mineAgent3 .top .b .choice p span{}
+.mineAgent3 .top .b .choice p span.icon{
+    display: block;
+    width: 13px;
+    height: 13px;
+    background: #ddd;
+    border: 1px solid #999;
+    box-sizing: border-box;
+    border-radius: 3px;
+    margin-right: 5px;
+}
+.mineAgent3 .top .b .input{
+    display: flex;
+}
+.mineAgent3 .top .b .input .l{}
+.mineAgent3 .top .b .input .r{
+    flex: 1;
+    height: auto;
+    margin-left: 1rem;
+}
+.mineAgent3 .top .b .input .r input{
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 1px solid #ccc;
+    padding: 0.2rem 0 0.2rem 0.8rem;
+    box-sizing: border-box;
+}
+.mineAgent3 .list{
+    background: #fff;
+}
+.mineAgent3 .list .title{
+    padding: 18px 30px;
+    border-bottom: 1px solid #eee;
+    color: #32aef9;
+}
+.mineAgent3 .list ul{}
+.mineAgent3 .list ul li{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 38px;
+    padding: 10px 30px;
+    border-bottom: 1px solid #eee;
+}
+.mineAgent3 .list ul li p{}
+.mineAgent3 .list ul li p:nth-child(1){
+    flex: 7;
+}
+.mineAgent3 .list ul li p:nth-child(2){
+    flex: 2;
+    font-size: 12px;
+}
+.mineAgent3 .list ul li p:nth-child(2).send{
+    color: #3b91f9;
+}
+.mineAgent3 .list ul li p:nth-child(2).unSend{
+    color: #ff0a49;
+}
+.mineAgent3 .list ul li p:nth-child(3){
+    flex: 2;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+}
+.mineAgent3 .list ul li p:nth-child(3) span{.mineAgent3 .list
+    ul li p: nth-child(3);
+    display: block;
+    width: 10px;
+    height: 10px;
+    background: #ccc;
+    border: 1px solid #999;
+    border-radius: 10px;
+    margin-right: 5px;
+}
+.mineAgent3 .btn{
+    padding: 15px 35px 30px;
+    background: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.mineAgent3 .btn a{
+    background: #5b9cec;
+    color: #fff;
+    border-radius: 50px;
+    font-size: 13px;
+    width: 40%;
+    height: 35px;
+    line-height: 35px;
+    text-align: center;
+}
+.mineAgent3 .btn a:first-child{
+    margin-right: 30px;
+}
+.mineAgent3 .btn a:last-child{
+    background: #ff133e;
+}
+
+/* è¿˜æ¬¾ */
+.mineHuankuan{}
+.mineHuankuan .top{
+    background: #fff url(../images/card_bg.png) no-repeat center 205px;
+    background-size: 100%;
+    margin-bottom: 0.5rem;
+    padding: 1rem 2rem .5rem;
+    position: relative;
+}
+.mineHuankuan .top .title{
+    display: flex;
+    color: #999;
+    font-size: 0.8rem;
+    align-items: center;
+    margin-bottom: 1.2rem;
+}
+.mineHuankuan .top .title span{
+    width: 1.6rem;
+    margin-right: .7rem;
+}
+.mineHuankuan .top .title span img{
+    display: block;
+}
+.mineHuankuan .top .number{
+    text-align: center;
+    color: #f98b29;
+    font-size: 1.8rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #eee;
+    line-height: 1;
+}
+.mineHuankuan .top .time{
+    padding: 1rem 0;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    flex-wrap: wrap;
+    font-size: .9rem;
+    border-bottom: 1px solid #eee;
+}
+.mineHuankuan .top .time p{
+    width: 50%;
+    line-height: 1.7;
+}
+.mineHuankuan .top .time p:nth-child(1){}
+.mineHuankuan .top .time p:nth-child(2){
+    text-align: right;
+}
+.mineHuankuan .top .time p:nth-child(3){}
+.mineHuankuan .top .b{
+    padding-top: 1rem;
+}
+.mineHuankuan .top .b .bt{}
+.mineHuankuan .top .b .price{
+    text-align: center;
+    padding: 1.5rem 0 6rem;
+    font-size: 2rem;
+    line-height: 1;
+}
+.mineHuankuan .top .b .bb{
+    color: #fff;
+    font-size: 0.8rem;
+}
+.mineHuankuan .bottom{
+    background: #fff;
+}
+.mineHuankuan .bottom .list{}
+.mineHuankuan .bottom .list li{
+    display: flex;
+    border-bottom: 1px solid #eee;
+    padding: .6rem 2rem;
+    align-items: center;
+    justify-content: space-between;
+}
+.mineHuankuan .bottom .list li .l{
+    width: 1.5rem;
+    margin-right: 1rem;
+}
+.mineHuankuan .bottom .list li .l img{
+    display: block;
+}
+.mineHuankuan .bottom .list li .c{
+    flex: 1;
+}
+.mineHuankuan .bottom .list li .r{
+    width: auto;
+    height: auto;
+}
+.mineHuankuan .bottom .list li .r.check{}
+.mineHuankuan .bottom .list li .r.check a{
+    display: block;
+}
+.mineHuankuan .bottom .list li .r a{
+    display: none;
+    width: 1.2rem;
+}
+.mineHuankuan .bottom .list li .r a img{
+    display: block;
+}
+.mineHuankuan .btn{}
+.mineHuankuan .btn a{
+    background: #589ee6;
+    color: #fff;
+    margin: 2rem auto;
+    display: block;
+    width: 9rem;
+    text-align: center;
+    height: 2rem;
+    line-height: 2rem;
+    border-radius: 1rem;
+    font-size: .9rem;
+}
+
+
+
+/* 订单 */
+.mineOrder{}
+.mineOrder .top ul{}
+.mineOrder .top ul li{
+    background: #fff;
+    margin-bottom: 0.5rem;
+    padding: 1rem 1.5rem;
+}
+.mineOrder .top ul li .t{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    /* align-items: center; */
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 1rem;
+}
+.mineOrder .top ul li .t .l{
+    width: 6rem;
+    height: 6rem;
+    margin-right: 1rem;
+    overflow: hidden;
+}
+.mineOrder .top ul li .t .l img{
+    display: block;
+    height: auto;
+}
+.mineOrder .top ul li .t .r{
+    flex: 1;
+    width: auto;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    line-height: 1;
+}
+.mineOrder .top ul li .t .r .tt{
+    font-size: 1.1rem;
+    font-weight: 700;
+    line-height: 1.3;
+}
+.mineOrder .top ul li .t .r .tc{
+    color: #aaa;
+    font-size: .8rem;
+}
+.mineOrder .top ul li .t .r .tb{
+    color: #00a0e9;
+}
+.mineOrder .top ul li .b{
+    font-size: .7rem;
+}
+.mineOrder .top ul li .b .input{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.mineOrder .top ul li .b .input .l{
+    font-size: .7rem;
+}
+.mineOrder .top ul li .b .input .r{
+    width: auto;
+    height: auto;
+    flex: 1;
+    margin-left: 1rem;
+}
+.mineOrder .top ul li .b .input .r select{
+    padding: 0.1rem 0.2rem;
+    margin: 0;
+    border: 1px solid #eee;
+    font-size: .7rem;
+    color: #aaa;
+    width: 100%;
+}
+.mineOrder .top ul li .b .txt{
+    margin-top: 0.3rem;
+    color: #f78826;
+}
+.mineOrder .top ul li .b .txt:first-child{}
+.mineOrder .top ul li .b .txt:last-child{
+    color: #ff0a47;
+}
+.mineOrder .total{
+    background: #fff;
+    padding: 0.9rem 1.5rem;
+    margin-bottom: .5rem;
+}
+.mineOrder .total p{}
+.mineOrder .bottom{}
+.mineOrder .bottom .list{}
+.mineOrder .bottom .list li{
+    display: flex;
+    border-bottom: 1px solid #eee;
+    padding: .6rem 2rem;
+    align-items: center;
+    justify-content: space-between;
+    background: #fff;
+}
+.mineOrder .bottom .list li .l{
+    width: 1.5rem;
+    margin-right: 1rem;
+}
+.mineOrder .bottom .list li .l img{
+    display: block;
+}
+.mineOrder .bottom .list li .c{
+    flex: 1;
+}
+.mineOrder .bottom .list li .r{
+    width: auto;
+    height: auto;
+}
+.mineOrder .bottom .list li .r a{
+    display: none;
+    width: 1.2rem;
+}
+.mineOrder .bottom .list li .r a img{}
+.mineOrder .bottom .list li .r.check{}
+.mineOrder .bottom .list li .r.check a{
+    display: block;
+}
+.mineOrder .bottom .btn{
+    background: #fff;
+    padding: 0.9rem 1.5rem;
+    margin-top: .5rem;
+}
+.mineOrder .bottom .btn a{
+    background: #fb3b58;
+    color: #fff;
+    margin: auto;
+    display: block;
+    width: 9rem;
+    text-align: center;
+    height: 2rem;
+    line-height: 2rem;
+    border-radius: 1rem;
+    font-size: .9rem;
+}
+
+
+
+
+/* 我的代理1 */
+
+.mineAgent1{}
+.mineAgent1 .pro{
+    display: flex;
+    justify-content: space-between;
+    background: #fff;
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+}
+.mineAgent1 .pro .l{
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+}
+.mineAgent1 .pro .l img{
+    display: block;
+    height: auto;
+}
+.mineAgent1 .pro .r{
+    flex: 1;
+    height: auto;
+    width: auto;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.mineAgent1 .pro .r .tt{}
+.mineAgent1 .pro .r .tc{
+    color: #aaa;
+    font-size: 12px;
+}
+.mineAgent1 .pro .r .tc p{
+    display: flex;
+    justify-content: flex-start;
+    line-height: 1;
+    margin: 5px 0;
+}
+.mineAgent1 .pro .r .tc p:first-child{}
+.mineAgent1 .pro .r .tc p:first-child span{
+    margin-right: 15px;
+    padding-right: 15px;
+    border-right: 1px solid #eee;
+}
+.mineAgent1 .pro .r .tc p:first-child span:nth-child(1){}
+.mineAgent1 .pro .r .tc p:first-child span:nth-child(2){
+    border: none;
+}
+.mineAgent1 .pro .r .tc p:last-child{}
+.mineAgent1 .pro .r .tc p:last-child span{
+    margin-right: 10px;
+    padding-right: 10px;
+    border-right: 1px solid #eee;
+    line-height: 1;
+}
+.mineAgent1 .pro .r .tc p:last-child span:nth-child(1){}
+.mineAgent1 .pro .r .tc p:last-child span:nth-child(2){}
+.mineAgent1 .pro .r .tc p:last-child span:nth-child(3){
+    border: none;
+}
+.mineAgent1 .pro .r .tb{
+    color: #e2002e;
+}
+
+.mineAgent1 .checkList{
+    background: #fff;
+    margin-bottom: 0.5rem;
+}
+.mineAgent1 .checkList .bottom{}
+.mineAgent1 .checkList .bottom li{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #eee;
+    align-items: center;
+    height: 45px;
+}
+.mineAgent1 .checkList .bottom li .l{
+    padding-left: 20px;
+    color: #ccc;
+    font-size: 12px;
+}
+.mineAgent1 .checkList .bottom li .c{}
+.mineAgent1 .checkList .bottom li .r{
+    width: auto;
+    height: 100%;
+}
+.mineAgent1 .checkList .bottom li .r a{
+    width: 3rem;
+    display: block;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.mineAgent1 .make {
+    background: #fff;
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+.mineAgent1 .make p{}
+.mineAgent1 .make p:first-child{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+.mineAgent1 .make p:first-child span{}
+.mineAgent1 .make p:first-child span:first-child{
+    color: #f90;
+}
+.mineAgent1 .make p:first-child span:last-child{
+    color: #f00;
+}
+.mineAgent1 .make p:last-child{}
+.mineAgent1 .make p:last-child a{
+    padding: 3px 20px;
+    background: #f90;
+    color: #fff;
+    border-radius: 30px;
+    font-size: 12px;
+}
+.mineAgent1 .subList{
+    background: #fff;
+}
+.mineAgent1 .subList ul{}
+.mineAgent1 .subList ul li{
+    display: flex;
+    justify-content: space-between;
+    height: 45px;
+    border-bottom: 1px solid #eee;
+    align-items: center;
+    font-size: 12px;
+    padding: 0 20px;
+}
+.mineAgent1 .subList ul li p{}
+.mineAgent1 .subList ul li p:nth-child(1){}
+.mineAgent1 .subList ul li p:nth-child(2){
+    color: #f90;
+}
+.mineAgent1 .subList ul li p:nth-child(3){
+    color: #e00;
+}
+.mineAgent1 .subList ul li p:nth-child(4){}
+.mineAgent1 .subList ul li p:nth-child(4) a{
+    padding: 3px 10px;
+    background: #ff1836;
+    color: #fff;
+    border-radius: 3px;
+    font-size: 12px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

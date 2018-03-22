@@ -1,0 +1,62 @@
+<#if member?? >
+<#-- 创建最近30天可代理商品信息标签 -->
+<#assign goodsAgentLatelyListTag= newTag("goodsAgentLatelyListTag") >
+<#-- 调用标签获取最近30天可代理商品信息 -->
+<#assign goodslatelylist= goodsAgentLatelyListTag() >
+<#-- 获取最近30天可代理商品列表 -->
+<#assign glatelylist= goodslatelylist.goodslist >
+	<#list glatelylist as glList>
+	    <div class="agentList" >
+	    	<div class="agentListPub">
+	    		<div class="agentListImg">
+	    			<div class="ALIBox">
+	    				<img src="${glList.goodsimg}" />
+	    			</div>
+	    		</div>
+	    		<div class="agentListText">
+	    			<p class="agentListName" style="height: auto;">
+	    				${glList.name}
+	    			</p>
+	    			<div class="agentLTPub">
+	    				<div class="agentLTPubLf">
+	    					市场价 ￥${glList.Mktprice}
+	    				</div>&nbsp;&nbsp;&nbsp;&nbsp;
+	    				<div class="agentLTPubLf">
+	    					优选价 ￥${glList.price}
+	    				</div>
+	    			</div><div class="agentLTPub">
+	    				<div class="agentLTPubLf">
+	    					代理价 ￥${glList.agentprice}
+	    				</div>&nbsp;&nbsp;&nbsp;&nbsp;
+	    				<div class="agentLTPubLf">
+	    					利润空间 ￥${glList.price-glList.agentprice}
+	    				</div>
+	    			</div>
+	    			<div class="agentLTPub">
+	    				<div class="agentLTPubLf">
+	    					已代理 ${glList.onsale}
+	    				</div>&nbsp;&nbsp;&nbsp;&nbsp;
+	    				<div class="agentLTPubLf">
+	    					剩余 ${glList.stock-glList.onsale}
+	    				</div>
+	    			</div>
+	    		</div>
+	    	</div>
+	        <div class="agentListBt">
+	        	<a href="discountDetail-${glList.goodsid}.html" class="agentListBtLf">U品详情</a>
+	        	<a href="signAgent-${glList.goodsid}.html" class="agentListBtRt">代理商品</a>
+	        </div>
+	    </div>
+	</#list>
+<div id="pagelate${goodslatelylist.nowpage}" style="display:none;"></div>
+	<#else>
+<script type="text/javascript"> 
+	onload=function(){ 
+		setTimeout(go, 1);
+	}; 
+	function go(){ 
+		location.href="login.html"; 
+	} 
+	
+</script> 
+</#if>

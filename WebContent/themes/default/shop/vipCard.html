@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+		<link rel="stylesheet" href="${ctx}/themes/default/shop/css/reset1.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/shop/css/common1.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/shop/css/SHOP1.css" />
+		<script type="text/javascript" src="${ctx}/themes/default/shop/js/jquery-3.1.0.min.js" ></script>
+		<script type="text/javascript" src="${ctx}/themes/default/js/jquery.qrcode.js" ></script>
+		<script type="text/javascript" src="${ctx}/themes/default/js/qrcode.js" ></script>
+		<title>我的VIP兑换券</title>
+	</head>
+<#if member?? >
+	<#--创建我的Vip标签-->
+	<#assign myTicketTag = newTag("myVipTicketTag")   />
+	<#--获取标签获取结果-->
+	<#assign myTicket= myTicketTag()   />
+	<body>
+		<div class="publicHeader">
+			<span class="headIcon f_l">
+				<a href="voucher.html">
+					<img src="${ctx}/themes/default/img/2.png" alt="">
+				</a>
+			</span>
+				VIP兑换券
+		</div>
+		<div class="voucherDetailWrap">
+	<#if myTicket.ticketget==0>
+			VIP兑换券不存在！
+	</#if>
+	<#if myTicket.ticketget==1>
+			<div class="card">
+				<div class="voucherGoods">
+					<img src="${myTicket.img}" alt="">
+				</div>
+				<div class="voucherDetail voucherNum">
+					<h4>${myTicket.name}</h4>
+					<span>优选单号：${myTicket.orderid}</span>
+					<span>${myTicket.createtime}</span>
+				</div>
+				<div class="voucherDetail see">
+					<p>自动使用日期：${myTicket.vusetime}</p>
+					<div class="voucherSee">
+						<span>VIP卡对应期限：${myTicket.viptime}天</span>
+						<a href="personCtList-${myTicket.proxymemberid}.html">查看网红店铺</a>
+					</div>
+				</div>
+				<div class="voucherDetail voucherdelivery">
+					<div class="delivery">
+				<#if myTicket.notuse==1&&myTicket.canuse==1>
+					<#if myTicket.thirdplatform!="">
+						<a href="http://${myTicket.thirdplatform}" target="_blank">直达链接</a>
+					</#if>
+					<#if myTicket.thirdplatform=="">						
+						<a style="width:50%;" id=useCard>直接使用</a>
+						<a id="give" style="background:#67aee2;width:50%;">赠送好友</a>
+					</#if>					
+				</#if>
+				<#if myTicket.notuse==1&&myTicket.canuse==2>
+					<a style="background:#C0C0C0;">兑换还未开始</a>
+				</#if>
+				<#if myTicket.notuse==1&&myTicket.canuse==0>
+					<a style="background:#C0C0C0;">兑换券已过期</a>
+				</#if>
+				<#if myTicket.notuse==0>
+					<a style="background:#C0C0C0;">兑换券已使用</a>
+				</#if>
+				<#if myTicket.notuse==3>
+					<a href="ticketGiveDetail.html?proxyorderId=${myTicket.proxyorderid}">查看赠送码</a>
+				</#if>
+				<#if myTicket.notuse==4>
+					<a style="background:#C0C0C0;">赠送码已经使用</a>
+				</#if>
+				<#if myTicket.notuse==6&&myTicket.canuse==1>
+					<a  id=useCard>现在使用</a>
+				</#if>
+				<#if myTicket.notuse==5>
+					<a style="background:#C0C0C0;">兑换券已使用</a>
+				</#if>
+					</div>
+					<span></span>
+					<span></span>
+				</div>
+				<div class="voucherDetail voucherEnd">
+					VIP卡使用后可以获得对应的网红的VIP特权。
+				</div>
+			</div>
+	</#if>
+		</div>
+	</body>
+<#if myTicket.ticketget==1>
+<script type="text/javascript"> 
+$(function(){
+	$("#give").click(function(){
+		if(confirm("是否赠送此vip卡？赠送后您将无法使用！"))
+		{
+			var proxyorderid = ${myTicket.proxyorderid};
+			$.ajax({
+				url:"${ctx}/shop/ext/ticketGive!giveTicket.do",
+				type:"POST",
+				data:"proxyorderid="+proxyorderid,
+				dataType:"json",
+				success:function(json){
+					if(json.result==0){
+						alert("参数错误！");
+					}else if(json.result==2){
+						alert("赠送码已经生成！");
+						location.href="ticketGiveDetail.html?proxyorderId="+proxyorderid;
+					}else{
+						alert("赠送码已生成！");
+						location.href="ticketGiveDetail.html?proxyorderId="+proxyorderid;
+					}
+				}
+			});
+		}else{
+			
+		}
+	});
+	$("#useCard").click(function(){
+		var cardid=${myTicket.proxyorderid};
+		$.ajax({
+			url:"${ctx}/shop/ext/proxyVip!useVipCard.do",
+			type:"POST",
+			data:"cardid="+cardid,
+			dataType:"json",
+			success:function(json){
+				if(json.result==0){
+					alert("对不起，此VIP卡片不属于您！");
+					location.href="user.html";
+				}else if(json.result==2){
+					alert("对不起，此VIP卡片已被您赠送！");
+					location.href="user.html";
+				}else if(json.result==3){
+					alert("对不起，此VIP卡片已使用！");
+					location.href="user.html";
+				}else if(json.result==4){
+					alert("对不起，参数错误！");
+					location.href="user.html";
+				}else if(json.result==1){
+					alert("使用成功！");
+					location.href="user.html";
+				}
+			}
+		});
+	});
+
+});
+</script>
+</#if>
+<#else>
+<script type="text/javascript"> 
+onload=function(){ 
+	setTimeout(go, 1);
+}; 
+function go(){ 
+	location.href="login.html"; 
+} 
+</script> 
+</#if>
+</html>

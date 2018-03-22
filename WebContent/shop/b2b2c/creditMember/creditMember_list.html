@@ -1,0 +1,336 @@
+<#include '/admin/header.html' >
+<#assign regionSelectDirective="com.enation.app.base.component.widget.regions.RegionSelectDirective"?new()>
+<style>
+.input_text{
+	width: 95%;
+}
+</style>
+<div id="loading"></div>
+<div class="main">
+	<form id="memberform">
+		<div id="tb" style="height: auto">
+			<a href="javascript:void(0)" class="easyui-linkbutton"
+				data-options="plain:true" onclick="newTab('网红用户添加','${ctx}/shop/b2b2c/creditMember!add_creditMember.do')">添加</a>
+			<#if currentUser.founder==1>
+			<a href="javascript:void(0)" class="easyui-linkbutton"
+				data-options="plain:true" onclick="setBrokerage()">设置经纪公司</a>
+			<a href="javascript:void(0)" class="easyui-linkbutton"
+				data-options="plain:true" onclick="importCredit()">批量导入网红</a>
+			<a href="javascript:void(0)" class="easyui-linkbutton"
+				data-options="plain:true" onclick="setShopShowHide()">设置网红商店是否可见</a>	
+			</#if>	
+			<span style="float: right;"> 
+				<span id="simpleSearch">
+					<input id="searchKeyword" class="input_text" type="text" value="" size="30" style="width: 300px;"
+					placeholder="请输入用户名，姓名，手机号" name="searchKeyWord"> 
+					<a href="javascript:void(0)" class="easyui-linkbutton" 
+					data-options="plain:true" onclick="searchMember()">搜索</a>
+				</span>
+			</span>
+		</div>
+		<div class="clear height10"></div>
+		<div class="shadowBoxWhite tableDiv">
+		<table class="easyui-datagrid"
+			data-options="url:'creditMember!creditMemberlistJson.do',pageList: [5,10,15,20],pageSize:${pageSize},fitColumns:'true'"
+			pagination="true" id="memberdata" sortName="member_id" sortOrder="desc" >
+			<thead>
+				<tr>
+					<th data-options="field:'member_id',checkbox:true"></th>
+					<th data-options="field:'uname',align:'center'">用户名</th>
+					<th data-options="field:'shopname',align:'center'" formatter="formatShop">用户店铺</th>
+					<th data-options="field:'idcard',width:230,align:'center'">身份证号</th>
+					<th data-options="field:'weibo',width:200,align:'center'">微博</th>
+					<th data-options="field:'fans',width:150,align:'center'">微博粉丝</th>
+					<th data-options="field:'weixin',width:200,align:'center'">微信号</th>
+					<th data-options="field:'friends',width:150,align:'center'">微信好友</th>
+					<th data-options="field:'live',width:150,align:'center'">直播</th>
+					<th data-options="field:'liveid',width:150,align:'center'">直播间id</th>
+					<th data-options="field:'livefans',width:150,align:'center'">直播粉丝</th>
+					<th data-options="field:'action',width:100,align:'center'"
+						formatter="formatOperation">操作</th>
+				</tr>
+			</thead>
+		</table>
+		</div>
+	</form>
+	<div id="divdia" style="display: none;"></div>
+
+</div>
+<script type="text/javascript">
+	function formatShop(value, row, index) {
+		var isShow = row.showorhide==1?'<span>可见<span>':'<span style="color:red">不可见<span>';
+		var val = "<a href='/javamall/personCtList-" + row.member_id + ".html' target='_blank'>" + row.shopname + "(" + isShow + ")" + "</a>";
+	return val;
+}
+
+	function submitForm(map) {
+		var formflag = $(map["formId"]).form().form('validate');
+		if (formflag) {
+			$.Loading.show(map["loadshow"]);
+			var options = {
+				url : map["url"],
+				type : "POST",
+				dataType : 'json',
+				success : function(result) {
+					if (result.result == 1) {
+						$.Loading.show(result.message);
+						$(map["divDialog"]).dialog('close');
+						$(map["gridreload"]).datagrid('reload');
+					}
+					if (result.result == 0) {
+						$.Loading.error(result.message);
+					}
+					$.Loading.hide();
+				},
+				error : function(e) {
+					alert("出现错误 ，请重试");
+				}
+			};
+			$(map["formId"]).ajaxSubmit(options);
+		}
+	}
+
+	function clearForm(map) {
+		$(map["formId"]).form('clear');
+	}
+
+	function formatOperation(value, row, index) {
+		var val = "<a class='edit' title='修改' href='javascript:void(0);' onclick='newTab(\"网红信息修改\",\"${ctx}/shop/b2b2c/creditMember!edit_creditMember.do?memberId="
+				+ row.member_id + "\")' ></a>";
+		return val;
+	}
+
+	function formatRegtime(value, row, index) {
+		return getFormatDateByLong(value, "yyyy-MM-dd hh:mm:ss");
+	}
+
+	function formatLastlogin(value, row, index) {
+		return getFormatDateByLong(value, "yyyy-MM-dd hh:mm:ss");
+	}
+
+	function formatArea(value, row, index) {
+		var val = "";
+		if(row.province!=null && row.province!="请选择" ){
+			val=val+row.province;
+		}
+		if(row.city!=null && row.city!="请选择"){
+			val=val+"-"+row.city;
+		}
+		if(row.region!=null && row.region!="请选择"){
+			val=val+"-"+row.region;
+		}
+		if(val==""){
+			val="未选择城市";
+		}
+		return val;
+	}
+
+	function formatSex(value, row, index) {
+		var val;
+		if (value == 1) {
+			val = "男";
+		} else {
+			val = "女";
+		}
+		return val;
+	}
+
+	function formatLogin(value, row, index) {
+		var val = '<a href="member!sysLogin.do?name='
+				+ row.uname
+				+ '" target="_blank"><img class="modify" src="images/transparent.gif" ></a>';
+		return val;
+	}
+	function del() {
+		var rows = $('#memberdata').datagrid("getSelections");
+		if (rows.length < 1) {
+			$.Loading.error("请选择要删除的网红用户");
+			return;
+		}
+		if (!confirm("确认要将删除网红用户吗？")) {
+			return;
+		}
+		var options = {
+			url : "member!delete.do?ajax=yes",
+			type : "POST",
+			dataType : 'json',
+			success : function(result) {
+				$.Loading.success(result.message);
+				if (result.result == 1) {
+					var rows = $('#memberdata').datagrid("getSelections");
+					for ( var i = 0; i < rows.length; i++) {
+						var index = $('#memberdata').datagrid('getRowIndex',
+								rows[i]);
+						$('#memberdata').datagrid('deleteRow', index);
+					}
+				}
+			},
+			error : function(e) {
+				$.Loading.error("出现错误 ，请重试");
+			}
+		};
+		$('#memberform').ajaxSubmit(options);
+	}
+	
+	function setBrokerage(){
+		var rows = $('#memberdata').datagrid("getSelections");
+		if (rows.length < 1) {
+			$.Loading.error("请选择要设置的网红用户");
+			return;
+		}
+		var memeberids = new Array();
+		for(var i=0;i<rows.length;i++){
+			memeberids.push(rows[i].memberid)
+		}
+		append(memeberids.toString());
+	}
+	function setShopShowHide(){
+		var rows = $('#memberdata').datagrid("getSelections");
+		if (rows.length < 1) {
+			$.Loading.error("请选择要设置的网红用户");
+			return;
+		}
+		var memeberids = new Array();
+		for(var i=0;i<rows.length;i++){
+			memeberids.push(rows[i].memberid)
+		}
+		openShopShowHide(memeberids.toString());
+	}
+	
+	function openShopShowHide(memeberids) {
+		var map = {}; // Map map = new HashMap();
+		map["href"] = "creditMember!setShopShowHide.do?memberids="+memeberids;
+		map["formId"] = "#setForm";
+		map["url"] = "creditMember!saveShopShowHide.do?ajax=yes";
+		map["title"] = "设置网红商店是否可见";
+		map["loadshow"] = "正在设置......";
+		map["divDialog"] = "#divdia";
+		map["gridreload"] = "#memberdata";
+		$(map["divDialog"]).show();
+		$(map["divDialog"]).dialog({
+			title : map["title"],
+			width : 400,
+			height : 200,
+			closed : false,
+			cache : false,
+			href : map["href"],
+			modal : true,
+			buttons : [ {
+				text : '设置',
+				iconCls : 'icon-ok',
+				handler : function() {
+					submitForm(map);
+				}
+			}, {
+				text : '取消',
+				handler : function() {
+					$(map["divDialog"]).dialog('close');
+				}
+			} ]
+		});
+	}
+	
+	function append(memeberids) {
+		var map = {}; // Map map = new HashMap();
+		map["href"] = "brokerage!set_brokerage.do?memberids="+memeberids;
+		map["formId"] = "#setForm";
+		map["url"] = "brokerage!setBrokerage.do?ajax=yes";
+		map["title"] = "设置经纪公司";
+		map["loadshow"] = "正在设置......";
+		map["divDialog"] = "#divdia";
+		//需要验证的参数
+		map["nameId"] = "#name";
+		map["urlId"] = "#url";
+		$(map["divDialog"]).show();
+		$(map["divDialog"]).dialog({
+			title : map["title"],
+			width : 400,
+			height : 200,
+			closed : false,
+			cache : false,
+			href : map["href"],
+			modal : true,
+			buttons : [ {
+				text : '设置',
+				iconCls : 'icon-ok',
+				handler : function() {
+					submitForm(map);
+				}
+			}, {
+				text : '取消',
+				handler : function() {
+					$(map["divDialog"]).dialog('close');
+				}
+			} ]
+		});
+	}
+	
+	function importCredit() {
+		var map = {}; // Map map = new HashMap();
+		map["href"] = "creditMember!import_creditMember.do";
+		map["formId"] = "#importForm";
+		map["url"] = "creditMember!importCreditMember.do?ajax=yes";
+		map["title"] = "批量导入网红";
+		map["loadshow"] = "正在导入......";
+		map["divDialog"] = "#divdia";
+		//需要验证的参数
+		map["nameId"] = "#name";
+		map["urlId"] = "#url";
+		$(map["divDialog"]).show();
+		$(map["divDialog"]).dialog({
+			title : map["title"],
+			width : 500,
+			height : 400,
+			closed : false,
+			cache : false,
+			href : map["href"],
+			modal : true,
+			buttons : [ {
+				text : '导入',
+				iconCls : 'icon-ok',
+				handler : function() {
+					submitForm(map);
+					$("#memberdata").datagrid('reload');
+				}
+			}, {
+				text : '取消',
+				handler : function() {
+					$(map["divDialog"]).dialog('close');
+				}
+			} ]
+		});
+	}
+	
+	$(function(){
+		$(".searchAdvanced").hide();
+		//高级查询按钮
+	    $("#aAdvanced").click(function () {
+	        if ($("#Advanced").val() == "0") {
+	            $("#Advanced").val(1);
+	            $("#simpleSearch").hide();
+	            //$("#aAdvanced").text("简单搜索")
+	            $("#aAdvanced").addClass("searchAdvancedS");
+	        } else {
+	            $("#Advanced").val(0);
+	            $("#simpleSearch").show();
+	            //$("#aAdvanced").text("高级搜索");
+	            $("#aAdvanced").removeClass("searchAdvancedS");
+	        }
+	        $(".searchAdvanced").slideToggle("slow");
+	    });
+	});
+	
+	function searchMember(){
+		
+		var keyword = $("#searchKeyword").val();
+
+		$("#memberdata").datagrid('load', {
+			stype: 0,
+			 keyword:keyword,
+			 page:1
+	    });
+	}
+	
+	
+</script>
+<#include '/admin/footer.html' >

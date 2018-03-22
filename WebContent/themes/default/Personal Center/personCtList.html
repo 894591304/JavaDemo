@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<#-- 创建个人店铺基本信息标签 -->
+<#assign memberShopBaseDataTag= newTag("memberShopBaseDataTag") >
+<#-- 调用个人店铺基本信息 -->
+<#assign shop= memberShopBaseDataTag() >
+<#if shop.show==0>
+<script type="text/javascript"> 
+onload=function(){ 
+	setTimeout(go, 1);
+}; 
+function go(){ 
+	location.href="404.html"; 
+} 
+</script> 
+</#if>
+<#if shop.show==1>
+<#assign list1= shop.levellist >
+<#assign list2= shop.levellist2 >
+
+<#assign proxyMemberShopAllTag= newTag("proxyMemberShopAllTag") >
+<#assign proxyAll= proxyMemberShopAllTag() >
+<#assign proxyAllList= proxyAll.pglist >
+
+<#assign proxyMemberShopNewTag= newTag("proxyMemberShopNewTag") >
+<#assign proxyNew= proxyMemberShopNewTag() >
+<#assign proxyNewList= proxyNew.pglist >
+
+
+<#assign proxyMemberShopHotTag= newTag("proxyMemberShopHotTag") >
+<#assign proxyHot= proxyMemberShopHotTag() >
+<#assign proxyHotList= proxyHot.pglist >
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+		<link rel="stylesheet" href="${ctx}/themes/default/Personal Center/css/reset.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/Personal Center/css/common.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/Personal Center/css/personalCenter.css" />
+		<script type="text/javascript" src="${ctx}/themes/default/Personal Center/js/jquery-3.1.0.min.js" ></script>
+		<script type="text/javascript" src="${ctx}/themes/default/js/jquery.qrcode.js" ></script>
+		<script type="text/javascript" src="${ctx}/themes/default/js/qrcode.js" ></script>
+<#if member?? >
+<script type="text/javascript"> 
+onload=function(){ 
+	setTimeout(go, 1);
+}; 
+function go(){ 
+	var followId = ${shop.shopid};
+	$.ajax({
+	url:"${ctx}/shop/ext/follow!msgClean.do",
+	type:"POST",
+	data:"followId="+followId,
+	dataType:"json",
+	success:function(json){}
+	});
+} 
+</script> 
+</#if>
+		<title>${shop.uname}的店铺</title>
+	</head>
+	<body>
+	<div class="hide" id="share_div">
+		<div class="publicHeader">
+		<span class="headIcon f_l">
+					<a href="javascript:;">
+						<div id="hidden_div">
+							<img src="${ctx}/themes/default/img/11.png" alt="">
+						</div>
+					</a>
+				</span>
+				分享
+	    </div>
+			<div class="title" style="margin-top: 50px;">
+				<div>
+					<img src="${ctx}${shop.memberimg}" alt="">
+				</div>
+				<div>分享 ${shop.uname} 的店铺</div>
+			</div>
+			<div class="share">
+				<div class="erweima" id="qrcodeCanvas">
+				</div>
+				<script>
+   					 $('#qrcodeCanvas').qrcode({
+       					text: 'm.huijuyouxuan.com/javamall/personCtlist-${shop.shopid}.html',//二维码代表的字符串（本页面的URL）
+       					width: 250,//二维码宽度
+       					height: 250//二维码高度
+    					});
+				</script>
+				<p>长按图片以保存二维码</p>
+				<p>店铺链接</p>
+				<p><textarea id="shopurl" >http://m.huijuyouxuan.com/javamall/personCtlist-${shop.shopid}.html</textarea><p>
+				<div>
+					<div class="fuzhi" onclick="copy()">复制链接</div>					
+				</div>
+			</div>
+		</div>
+	<input type="hidden" id="shopid"  value="${shop.shopid}">
+		<div class="personLTp" style="background-image:url(${ctx}${shop.shopimg});height:<#if member ??><#if shop.follow==2>200px;"></#if><#if shop.follow!=2>230px;"></#if><#else>230px;"></#if>
+			<div class="publicHeader perLHead">
+		        <span class="f_r headIcon">
+					<div id="share">
+						<img src="${ctx}/themes/default/img/share1.png" alt=""style="width: 16px;">
+					</div>	
+			    </span>
+			    	${shop.uname}的店铺
+			    <span class="f_l headIcon">
+					<a href="javascript:;" onclick="window.history.back();">
+						<img src="${ctx}/themes/default/img/11.png" alt="">
+					</a>
+			    </span>	
+	        </div>
+	        <div class="perLTp" style="padding-top: 20px;">
+	    		<div class="perLTpLf">
+	    		    <div class="imgBox">
+	    			    <img src="${ctx}${shop.memberimg}" />
+	    	      	</div>
+	    		</div>
+	        	<div class="perLTpRt">
+	        		<p class="perLName">${shop.shopname}</p>
+	        		<p class="perLSign">${shop.shoplabel}</p>
+	        		<ul class="perLlibOX">
+	        			<li class="perLli">
+	        				<span class="perLliNum">${shop.fans}</span>
+	        				粉丝
+	        			</li>
+	        			<li class="perLli">
+	        				<span class="perLliNum">${shop.proxynum}</span>
+	        				代言
+	        			</li>
+	        			<li class="perLli">
+	        				<span class="perLliNum">${shop.allsale}</span>
+	        				销量
+	        			</li>
+	        		</ul>
+<#if member?? >	
+	<#if shop.follow==1>
+		        	<div class="perNButton">
+	        			<span class="plusIcon"><img src="${ctx}/themes/default/img/35.png" alt=""></span>
+	        			&nbsp;&nbsp;&nbsp;&nbsp;取消&nbsp;&nbsp;
+	        			</a>
+	        		</div>
+	</#if>
+	<#if shop.follow==0>
+			        <div class="perLButton">
+	        			<span class="plusIcon"><img src="${ctx}/themes/default/img/24.png" alt=""></span>
+	        			&nbsp;&nbsp;&nbsp;&nbsp;关注&nbsp;&nbsp;
+	        			</a>
+	        		</div>
+	</#if>
+	<#else>
+	        		<div class="perLoginButton">
+	        			<a href="login.html">
+	        			<span class="plusIcon"><img src="${ctx}/themes/default/img/24.png" alt=""></span>
+	        			&nbsp;&nbsp;&nbsp;&nbsp;关注&nbsp;&nbsp;
+	        			</a>
+	        		</div>
+</#if>
+	        	</div>
+	    	</div>
+		</div>
+		<div class="influence perLInfluce">
+	    	    <span class="influenceText">影响力</span>
+	    	    <ul>
+					<#list list1 as level1>
+	    	    	<li class="pubStar starColor"><img src="${ctx}/themes/default/img/25.png" alt=""></li>
+					</#list>
+					<#list list2 as level2>
+	    	    	<li class="pubStar"><img src="${ctx}/themes/default/img/26.png" alt=""></li>
+					</#list>
+	    	    </ul>
+	    	    <div class="userInformation f_r"><img src="${ctx}/themes/default/img/identity.png"/></div>
+	    </div>
+	    <div class="perLText">
+	    	${shop.shopintro}
+	    </div>
+	    	<div class="perList" style="padding-bottom: 54px;">
+	    		<ul class="menulistBox">
+	    			<li class="menulist menulihover" id="alllist">U品<span class="gray_3">（${proxyAll.total}）</span></li>
+	    			<li class="menulist" id="newlist">上新<span class="gray_3">（${proxyNew.total}）</span></li>
+					<li class="menulist" id="hotlist">热销<span class="gray_3">（${proxyHot.total}）</span></li>
+	    		</ul>
+			
+	    	<div class="shopList" id="AllList">
+				<#list proxyAllList as pagoods>
+				${pagoods.shang}
+					<li>
+						<a href="Upin-${pagoods.proxyid}.html">
+							<div class="shopImg">
+								<img src="${pagoods.goodsimg}" />
+							</div>
+							<p class="shopVoucher">&nbsp;</p>
+							<p class="shopName" style="height: 40px;">${pagoods.goodsname}</p>
+							<p class="shopPrice">￥${pagoods.goodsprice}</p>
+						</a>
+					</li>
+				${pagoods.xia}	
+				</#list>				
+			</div>
+			<div class="shopList" id="NewList" style="display:none;">				
+				<#list proxyNewList as pngoods>
+				${pngoods.shang}
+					<li>
+						<a href="Upin-${pngoods.proxyid}.html">
+							<div class="shopImg">
+								<img src="${pngoods.goodsimg}" />
+							</div>
+							<p class="shopVoucher">&nbsp;</p>
+							<p class="shopName" style="height: 40px;">${pngoods.goodsname}</p>
+							<p class="shopPrice">￥${pngoods.goodsprice}</p>
+						</a>
+					</li>
+				${pngoods.xia}
+				</#list>				
+			</div>
+			<div class="shopList" id="HotList" style="display:none;">
+				<#list proxyHotList as phgoods>
+				${phgoods.shang}
+					<li>
+						<a href="Upin-${phgoods.proxyid}.html">
+							<div class="shopImg">
+								<img src="${phgoods.goodsimg}" />
+							</div>
+							<p class="shopVoucher">&nbsp;</p>
+							<p class="shopName" style="height: 40px;">${phgoods.goodsname}</p>
+							<p class="shopPrice">￥${phgoods.goodsprice}</p>
+						</a>
+					</li>
+				${phgoods.xia}
+				</#list>
+			</div>
+		</div>	
+<script type="text/javascript">
+$(function(){
+	$('body').on("click",".perLButton",function(e){
+		var fid = $("#shopid").val();
+		$.ajax({
+			url:"${ctx}/shop/ext/follow!follow.do",
+			type:"POST",
+			data:"followId="+fid,
+			dataType:"json",
+			success:function(result){
+				if(result.result==1){
+					alert("关注成功！");
+					$(".perLButton").html("<span class='plusIcon'><img src='${ctx}/themes/default/img/35.png' alt=''></span>&nbsp;&nbsp;&nbsp;&nbsp;取消&nbsp;&nbsp;");
+					$(".perLButton").attr("class","perNButton");
+				}else if(result.result==0){
+				}else if(result.result==2){
+					alert("不能关注自己！");
+				}else{
+					alert("请登录后再关注达人！");
+					window.location.href="/login.html";
+				}
+			},
+			error:function(e){
+				alert("出现错误，请重试");
+			}
+		});	
+	});
+	
+	$('body').on("click",".perNButton",function(e){	
+		var fid = $("#shopid").val();
+		var r = confirm("是否取消关注？");
+		if(r==true){
+			$.ajax({
+				url:"${ctx}/shop/ext/follow!cancelFollow.do",
+				type:"POST",
+				data:"followId="+fid,
+				dataType:"json",
+				success:function(result){
+					if(result.result==1){
+						$(".perNButton").html("<span class='plusIcon'><img src='${ctx}/themes/default/img/24.png' alt=''></span>&nbsp;&nbsp;&nbsp;&nbsp;关注&nbsp;&nbsp;");
+						$(".perNButton").attr("class","perLButton");
+					}else if(result.result==0){
+					}else if(result.result==2){
+					}else{
+						alert("请登录后再关注达人！");
+						window.location.href="/login.html";
+					}
+				},
+				error:function(e){
+					alert("出现错误，请重试");
+				}
+			});
+		}	
+	});
+	
+	$("#alllist").click(function(){
+		$("#alllist").attr("class","menulist menulihover");
+		$("#newlist").attr("class","menulist");
+		$("#hotlist").attr("class","menulist");
+		$("#NewList").hide();
+		$("#HotList").hide();
+		$("#AllList").show();
+	});
+	$("#newlist").click(function(){
+		$("#newlist").attr("class","menulist menulihover");
+		$("#alllist").attr("class","menulist");
+		$("#hotlist").attr("class","menulist");
+		$("#AllList").hide();
+		$("#HotList").hide();
+		$("#NewList").show();
+	});
+	$("#hotlist").click(function(){
+		$("#hotlist").attr("class","menulist menulihover");
+		$("#newlist").attr("class","menulist");
+		$("#alllist").attr("class","menulist");
+		$("#AllList").hide();
+		$("#NewList").hide();
+		$("#HotList").show();
+	});
+	$("#share").click(function(){
+		$("#share_div").css('display','block');
+	});
+	$("#hidden_div").click(function(){
+		$("#share_div").css('display','none');
+	});
+});
+function copy(){
+		document.getElementById("shopurl").select();
+		document.execCommand("copy",false,null);
+		alert("复制成功！");
+};
+</script>
+</#if>
+		<footer class="homeFooter">
+			<ul>
+			<a href="homePage.html">
+				<li class="tabLi numColor">
+					<div class="tabIcon">
+						<img src="${ctx}/themes/default/img/customized_sel.png" />
+					</div>
+					<span>定制</span>
+				</li>
+			</a>
+			<a href="discountHome.html">
+				<li class="tabLi">
+					<div class="tabIcon">
+						<img src="${ctx}/themes/default/img/discover.png" />
+					</div>
+					<span class="tabText">发现</span>
+				</li>
+			</a>
+			<a href="cart.html">
+				<li class="tabLi">
+					<div class="tabIcon">
+						<img src="${ctx}/themes/default/img/order.png" />
+					</div>
+					<span>购物车</span>
+				</li>
+			</a>
+			<a href="user.html">
+				<li class="tabLi">
+					<div class="tabIcon">
+						<img src="${ctx}/themes/default/img/mine.png" />
+					</div>
+					<span>我的</span>
+				</li>
+			</a>
+			</ul>
+		</footer>	    	
+	</body>
+</html>

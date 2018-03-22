@@ -1,0 +1,62 @@
+<#if member?? >
+<#-- 创建全部可代理商品信息标签 -->
+<#assign goodsAgentListTag= newTag("goodsAgentListTag") >
+<#-- 调用标签获取全部可代理商品信息 -->
+<#assign goodslist= goodsAgentListTag() >
+<#-- 获取全部可代理商品列表 -->
+<#assign glist= goodslist.goodslist >
+	<#list glist as gList>		
+	    <div class="agentList">
+	    	<div class="agentListPub">
+	    		<div class="agentListImg">
+	    			<div class="ALIBox">
+	    				<img src="${gList.goodsimg}" />
+	    			</div>
+	    		</div>
+	    		<div class="agentListText">
+	    			<p class="agentListName" style="height: auto;">
+	    				${gList.name}
+	    			</p>
+	    			<div class="agentLTPub">
+	    				<div class="agentLTPubLf">
+	    					市场价 ￥${gList.Mktprice}
+	    				</div>&nbsp;&nbsp;&nbsp;&nbsp;
+	    				<div class="agentLTPubLf">
+	    					优选价 ￥${gList.price}
+	    				</div>
+	    			</div><div class="agentLTPub">
+	    				<div class="agentLTPubLf">
+	    					代理价 ￥${gList.agentprice}
+	    				</div>&nbsp;&nbsp;&nbsp;&nbsp;
+	    				<div class="agentLTPubLf">
+	    					利润空间 ￥${gList.price-gList.agentprice}
+	    				</div>
+	    			</div>
+	    			<div class="agentLTPub">
+	    				<div class="agentLTPubLf">
+	    					已代理 ${gList.onsale}
+	    				</div>&nbsp;&nbsp;&nbsp;&nbsp;
+	    				<div class="agentLTPubLf">
+	    					剩余 ${gList.stock-gList.onsale}
+	    				</div>
+	    			</div>
+	    		</div>
+	    	</div>
+	        <div class="agentListBt">
+	        	<a href="discountDetail-${gList.goodsid}.html" class="agentListBtLf">U品详情</a>
+	        	<a href="signAgent-${gList.goodsid}.html" class="agentListBtRt">代理商品</a>
+	        </div>
+	    </div>
+	</#list>
+<div id="page${goodslist.nowpage}" style="display:none;"></div>
+<#else>
+<script type="text/javascript"> 
+	onload=function(){ 
+		setTimeout(go, 1);
+	}; 
+	function go(){ 
+		location.href="login.html"; 
+	} 
+	
+</script> 
+</#if>

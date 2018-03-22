@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+		<link rel="stylesheet" href="${ctx}/themes/default/shop/css/reset.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/shop/css/common.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/shop/css/SHOP.css" />
+		<script type="text/javascript" src="${ctx}/themes/default/shop/js/jquery-3.1.0.min.js" ></script>
+		<script type="text/javascript" src="${ctx}/themes/default/js/Cart.js" ></script>
+		<script>ctx = "${ctx}";</script>
+		<title>我的购物车</title>
+	</head>
+	<body>
+<#if member?? >
+	<#assign cartCheckTag= newTag("cartCheckTag")>
+	<#assign check = cartCheckTag() >	
+		<div class="publicHeader">
+			<span class="headIcon f_l">
+				
+			</span>
+				我的购物车
+		</div>
+		<#include '/cart/cart_item.html'>
+		<footer class="homeFooter">
+			<ul>
+			<a href="homePage.html">
+				<li class="tabLi">
+					<div class="tabIcon" style="height: 28px;">
+						<img src="${ctx}/themes/default/img/customized.png" style="height: 24px;"/>
+					</div>
+					<span>定制</span>
+				</li>
+			</a>
+			<a href="discountHome.html">
+				<li class="tabLi">
+					<div class="tabIcon" style="height: 28px;">
+						<img src="${ctx}/themes/default/img/discover.png" style="height: 24px;"/>
+					</div>
+					<span class="tabText">发现</span>
+				</li>
+			</a>
+			<a href="cart.html">
+				<li class="tabLi numColor">
+					<div class="tabIcon"  style="height: 28px;">
+						<img src="${ctx}/themes/default/img/order_sel.png" style="height: 24px;"/>
+					</div>
+					<span>购物车</span>
+				</li>
+			</a>
+			<a href="user.html">
+				<li class="tabLi">
+					<div class="tabIcon" style="height: 28px;">
+						<img src="${ctx}/themes/default/img/mine.png" style="height: 24px;"/>
+					</div>
+					<span>我的</span>
+				</li>
+			</a>
+			</ul>
+		</footer>
+<#else>
+<script type="text/javascript"> 
+onload=function(){ 
+	setTimeout(go, 1);
+}; 
+function go(){ 
+	location.href="login.html"; 
+} 
+</script> 
+</#if>
+	</body>
+</html>

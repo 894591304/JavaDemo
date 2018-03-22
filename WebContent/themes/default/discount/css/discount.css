@@ -1,0 +1,47 @@
+.numColor{color: #f05;}
+.pt2r{padding-top: 2rem!important;}
+.publicDiscount{border-top: 2px solid #fff;}
+.publicDiscount:first-child{border: none;}
+.discountBox1{}
+.discountBox1 a{
+	display: block;height: 10rem;background-size: cover;color: #FFF;text-align: center;
+	}
+.textTp{font-size: 1.5rem;padding-top: 4rem;}
+.textBt{font-size: 1rem;line-height: 2;}
+.disB2Lf{
+	background-size: cover;display: block;width: 50%;color: #fff;
+	}
+.disB2Rt{
+	background-size: cover;display: block;width: 50%;color: #fff;
+	}
+.discountBox2{display: flex;}
+.discountBox2 a{box-sizing: border-box;text-align: center;height: 6rem;}
+.discountBox2 a:first-child{border-right: 2px solid #FFF;}
+.discountWrap{padding-bottom: 4rem;}
+
+/**************************discountList**********************************/
+.discountWrap{padding-bottom: 4rem;}
+.discountImgBox{
+    height: 10rem;
+}
+.discountListText{
+    padding: .5rem;
+    font-size: .8rem;
+    color: #000;
+}
+
+/**************************discountDetail**********************************/
+.shopDetail{
+    padding: .5rem;
+    border-bottom: 2px solid #ccc;
+    border-top: 2px solid #ccc;
+    font-size: .8rem;
+    font-weight: 600;
+    line-height: 1.5;
+}
+.shopDetail .detailName{}
+.shopDetail .detailPrice{}
+.detailText{
+    padding: .5rem;
+    font-size: .8rem;
+}

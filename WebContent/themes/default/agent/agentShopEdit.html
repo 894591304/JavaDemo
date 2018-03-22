@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+		<link rel="stylesheet" href="${ctx}/themes/default/agent/css/reset.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/agent/css/common.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/agent/css/agent1.css" />
+		<script type="text/javascript" src="${ctx}/themes/default/agent/js/jquery-3.1.0.min.js" ></script>
+		<script type="text/javascript" src="${ctx}/themes/default/js/zyupload.basic-1.0.0.min.js"></script>
+		<script src="${ctx}/themes/default/js/jquery-form.js"  type="text/javascript"></script>
+		<title>编辑我的店铺</title>
+	</head>
+<#if member?? >
+<#-- 创建用户基本信息标签 -->
+<#assign userBaseDataTag= newTag("userBaseDataTag") >
+<#-- 调用标签获取用户基本信息 -->
+<#assign user= userBaseDataTag() >
+	<#if user.isCredit==1||user.isCredit==3>
+		<#-- 创建店铺信息标签 -->
+		<#assign memberShopTag= newTag("memberShopTag") >
+		<#-- 调用标签获取店铺信息 -->
+		<#assign shop= memberShopTag() >
+	<body class="agentNewBody">
+		<div id="zyupload" class="zyupload" style="display:none"></div>
+		<div class="publicHeader">
+		    <span class="f_l headIcon">
+				<a href="javascript:;" onclick="window.history.back();">
+					<img src="${ctx}/themes/default/img/2.png" alt="">
+				</a>
+			</span>
+			编辑我的店铺
+	    </div>
+		<form action="shopInfo.html" method="post" id="shopInfo_form" >
+			<input type="hidden" id="up1url" name="memberImg" value="${shop.memberimg}">
+			<input type="hidden" id="up2url" name="shopImg" value="${shop.shopimg}">
+	    	<div class="agentBox">
+	    		<p class="agentBoxH">店铺用户名</p>
+	    		<input type="text" class="agentBoxText" name="shopName" value="${shop.shopname}" placeholder="请输入店铺名"> </input>
+	    	</div>
+	    	<div class="agentBox">
+	    		<p class="agentBoxH">店铺关键字</p>
+	    		<input type="text" class="agentBoxText agentNewText" name="label" value="${shop.label}" maxlength="20" style="width: 325px;" placeholder="请输入店铺关键字"> </input>
+	    	</div>
+	    	<div class="agentBox">
+	    		<p class="agentBoxH">店铺描述</p>
+				<textarea name="shopIntro" id="" cols="30" rows="6" style="width: 325px;height: 83px;" maxlength="100" placeholder="请输入店铺描述">${shop.intro}</textarea>
+	    	</div>
+			<div class="agentBox filecontent">
+				<p class="agentBoxH tofile">上传用户头像及店铺背景图</p>
+				<div class="filebox">
+					<div>
+						<div class="touxiang">
+							<img src="${ctx}${shop.memberimg}" id="up1img" alt="">
+						</div>
+						<div class="webuploader_pick" id="up1">
+							<img src="${ctx}/themes/default/img/album.png" alt="">
+							<img src="${ctx}/themes/default/img/30.png" alt="">
+							<span>上传头像图片</span>
+						</div>
+					</div>
+					<div>
+						<div class="beijing">
+							<img src="${ctx}${shop.shopimg}" id="up2img" alt="">
+						</div>
+						<div class="webuploader_pick" id="up2">
+							<img src="${ctx}/themes/default/img/album.png" alt="">
+							<img src="${ctx}/themes/default/img/30.png" alt="">
+							<span>上传背景图片</span>
+						</div>
+					</div>
+				</div>
+			</div>
+	    	<div class="agentBox">
+	    		<p class="agentBoxH">联系电话</p>
+	    		<input type="number" name="mobile" class="agentBoxText agentNewText" value="${shop.mobile}"></input>
+	    	</div>
+	    	<div class="agentBox">
+	    		<p class="agentBoxH">客服QQ</p>
+	    		<input type="number" name="qq" class="agentBoxText agentNewText" value="${shop.qq}"></input>
+	    	</div>
+	    	<div class="agentNewBt">
+	    		<a href="javascript:;" id="agentNewBtn" class="agentNewBtRt">确认提交</a>
+	    	</div>
+		</form>
+<script type="text/javascript">
+			var clickid;
+			$(function(){
+				// 初始化插件
+				$("#zyupload").zyUpload({
+					width            :   "650px",                 // 宽度
+					height           :   "400px",                 // 宽度
+					itemWidth        :   "140px",                 // 文件项的宽度
+					itemHeight       :   "115px",                 // 文件项的高度
+					url              :   "/javamall/h5upload.action",  // 上传文件的路径
+					fileType         :   ["jpg","png","jpeg","gif","JPG","PNG","JPEG","GIF"],// 上传文件的类型
+					fileSize         :   51200000,                // 上传文件的大小
+					multiple         :   false,                    // 是否可以多个文件上传
+					dragDrop         :   false,                   // 是否可以拖动上传文件
+					tailor           :   false,                   // 是否可以裁剪图片
+					del              :   true,                    // 是否可以删除文件
+					finishDel        :   false,  				  // 是否在上传文件完成后删除预览
+					/* 外部获得的回调接口 */
+					onSelect: function(selectFiles, allFiles){    // 选择文件的回调方法  selectFile:当前选中的文件  allFiles:还没上传的全部文件
+						//console.info("当前选择了以下文件：");
+						//console.info(selectFiles);
+					},
+					onDelete: function(file, files){              // 删除一个文件的回调方法 file:当前删除的文件  files:删除之后的文件
+						//console.info("当前删除了此文件：");
+						//console.info(file.name);
+					},
+					onSuccess: function(file, response){          // 文件上传成功的回调方法
+						//console.info("此文件上传成功：");
+						//console.info(file.name);
+						//console.info("此文件上传到服务器地址：");
+						//console.info(response);
+						//$("#selfile").show();
+						//$("#upbtn").hide();
+						//$("#uploadInf").append("<p>上传成功，文件地址是：" + response + "</p>");
+						$("#"+clickid+"url").val(response);
+						$("#"+clickid+"img").attr('src',"${ctx}"+response);
+					},
+					onFailure: function(file, response){          // 文件上传失败的回调方法
+						//console.info("此文件上传失败：");
+						alert("文件上传失败！");
+						//console.info(file.name);
+					},
+					onComplete: function(response){           	  // 上传完成的回调方法
+						//console.info("文件上传完成");
+						//console.info(response);
+					}
+				});				
+			});
+$(function(){
+	 var options = {
+			url : "${ctx}/shop/ext/memberShop!submit.do" ,
+			type : "POST",
+			dataType : 'json',
+			async: false,
+			success : function(result) {
+ 				if(result.result==1){
+ 					alert("保存完成!");
+	 				location.href="${ctx}/user.html";
+	 			}else{
+	 				alert(result.message);
+		 		} 
+			},
+			error : function(e) {
+				alert("出现错误 ，请重试");
+			}
+	};
+	$("#agentNewBtn").click(function(){
+		$('#shopInfo_form').ajaxSubmit(options);	
+	})
+});		
+</script>		
+		
+	</body>
+	<#else>
+	<script type="text/javascript"> 
+	onload=function(){ 
+		setTimeout(go, 1);
+	}; 
+	function go(){
+		alert("请通过授信后再编辑店铺！");
+		self.location=document.referrer; 
+	} 
+	</script> 
+</#if>
+<#else>
+<script type="text/javascript"> 
+onload=function(){ 
+	setTimeout(go, 1);
+}; 
+function go(){ 
+	location.href="login.html"; 
+} 
+</script> 
+</#if>
+</html>

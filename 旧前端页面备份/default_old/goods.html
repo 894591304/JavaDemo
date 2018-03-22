@@ -1,0 +1,180 @@
+<#-- 创建商品基本信息标签 -->
+<#assign goodsBaseDataTag= newTag("goodsBaseDataTag") >
+<#-- 调用标签获取商品基本信息 -->
+<#assign goods= goodsBaseDataTag() >
+<#if goods.page_title!="">
+		<#assign  title="${goods.page_title}" />
+		<#else>
+		<#assign  title="${goods.name}" />
+</#if>
+<#if goods.meta_keywords!="">
+	<#assign  keywords="${goods.meta_keywords}" />
+</#if>
+<#if goods.meta_description!="">
+	<#assign  description="${goods.meta_description}" />
+</#if>
+
+<#include 'common/header.html' />
+
+<script>
+	var ctx="${ctx}";
+</script>
+
+<@css src="css/goods.css" />
+<@script src="js/magiczoom.js"  compress="false" />
+<@script src="js/jcarousellite_1.0.1.min.js" compress="false"  />
+<@script src="js/favorite.js"   />
+<@script src="js/jquery.numinput.js" />
+<@script src="js/Goods.js" />
+<@script src="js/Comment.js" />
+<@script src="js/spec.js"  />
+
+<#-- 创建商品相册标签 -->
+<#assign goodsGalleryTag= newTag("goodsGalleryTag")>
+<#-- 调用标签获取商品相册信息 -->
+<#assign galleryList= goodsGalleryTag()!'' >
+<#-- 创建商品属性标签 -->
+<#assign goodsAttributeTag= newTag("goodsAttributeTag")>
+<#-- 调用标签获取商品属性信息 -->
+<#assign attr= goodsAttributeTag()!'' >
+<#-- 创建商品参数标签 -->
+<#assign goodsParametersTag= newTag("goodsParametersTag")>
+<#-- 调用标签获取商品参数信息 -->
+<#assign goodsPara= goodsParametersTag()!'' >
+
+	<#-- 获得商品参数的参数组 -->
+<#if goodsPara.hasParam==true>
+	<#assign para = goodsPara.paramList>
+</#if>
+
+<#-- 创建会员vip价格标签 -->
+<#assign vipPriceTag= newTag("goodsVipPriceTag") >
+<#-- 调用会员vip价格信息 -->
+<#assign vipPrice = vipPriceTag() >
+<#-- 创建会员是否登录标签 -->
+<#assign memberIsLoginTag= newTag("memberIsLoginTag") >
+<#-- 调用会员是否登录信息 -->
+<#assign isLogin = memberIsLoginTag() >
+<!-- 创建当前位置标签 -->
+<#assign goodsNav= newTag("goodsNavTag")>
+<!-- 获取当前位置结果 -->
+<#assign goodscat = goodsNav()!'' >
+	<!--正文-->
+	<div id="goods_detail_wrapper">
+		<!--商品列表-->
+		<div class="good_list">
+			<!--商品列表左侧-->
+			<div class="gl_left">				
+				<div class="nav">
+					<span class="float b">您的当前位置：</span><span class="nav_title">${goodscat.navHtml}</span>
+				</div>				
+				<!--商品信息-->
+					<#include 'detail/goods_detail.html' />
+				<div class="rer_intro">
+					<h2>商品介绍</h2>
+				</div>
+					<!-- 商品属性 -->
+					<#include 'detail/goods_props.html' />
+				<div class="rer_detail">
+					<h2></h2>
+					<h3>产品描述：</h3>
+					<p>${goods.intro}</p>
+				</div>
+				<div id="comment_tab">
+					<ul>
+						<li class="selected discuss">商品评价</li>
+						<li class="ask">商品咨询</li>
+					</ul>
+				</div>
+				<!--商品评论-->
+				<div id="discuss_wrapper">
+					<!-- 评论列表 -->
+					<#include 'detail/discuss_list.html'/>
+					<!--发表评论-->				
+					<#include 'detail/discuss_form.html'/>
+				</div>
+				<!--商品咨询-->
+				<div id="ask_wrapper" style="display:none">
+					<div class="ask_question">
+						<h4>对该商品有任何疑问，您都可在此提问，我们会在最短的时间内给您回复</h4>
+						<div class="btn"><a href="#askForm" class="blue_btn">我要咨询</a></div>					
+					</div>				
+					<!--商品咨询列表-->
+					<#include 'detail/ask_list.html'/>
+					<!--商品咨询表单-->				
+					<#include 'detail/ask_form.html'/>
+				</div>
+			</div>
+			<!--商品列表左侧结束-->
+			<!--商品列表右侧推荐商品-->
+			<div class="gl_right">
+				<div class="goods_list_box">
+					<div class="commend">
+						<h1><span></span>推荐商品</h1>	
+						<#-- 创建商品列表标签 -->
+						<#assign goodsListTag= newTag("goodsListTag") >
+						<#-- 调用商品列表 -->
+						<#assign goodsList=goodsListTag("'tagid':'3','goodsnum':'10'")>   <!-- 由于后台不能编辑，所以商品暂缺， -->
+						<ul>
+							<#list goodsList as goods>
+							<li>
+								<a href="goods-${goods.goods_id}.html" title="${goods.name}"><@image src="${goods.thumbnail!''}" alt="${goods.name}"/>
+									<div class="q_intro">
+										<div><h2 style="height:40px;line-height:20px;"><@substring title="${goods.name}" length="28" dot="..." /></h2></div>
+										<p>售价：<span>${goods.price!''}</span></p>
+									</div>
+								</a>
+							</li>
+							</#list>
+						</ul>
+					</div>
+					<div class="hot">
+						<h1><span></span>热卖排行榜</h1>
+						<#assign goodsList=goodsListTag("'tagid':'1','goodsnum':'10'")>   <!-- 由于后台不能编辑，所以商品暂缺， -->
+						<ul>
+							<#list goodsList as goods>
+							<li>
+								<a href="goods-${goods.goods_id}.html" title="${goods.name}"><@image src="${goods.thumbnail!''}" alt="${goods.name}" />
+									<div class="q_intro">
+										<div><h2>${goods.name}</h2></div>
+										<p>售价：<span>${goods.price!''}</span></p>
+									</div>
+								</a>
+							</li>
+							</#list>
+						</ul>
+					</div>
+					<div class="gl_adv">
+					<!-- 创建广告标签 -->
+					<#assign advListTag= newTag("advListTag")>
+					<!-- 调用广告信息,传递参数acid:6 -->
+					<#assign adv = advListTag("'acid':'6'")!'' >
+					<!-- 获取广告列表 -->
+					<#assign advList = adv.advList />
+					<#if !advList?exists || advList?size==0> 
+						没有上传广告 
+					<#else>
+						<#list advList as adv>
+							<a href="${adv.url!''}"><@image src="${adv.atturl}"/></a>
+						</#list>
+					</#if>
+					<!-- 调用广告信息,传递参数acid:5 -->
+					<#assign adv = advListTag("'acid':'5'")!'' >
+					<!-- 获取广告列表 -->
+					<#assign advList = adv.advList />
+					<#if !advList?exists || advList?size==0> 
+						没有上传广告 
+					<#else>
+						<#list advList as adv>
+							<a href="${adv.url!''}"><@image src="${adv.atturl}"/></a>
+						</#list>
+					</#if>
+					<a href="register.html"><@image src="images/huiyuan.jpg"  alt="商品列表右侧下部广告图片" /></a>
+					</div>
+				</div>
+			</div>
+			<!--商品列表右侧推荐商品结束-->
+		</div>
+		<!--商品列表结束-->
+	</div>
+<#include 'common/footer.html'/>

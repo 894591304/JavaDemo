@@ -1,0 +1,22 @@
+<#include '/admin/header.html' > 
+
+<div class="main" style="background-color: white;">
+	<form id="setForm">
+		<table width="98%" border="0" cellspacing="0" cellpadding="8">
+			<input type="hidden" name="memberids" value="${memberids}" />
+			<tr>
+				<td>
+				<tr>
+					<td style="width:60px;">是否可见：</td>
+					<td style="text-algin:left"><input class="easyui-validatebox" type="radio" id="showOrHide"
+						name="showOrHide" data-options="required:true" value="1" checked>是</input> <input
+						class="easyui-validatebox" type="radio" id="showOrHide" name="showOrHide"
+						data-options="required:true" value="0">否</input></td>
+				</tr>
+				</td>
+			</tr>
+		</table>
+	</form>
+</div>
+
+<#include '/admin/footer.html' >

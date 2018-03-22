@@ -1,0 +1,124 @@
+<#assign dateformat=
+"com.enation.framework.directive.DateformateDirective"?new()>
+<#include '/admin/header.html' >
+<style>
+.input_text{
+	width: 200px;
+}
+</style>
+<div id="loading"></div>
+<div class="main">
+<form id="addEditForm"  class="validate">
+		<table width="98%" border="0" cellspacing="0" cellpadding="8">
+		<input type="hidden" id="goods_id" name="goods_id" value="${goods.goods_id}" />
+			<tr>
+				<th width="10%" style="min-width:120px;">商品名称：</th>
+				<td><input class="input_text easyui-validatebox" type="text" value="${goods.name}" disabled></input>
+				</td>
+			</tr>
+			<tr>
+				<th>提货券前缀：</th>
+				<td><input class="input_text easyui-validatebox" type="text" name="pre" data-options="required:true" value=""></input>
+				</td>
+			</tr>
+			<tr>
+				<th>提货券数量：</th>
+				<td><input class="input_text easyui-validatebox" type="text" name="num" data-options="required:true"value="" ></input>
+				</td>
+			</tr>
+			<tr>
+				<th>起始时间：</th>
+				<td><input class="easyui-datebox input_text" type="text"
+					style="height: 28px;"
+					value=""
+					name="mstartdate" data-options="required:true"></input>
+				</td>
+			</tr>
+			<tr>	
+				<th>终止时间：</th>
+				<td><input class="easyui-datebox input_text" type="text"
+					style="height: 28px;"
+					value=""
+					name="menddate" data-options="required:true"></input>
+				</td>
+			</tr>
+			<tr>	
+				<td><a href="javascript:void(0)" class="easyui-linkbutton" 
+					data-options="plain:true" onclick="submitForm()">生成提货券</a></td>
+				<td><a href="javascript:void(0)" class="easyui-linkbutton" 
+					data-options="plain:true" onclick="doExport()">导出提货券</a></td>
+			</tr>
+		</table>
+	</form>
+	<form id="agentform">
+		<div class="clear height10"></div>
+		<div class="shadowBoxWhite tableDiv">
+		<table class="easyui-datagrid"
+			data-options="url:'ticket!ticketlistJson.do?goods_id=${goods_id}',pageList: [5,10,15,20],pageSize:${pageSize},fitColumns:'true'"
+			pagination="true" id="ticketData" sortName="id" sortOrder="desc" >
+			<thead>
+				<tr>
+					<th width="25%" data-options="field:'ticketcode'" formatter="formatTicket">提货券码</th>
+					<th width="25%" data-options="field:'status'" formatter="formatStatus">提货券状态</th>
+					<th width="25%" data-options="field:'startdate'" formatter="formatBegintime">生效时间</th>
+					<th width="25%" data-options="field:'enddate'" formatter="formatEndtime">失效时间</th>
+				</tr>
+			</thead>
+		</table>
+		</div>
+	</form>
+	<div id="divdia" style="display: none;"></div>
+</div>
+<script type="text/javascript">
+	function submitForm(){
+			if($('#addEditForm').form('validate')){
+			 	var options = {
+					url : "ticket!saveEditGoodsTicket.do?ajax=yes",
+					type : "POST",
+					dataType : "json",
+					success : function(result) {
+						$("#ticketData").datagrid('load',{
+							page:1
+						});
+				 	},
+				 	error : function(e) {
+						alert("出现错误 ，请重试");
+					}
+				};
+				$('#addEditForm').ajaxSubmit(options);	
+			}
+	}
+	function formatTicket(value, row, index) {
+		return value.toUpperCase();
+	}
+	function formatBegintime(value, row, index) {
+		return getFormatDateByLong(value/1000, "yyyy-MM-dd");
+	}
+
+	function formatEndtime(value, row, index) {
+		return getFormatDateByLong(value/1000, "yyyy-MM-dd");
+	}
+	function formatStatus(value, row, index){
+		return value=='1'?'已使用':'未使用';
+	}
+	function exportTicket(){
+		window.location.href = 'ticket!export.do?goods_id=${goods.goods_id}';
+	}
+	function doExport(){
+		$.Loading.show('正在导出，请稍侯...'); 
+		$.ajax({
+			url:"ticket!export.do?goods_id=${goods.goods_id}",
+			type:"POST",
+			dataType:"json",
+			success:function(result){
+				window.open(result.message);
+				$.Loading.hide();
+			},
+			error:function(){
+				$.Loading.hide();
+				alert("导出错误");
+			}
+		});	
+	}
+</script>
+<#include '/admin/footer.html' >

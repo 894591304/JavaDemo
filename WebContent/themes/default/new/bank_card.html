@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+		<link rel="stylesheet" href="${ctx}/themes/default/new/css/reset.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/new/css/common.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/new/css/newStyle.css" />
+		<script type="text/javascript" src="${ctx}/themes/default/js/jquery-1.7.2.js" ></script>
+		<title>我的银行卡</title>
+	</head>
+	<body>
+    <header>
+      <div class="l"><a href="myWallet.html"><img src="${ctx}/themes/default/new/images/LeftArrow.png"/></a></div>
+      <div class="c">我的银行卡</div>
+      <div class="r"></div>
+    </header>
+<#if member?? >
+<#-- 创建用户基本信息标签 -->
+<#assign userBaseDataTag= newTag("userBaseDataTag") >
+<#-- 调用标签获取用户基本信息 -->
+<#assign user= userBaseDataTag() >
+	<#if user.isCredit==1>  
+	<#-- 创建用户基本信息标签 -->
+	<#assign bankListTag= newTag("bankListTag") >
+	<#-- 调用标签获取用户基本信息 -->
+	<#assign banklisttag= bankListTag() >
+	<#assign banklist= banklisttag.blist >
+    <div class="wrap myBankCard">
+      <div class="list">
+        <ul>
+        <#list banklist as bank>
+        	<li>
+           		<div class="img" onclick="window.open('bankInfoEdit.html?infoid=${bank.bankinfoid?c}','_self')"><img src="${ctx}/themes/default/img/9.png"/></div>
+            	<div class="title" onclick="window.open('bankInfoEdit.html?infoid=${bank.bankinfoid?c}','_self')">${bank.bankname}储蓄卡（${bank.num}）</div>
+            	<div class="tig tig${bank.status}">默认</div>
+            	<div class="check check${bank.status}"><img src="${ctx}/themes/default/img/14.png"/></div>
+          	</li>
+		</#list>
+        </ul>
+        <div class="btn" onclick="window.open('bankInfoEdit.html','_self')">
+          		<span>添加银行卡</span>
+          		<span><img src="${ctx}/themes/default/img/5.png"/></span>
+        </div>
+      </div>
+	</div>
+		<#else>
+		请先申请授信后再管理"我的银行卡"！
+	</#if>
+	<#else>
+<script type="text/javascript"> 
+onload=function(){ 
+	setTimeout(go, 1);
+}; 
+function go(){ 
+	location.href="login.html"; 
+} 
+</script> 
+</#if>
+	</body>
+</html>

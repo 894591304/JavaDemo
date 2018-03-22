@@ -1,0 +1,33 @@
+<!-- 获取列表标签 -->
+<#assign memberShopLevelList = newTag("memberShopLevelListTag")>
+<!-- 调用会员信息列表标签 -->
+<#assign memberShopList = memberShopLevelList()>
+<#assign memberShop = memberShopList.shopLevelList>
+<#if !memberShop?exists || memberShop?size==0>
+	<#else>
+	<ul class="peopleList">
+		<#list memberShop as mshop>
+				<li class="gzLi">
+					<div class="gzImgBox">
+						<div class="gzImg">
+						    <a href="personCtList-${mshop.memberid}.html">
+						    	<img src="${ctx}${mshop.memberimg}" />
+						    </a>
+					    </div>
+					</div>
+					<div class="gzLiText">
+						<p class="gzPeopleName"><a href="personCtList-${mshop.memberid}.html">${mshop.shopname}</a></p>
+						<p>${mshop.label}</p>
+					</div>
+					<div class="gzLiIcon">
+						<#if mshop.guanzhu=="1">
+							<span class="gzPeople" fid="${mshop.memberid}"><img src="${ctx}/themes/default/img/13.png" alt=""></span>
+						<#else>
+							<span class="PlusPeople" fid="${mshop.memberid}"><img src="${ctx}/themes/default/img/12.png" alt="" class="fa-plus-circle" ></span>
+						</#if>	
+					</div>
+				</li>
+		</#list>
+	</ul>
+	<div id="page${memberShopList.nowpage}" style="display:none;"></div>
+</#if>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+		<link rel="stylesheet" href="${ctx}/themes/default/new/css/reset.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/new/css/common.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/new/css/newStyle.css" />
+		<script type="text/javascript" src="${ctx}/themes/default/shop/js/jquery-3.1.0.min.js" ></script>
+		<title>我的会员</title>
+	</head>
+<#if member?? >
+	<#-- 创建用户基本信息标签 -->
+	<#assign userBaseDataTag= newTag("userBaseDataTag") >
+	<#-- 调用标签获取用户基本信息 -->
+	<#assign user= userBaseDataTag() >
+	<#if user.isCredit!=1>
+	请先进行授信操作！
+	<#else>
+	<#assign myVipMemberListTag= newTag("myVipMemberListTag") >
+	<#assign myVipMemberList= myVipMemberListTag() >
+	<#assign mplist= myVipMemberList.mplist>
+	<body>
+    <header>
+      <div class="l"><a href="user.html"><img src="${ctx}/themes/default/new/images/LeftArrow.png"/></a></div>
+      <div class="c">我的会员</div>
+      <div class="r" style="margin-right: 10px;"><a href="myAgentShop.html">发福利</a></div>
+    </header>
+    
+    <div class="wrap mineVip">
+      <div class="search">
+        <div class="l"><input type="text" placeholder="搜索会员" name="" id="" value="" /></div>
+        <div class="r"><a href=""><img src="${ctx}/themes/default/new/images/search.png"/></a></div>
+      </div>
+      <div class="banner">
+      </div>
+      
+      <ul class="memlist">
+      	<li><span><img src="${ctx}/themes/default/new/images/vipHui.png"/></span><span>会员总数</span><span>${myVipMemberList.vipcount}人</span></li>
+      	<li><span><img src="${ctx}/themes/default/new/images/v1.png"/></span><span>V1会员总数</span><span>${myVipMemberList.vip1count}人</span></li>
+      	<li><span><img src="${ctx}/themes/default/new/images/v2.png"/></span><span>V2会员总数</span><span>${myVipMemberList.vip2count}人</span></li>
+      	<li><span><img src="${ctx}/themes/default/new/images/v3.png"/></span><span>V3会员总数</span><span>${myVipMemberList.vip3count}人</span></li>
+      	<li><span><img src="${ctx}/themes/default/new/images/vipOld.png"/></span><span>过期会员总数</span><span>${myVipMemberList.vipoldcount}人</span></li>
+      </ul>
+      
+      <div class="checkList">
+        <div class="top">
+          <p><input id="v1" type="checkbox" checked/>Vip1</p>
+          <p><input id="v2" type="checkbox" checked/>Vip2</p>
+          <p><input id="v3" type="checkbox" checked/>Vip3</p>
+          <p><input id="vold" type="checkbox" checked/>已过期</p>
+        </div>
+
+        <ul class="bottom">
+<#list mplist as member>        
+        	<li class="vip${member.level}">
+            	<div class="l"><img src="${ctx}${member.img}"/></div>
+            	<div class="c">${member.name}</div>
+           		<div class="r">
+              		<#if member.level==1>
+             		<span class="textBlue">VIP1</span>
+             		<#elseif member.level==2>
+             		<span class="textRed">VIP2</span>
+             		<#elseif member.level==3>
+             		<span class="textYellow">VIP3</span>
+             		<#elseif member.level==0>
+             		<span class="textGrey">已过期会员</span>
+             		</#if>
+              		<span class="textGray">经验：${member.exp}</span>
+            	</div>
+          	</li>
+</#list>
+        </ul>
+      </div>      
+    </div>
+	        
+    <footer class="homeFooter">
+			<ul>
+			<a href="homePage.html">
+				<li class="tabLi">
+					<div class="tabIcon">
+						<img src="${ctx}/themes/default/img/customized.png" />
+					</div>
+					<span>定制</span>
+				</li>
+			</a>
+			<a href="discountHome.html">
+				<li class="tabLi">
+					<div class="tabIcon">
+						<img src="${ctx}/themes/default/img/discover.png" />
+					</div>
+					<span class="tabText">发现</span>
+				</li>
+			</a>
+			<a href="cart.html">
+				<li class="tabLi">
+					<div class="tabIcon">
+						<img src="${ctx}/themes/default/img/order.png" />
+					</div>
+					<span>购物车</span>
+				</li>
+			</a>
+			<a href="user.html">
+				<li class="tabLi numColor">
+					<div class="tabIcon">
+						<img src="${ctx}/themes/default/img/mine_sel.png" />
+					</div>
+					<span>我的</span>
+				</li>
+			</a>
+			</ul>
+		</footer>
+	</body>
+<script type="text/javascript"> 
+$(function(){
+	$('input[type=checkbox]').change(function(){
+		if($("#v1").is(":checked")){
+			$(".vip1").show();
+		}else{
+			$(".vip1").hide();
+		}
+		if($("#v2").is(":checked")){
+			$(".vip2").show();
+		}else{
+			$(".vip2").hide();
+		}
+		if($("#v3").is(":checked")){
+			$(".vip3").show();
+		}else{
+			$(".vip3").hide();
+		}
+		if($("#vold").is(":checked")){
+			$(".vip0").show();
+		}else{
+			$(".vip0").hide();
+		}
+	});	
+});
+</script> 
+	</#if>
+<#else>
+<script type="text/javascript"> 
+onload=function(){ 
+	setTimeout(go, 1);
+}; 
+function go(){ 
+	location.href="login.html"; 
+} 
+</script> 
+</#if>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+		<link rel="stylesheet" href="${ctx}/themes/default/login/css/reset.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/login/css/common.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/login/css/loginPage.css" />
+		<script type="text/javascript" src="${ctx}/themes/default/login/js/jquery-3.1.0.min.js" ></script>
+		<title>用户注册</title>
+	</head>
+	<body>
+		<header>
+			<div class="publicHeader">
+				<span class="headIcon f_l">
+					<img src="${ctx}/themes/default/img/11.png" alt="">
+				</span>
+				用户注册
+			</div>
+		</header>
+		<div class="Wrap">
+			<div class="topText">
+				<p class="phoneNumber">尊敬的会员 88888888888</p>
+				<p>欢迎加入"汇聚优选"</p>
+			</div>
+			<div class="midText">
+				请输入您的用户名或昵称，如现在不想输入，用户名将默认为您手机号码，登陆后您可以在"个人中心"里进行修改。
+			</div>
+			<div class="inputBox">
+				<div class="pubInput">
+				<input class="inputCheck" type="text" placeholder="请输入昵称/用户名" id="checkNumber"/>
+				<a href="javascript:;" id="check" class="checkBt">检测用户名</a>
+			</div>
+			</div>
+			<div class="btText" id="resault" style="display: none">
+				用户名：小王小王小王<span class="useable">可用</span>
+			</div>
+			<div class="publicButton checkNameBt">
+				<a href="userLogin.html">
+					完成
+				</a>
+			</div>
+		</div>
+		<script type="text/javascript">
+			$(function(){
+				var userNameAble = false;//检测用户名是否可用！
+				//验证用户名
+				$('#check').click(function(){
+					var title = $('#checkNumber').val();
+					if($.trim(title) == ''){
+						alert('用户名不能为空!');
+					}else{
+						// $.post('url',{data:title},function(){
+
+						// })
+						var html = userNameAble ? '用户名：小王小王小王<span class="useable" style="color:#60c23d">可用</span>' : '用户名：小王小王小王<span  class="useable" style="color:#ff0b47">用户名已被占用</span>';
+						$('#resault').show().html(html);
+					}
+				})
+			})
+		</script>
+	</body>
+</html>

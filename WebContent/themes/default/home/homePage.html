@@ -1,0 +1,204 @@
+<#include '../common/header.html' />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+<link rel="stylesheet" href="${ctx}/themes/default/home/css/reset.css" />
+<link rel="stylesheet" href="${ctx}/themes/default/home/css/common.css" />
+<link rel="stylesheet" href="${ctx}/themes/default/home/css/home.css" />
+<script type="text/javascript" src="${ctx}/themes/default/home/js/jquery-3.1.0.min.js" ></script>
+
+<#if member?? >
+<#-- 创建用户基本信息标签 -->
+<#assign userBaseDataTag= newTag("userBaseDataTag") >
+<#-- 调用标签获取用户基本信息 -->
+<#assign user= userBaseDataTag() >
+<#--创建代理商品检测-->
+<#assign proxyStatusCheckTag = newTag("proxyStatusCheckTag")/>
+<#--调用代理商品检测标签-->
+<#assign check1= proxyStatusCheckTag()/>
+<#if user.isCredit==1>
+	<#--创建代理商品结算标签-->
+	<#assign checkUseraccountTag = newTag("checkUseraccountTag")/>
+	<#--调用代理商品结算标签-->
+	<#assign check2= checkUseraccountTag()/>
+</#if>	
+<#else>
+<script type="text/javascript"> 
+onload=function(){ 
+	setTimeout(go, 1);
+}; 
+function go(){ 
+	location.href="guanzhuPage.html"; 
+} 
+</script> 
+</#if>
+<!-- 创建关注基本信息标签 -->
+<#assign followListTag= newTag("followListTag") >
+<!-- 调用标签获取关注用户基本信息 -->
+<#assign followlist= followListTag() >
+<#assign follow= followlist.memberlist >
+<title>定制优惠</title>
+	</head>
+	<body>
+		<header>
+			<div class="publicHeader">
+				我的关注
+			</div>
+		</header>
+		<div class="searchBox" >
+			<input id="giveKey" placeholder="请输入礼品卡兑换码" type="text">
+			<a href="" id="checkKey" class="changeBt">兑换</a>
+		</div>
+		<div class="tpText">
+			您关注的<span class="numColor">${followlist.total}</span>位达人有<span class="numColor">${followlist.msgnum}</span>种新的优惠
+		</div>
+		<div class="HomeWrap">
+		<input type="hidden" id="allPage" value="${followlist.allpage}">
+			<ul>
+<#if !follow?exists || follow?size==0>
+<script type="text/javascript"> 
+onload=function(){ 
+	setTimeout(go, 1);
+}; 
+function go(){ 
+	location.href="guanzhuPage.html"; 
+} 
+</script>	
+	<#else>
+		<#list follow as fmember>
+				<li class="pubList">
+					<a href="personCtList-${fmember.followid}.html" style="padding-left: 0px;padding-right: 0px;">
+						<div class="homeImgBox">
+							<div class="imgBox">
+							    <img src="${ctx}${fmember.memberimg}" />
+						    </div>
+							<#if fmember.msg!=0>
+						    <span class="homeImgNum">${fmember.msg}</span>
+							</#if>
+						</div>						
+						<p class="listMd">${fmember.uname}</p>
+						<p class="listBt">${fmember.label}</p>
+					
+						<div class="listButton" fid=${fmember.followid} uname=${fmember.uname}>
+							取消
+						</div>
+					</a>	
+					
+				</li>
+		</#list>
+</#if>
+			<div id="page2" style="display:none;"></div>
+				<li class="pubList">
+					<a href="guanzhuPage.html">
+						<div class="imgBox homeaddGb">					
+						    <span><img src="${ctx}/themes/default/img/15.png" alt="" style="padding-top: 4px;"></span>
+					    </div>
+					    <p class="listMd">定制更多优惠</p>
+					    <p class="listBt">点击“+”号查看关注更多U客</p>
+					</a>
+				</li>
+			</ul>
+			<#if followlist.allpage!="1">
+				<div style="text-align:center;padding-top: 20px;padding-bottom: 20px;font-size:16px;"><a class="more" page="1" style="color:#745D68;">点击加载更多</a></div>
+			</#if>	
+		</div>
+<#include '../common/footer.html' />
+<script type="text/javascript">
+$(function(){
+	$("#checkKey").click(function(){
+		var giveKey = $("#giveKey").val();
+		var regex=/[a-z0-9_]*/;
+		var a=regex.exec(giveKey);
+		if(a!=""){
+			$.ajax({
+				url:"/javamall/shop/ext/ticketGive!exchangeTicket.do",
+				type:"POST",
+				data:"giveKey="+giveKey,
+				async: false,
+				dataType:"json",
+				success:function(result){
+					if(result.result==1){
+						if(result.poid!=""&&result.poid!=null){
+							location.href="ticketExchangeResult.html?proxyorderId="+result.poid;
+						}else if(result.tid!=""&&result.tid!=null){
+							alert("现金券兑换成功！");
+							location.href="myTicketInfo.html?ticketid="+result.tid;
+						}												
+					}else if(result.result==4){
+						alert("现金券兑换成功！");
+						location.href="myTicketInfo.html?ticketid="+result.tid;
+					}else if(result.result==0){
+						alert("对不起！您输入的兑换码有误！");
+					}else if(result.result==2){
+						alert("对不起！您输入的兑换码已经被使用！");
+					}else if(result.result==3){
+						alert("对不起！您无法兑换您自己发布的兑换券！");
+					}else{
+						alert("请登录！");
+						window.location.href="login.html";
+					}
+				},
+				error:function(e){
+					alert("出现错误，请重试");
+					window.location.reload(); 
+				}
+			})
+		}else{
+			alert("对不起！您输入的兑换码有误！");
+		}
+	});
+	
+	
+	
+	
+	$(".listButton").click(function(){
+		var fid = $(this).attr("fid");
+		var uname = $(this).attr("uname");
+		if(confirm("是否取消关注"+uname+"？取消关注后将无法获得该U客的更多优惠！"))
+		{
+		$.ajax({
+				url:"/javamall/shop/ext/follow!cancelFollow.do",
+				type:"POST",
+				data:"followId="+fid,
+				dataType:"json",
+				success:function(result){
+					if(result.result==1){
+						window.location.reload(); 
+					}else if(result.result==0){
+						alert("您未关注此达人！");
+						window.location.reload(); 
+					}else if(result.result==2){
+						alert("取消关注错误！");
+						window.location.reload(); 
+					}else{
+						alert("请登录！");
+						window.location.href="../javamall/login/login.html";
+					}
+				},
+				error:function(e){
+					alert("出现错误，请重试");
+					window.location.reload(); 
+				}
+		})
+		}
+		return false;
+	});
+		
+	$(".more").click(function(){
+		var allpage=parseInt($("#allPage").val());
+		var page=parseInt($(this).attr("page"));
+		var page=page+1;
+		if(page>allpage){
+			alert("没有更多商品！");
+			page=page-1;
+			return false;
+		}
+		$("#page"+page).css("display","block");
+	    $("#page"+page).load("home/guanzhuList.html?page="+page,function(){ 
+	    	$("#page"+page).fadeIn(100);
+	    	$(".more").attr("page",page);
+	    });
+	    
+	});
+})
+</script>
+	</body>
+</html>

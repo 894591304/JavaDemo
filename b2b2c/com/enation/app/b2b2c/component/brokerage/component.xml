@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="网红企业(经纪公司)组件"  version="1.0" javashop_version="3.0.0" author="Javashop">
+	<plugins>
+		<plugin name="经济公司删除插件" id="brokerageUserDeletePlugin">
+			<bundle id="adminUserPluginBundle"></bundle>
+		</plugin>
+	</plugins>
+</component>

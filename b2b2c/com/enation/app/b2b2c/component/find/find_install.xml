@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dbsolution>
+	<!-- 更新表 -->
+	<action>
+		<command>alter</command>
+		<table>es_tags</table>
+		<field type="add"><name>pic</name><type>varchar</type><size>255</size><option>00</option></field>
+	</action>
+	<action>
+		<command>alter</command>
+		<table>es_tags</table>
+		<field type="add"><name>comment</name><type>memo</type><size>21845</size><option>00</option></field>
+	</action>
+	
+</dbsolution>

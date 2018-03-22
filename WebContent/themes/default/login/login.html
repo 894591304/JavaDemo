@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+		<link rel="stylesheet" href="${ctx}/themes/default/login/css/reset.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/login/css/loginPage.css" />
+		<script>
+			var ctx="${ctx}";
+		</script>
+		<script type="text/javascript" src="${ctx}/themes/default/login/js/jquery-3.1.0.min.js" ></script>
+		<script type="text/javascript" src="${ctx}/statics/js/common/common-min.js" ></script>
+		<script src="${ctx}/themes/default/js/shop.js"  type="text/javascript"></script>
+		<script src="${ctx}/themes/default/js/CartBar.js"  type="text/javascript"></script>
+		<script src="${ctx}/themes/default/js/DropDownMenu.js"  type="text/javascript"></script>
+		<script src="${ctx}/themes/default/js/ui.datepicker.js"  type="text/javascript"></script>
+		<script src="${ctx}/themes/default/js/DatePicker.js"  type="text/javascript"></script>
+		<script src="${ctx}/themes/default/js/LoginDialog.js"  type="text/javascript"></script>
+		<title>用户登陆</title>
+	</head>
+
+	<body>
+		<header>
+			<div class="publicHeader">
+				<span class="f_l headIcon">
+					<a href="guanzhuPage.html">
+						<img src="${ctx}/themes/default/img/11.png" alt="">
+					</a>
+				</span>
+				用户登录
+			</div>
+		</header>
+<#if member?? >
+<script type="text/javascript"> 
+onload=function(){ 
+	setTimeout(go, 1);
+}; 
+function go(){ 
+	location.href="user.html"; 
+} 
+</script> 
+<div class="Wrap">
+	<p style="text-align:center;font-size:18px;">帐号已登录！<br/><br/>即将跳转到“我的”页面！</p>
+</div>
+<#else>
+		<div class="Wrap">
+			<form action="" method="post" class="validate" id="login_form">
+				<input type="hidden" name="action" value="login" />
+				<input type="hidden" value="${forward!''}" name="forward" >
+				<input type="hidden" name="remember" class="satisfied" value="1"/>
+				<div class="inputBox">
+					<div class="pubInput">
+						<input type="text" name="mobile" placeholder="请输入手机号" id="mobile"/>
+					</div>
+					<div class="pubInput">
+						<input type="password" name="password" placeholder="请输入密码" id="password"/>
+					</div>
+				</div>
+			</form>
+			<div class="publicButton">
+				<a id="login">
+					登录
+				</a>
+			</div>
+			<div class="loginPageBt">
+				<p><a href="getPassword.html" class="gray_3">找回密码</a></p>
+			</div>
+			<div class="loginPageBt">
+				<p><a href="register.html" class="gray_3">我要注册</a></p>
+			</div>
+		</div>
+		<script type="text/javascript">
+			$(function(){
+				//登录简单验证
+				$('#login').click(function(){
+					var phone = $('#mobile').val(),
+						psw = $('#password').val();
+					if($.trim(phone) == ''){
+						alert('手机号不能为空!');
+						return false;
+					}else if($.trim(psw) == ''){
+						alert('密码不能为空!')
+						return false;
+					}else{
+						$('#login_form').ajaxSubmit(options);
+					}
+				});
+				var options = {
+						url : "${ctx}/shop/ext/mobileMember!mobileLogin.do",
+						type : "POST",
+						dataType : 'json',
+						success : function(data) {	
+							if(data.result==1){
+								var forward='homePage.html'; 
+								<#if forward?? >
+									forward='${forward}';
+								</#if>
+					 
+								location.href =forward;
+							}
+							else{
+								alert(data.message)
+							}
+						},
+						error : function(e) {
+							alert("出现错误 ，请重试");
+						}
+					};
+			})
+		</script>
+</#if>
+	</body>
+</html>

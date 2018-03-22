@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+		<link rel="stylesheet" href="${ctx}/themes/default/new/css/reset.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/new/css/common.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/new/css/newStyle.css" />
+		<script type="text/javascript" src="${ctx}/themes/default/js/jquery-1.7.2.js" ></script>
+		<title>我的代理</title>
+	</head>
+	<body>
+<#if member?? >
+	<#assign discountTicketDetailTag = newTag("discountTicketDetailTag") >
+	<#assign discountTicketDetail= discountTicketDetailTag()>
+	<#if discountTicketDetail.re==2>
+	参数错误！
+		<#elseif discountTicketDetail.re==3>
+	此商品无法生成现金券！
+		<#else>
+    <header>
+      <div class="l"><a href="myProxyTicket.html?proxyid=${discountTicketDetail.proxyid?c}"><img src="${ctx}/themes/default/new/images/LeftArrow.png"/></a></div>
+      <div class="c">我的代理</div>
+      <div class="r"></div>
+    </header>
+    <div class="wrap mineAgent">
+      <div class="checkList">
+        <p class="title">选择会员分组</p>
+        <input type="hidden" name="proxyid" id="proxyid" value="${discountTicketDetail.proxyid?c}">
+        <div class="top">
+          <p><input id="v1" type="checkbox" value="" />VIP1</p>
+          <p><input id="v2" type="checkbox" value="" />VIP2</p>
+          <p><input id="v3" type="checkbox" value="" />VIP3</p>
+          <p><input id="vold" type="checkbox" value="" />已过期</p>
+        </div>
+      </div>
+      
+      <div class="main">
+        <div class="top">
+          <div class="l">发送方式</div>
+          <ul class="r">
+          	<li><input type="radio" name="sendnum" value="1"/> 已选择的用户组每人1张</a></li>
+            <li><input type="radio" name="sendnum" value="2"/> 已选择的用户组每人2张</a></li>
+            <li><input type="radio" name="sendnum" value="3"/> 已选择的用户组每人3张</a></li>
+            <input type="hidden" id="sendnum" value="0">
+          </ul>
+        </div>
+        <p class="intro">注：选择的发放数量大于拥有的现金券总数时，现金券的发放为后台平均随机发放。卡券发放顺序按生成时的顺序，由前到后发放，但发放用户则为系统随机发放。 </p>
+      </div>
+      
+      <div class="btn">
+        <a id="send">发送</a>
+      </div>
+      
+    </div>
+<script type="text/javascript">
+$(function(){
+	$("#send").click(function(){
+		var proxyid = $("#proxyid").val();
+		var sendnum = $("#sendnum").val();
+		var option = getUrlParam('option');
+		if(option==null){
+			option=0;
+		}
+		var v1 = 0;
+		var v2 = 0;
+		var v3 = 0;
+		var vold = 0;
+		if($("#v1").attr("checked")){
+			v1=1;
+		}else{
+			v1=0;
+		}
+		if($("#v2").attr("checked")){
+			v2=1;
+		}else{
+			v2=0;
+		}
+		if($("#v3").attr("checked")){
+			v3=1;
+		}else{
+			v3=0;
+		}
+		if($("#vold").attr("checked")){
+			vold=1;
+		}else{
+			vold=0;
+		}
+		if(v1==0&&v2==0&&v3==0&&vold==0){
+			alert("请选择发放的用户组！");
+			return false;
+		}
+		if(sendnum==0||sendnum==null){
+			alert("请选择发送数量！");
+			return false;
+		}
+		$.ajax({
+			url:"${ctx}/shop/ext/discountTicket!allSend.do",
+			type:"POST",
+			data:"proxyid="+proxyid+"&sendnum="+sendnum+"&v1="+v1+"&v2="+v2+"&v3="+v3+"&vold="+vold+"&option="+option,
+			dataType:"json",
+			success:function(json){
+				if(json.result==0){
+					alert("用户不正确或商品不存在！");
+					location.href="user.html";
+				}else if(json.result==2){
+					alert("请先登录！");
+					location.href="login.html";
+				}else if(json.result==3){
+					alert("没有可以赠送的现金券！");
+					location.href="myProxyTicket.html?proxyid=${discountTicketDetail.proxyid?c}";
+				}else if(json.result==4){
+					alert("现金券数量不足，已平均随机发送给所选用户组！");
+					if(option==0){
+						location.href="myProxyTicket.html?proxyid=${discountTicketDetail.proxyid?c}";
+					}else{
+						location.href="ticketOption"+option+".html?proxyid=${discountTicketDetail.proxyid?c}";
+					}
+				}else if(json.result==5){
+					alert("所选用户组中没有会员！");
+					location.reload();
+				}else if(json.result==1){
+					alert("发送成功！");
+					if(option==0){
+						location.href="myProxyTicket.html?proxyid=${discountTicketDetail.proxyid?c}";
+					}else{
+						location.href="ticketOption"+option+".html?proxyid=${discountTicketDetail.proxyid?c}";
+					}
+				}
+			}
+		});	
+	});
+	$('input[type=radio]').change(function(){
+		$('#sendnum').val($('input[name=sendnum]:checked').map(function(){return this.value}).get());
+	});	
+});
+function getUrlParam(name) {
+	 var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+	 var r = window.location.search.substr(1).match(reg); //匹配目标参数
+	 if (r != null) return unescape(r[2]); return null; //返回参数值
+}
+</script>
+	</#if>
+<#else>
+<script type="text/javascript"> 
+onload=function(){ 
+	setTimeout(go, 1);
+}; 
+function go(){ 
+	location.href="login.html"; 
+} 
+</script> 
+</#if>	        
+     		<footer class="homeFooter">
+			<ul>
+			<a href="homePage.html">
+				<li class="tabLi">
+					<div class="tabIcon">
+						<img src="${ctx}/themes/default/img/customized.png" />
+					</div>
+					<span>定制</span>
+				</li>
+			</a>
+			<a href="discountHome.html">
+				<li class="tabLi">
+					<div class="tabIcon">
+						<img src="${ctx}/themes/default/img/discover.png" />
+					</div>
+					<span class="tabText">发现</span>
+				</li>
+			</a>
+			<a href="cart.html">
+				<li class="tabLi">
+					<div class="tabIcon">
+						<img src="${ctx}/themes/default/img/order.png" />
+					</div>
+					<span>购物车</span>
+				</li>
+			</a>
+			<a href="user.html">
+				<li class="tabLi numColor">
+					<div class="tabIcon">
+						<img src="${ctx}/themes/default/img/mine_sel.png" />
+					</div>
+					<span>我的</span>
+				</li>
+			</a>
+			</ul>
+		</footer>
+	</body>
+</html>

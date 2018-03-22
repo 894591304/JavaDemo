@@ -1,0 +1,83 @@
+<#include '/admin/header.html' > 
+
+<div class="main" style="background-color: white;">
+	<form id="editForm">
+		<table width="98%" border="0" cellspacing="0" cellpadding="8">
+			<input type="hidden" name="memberId" value="${member.member_id}">
+			<tr>
+				<th width="25%">用户名：</th>
+				<td>${credit.name}</td>
+				<th>手机号：</th>
+				<td>${credit.mobile}</td>
+			</tr>
+			<tr>
+				<th>身份证号：</th>
+				<td>${credit.idCard}</td>
+			</tr>
+			<tr>
+				<th>身份证：</th>
+				<td>
+					<#list idImgList as idImg>
+						<#if idImg!="">
+						<img src="${ctx}/${idImg}" />
+						</#if>
+					</#list>
+				</td>
+			</tr>
+			<tr>
+				<th>微博：</th>
+				<td>${credit.weibo}</td>
+				<th>微博粉丝：</th>
+				<td>${credit.fans}</td>
+			</tr>
+			<tr>
+				<th>微信：</th>
+				<td>${credit.weixin}</td>
+				<th>微信好友：</th>
+				<td>${credit.friends}</td>
+			</tr>
+			<tr>
+				<th>直播：</th>
+				<td>${credit.live}</td>
+				<th>直播号：</th>
+				<td>${credit.liveId}</td>
+			</tr>
+			<tr>
+				<th>直播粉丝：</th>
+				<td>${credit.liveFans}</td>
+			</tr>
+			<tr>
+				<th>审核结果：</th>
+				<td><input type="radio" name="review" value="1" checked="true" onclick="clickHandle(true)">通过&nbsp;&nbsp;<input  name="review" type="radio" value="-1"  onclick="clickHandle(false)">不通过
+				</td>
+			</tr>
+			<tr id="review1">
+				<th>用户账户：</th>
+				<td><input class="input_text" type="text" name="accountId"></input></td>
+				<th>授信等级：</th>
+				<td><select class="easyui-validatebox"
+					name="creditLevel">
+						<option value="1">&nbsp;金卡&nbsp;</option>
+						<option value="2">&nbsp;白金卡&nbsp;</option>
+						<option value="3">&nbsp;黑卡&nbsp;</option>
+				</select></td>
+			</tr>
+			<tr id="review2">
+				<th>授信额度：</th>
+				<td><input class="input_text" type="text" name="credit_num"></input></td>
+			</tr>
+		</table>
+	</form>
+</div>
+<script>
+	function clickHandle(b){
+		if(b){
+			$("#review1").show();
+			$("#review2").show();
+		}else{
+			$("#review1").hide();
+			$("#review2").hide();
+		}
+	}
+</script>
+<#include '/admin/footer.html' >

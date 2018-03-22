@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+		<link rel="stylesheet" href="${ctx}/themes/default/shop/css/reset1.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/shop/css/common1.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/shop/css/SHOP1.css" />
+		<script type="text/javascript" src="${ctx}/themes/default/shop/js/jquery-3.1.0.min.js" ></script>
+		<title>赠送提货券</title>
+	</head>
+<#if member?? >
+	<#--创建我的提货券标签-->
+	<#assign ticketGiveDetailTag = newTag("ticketGiveDetailTag")   />
+	<#--获取标签获取结果-->
+	<#assign ticketDetail= ticketGiveDetailTag()   />
+	<body>
+		<div class="publicHeader">
+			<span class="headIcon f_l">
+				<a href="voucher.html">
+					<img src="${ctx}/themes/default/img/2.png" alt="">
+				</a>
+			</span>
+				赠送提货券
+		</div>
+		<div class="voucherDetailWrap">
+	<#if ticketDetail.re==0>
+			相关信息不存在！
+	</#if>
+	<#if ticketDetail.re==1>
+			<div class="card">
+				<div class="voucherGoods">
+					<img src="${ticketDetail.img}" alt="">
+				</div>
+				<div class="voucherDetail voucherNum">
+					<h4>${ticketDetail.name}</h4>
+				</div>
+				<div class="voucherDetail voucherdelivery">
+					<p>赠送码</p>
+					<div class="voucherSee">
+						<h4>${ticketDetail.code}</h4>
+					</div>
+					<span></span>
+					<span></span>
+				</div>
+				<div class="voucherDetail voucherEnd">
+					<p>将赠送码提供给好友，好友通过定制页面中的兑换功能进行兑换！</p>
+				</div>
+			</div>
+	</#if>
+		</div>
+	</body>
+<#else>
+<script type="text/javascript"> 
+onload=function(){ 
+	setTimeout(go, 1);
+}; 
+function go(){ 
+	location.href="login.html"; 
+} 
+</script> 
+</#if>
+</html>

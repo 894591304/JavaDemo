@@ -1,0 +1,160 @@
+.publicHeader{
+    text-align: center;
+    font-size: 1rem;
+    height: 3rem;
+    line-height: 3rem;
+    background: -webkit-linear-gradient(left,#ff4100,#ff0055);
+    color: #fff;
+    padding: 0 1rem;
+}
+.headIcon{font-size: 1.2rem;}
+.homeFooter{
+    overflow: hidden;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    left: 0;
+    background-color: #fff;
+    padding: .3rem 0 0 0;
+    box-shadow: 0px -2px 25px #ccc;
+}
+.tabLi{float: left;width: 25%;text-align: -webkit-center;height: 3rem;/* position: fixed; *//* bottom: 0; *//* width: 100%; *//* left: 0; */}
+.tabLi .tabIcon{
+    display: block;
+    font-size: 1rem;
+    width: 1.5rem;
+    margin-bottom: -.4rem;
+}
+.goodsList{
+    border-top: 1px solid #ccc;
+    padding-bottom: 2.5rem;
+}
+.goodsLi{
+    padding: 1rem;
+    border-bottom: 3px solid #f1f0ee;
+    overflow: hidden;
+    display: flex;
+    background-color: #fff;
+}
+.goodsLi .goodsImgBox{
+    width: 6.5rem;
+}
+.goodsLi .goodsImg{
+    height: 6rem;
+    width: 6rem;
+    float: left;
+    border: 1px solid #ccc;
+    box-shadow: 0px 0px 15px #ccc;
+}
+.goodsLi .goodsText{
+    float: left;
+    padding-left: .5rem;
+    height: 6rem;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    width: 65%;
+}
+.goodsLi .goodsText .goodsName{
+    font-size: 1rem;
+    height: 1.5rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.goodsLi .goodsText .goodsPrice{
+    height: 2rem;
+    line-height: 2rem;
+    color: #666;
+    font-size: 0.7rem;
+}
+.goodsLi .goodsText .goodsPriceLf{}
+.goodsLi .goodsText .goodsPriceRt{
+    padding-left: 1rem;
+}
+.goodsLi .goodsText .goodsNumber{
+    font-size: .7rem;
+    height: 1rem;
+    color: #666;
+}
+.goodsLi .goodsText .goodsLiBt{
+    overflow: hidden;
+    height: 1.5rem;
+}
+.goodsLi .goodsText .goodsLiBt .goodsComment{
+    font-size: .8rem;
+    padding-top: .3rem;
+    float: left;
+}
+.goodsLi .goodsText .goodsLiBt .goodsComment{
+    font-size: .8rem;
+    padding-top: .3rem;
+    float: left;
+    color: #ccc;
+}
+.goodsCommentIconB{height: 1.5rem;width: 3rem;line-height: 1.5rem;}
+.goodsCommentIcon{
+	width: 1rem;height: 1rem;float: left;
+}
+.goodsLi .goodsText .goodsLiBt .goodsSelect{
+    float: right;
+    font-size: 1.5rem;
+    color: #ff4100;
+}
+.homeExchangeBt{
+    text-align: center;
+    margin-top: 4rem;
+}
+.shopList{}
+.shopList ul{
+    display: flex;
+    border-top: 2px solid #ccc;
+}
+.shopList ul li{
+    width: 50%;
+    text-align: -webkit-center;
+    padding: .5rem;
+    box-sizing: border-box;
+    border-bottom: 1px solid #ccc;
+}
+.shopList ul li:nth-child(odd){border-right: 1px solid #CCCCCC;}
+.shopList ul li a{display: block;}
+.shopList ul li .shopImg{
+    width: 10rem;
+    height: 10rem;
+}
+.shopList ul li .shopVoucher{
+    font-size: .6rem;
+}
+.shopList ul li .shopName{
+    font-size: .6rem;
+}
+.shopList ul li .shopPrice{
+    font-size: .8rem;
+    padding-top: 2rem;
+    font-weight: 600;
+}
+.peopleList{
+}
+.peopleList .peopleListHead{
+    text-align: -webkit-center;
+}
+.peopleList ul{display: flex;margin-top: 1rem;}
+.peopleList .peopleLi:last-child a{
+     background-color: #ff0050;
+     line-height: 4rem;
+     text-align: -webkit-center;
+}
+.peopleList .peopleLi{
+   width: 20%;
+   text-align: -webkit-center;
+}
+.peopleList .peopleLi a{
+    color: #fff;
+    font-size: 1rem;
+    overflow: hidden;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 5rem;
+    overflow: hidden;
+    display: inline-block;
+}

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="192px" height="192px" viewBox="0 0 192 192" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 42 (36781) - http://www.bohemiancoding.com/sketch -->
+    <title>收藏</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="收藏" stroke="#CCCCCC" stroke-width="13">
+            <path d="M109.6705,51.5602941 C122.5585,38.8132353 143.4565,38.8132353 156.3445,51.5602941 C169.2265,64.3132353 169.2265,84.9838235 156.3445,97.7485294 M109.6705,51.5602941 L100.0045,59.5779412 M90.3445,51.5602941 C77.4565,38.8132353 56.5585,38.8132353 43.6705,51.5602941 C30.7765,64.3132353 30.7765,84.9838235 43.6705,97.7485294 M90.3445,51.5602941 L100.0045,59.6485294 M43.6705,97.7485294 L92.0065,156.030882 C96.4045,160.854412 103.5985,160.854412 107.9965,156.030882 L156.3445,97.7485294" id="icon-:-liked"></path>
+        </g>
+    </g>
+</svg>

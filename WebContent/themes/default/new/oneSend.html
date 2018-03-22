@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+		<link rel="stylesheet" href="${ctx}/themes/default/new/css/reset.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/new/css/common.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/new/css/newStyle.css" />
+		<script type="text/javascript" src="${ctx}/themes/default/js/jquery-1.7.2.js" ></script>
+		<title>我的代理</title>
+	</head>
+	<body>
+<#if member?? >
+    <#assign proxyVIPListTag = newTag("proxyVIPListTag") >
+	<#assign proxyVIPList= proxyVIPListTag()>
+	<#if proxyVIPList.re==2>
+	参数错误！
+	<#elseif proxyVIPList.re==3>
+	该现金券已经发送！
+	<#elseif proxyVIPList.re==1>
+	<header>
+      <div class="l"><a href="myProxyTicket.html?proxyid=${proxyVIPList.proxyid?c}"><img src="${ctx}/themes/default/new/images/LeftArrow.png"/></a></div>
+      <div class="c">我的代理</div>
+      <div class="r"></div>
+    </header>
+    <div class="wrap mineVip">
+      <div class="search">
+        <div class="l"><input type="text" placeholder="搜索会员" name="" id="" value="" /></div>
+        <div class="r"><a href=""><img src="${ctx}/themes/default/new/images/search.png"/></a></div>
+      </div>
+      <input type="hidden" name="ticketid" id="ticketid" value="${proxyVIPList.ticketid?c}">
+      <div class="checkList">
+        <ul class="bottom">
+     <#assign proxyVipList = proxyVIPList.mplist >
+     <#list proxyVipList as proxyVip>
+        	<li style="padding-right: 15px;padding-left: 15px;">
+            	<div class="l"><img src="${ctx}${proxyVip.img}"/></div>
+            	<div class="c">${proxyVip.name}</div>
+            	<div class="r">
+             		<#if proxyVip.level==1>
+             		<span class="textBlue">VIP1</span>
+             		<#elseif proxyVip.level==2>
+             		<span class="textRed">VIP2</span>
+             		<#elseif proxyVip.level==3>
+             		<span class="textYellow">VIP3</span>
+             		<#elseif proxyVip.level==0>
+             		<span class="textGrey">已过期会员</span>
+             		</#if>
+             		<span class="textRed">经验：${proxyVip.exp}</span>
+            	</div>
+            	<div class="rn">
+              		<a href="">
+                	<input type="radio" name="member" value="${proxyVip.id?c}"/> 选择
+              		</a>
+            	</div>
+          	</li>
+		</#list>
+		<input type="hidden" id="member" value="0">
+        </ul>
+        <div class="wrap mineAgent3" style="padding-top: 20px;padding-bottom: 0px;">
+        	<div class="btn" style="padding-bottom: 0px;padding-top: 0px;padding-left: 0px;padding-right: 0px;">
+          		<a id="sendticket" style="margin-right: 0px;">发&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;送</a>
+      		</div>
+      	</div>	
+      </div>      
+    </div>
+<script type="text/javascript">
+$(function(){
+	$('input[type=radio]').change(function(){
+		$('#member').val($('input[name=member]:checked').map(function(){return this.value}).get());
+	});
+	$("#sendticket").click(function(){
+		var memberid = $("#member").val();
+		var ticketid = $("#ticketid").val();
+		if(memberid==null||memberid==0){
+			alert("请选择发送的会员！");
+			return false;
+		}else{
+			$.ajax({
+				url:"${ctx}/shop/ext/discountTicket!oneSend.do",
+				type:"POST",
+				data:"memberid="+memberid+"&ticketid="+ticketid,
+				dataType:"json",
+				success:function(json){
+					if(json.result==0){
+						alert("用户不正确或商品不存在！");
+						location.href="user.html";
+					}else if(json.result==2){
+						alert("请先登录！");
+						location.href="login.html";
+					}else if(json.result==3){
+						alert("此现金券已经送出！");
+						location.href="myProxyTicket.html?proxyid=${proxyVIPList.proxyid?c}";
+					}else if(json.result==1){
+						alert("发送成功！");
+						location.href="myProxyTicket.html?proxyid=${proxyVIPList.proxyid?c}";
+					}
+				}
+			});	
+		}
+	});
+});
+</script>    
+    </#if>
+<#else>
+<script type="text/javascript"> 
+onload=function(){ 
+	setTimeout(go, 1);
+}; 
+function go(){ 
+	location.href="login.html"; 
+} 
+</script> 
+</#if>	        
+ 		<footer class="homeFooter">
+			<ul>
+			<a href="homePage.html">
+				<li class="tabLi">
+					<div class="tabIcon">
+						<img src="${ctx}/themes/default/img/customized.png" />
+					</div>
+					<span>定制</span>
+				</li>
+			</a>
+			<a href="discountHome.html">
+				<li class="tabLi">
+					<div class="tabIcon">
+						<img src="${ctx}/themes/default/img/discover.png" />
+					</div>
+					<span class="tabText">发现</span>
+				</li>
+			</a>
+			<a href="cart.html">
+				<li class="tabLi">
+					<div class="tabIcon">
+						<img src="${ctx}/themes/default/img/order.png" />
+					</div>
+					<span>购物车</span>
+				</li>
+			</a>
+			<a href="user.html">
+				<li class="tabLi numColor">
+					<div class="tabIcon">
+						<img src="${ctx}/themes/default/img/mine_sel.png" />
+					</div>
+					<span>我的</span>
+				</li>
+			</a>
+			</ul>
+		</footer>
+	</body>
+</html>

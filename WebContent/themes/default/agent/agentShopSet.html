@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<#if member?? >
+<!-- 创建商品基本信息标签 -->
+<#assign goodsBaseDataTag= newTag("goodsBaseDataTag") >
+<!-- 调用标签获取商品基本信息 -->
+<#assign goods= goodsBaseDataTag() >
+<#if goods.page_title!="">
+		<#assign  title="${goods.page_title}" />
+		<#else>
+		<#assign  title="${goods.name}" />
+</#if>
+<#if goods.meta_keywords!="">
+	<#assign  keywords="${goods.meta_keywords}" />
+</#if>
+<#if goods.meta_description!="">
+	<#assign  description="${goods.meta_description}" />
+</#if>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+		<link rel="stylesheet" href="${ctx}/themes/default/agent/css/reset.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/agent/css/common.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/agent/css/agent.css" />
+		<script type="text/javascript" src="${ctx}/themes/default/agent/js/jquery-3.1.0.min.js" ></script>
+		<script src="${ctx}/themes/default/js/jquery-form.js"  type="text/javascript"></script>
+		<title>上架商品</title>
+	</head>
+<!-- 创建代理商品信息标签 -->
+<#assign proxyOnSaleTag= newTag("proxyOnSaleTag") >
+<!-- 调用代理商品信息标签-->
+<#assign proxyInfo= proxyOnSaleTag() >	
+	<body>
+		<div class="publicHeader">
+		    <span class="f_l headIcon">
+				<a href="javascript:" onclick="window.history.back();">
+					<img src="${ctx}/themes/default/img/2.png" alt="">
+				</a>
+			</span>
+				上架信息
+	    </div>
+	    <div class="agentSetText">
+	    	<p>您已完成商品签署代理，所代理的商品信息：</p>
+	    	<p>代理商品：${goods.name}[提货券]</p>
+	    	<p>货号:${proxyInfo.huohao}</p>
+	    	<p>代理数量：${proxyInfo.goodsamount}件</p>
+	    	<p>销售保证金：￥${proxyInfo.frozendeposit}元</p>
+	    	<p>代销售期：${proxyInfo.dxsq}天</p>
+	    	<p>试售期：${proxyInfo.begintime} 至 ${proxyInfo.testtime}</p>
+	    </div>
+<form action="agentShopSet.html" method="post" id="agentShopSet_form" >
+	<input type="hidden" name="goodsid" id="goodsid" value="${proxyInfo.goodsid}">
+	    <div class="agentShopNews">
+	    	<p class="agentShopNewsH">
+	    		商品上架信息调整：
+	    	</p>
+	    	<div class="agentShopPub">
+	    		<div class="agentShopPubLf">市场价</div>
+	    		<div class="agentShopPubRt">￥&nbsp;&nbsp;&nbsp;&nbsp;${proxyInfo.mktprice}</div>
+	    	</div>
+	    	<div class="agentShopPub">
+	    		<div class="agentShopPubLf">优选价</div>
+	    		<div class="agentShopPubRt">￥&nbsp;&nbsp;&nbsp;&nbsp;${proxyInfo.price}</div>
+	    	</div>
+	    	<div class="agentShopPub">
+	    		<div class="agentShopPubLf">数量 
+					<span class="shopHave">还可上架:${proxyInfo.canonsale}件</span>
+				</div>
+	    		<div class="agentShopPubRt">上架 
+	    			<input type="hidden" id="onsalemax" value="${proxyInfo.canonsale}">
+					<input type="number" class="shopNumInput" name="onsalenum"  id="onsalenum" min="0" max="${proxyInfo.canonsale}" value="${proxyInfo.canonsale}" />件
+				</div>
+	    	</div>
+	    	<div class="agentShopPub" style="display:none;">
+	    		<div class="fenleiLf">输入分类</div>
+				<div class="addSelect">
+	    			<input type="text" name="goodsCategory" id="goodsCategory" value="0"/>
+	    		</div>
+	    	</div>
+	    	<div class="agentShopPub" style="display:none;">
+	    		<div class="shopTitle">
+	    			输入标签
+	    		</div>
+	    		<div class="addSelect">
+	    			<input type="text" name="goodsLabel" id="goodsLabel" value="0"/>
+	    		</div>
+	    	</div>
+	    	<div class="agentShopPub">
+	    		<div class="shopTimeLf">
+	    			推荐
+	    		</div>
+	    		<div class="shopTime">
+	    			<div class="shopTimeInput">
+	    				<input type="radio" name="status1" value="1" <#if proxyInfo.status==1>checked</#if>/> 热销
+	    			</div>
+	    			<div class="shopTimeInput">
+	    				<input type="radio" name="status1" value="2" <#if proxyInfo.status==2>checked</#if>/> 上新
+	    			</div>
+					<input type="hidden" name="status" id="status" value="${proxyInfo.status}">
+	    		</div>
+	    	</div>
+	    </div>
+	    <div class="agentNewBt">
+	    	<a href="agentList.html" class="agentNewBtLf" >暂不上架</a>
+	    	<a href="#" class="agentNewBtRt aBg" id="onsale">确认上架</a>
+	    </div>
+</form>
+
+		<script type="text/javascript">
+			$(function(){
+				//登录简单验证
+					$('#onsale').click(function(){
+					var num = parseInt($('#onsalenum').val());
+					var category = $('#goodsCategory').val();
+					var label = $('#goodsLabel').val();
+					var maxnum = parseInt($("#onsalemax").val());
+					if(num>maxnum||num<0){
+						alert("输入数量有误！");
+						return false;
+					}
+					if($.trim(num) == ''){
+						alert('请输入上架数量！');
+						return false;
+					}else if($.trim(category) == ''){
+						alert('请输入分类！')
+						return false;
+					}else if($.trim(label) == ''){
+						alert('请输入标签!')
+						return false;
+					}else{
+						$('#agentShopSet_form').ajaxSubmit(options);
+					}
+				});
+				var options = {
+					url : "${ctx}/shop/ext/goodsAgent!onSale.do",
+					type : "POST",
+					dataType : 'json',
+					success : function(data) {	
+								if(data.result==1){
+									alert("上架完成！");
+									var forward="myAgentShop.html"							 				 
+									location.href = forward;
+								}else if(data.result==2){
+									alert("上架成功！请完善您的VIP信息！");
+									location.href = "vipInfoEdit.html";
+								}else{
+									alert(data.message)
+								}
+							},
+					error : function(e) {
+								alert("出现错误 ，请重试");
+							}
+					};
+			})	
+		
+		$('input[type=radio]').change(function(){
+		$('#status').val($('input[type=radio]:checked').map(function(){return this.value}).get())
+		})	
+		</script>
+	</body>
+<#else>
+<script type="text/javascript"> 
+	onload=function(){ 
+		setTimeout(go, 1);
+	}; 
+	function go(){ 
+		location.href="login.html"; 
+	} 
+</script> 
+</#if>
+</html>

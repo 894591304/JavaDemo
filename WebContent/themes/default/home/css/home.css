@@ -1,0 +1,203 @@
+.bodyBg{background-color: #f5f5f5;}
+.color1{color:#ff4100;}
+.numColor{color: #f05;}
+.searchBox{
+    border-bottom: 1px solid #ddd;
+    display: flex;
+}
+.searchBox input{width: 80%;height: 2.5rem;border: none;text-indent: 1rem;/* line-height: 2.5rem; *//* margin-right: 20%; */font-size: .8rem;}
+.searchBox a{
+    width: 20%;
+    display: inline-block;
+    text-align: -webkit-center;
+    height: 2.5rem;
+    line-height: 2.5rem;
+    color: #fff;
+    background-color: #ff4100;
+    box-sizing: border-box;
+    font-size: .8rem;
+}
+.tpText{
+    text-align: center;
+    height: 2rem;
+    line-height: 2rem;
+    background-color: #eee;
+    font-size: .85rem;
+}
+.HomeWrap{
+    padding-bottom: 3.5rem;
+}
+.pubList{
+    float: left;
+    width: 50%;
+    text-align: -webkit-center;
+    border-right: 1px solid #ccc;
+    box-sizing: border-box;
+    border-bottom: 1px solid #ccc;
+    /* padding: 1.5rem 2rem; */
+}
+
+.pubList a{
+    display: block;
+    padding: 1.5rem 2rem;
+    height: 9rem;
+    overflow: hidden;
+    /* position: relative; */
+}
+.pubList .imgBox{
+    width: 3.5rem;
+    height: 3.5rem;
+    overflow: hidden;
+    border-radius: 3rem;
+    border: 4px solid #f1f0ee;
+    line-height: 3.7rem;
+    font-size: 3rem;
+    background-color: #dbd8d3;
+    color: #fff;
+    /* position: relative; */
+}
+.pubList .listMd{
+    font-size: 1rem;
+    padding-top: 1rem;
+}
+.pubList .listBt{
+    font-size: .8rem;
+    color: #ccc;
+    padding: .1rem 0 .5rem;
+}
+.pubList .listButton{
+    background-color: #9c9893;
+    color: #fff;
+    width: 4rem;
+    height: 1.5rem;
+    line-height: 1.5rem;
+    border-radius: 1rem;
+}
+.pubList .listButtonRed{
+    background-color: #ff3b5e;
+}
+.homeaddGb{border-color: #dbd8d3!important;}
+.homeImgNum{
+    position: absolute;
+    /* bottom: 0; */
+    width: 1.5rem;
+    height: 1.5rem;
+    background-color: rgba(255, 59, 94, 1);
+    border-radius: 1rem;
+    line-height: 1.5rem;
+    font-size: .7rem;
+    top: -4px;
+    right: -7px;
+    color: #fff;
+}
+.homeImgBox{
+    position: relative;
+    /* box-sizing: inherit; */
+    width: 4rem;
+    height: 4rem;
+}
+/********************home_exchange***************************/
+.tpChangeText{background-color: #f1f0ee;font-size: .8rem;padding: .5rem .8rem;}
+
+.homeExchangeBt a{
+    width: co;
+    color: #fff;
+    background: #ff2f52;
+    width: 9rem;
+    display: inline-block;
+    height: 2.5rem;
+    line-height: 2.5rem;
+    font-size: .9rem;
+    border-radius: 2rem;
+}
+/********************guanzhuPage***************************/
+.gzSearchBox{
+    padding: .7rem 0;
+    font-size: .8rem;
+}
+.gzSearchBox .searchIcon{
+	width: 30%;
+	display: inline-block;
+	text-align: right;
+}
+.gzSearchBox input{
+    border: none;
+    background: none;
+    font-weight: 400;
+    width: 35%;
+}
+.gzWrap{
+    /* padding: 0 1rem; */
+}
+.gzWrap .gzTp{
+    /* text-align: center; */
+    background-color: #fff;
+    height: 3rem;
+    line-height: 3rem;
+    font-size: .9rem;
+    text-indent: 1rem;
+    color: #ff0055;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+}
+.peopleList{
+	background-color: #f7f7f6;
+	margin-top: 5px;
+}
+.gzLi{
+    display: flex;
+    /* padding: 1rem; */
+    padding: .7rem 1rem;
+}
+.gzImgBox{
+    width: 20%;
+}
+.gzLi .gzImg{
+    width: 2.7rem;
+    height: 2.7rem;
+    border-radius: 5rem;
+    overflow: hidden;
+    margin-top: 0.1rem;
+}
+.gzLi .gzLiText{
+    width: 70%;
+}
+.gzLi .gzLiText p{
+    color: #666;
+    font-size: .7rem;
+}
+.gzLi p.gzPeopleName{
+    font-size: 1rem;
+    margin-bottom: 0.3rem;
+}
+.gzLi .gzLiIcon{
+    width: 10%;
+    text-align: -webkit-center;
+    height: 3rem;
+    line-height: 3rem;
+    font-size: 1.5rem;
+    color: #9c9893;
+}
+.gzPeople{color: #FF0055;}
+.gzLi:nth-child(even){background-color: #FFF;box-shadow: 0 0 5px rgba(0,0,0,0.1);}
+.searchIcon  >img{
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
+}
+.imgBox >span >img{
+    width:48px;
+    height:48px;
+}
+.gzLiIcon > span{
+    display: block;
+    width:24px;
+    height:24px;
+}
+.gzLiIcon > span >img{
+    width:24px;
+    height:24px;
+}
+.goodsSelect >img{
+    width:24px;
+    height:24px;
+}

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+		<link rel="stylesheet" href="${ctx}/themes/default/new/css/reset.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/new/css/common.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/new/css/newStyle.css" />
+		<script type="text/javascript" src="${ctx}/themes/default/js/jquery-1.7.2.js"></script>
+		<title>现金券详情</title>
+	</head>
+	<body>
+    <header>
+      <div class="l"><a href="myTicketList.html"><img src="${ctx}/themes/default/new/images/LeftArrow.png"/></a></div>
+      <div class="c">现金券详情</div>
+      <div class="r"></div>
+    </header>
+<#if member?? >
+	<#assign myDiscountTicketDetailTag = newTag("myDiscountTicketDetailTag") >
+	<#assign ticketDetail= myDiscountTicketDetailTag()>
+	<#if ticketDetail.re==2>
+	参数错误！
+		<#elseif ticketDetail.re==3>
+	对不起！此现金券不属于您！
+		<#else>	 
+    <div class="wrap cashCouponDetail">
+      <div class="box">
+        <div class="img"><img src="${ticketDetail.img}" alt="" /></div>
+        <div class="boxWrap">
+          <p class="title">${ticketDetail.name}</p>
+          <p class="price">￥${ticketDetail.value}元现金券</p>
+          <p class="time">有效期: ${ticketDetail.begintime} - ${ticketDetail.endtime}</p>
+          <#if ticketDetail.send==1>
+          <p class="title">现金券正在赠送中！</p>
+          </#if>
+          <div class="btnTop">
+            <a href="Upin-${ticketDetail.proxyid?c}.html">查看商品</a>
+            <#if ticketDetail.send==0>
+            <a id="send">赠送好友</a>
+            </#if>
+          </div>
+          <div class="btnBottom">
+            <p>现金券码 <span>${ticketDetail.code}</span></p>
+            <#if ticketDetail.send==0||ticketDetail.send==2>
+            <a href="Upin-${ticketDetail.proxyid?c}.html">立即使用</a>
+            <#else>
+            <p>赠送码： <span>${ticketDetail.sendcode}</span></p>
+            </#if>
+          </div>
+          
+          <div class="intro">
+            <div class="t">现金券使用说明</div>
+            <div class="b">
+              <p>${ticketDetail.info!""}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+<script type="text/javascript">
+$(function(){
+	$("#send").click(function(){
+		if(confirm("是否赠送此现金券？赠送后您将无法使用！"))
+		{
+			var ticketid = ${ticketDetail.ticketid?c};
+			$.ajax({
+				url:"${ctx}/shop/ext/discountTicket!send.do",
+				type:"POST",
+				data:"ticketid="+ticketid,
+				dataType:"json",
+				success:function(json){
+					if(json.result==0){
+						alert("参数错误！");
+					}else if(json.result==2){
+						alert("请登录！");
+						location.href="login.html";
+					}else if(json.result==3){
+						alert("此现金券不属于您！");
+						location.href="myTicketList.html";
+					}else if(json.result==4){
+						alert("此现金券已使用！无法赠送！");
+						location.href="myTicketList.html";
+					}else if(json.result==5){
+						alert("此现金券在赠送中！");
+						location.href="discountTicketGive.html?ticketid="+ticketid;
+					}else{
+						alert("赠送码已生成！");
+						location.href="discountTicketGive.html?ticketid="+ticketid;
+					}
+				}
+			});
+			
+			
+		}else{
+			
+		}
+	});
+
+	
+})
+</script>
+      </#if>
+<#else>
+<script type="text/javascript"> 
+onload=function(){ 
+	setTimeout(go, 1);
+}; 
+function go(){ 
+	location.href="login.html"; 
+} 
+</script> 
+</#if>      
+    </div>   
+     		<footer class="homeFooter">
+			<ul>
+			<a href="homePage.html">
+				<li class="tabLi">
+					<div class="tabIcon">
+						<img src="${ctx}/themes/default/img/customized.png" />
+					</div>
+					<span>定制</span>
+				</li>
+			</a>
+			<a href="discountHome.html">
+				<li class="tabLi">
+					<div class="tabIcon">
+						<img src="${ctx}/themes/default/img/discover.png" />
+					</div>
+					<span class="tabText">发现</span>
+				</li>
+			</a>
+			<a href="cart.html">
+				<li class="tabLi">
+					<div class="tabIcon">
+						<img src="${ctx}/themes/default/img/order.png" />
+					</div>
+					<span>购物车</span>
+				</li>
+			</a>
+			<a href="user.html">
+				<li class="tabLi numColor">
+					<div class="tabIcon">
+						<img src="${ctx}/themes/default/img/mine_sel.png" />
+					</div>
+					<span>我的</span>
+				</li>
+			</a>
+			</ul>
+		</footer>
+	</body>
+</html>

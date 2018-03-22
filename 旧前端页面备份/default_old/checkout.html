@@ -1,0 +1,13 @@
+<#assign  title="核对订单信息" />
+<#include 'common/header.html'/>
+<@css src="css/checkout.css" />
+<@script src="js/Checkout.js" />
+<div id="main">
+	<!--上部填写信息单、购买流程-->
+	<div class="checkout_step2">
+		<@image src="images/lc.jpg" alt="结算流程第一步" />
+	</div>
+	<!--上不填写信息单、购买流程结束-->
+	<#include 'checkout/checkout.html'/>
+</div>
+<#include 'common/footer.html'/>

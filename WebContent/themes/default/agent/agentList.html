@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+		<link rel="stylesheet" href="${ctx}/themes/default/agent/css/reset.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/agent/css/common.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/agent/css/agent.css" />
+		<script type="text/javascript" src="${ctx}/themes/default/agent/js/jquery-3.1.0.min.js" ></script>
+<#if member?? >
+<#-- 创建全部可代理商品信息标签 -->
+<#assign goodsAgentListTag= newTag("goodsAgentListTag") >
+<#-- 调用标签获取全部可代理商品信息 -->
+<#assign goodslist= goodsAgentListTag() >
+<#-- 获取全部可代理商品列表 -->
+<#assign glist= goodslist.goodslist >
+
+<#-- 创建最近30天可代理商品信息标签 -->
+<#assign goodsAgentLatelyListTag= newTag("goodsAgentLatelyListTag") >
+<#-- 调用标签获取最近30天可代理商品信息 -->
+<#assign goodslatelylist= goodsAgentLatelyListTag() >
+<#-- 获取最近30天可代理商品列表 -->
+<#assign glatelylist= goodslatelylist.goodslist >
+
+<#-- 创建分类标签 -->
+<#assign newGoodsCatTag= newTag("newGoodsCatTag") >
+<#-- 调用分类信息 -->
+<#assign goodscat= newGoodsCatTag() >
+<#-- 获取一级分类列表 -->
+<#assign catlist1= goodscat.catlist1 >
+<#-- 获取二级分类列表 -->
+<#assign catlist2= goodscat.catlist2 >
+
+	<title>可代理商品列表</title>
+	</head>
+	<body>
+		<div class="publicHeader">
+		    <span class="f_l headIcon">
+				<a href="myAgent.html">
+					<img src="${ctx}/themes/default/img/2.png" alt="">
+				</a>
+			</span>
+				全部代理
+	    </div>
+	    <div class="agentSearch">
+	    	<div class="agentSLf"  style="width:30%;">
+	    		<span class="agentSearchIcon"></span>
+	    	</div>
+	    	<div class="agentLInput" style="width:50%;">
+	    		<input type="text" id="keyword" placeholder="搜索可代理商品" />
+	    	</div>
+	    	<div class="agentLInput" style="width:10%;padding: .7rem 0;">
+	    	<span class="agentSearchIcon"><img id="searchbtn" src="${ctx}/themes/default/img/3.png" alt=""></span>
+	    	</div>
+	    	<div class="agentSRt">
+	    		<span class="agentSRtIcon">
+	    			<img src="${ctx}/themes/default/img/4.png" alt="">
+	    		</span>
+	    		<span class="agentSRtIcon change">
+	    			<img src="${ctx}/themes/default/img/4-2.png" alt="">
+	    		</span>
+	    	</div>
+	    </div>
+		
+        <div class="agentNavigation" id="1cat">
+            <ul class="">
+			<#list catlist1 as cat1>	
+				<li class="cat1" catid="${cat1.catid}">${cat1.catname}</li>
+			</#list>
+            </ul>
+        </div>
+		<div class="agentNavigation" id="2cat" style="left: 75px;">
+            <ul class="">
+			<#list catlist2 as cat2>
+                <li class="cat2" pid="${cat2.parentid}" catid="${cat2.catid}" onclick="window.location.href='catAgentList.html?catid=${cat2.catid}'">${cat2.catname}</li>
+			</#list>
+            </ul>
+        </div>
+		
+	    <div class="agentLMenu">
+		
+	    	<div class="agentLMenuBox agentLMenuBoxS" id="AllList">
+	    		<div class="agentLMenuList">
+	    			可代理<span class="agentLMenuNum">(${goodslist.total})</span>
+	    		</div>
+	    	</div>
+			
+	    	<div class="agentLMenuBox" id="NewList">
+	    		<div class="agentLMenuList">
+	    			最新代理<span class="agentLMenuNum">(${goodslatelylist.total})</span>
+	    		</div>
+	    	</div>
+			
+	    </div>
+<div id="goodsList" style="padding-bottom: 54px;">
+<input type="hidden" id="goodsAllPage" value="${goodslist.allpage}">
+<#if goodslist.total!=0>
+	<#list glist as gList>		
+	    <div class="agentList">
+	    	<div class="agentListPub">
+	    		<div class="agentListImg">
+	    			<div class="ALIBox">
+	    				<img src="${gList.goodsimg}" />
+	    			</div>
+	    		</div>
+	    		<div class="agentListText">
+	    			<p class="agentListName" style="height: auto;">
+	    				${gList.name}
+	    			</p>
+	    			<div class="agentLTPub">
+	    				<div class="agentLTPubLf">
+	    					市场价 ￥${gList.Mktprice}
+	    				</div>&nbsp;&nbsp;&nbsp;&nbsp;
+	    				<div class="agentLTPubLf">
+	    					优选价 ￥${gList.price}
+	    				</div>
+	    			</div><div class="agentLTPub">
+	    				<div class="agentLTPubLf">
+	    					代理价 ￥${gList.agentprice}
+	    				</div>&nbsp;&nbsp;&nbsp;&nbsp;
+	    				<div class="agentLTPubLf">
+	    					利润空间 ￥${gList.price-gList.agentprice}
+	    				</div>
+	    			</div>
+	    			<div class="agentLTPub">
+	    				<div class="agentLTPubLf">
+	    					已代理 ${gList.onsale}
+	    				</div>&nbsp;&nbsp;&nbsp;&nbsp;
+	    				<div class="agentLTPubLf">
+	    					剩余 ${gList.stock-gList.onsale}
+	    				</div>
+	    			</div>
+	    		</div>
+	    	</div>
+	        <div class="agentListBt">
+	        	<a href="discountDetail-${gList.goodsid}.html" class="agentListBtLf">U品详情</a>
+	        	<a href="signAgent-${gList.goodsid}.html" class="agentListBtRt">代理商品</a>
+	        </div>
+	    </div>
+	</#list>	
+</#if>
+<div id="page2" style="display:none;"></div>
+<div style="text-align:center;padding-top: 20px;padding-bottom: 20px;font-size:16px;"><a class="more1" page="1" style="color:#745D68;">点击加载更多</a></div>
+</div>
+<div id="latelyList" style="display:none;padding-bottom: 54px;">
+<input type="hidden" id="goodsLatelyAllPage" value="${goodslatelylist.allpage}">
+<#if goodslatelylist.total!=0>
+	<#list glatelylist as glList>
+	    <div class="agentList" >
+	    	<div class="agentListPub">
+	    		<div class="agentListImg">
+	    			<div class="ALIBox">
+	    				<img src="${glList.goodsimg}" />
+	    			</div>
+	    		</div>
+	    		<div class="agentListText">
+	    			<p class="agentListName" style="height: auto;">
+	    				${glList.name}
+	    			</p>
+	    			<div class="agentLTPub">
+	    				<div class="agentLTPubLf">
+	    					市场价 ￥${glList.Mktprice}
+	    				</div>&nbsp;&nbsp;&nbsp;&nbsp;
+	    				<div class="agentLTPubLf">
+	    					优选价 ￥${glList.price}
+	    				</div>
+	    			</div><div class="agentLTPub">
+	    				<div class="agentLTPubLf">
+	    					代理价 ￥${glList.agentprice}
+	    				</div>&nbsp;&nbsp;&nbsp;&nbsp;
+	    				<div class="agentLTPubLf">
+	    					利润空间 ￥${glList.price-glList.agentprice}
+	    				</div>
+	    			</div>
+	    			<div class="agentLTPub">
+	    				<div class="agentLTPubLf">
+	    					已代理 ${glList.onsale}
+	    				</div>&nbsp;&nbsp;&nbsp;&nbsp;
+	    				<div class="agentLTPubLf">
+	    					剩余 ${glList.stock-glList.onsale}
+	    				</div>
+	    			</div>
+	    		</div>
+	    	</div>
+	        <div class="agentListBt">
+	        	<a href="discountDetail-${glList.goodsid}.html" class="agentListBtLf">U品详情</a>
+	        	<a href="signAgent-${glList.goodsid}.html" class="agentListBtRt">代理商品</a>
+	        </div>
+	    </div>
+	</#list>
+</#if>
+<div id="pagelate2" style="display:none;"></div>
+<div style="text-align:center;padding-top: 20px;padding-bottom: 20px;font-size:16px;"><a class="more2" page="1" style="color:#745D68;">点击加载更多</a></div>
+</div>
+	<footer class="homeFooter">
+			<ul>
+			<a href="homePage.html">
+				<li class="tabLi">
+					<div class="tabIcon">
+						<img src="${ctx}/themes/default/img/customized.png" />
+					</div>
+					<span>定制</span>
+				</li>
+			</a>
+			<a href="discountHome.html">
+				<li class="tabLi">
+					<div class="tabIcon">
+						<img src="${ctx}/themes/default/img/discover.png" />
+					</div>
+					<span class="tabText">发现</span>
+				</li>
+			</a>
+			<a href="cart.html">
+				<li class="tabLi">
+					<div class="tabIcon">
+						<img src="${ctx}/themes/default/img/order.png" />
+					</div>
+					<span>购物车</span>
+				</li>
+			</a>
+			<a href="user.html">
+				<li class="tabLi numColor">
+					<div class="tabIcon">
+						<img src="${ctx}/themes/default/img/mine_sel.png" />
+					</div>
+					<span>我的</span>
+				</li>
+			</a>
+			</ul>
+	</footer>
+<script type="text/javascript">
+$(function(){
+	$("#AllList").click(function(){
+		$("#AllList").attr("class","agentLMenuBox agentLMenuBoxS");
+		$("#NewList").attr("class","agentLMenuBox");
+		$("#latelyList").hide();
+		$("#goodsList").show();
+	});
+	$("#NewList").click(function(){
+		$("#NewList").attr("class","agentLMenuBox agentLMenuBoxS");
+		$("#AllList").attr("class","agentLMenuBox");
+		$("#goodsList").hide();
+		$("#latelyList").show();
+	});
+	$("#keyword").keydown(function(){
+		if(event.keyCode == "13"){
+			var keyword = $("#keyword").val();
+			if(keyword==null||keyword==""){
+				alert("请输入关键词！");
+				return false;
+			}
+			location.href="agentSearchList.html?keyword="+keyword;
+		}
+	});
+	$("#searchbtn").click(function(){
+		var keyword = $("#keyword").val();
+		if(keyword==null||keyword==""){
+			alert("请输入关键词！");
+			return false;
+		}
+		location.href="agentSearchList.html?keyword="+keyword;
+	});
+})
+			$(".agentSRt").click(function(){
+				$(".agentSRtIcon").toggleClass("change");
+                $("#1cat").slideToggle();
+                if($("#2cat").css("display")!="none"){
+                $("#2cat").slideToggle();}
+			});
+
+			$(".cat1").click(function(){
+				var id = $(this).attr("catid");
+
+				if($("#2cat").css("display")!="none"){
+					$("#2cat").slideToggle(function(){
+						$(".cat2").css("display","none");
+						$("li[pid="+id+"]").css("display","block");
+					});
+					$("#2cat").slideToggle();
+					}else{
+					$(".cat2").css("display","none");
+					$("li[pid="+id+"]").css("display","block");
+					$("#2cat").slideToggle();
+					}
+			});
+			
+			$(".more1").click(function(){
+				var allpage=parseInt($("#goodsAllPage").val());
+				var page=parseInt($(this).attr("page"));
+				var page=page+1;
+				if(page>allpage){
+					alert("没有更多商品！");
+					page=page-1;
+					return false;
+				}
+				$("#page"+page).css("display","block");
+			    $("#page"+page).load("agent/goodsAgentList.html?page="+page,function(){ 
+			    	$("#page"+page).fadeIn(100);
+			    	$(".more1").attr("page",page);
+			    });
+			    
+			});   
+			$(".more2").click(function(){
+				var allpage=parseInt($("#goodsLatelyAllPage").val());
+				var page=parseInt($(this).attr("page"));
+				var page=page+1;
+				if(page>allpage){
+					alert("没有更多商品！");
+					page=page-1;
+					return false;
+				}
+				$("#pagelate"+page).css("display","block");
+			    $("#pagelate"+page).load("agent/goodsAgentLatelyList.html?page="+page,function(){ 
+			    	$("#pagelate"+page).fadeIn(100);
+			    	$(".more2").attr("page",page);
+			    });
+			    
+			});
+</script>		
+	</body>
+<#else>
+<script type="text/javascript"> 
+	onload=function(){ 
+		setTimeout(go, 1);
+	}; 
+	function go(){ 
+		location.href="login.html"; 
+	} 
+	
+</script> 
+</#if>
+</html>

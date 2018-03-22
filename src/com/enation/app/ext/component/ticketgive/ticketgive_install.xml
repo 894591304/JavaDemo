@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dbsolution>
+	<action>
+		<command>create</command>
+		<table>ticketgive</table>
+		<field><name>id</name><type>int</type><size>8</size><option>11</option></field>
+		<field><name>proxyorderId</name><type>int</type><size>8</size><option>00</option></field>
+		<field><name>giveKey</name><type>varchar</type><size>16</size><option>00</option></field>
+		<field><name>memberId</name><type>int</type><size>8</size><option>00</option></field>
+		<field><name>status</name><type>int</type><size>8</size><option>00</option></field>
+	</action>
+</dbsolution>

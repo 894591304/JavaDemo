@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="192px" height="192px" viewBox="0 0 192 192" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 42 (36781) - http://www.bohemiancoding.com/sketch -->
+    <title>评论</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="评论" stroke="#CCCCCC" stroke-width="11">
+            <path d="M55.0909091,71.9090909 L136.909091,71.9090909 M55.0909091,92.3636364 L109.636364,92.3636364 M75.5454545,133.272727 L48.2727273,167.363636 L48.2727273,133.272727 L27.8181818,133.272727 C24.0613636,133.272727 21,130.204545 21,126.454545 L21,37.8181818 C21,34.0681818 24.0613636,31 27.8181818,31 L164.181818,31 C167.938636,31 171,34.0681818 171,37.8181818 L171,126.454545 C171,130.204545 167.938636,133.272727 164.181818,133.272727 L75.5454545,133.272727" id="icon-:-profile-:-comment"></path>
+        </g>
+    </g>
+</svg>

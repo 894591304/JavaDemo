@@ -1,0 +1,39 @@
+<#if member?? >
+<!-- 创建关注基本信息标签 -->
+<#assign followListTag= newTag("followListTag") >
+<!-- 调用标签获取关注用户基本信息 -->
+<#assign followlist= followListTag() >
+<#assign follow= followlist.memberlist >
+		<#list follow as fmember>
+				<li class="pubList">
+					<a href="personCtList-${fmember.followid}.html" style="padding-left: 0px;padding-right: 0px;">
+						<div class="homeImgBox">
+							<div class="imgBox">
+							    <img src="${ctx}${fmember.memberimg}" />
+						    </div>
+							<#if fmember.msg!=0>
+						    <span class="homeImgNum">${fmember.msg}</span>
+							</#if>
+						</div>						
+						<p class="listMd">${fmember.uname}</p>
+						<p class="listBt">${fmember.label}</p>
+					
+						<div class="listButton" fid=${fmember.followid} uname=${fmember.uname}>
+							取消
+						</div>
+					</a>	
+					
+				</li>
+		</#list>
+		<div id="page${followlist.nowpage}" style="display:none;"></div>
+<#else>
+<script type="text/javascript"> 
+	onload=function(){ 
+		setTimeout(go, 1);
+	}; 
+	function go(){ 
+		location.href="login.html"; 
+	} 
+	
+</script> 
+</#if>

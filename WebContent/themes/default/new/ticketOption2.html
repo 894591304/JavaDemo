@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+		<link rel="stylesheet" href="${ctx}/themes/default/new/css/reset.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/new/css/common.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/new/css/newStyle.css" />
+		<script type="text/javascript" src="${ctx}/themes/default/js/jquery-1.7.2.js" ></script>
+		<title>现金券</title>
+	</head>
+	<body>
+<#if member?? >
+	<#assign ticketOption2Tag = newTag("ticketOption2Tag") >
+	<#assign ticketOption2= ticketOption2Tag()>
+	<#assign haveList= ticketOption2.havelist> 
+	<#assign notList= ticketOption2.notlist> 
+	<#if ticketOption2.re==2>
+	参数错误！
+		<#elseif ticketOption2.re==3>
+	此商品无法生成现金券！
+		<#else>
+    <header>
+      <div class="l"><a href="newUpin-${ticketOption2.proxyid?c}.html?proxyid=${ticketOption2.proxyid?c}"><img src="${ctx}/themes/default/new/images/LeftArrow.png"/></a></div>
+      <div class="c">现金券</div>
+      <div class="r"></div>
+    </header>
+    
+    <div class="wrap cashCoupon">
+      <div class="top">
+        <p>30元现金券码</p>
+        <p>有效期: ${ticketOption2.begintime} - ${ticketOption2.endtime}</p>
+      </div>
+      <ul class="list">
+		<#list notList as not>
+      	<li>
+          <div class="t">
+            <p>${not.ticketid}</p>
+            <p>未发送</p>
+            <p><input type="radio" name="ticketid" value="${not.id?c}"/>选择</p>
+          </div>
+        </li>
+		</#list>
+		<#if ticketOption2.notsend!=0>
+       	<li>
+       	<input type="hidden" id="ticketid" value="0">
+       	<input type="hidden" name="proxyid" id="proxyid" value="${ticketOption2.proxyid?c}">
+          <div class="b">
+            <a id="allSend">全部发送</a>
+            <a id="oneSend">一对一发送</a>
+          </div>
+        </li>
+        </#if>
+      	<#list haveList as have>
+        <li>
+          <div class="t">
+            <p>${have.ticketid}</p>
+            <p class="send">已发送</p>
+            <p>${have.name}</p>
+          </div>
+        </li>
+        </#list>
+      </ul>
+    </div>   
+<script type="text/javascript">
+$(function(){
+	$("#allSend").click(function(){
+		var proxyid = $("#proxyid").val();
+		location.href="allSend.html?proxyid="+proxyid+"&option=2";
+	});
+	$("#oneSend").click(function(){
+		var ticketid = $("#ticketid").val();
+		if(ticketid==null||ticketid==0){
+			alert("请选择想要发送的现金券！");
+			return false;
+		}else{
+			location.href="oneSend.html?ticketid="+ticketid;
+		}
+	});	
+	$('input[type=radio]').change(function(){
+		$('#ticketid').val($('input[name=ticketid]:checked').map(function(){return this.value}).get())
+	});
+});
+</script>
+    </#if>
+<#else>
+<script type="text/javascript"> 
+onload=function(){ 
+	setTimeout(go, 1);
+}; 
+function go(){ 
+	location.href="login.html"; 
+} 
+</script> 
+</#if>    
+<footer class="homeFooter">
+			<ul>
+			<a href="homePage.html">
+				<li class="tabLi">
+					<div class="tabIcon">
+						<img src="${ctx}/themes/default/img/customized.png" />
+					</div>
+					<span>定制</span>
+				</li>
+			</a>
+			<a href="discountHome.html">
+				<li class="tabLi">
+					<div class="tabIcon">
+						<img src="${ctx}/themes/default/img/discover.png" />
+					</div>
+					<span class="tabText">发现</span>
+				</li>
+			</a>
+			<a href="cart.html">
+				<li class="tabLi">
+					<div class="tabIcon">
+						<img src="${ctx}/themes/default/img/order.png" />
+					</div>
+					<span>购物车</span>
+				</li>
+			</a>
+			<a href="user.html">
+				<li class="tabLi numColor">
+					<div class="tabIcon">
+						<img src="${ctx}/themes/default/img/mine_sel.png" />
+					</div>
+					<span>我的</span>
+				</li>
+			</a>
+			</ul>
+		</footer>
+	</body>
+</html>

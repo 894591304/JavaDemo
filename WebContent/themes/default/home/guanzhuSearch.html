@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<!-- 获取列表标签 -->
+<#assign memberShopSearchListTag = newTag("memberShopSearchListTag")>
+<!-- 调用会员信息列表标签 -->
+<#assign memberShopList = memberShopSearchListTag()>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+<link rel="stylesheet" href="${ctx}/themes/default/home/css/reset.css" />
+<link rel="stylesheet" href="${ctx}/themes/default/home/css/common.css" />
+<link rel="stylesheet" href="${ctx}/themes/default/home/css/home.css" />
+<script>ctx="${ctx}";</script>
+<script type="text/javascript" src="${ctx}/themes/default/home/js/jquery-3.1.0.min.js" ></script>
+<script type="text/javascript" src="${ctx}/themes/default/home/js/home.js" ></script>
+		<title>搜索达人</title>
+	</head>
+	<body class="bodyBg">
+		<header>
+			<div class="publicHeader">
+				<span class="headIcon f_l">
+					<a href="javascript:" onclick="self.location=document.referrer;">
+						<img src="${ctx}/themes/default/img/11.png" alt="">
+					</a>
+				</span>
+				搜索达人
+			</div>
+		</header>
+		<div class="gzSearchBox">
+			<span class="searchIcon"></span>
+			<input type="text" id="keyword" placeholder="输入关键字检索达人" />			
+			<span class="searchIcon"><img id="searchbtn" src="${ctx}/themes/default/img/3.png" alt=""></span>
+		</div>
+		<div class="gzWrap" style="padding-bottom: 52px;">
+			<div class="gzTp">
+				推荐关注更多达人
+			</div>
+			<ul class="peopleList">
+<#if memberShopList.search==0>
+	请输入搜索关键词！
+</#if>
+<#if memberShopList.search==2>
+	未搜索到达人！
+</#if>
+<#if memberShopList.search==3>
+	搜索失败！请重新尝试！
+</#if>
+<#if memberShopList.search==1>
+<!-- 获取会员信息列表 -->
+<#assign memberShop = memberShopList.membershoplist>
+<#list memberShop as mshop>
+				<li class="gzLi">
+					<div class="gzImgBox">
+						<div class="gzImg">
+						    <a href="personCtList-${mshop.memberid}.html">
+						    	<img src="${ctx}${mshop.memberimg}" />
+						    </a>
+					    </div>
+					</div>
+					<div class="gzLiText">
+						<p class="gzPeopleName"><a href="personCtList-${mshop.memberid}.html">${mshop.shopname}</a></p>
+						<p>${mshop.label}</p>
+					</div>
+					<div class="gzLiIcon">
+						<#if mshop.guanzhu=="1">
+							<span class="gzPeople" fid="${mshop.memberid}"><img src="${ctx}/themes/default/img/13.png" alt=""></span>
+						<#else>
+							<span class="PlusPeople" fid="${mshop.memberid}"><img src="${ctx}/themes/default/img/12.png" alt="" class="fa-plus-circle" ></span>
+						</#if>	
+					</div>
+				</li>
+</#list>
+</#if>
+			</ul>
+		</div>
+<#include '../common/footer.html' />		
+	</body>
+<script type="text/javascript"> 
+$(function(){
+	$("#keyword").keydown(function(){
+		if(event.keyCode == "13"){
+			var keyword = $("#keyword").val();
+			if(keyword==null||keyword==""){
+				alert("请输入关键词！");
+				return false;
+			}
+			location.href="guanzhuSearch.html?keyword="+keyword;
+		}
+	});
+	$("#searchbtn").click(function(){
+		var keyword = $("#keyword").val();
+		if(keyword==null||keyword==""){
+			alert("请输入关键词！");
+			return false;
+		}
+		location.href="guanzhuSearch.html?keyword="+keyword;
+	});
+})
+</script> 	
+</html>

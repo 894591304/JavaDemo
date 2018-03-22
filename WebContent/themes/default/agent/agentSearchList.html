@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+		<link rel="stylesheet" href="${ctx}/themes/default/agent/css/reset.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/agent/css/common.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/agent/css/agent.css" />
+		<script type="text/javascript" src="${ctx}/themes/default/agent/js/jquery-3.1.0.min.js" ></script>
+<#if member?? >
+<#-- 创建搜索可代理商品信息标签 -->
+<#assign newGoodsSearchTag= newTag("newGoodsSearchTag") >
+<#-- 调用标签获取搜索可代理商品信息 -->
+<#assign goodslist= newGoodsSearchTag() >
+
+<#-- 创建分类标签 -->
+<#assign newGoodsCatTag= newTag("newGoodsCatTag") >
+<#-- 调用分类信息 -->
+<#assign goodscat= newGoodsCatTag() >
+<#-- 获取一级分类列表 -->
+<#assign catlist1= goodscat.catlist1 >
+<#-- 获取二级分类列表 -->
+<#assign catlist2= goodscat.catlist2 >
+	<title>代理搜索列表</title>
+	</head>
+	<body>
+		<div class="publicHeader">
+		    <span class="f_l headIcon">
+				<a href="myAgent.html">
+					<img src="${ctx}/themes/default/img/2.png" alt="">
+				</a>
+			</span>
+				代理搜索列表
+	    </div>
+	    <div class="agentSearch">
+	    	<div class="agentSLf"  style="width:30%;">
+	    		<span class="agentSearchIcon"></span>
+	    	</div>
+	    	<div class="agentLInput" style="width:50%;">
+	    		<input type="text" id="keyword" placeholder="搜索可代理商品" />
+	    	</div>
+	    	<div class="agentLInput" style="width:10%;padding: .7rem 0;">
+	    	<span class="agentSearchIcon"><img id="searchbtn" src="${ctx}/themes/default/img/3.png" alt=""></span>
+	    	</div>
+	    	<div class="agentSRt">
+	    		<span class="agentSRtIcon">
+	    			<img src="${ctx}/themes/default/img/4.png" alt="">
+	    		</span>
+	    		<span class="agentSRtIcon change">
+	    			<img src="${ctx}/themes/default/img/4-2.png" alt="">
+	    		</span>
+	    	</div>
+	    </div>
+	    <div class="agentNavigation" id="1cat">
+            <ul class="">
+			<#list catlist1 as cat1>	
+				<li class="cat1" catid="${cat1.catid}">${cat1.catname}</li>
+			</#list>
+            </ul>
+        </div>
+		<div class="agentNavigation" id="2cat" style="left: 75px;">
+            <ul class="">
+			<#list catlist2 as cat2>
+                <li class="cat2" pid="${cat2.parentid}" catid="${cat2.catid}" onclick="window.location.href='catAgentList.html?catid=${cat2.catid}'">${cat2.catname}</li>
+			</#list>
+            </ul>
+        </div>
+<#if goodslist.search==2>
+	请输入搜索关键词！	
+</#if>
+<#if goodslist.search==0>
+	未搜索到商品或搜索的商品您已代理。
+</#if>
+<#if goodslist.search==3>
+	搜索失败！请重新尝试！
+</#if>
+<#if goodslist.search==1>
+<#-- 获取搜索可代理商品列表 -->
+<#assign glist= goodslist.goodslist >
+<div id="goodsList" style="padding-bottom: 54px;">
+	<#list glist as gList>		
+	    <div class="agentList">
+	    	<div class="agentListPub">
+	    		<div class="agentListImg">
+	    			<div class="ALIBox">
+	    				<img src="${gList.goodsimg}" />
+	    			</div>
+	    		</div>
+	    		<div class="agentListText">
+	    			<p class="agentListName" style="height: auto;">
+	    				${gList.name}
+	    			</p>
+	    			<div class="agentLTPub">
+	    				<div class="agentLTPubLf">
+	    					市场价 ￥${gList.Mktprice}
+	    				</div>&nbsp;&nbsp;&nbsp;&nbsp;
+	    				<div class="agentLTPubLf">
+	    					优选价 ￥${gList.price}
+	    				</div>
+	    			</div><div class="agentLTPub">
+	    				<div class="agentLTPubLf">
+	    					代理价 ￥${gList.agentprice}
+	    				</div>&nbsp;&nbsp;&nbsp;&nbsp;
+	    				<div class="agentLTPubLf">
+	    					利润空间 ￥${gList.price-gList.agentprice}
+	    				</div>
+	    			</div>
+	    			<div class="agentLTPub">
+	    				<div class="agentLTPubLf">
+	    					已代理 ${gList.onsale}
+	    				</div>&nbsp;&nbsp;&nbsp;&nbsp;
+	    				<div class="agentLTPubLf">
+	    					剩余 ${gList.stock-gList.onsale}
+	    				</div>
+	    			</div>
+	    		</div>
+	    	</div>
+	        <div class="agentListBt">
+	        	<a href="discountDetail-${gList.goodsid}.html" class="agentListBtLf">U品详情</a>
+	        	<a href="signAgent-${gList.goodsid}.html" class="agentListBtRt">代理商品</a>
+	        </div>
+	    </div>
+	</#list>
+</#if>
+</div>	
+	<footer class="homeFooter">
+			<ul>
+			<a href="homePage.html">
+				<li class="tabLi">
+					<div class="tabIcon">
+						<img src="${ctx}/themes/default/img/customized.png" />
+					</div>
+					<span>定制</span>
+				</li>
+			</a>
+			<a href="discountHome.html">
+				<li class="tabLi">
+					<div class="tabIcon">
+						<img src="${ctx}/themes/default/img/discover.png" />
+					</div>
+					<span class="tabText">发现</span>
+				</li>
+			</a>
+			<a href="cart.html">
+				<li class="tabLi">
+					<div class="tabIcon">
+						<img src="${ctx}/themes/default/img/order.png" />
+					</div>
+					<span>购物车</span>
+				</li>
+			</a>
+			<a href="user.html">
+				<li class="tabLi numColor">
+					<div class="tabIcon">
+						<img src="${ctx}/themes/default/img/mine_sel.png" />
+					</div>
+					<span>我的</span>
+				</li>
+			</a>
+			</ul>
+	</footer>
+	</body>
+<script type="text/javascript"> 
+$(function(){
+	$("#keyword").keydown(function(){
+		if(event.keyCode == "13"){
+			var keyword = $("#keyword").val();
+			if(keyword==null||keyword==""){
+				alert("请输入关键词！");
+				return false;
+			}
+			location.href="agentSearchList.html?keyword="+keyword;
+		}
+	});
+	$("#searchbtn").click(function(){
+		var keyword = $("#keyword").val();
+		if(keyword==null||keyword==""){
+			alert("请输入关键词！");
+			return false;
+		}
+		location.href="agentSearchList.html?keyword="+keyword;
+	});
+	$(".agentSRt").click(function(){
+		$(".agentSRtIcon").toggleClass("change");
+        $("#1cat").slideToggle();
+        if($("#2cat").css("display")!="none"){
+        $("#2cat").slideToggle();}
+	});
+
+	$(".cat1").click(function(){
+		var id = $(this).attr("catid");
+
+		if($("#2cat").css("display")!="none"){
+			$("#2cat").slideToggle(function(){
+				$(".cat2").css("display","none");
+				$("li[pid="+id+"]").css("display","block");
+			});
+			$("#2cat").slideToggle();
+			}else{
+			$(".cat2").css("display","none");
+			$("li[pid="+id+"]").css("display","block");
+			$("#2cat").slideToggle();
+			}
+	});
+})
+</script> 	
+<#else>
+<script type="text/javascript"> 
+	onload=function(){ 
+		setTimeout(go, 1);
+	}; 
+	function go(){ 
+		location.href="login.html"; 
+	} 
+</script> 
+</#if>
+</html>

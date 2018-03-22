@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="新支付组件" version="1.0" javashop_version="3.0.0" author="javashop">
+	<plugins>
+		<plugin name="支付宝wap支付接口" id="alipayWapPlugin">
+			<bundle id="paymentPluginBundle"></bundle>
+		</plugin>
+		<plugin name="微信h5支付接口" id="weChatPayPlugin">
+			<bundle id="paymentPluginBundle"></bundle>
+		</plugin>
+	</plugins>
+</component>

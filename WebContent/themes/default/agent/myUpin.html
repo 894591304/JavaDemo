@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+		<link rel="stylesheet" href="${ctx}/themes/default/agent/css/reset.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/agent/css/common.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/agent/css/agent.css" />
+		<script type="text/javascript" src="${ctx}/themes/default/agent/js/jquery-3.1.0.min.js" ></script>
+<#if member?? >	
+<#-- 创建代理商品信息标签 -->
+<#assign myAgentInfoTag= newTag("myAgentInfoTag") >
+<#-- 调用标签获取代理商品信息 -->
+<#assign myAgentInfo= myAgentInfoTag() >	
+
+<#-- 创建代理商品订单标签 -->
+<#assign proxyOrderItemTag= newTag("proxyOrderItemTag") >
+<#-- 调用标签获取代理商品订单信息 -->
+<#assign proxyOrderItem= proxyOrderItemTag() >
+<#assign orderitemlist= proxyOrderItem.orderitemlist >
+		<title>我的U品</title>
+	</head>
+	<body>
+		<div class="publicHeader">
+		    <span class="f_l headIcon">
+				<a href="javascript:;" onclick="window.history.back();">
+					<img src="${ctx}/themes/default/img/2.png" alt="">
+				</a>
+			</span>
+				我的U品
+	    </div>
+	    <div class="agentList">
+	    	<div class="agentListPub">
+	    		<div class="agentListImg">
+	    			<div class="ALIBox">
+	    				<img src="${myAgentInfo.goodsimg}" />
+	    			</div>
+	    		</div>
+	    		<div class="agentListText">
+	    			<p class="agentListName">
+	    				${myAgentInfo.goodsname}
+	    			</p>
+	    			<div class="UpinText">
+	    				<span>市场价 ￥${myAgentInfo.Mktprice}</span>
+	    				<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;代理价 ￥${myAgentInfo.agentprice}</span>	    				
+	    			</div>
+	    			<div class="UpinText">
+						<span class="ucolor">优选价 ￥${myAgentInfo.price}</span>
+	    				<span class="ucolor">&nbsp;&nbsp;&nbsp;&nbsp;利润空间 ￥${myAgentInfo.price-myAgentInfo.agentprice}</span>
+	    			</div>
+	    			<div class="UpinText">
+	    				<span class="">已销售 ${myAgentInfo.sale}</span>
+	    				<span class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;剩余 ${myAgentInfo.notsale}</span>
+	    			</div>
+	    		</div>
+	    	</div>
+	    </div>
+	    <div class="UpinPub">
+	    	<div class="UpinPubLf">待结算总收入</div>
+	    	<div class="UpinPubRt">
+	    		<span class="UpinPubRtNum">
+	    			￥${myAgentInfo.frozenearn}
+	    		</span>
+	    		<span class="UpinPubRtIcon">
+	    			<img src="${ctx}/themes/default/img/8.png" alt="">
+	    		</span>
+	    	</div>
+	    </div>
+		
+	    <div class="UpinPub">
+	    	<div class="UpinPubLf">锁定保证金</div>
+	    	<div class="UpinPubRt">
+	    		<span class="UpinPubRtNum">
+	    			￥${myAgentInfo.frozendeposit}
+	    		</span>
+	    		<span class="UpinPubRtIcon">
+	    			<img src="${ctx}/themes/default/img/8.png" alt="">
+	    		</span>
+	    	</div>
+	    </div>
+
+		<div class="UpinPub">
+	    	<div class="UpinPubLf">锁定授信额</div>
+	    	<div class="UpinPubRt">
+	    		<span class="UpinPubRtNum">
+	    			￥${myAgentInfo.frozenCredit}
+	    		</span>
+	    		<span class="UpinPubRtIcon">
+	    			<img src="${ctx}/themes/default/img/8.png" alt="">
+	    		</span>
+	    	</div>
+	    </div>
+
+	    <div class="UpinPubBt"style="padding-bottom: 54px;">
+	    	<div class="UpinPubBtH">
+	    		<div class="UpinPubBtHL">
+	    			订单列表
+	    		</div>
+	    		<div class="UpinPubBtHR">
+	    		</div>
+	    	</div>
+<#list orderitemlist as orderitem>				
+	    	<div class="UpinPubBtText">    	
+	    		<a>
+	    			<div class="UpinOrder">
+	    			<div class="UpinOrderLf">
+	    				订单号：${orderitem.ordersn}
+	    			</div>
+	    			<div class="UpinOrderRt">
+	    				${orderitem.createtime}
+	    			</div>
+	    		</div>
+	    		<div class="UpinOrder">
+	    			<div class="UpinOrderLf">	    
+	    				状态：<span class=""><#if orderitem.status==0>未付款 </#if><#if orderitem.status==1>配发中 </#if><#if orderitem.status==2>已配发 </#if></span>	   
+	    			</div>
+	    			<div class="UpinOrderRt">
+	    			</div>
+	    		</div>
+	    		</a>	    		
+	    	</div>
+</#list>
+	    </div>
+		<footer class="homeFooter">
+			<ul>
+			<a href="homePage.html">
+				<li class="tabLi">
+					<div class="tabIcon">
+						<img src="${ctx}/themes/default/img/customized.png" />
+					</div>
+					<span>定制</span>
+				</li>
+			</a>
+			<a href="discountHome.html">
+				<li class="tabLi">
+					<div class="tabIcon">
+						<img src="${ctx}/themes/default/img/discover.png" />
+					</div>
+					<span class="tabText">发现</span>
+				</li>
+			</a>
+			<a href="cart.html">
+				<li class="tabLi">
+					<div class="tabIcon">
+						<img src="${ctx}/themes/default/img/order.png" />
+					</div>
+					<span>购物车</span>
+				</li>
+			</a>
+			<a href="user.html">
+				<li class="tabLi numColor">
+					<div class="tabIcon">
+						<img src="${ctx}/themes/default/img/mine_sel.png" />
+					</div>
+					<span>我的</span>
+				</li>
+			</a>
+			</ul>
+		</footer>
+	</body>
+<#else>
+<script type="text/javascript"> 
+	onload=function(){ 
+		setTimeout(go, 1);
+	}; 
+	function go(){ 
+		location.href="login.html"; 
+	} 
+</script> 
+</#if>
+</html>

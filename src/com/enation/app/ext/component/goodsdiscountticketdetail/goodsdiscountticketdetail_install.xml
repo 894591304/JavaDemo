@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dbsolution>
+	<action>
+		<command>create</command>
+		<table>goods_discount_ticketdetail</table>
+		<field><name>id</name><type>int</type><size>8</size><option>11</option></field>
+		<field><name>goodsId</name><type>int</type><size>8</size><option>00</option></field>
+		<field><name>proxyId</name><type>int</type><size>8</size><option>00</option></field>
+		<field><name>proxyMemberId</name><type>int</type><size>8</size><option>00</option></field>
+		<field><name>ticketValue</name><type>decimal</type><size>20,2</size><option>00</option></field>
+		<field><name>discountTicketId</name><type>varchar</type><size>32</size><option>00</option></field>
+		<field><name>giveStatus</name><type>int</type><size>2</size><option>00</option></field>
+		<field><name>sendKey</name><type>varchar</type><size>32</size><option>00</option></field>
+		<field><name>sendStatus</name><type>int</type><size>2</size><option>00</option></field>
+		<field><name>useStatus</name><type>int</type><size>2</size><option>00</option></field>
+		<field><name>useOrderItemId</name><type>int</type><size>8</size><option>00</option></field>
+		<field><name>belongMemberId</name><type>int</type><size>8</size><option>00</option></field>
+	</action>
+</dbsolution>

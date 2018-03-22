@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+		<link rel="stylesheet" href="${ctx}/themes/default/shop/css/reset.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/shop/css/common.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/shop/css/SHOP.css" />
+		<script type="text/javascript" src="${ctx}/themes/default/shop/js/jquery-3.1.0.min.js" ></script>
+		<script src="${ctx}/themes/default/js/jquery-form.js"  type="text/javascript"></script>
+		<script>ctx = "${ctx}";</script>
+		<script type="text/javascript" src="${ctx}/themes/default/js/Checkout.js" ></script>
+		<title>订单</title>
+	</head>
+	<body>
+		<div class="publicHeader">
+			<span class="headIcon f_l">
+				<a href="cart.html">
+					<img src="${ctx}/themes/default/img/2.png" alt="">
+				</a>
+			</span>
+				订单
+		</div>
+		<form class="validate" id="checkoutform">
+			<input type="hidden" id="shipAddr" value="自取" autocomplete="off">
+			<input type="hidden" id="shipName" value="自取" autocomplete="off">
+			<input type="hidden" id="shipTel"  value="自取" autocomplete="off">
+			<input type="hidden" id="shipZip"  value="自取" autocomplete="off">
+			<input type="hidden" id="shipMobile"  value="自取" autocomplete="off">
+			<input type="hidden" id="typeId"  value="1" autocomplete="off">
+			<input type="hidden" id="region_id"  value="1" autocomplete="off">
+		<div class="orderList">
+			<ul class="orderListBox">
+<#-- 创建购物车标签 -->
+<#assign cartTag= newTag("newCartTag")>
+<#--通过购物车标签获取购物项列表 -->
+<#assign cart = cartTag() >	
+<#--通过购物车标签获取购物项列表 -->
+<#assign itemList = cart.goodsList >			
+
+<#if itemList?exists && itemList?size gt 0>			
+	<#list itemList as item >			
+				<li class="orderListLi" itemid="${item.id}">
+					<div class="orderListImg">
+						<div class="orderImg">
+							<img src="${item.image_default}"/>
+						</div>
+					</div>
+					<div class="orderText">
+						<p class="orderName">
+							${item.name}
+						</p>
+						<div class="orderPrice">
+							小计：<span class="YXprice">${item.subtotal2?string("currency")}</span>
+						</div>
+						<#if item.ticket==0>
+						没有可以使用的现金券
+							<#else>
+						现金券：${item.ticket}元商品现金券
+						</#if>
+					</div>
+					<div class="numAdd">
+						<div class="numAddNum" style="padding-top: 28px;">
+							${item.num}&nbsp件
+						</div>
+					</div>
+				</li>
+	</#list>				
+</#if>				
+			</ul>
+		</div>
+		<div class="orderPub" id="orderPub">
+			<div class="orderpubLf" >支付方式：</div>			
+			<div class="orderpubRt">
+				<div class="orderRtIcon">
+					<a href="javascript:;" class="modify_btn">	
+						<img src="${ctx}/themes/default/img/8.png" alt="" style="height: 16px;width: 6px;">
+					</a>
+				</div>
+			</div>			
+			<div class="orderpubRt1" style="float:right">已选择：<a>未选择</a></div>	
+			</br>
+			</br>
+			<div class="modify">
+				<div class="list"></div>
+				</br>
+				<div class="pay_botton btn">
+					<input type="button" class="yellow_btn" id="savePaymentBtn" value="确认支付方式" style="display:none">
+				</div>					
+			</div>			
+		</div>
+	
+		
+		<div class="orderPub" id="dlytype" style="display:none">
+			<div class="orderpubLf" >配送方式</div>			
+			<div class="orderpubRt">
+				<div class="orderRtIcon">
+					<a href="javascript:;" class="modify_btn">	
+						<img src="${ctx}/themes/default/img/8.png" alt="" style="height: 16px;width: 6px;">
+					</a>
+				</div>
+			</div>			
+			<div class="orderpubRt1" style="float:right">已选择：<a>未选择</a></div>			
+			<div class="modify">
+				<div class="list"></div>
+				<div class="pay_botton btn">
+					<input type="button" class="yellow_btn" id="saveDlytypeBtn" value="确认配送方式" style="display:none">
+				</div>	
+			</div>		
+		</div>
+		
+		<div class="orderPub" id="ordertotal" style="display:none;"></div>
+		<div class="orderBt">
+			<a href="#" id="createBtn">
+				提交订单
+			</a>
+		</div>
+	</form>
+	
+<script>
+$(function(){
+	<#if defaultAddress?exists>
+		RegionsSelect.load(${defaultAddress.province_id},${defaultAddress.city_id},${defaultAddress.region_id});
+		CheckOut.showModifyUI();
+	</#if>	
+})
+</script>
+
+	</body>
+</html>

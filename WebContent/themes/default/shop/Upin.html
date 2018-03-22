@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<#-- 创建商品基本信息标签 -->
+<#assign proxyGoodsBaseDateTag= newTag("proxyGoodsBaseDateTag") >
+<#-- 调用标签获取商品基本信息 -->
+<#assign goods= proxyGoodsBaseDateTag() >
+<#if goods.show==0>
+<script type="text/javascript">
+onload=function(){ 
+	setTimeout(go, 1);
+}; 
+function go(){ 
+	location.href="404.html"; 
+}
+</script>
+</#if>
+<#if goods.show==1>
+<#if goods.page_title!="">
+		<#assign  title="${goods.page_title}" />
+		<#else>
+		<#assign  title="${goods.name}" />
+</#if>
+<#if goods.meta_keywords!="">
+	<#assign  keywords="${goods.meta_keywords}" />
+</#if>
+<#if goods.meta_description!="">
+	<#assign  description="${goods.meta_description}" />
+</#if>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+		<link rel="stylesheet" href="${ctx}/themes/default/shop/css/reset.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/shop/css/common.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/shop/css/SHOP.css" />
+		<script type="text/javascript" src="${ctx}/themes/default/shop/js/jquery-3.1.0.min.js" ></script>
+		
+		<script src="${ctx}/themes/default/js/jquery-form.js"  type="text/javascript"></script>
+		<script src="${ctx}/themes/default/js/favorite.js"  type="text/javascript"></script>
+		<script src="${ctx}/themes/default/js/jcarousellite_1.0.1.min.js"  type="text/javascript"></script>
+		<script src="${ctx}/themes/default/js/jquery.numinput.js"  type="text/javascript"></script>
+		<script src="${ctx}/themes/default/js/Comment.js"  type="text/javascript"></script>
+		<script src="${ctx}/themes/default/js/spec.js"  type="text/javascript"></script>
+		<script type="text/javascript" src="${ctx}/themes/default/js/jquery.qrcode.js" ></script>
+		<script type="text/javascript" src="${ctx}/themes/default/js/qrcode.js" ></script>
+		<title>U品</title>
+	</head>
+	<body>
+		<header>
+<#-- 创建商品相册标签 -->
+<#assign goodsGalleryTag= newTag("goodsGalleryTag")>
+<#-- 调用标签获取商品相册信息 -->
+<#assign galleryList= goodsGalleryTag()!'' >
+<#-- 创建商品属性标签 -->
+<#assign goodsAttributeTag= newTag("goodsAttributeTag")>
+<#-- 调用标签获取商品属性信息 -->
+<#assign attr= goodsAttributeTag()!'' >
+<#-- 创建商品参数标签 -->
+<#assign goodsParametersTag= newTag("goodsParametersTag")>
+<#-- 调用标签获取商品参数信息 -->
+<#assign goodsPara= goodsParametersTag()!'' >
+
+	<#-- 获得商品参数的参数组 -->
+<#if goodsPara.hasParam==true>
+	<#assign para = goodsPara.paramList>
+</#if>
+<#-- 创建会员是否登录标签 -->
+<#assign memberIsLoginTag= newTag("memberIsLoginTag") >
+<#-- 调用会员是否登录信息 -->
+<#assign isLogin = memberIsLoginTag() >	
+		
+<#-- 创建代理信息标签 -->
+<#assign proxyDateTag= newTag("proxyDateTag") >
+<#-- 调用代理信息标签 -->
+<#assign proxyDate = proxyDateTag() >	
+<#-- 获得代理网红列表 -->
+<#assign agentmap = proxyDate.agentmembermap>
+
+<#-- 创建代理商品是否可以购买标签 -->
+<#assign proxyCanBuyTag= newTag("proxyCanBuyTag") >
+<#-- 调用是否可以购买标签 -->
+<#assign proxyCanBuy = proxyCanBuyTag() >	
+
+<#-- 创建收藏U品标签 -->
+<#assign checkCollectTag= newTag("checkCollectTag") >
+<#-- 调用收藏U品标签 -->
+<#assign collect = checkCollectTag() >
+
+<#assign scroll="false" />
+<#if galleryList?size gt 4><#assign scroll="true" /></#if>
+<#list galleryList as gallery>
+	<#if gallery.isdefault==1>
+		<#assign big="${gallery.big!''}" />
+		<#assign small="${gallery.small!''}" />
+	</#if>
+</#list>
+<#if member?? >
+<script type="text/javascript"> 
+onload=function(){ 
+	setTimeout(go, 1);
+}; 
+function go(){ 
+	var proxyid = ${proxyDate.proxyid};
+	var goodsid = ${goods.goods_id?c};
+	$.ajax({
+	url:"${ctx}/shop/ext/history!look.do",
+	type:"POST",
+	data:"proxyid="+proxyid+"&goodsid="+goodsid,
+	dataType:"json",
+	success:function(json){}
+	});
+} 
+</script> 
+</#if>	
+	<div class="hide" id="share_div">
+		<div class="publicHeader">
+		<span class="headIcon f_l">
+					<a href="javascript:;">
+						<div id="hidden_div">
+							<img src="${ctx}/themes/default/img/11.png" alt="">
+						</div>
+					</a>
+				</span>
+				分享U品
+	    </div>
+			<div class="title" style="margin-top: 50px;">
+				<div>
+					<img src="${goods.original}" alt="">
+				</div>
+				<div>${goods.name}</div>
+			</div>
+			<div class="share">
+				<div class="erweima" id="qrcodeCanvas">
+				</div>
+				<script>
+   					 $('#qrcodeCanvas').qrcode({
+       					text: 'm.huijuyouxuan.com/javamall/Upin-${goods.goods_id?c}.html',//二维码代表的字符串（本页面的URL）
+       					width: 250,//二维码宽度
+       					height: 250//二维码高度
+    					});
+				</script>
+				<p>长按图片以保存二维码</p>
+				<p>U品链接</p>
+				<p><textarea id="shopurl" >m.huijuyouxuan.com/javamall/Upin-${goods.goods_id?c}.html</textarea><p>
+				<div>
+					<div class="fuzhi" onclick="copy()">复制链接</div>					
+				</div>
+			</div>
+		</div>
+			<div class="publicHeader">
+				<span class="headIcon f_l">
+					<a href="javascript:" onclick="self.location=document.referrer;">
+						<img src="${ctx}/themes/default/img/11.png" alt="">
+					</a>
+				</span>
+				U品信息
+				<span class="f_r headIcon">
+					<div id="share">
+						<img src="${ctx}/themes/default/img/share1.png" alt="" style="width: 16px;">
+					</div>
+				</span>
+			</div>
+		</header>
+		<div class="shopImgWrap">
+			<div class="ShopShow">
+				<div class="ShopShowImg">
+					<img src="${goods.original}" />
+				</div>
+			</div>
+			<div class="likeShow">
+				<#if collect.collect==0>
+					<span class="likeIcon"><img src="${ctx}/themes/default/img/34.png" alt="" id="collect"></span>
+					<#else>
+					<span class="likeIcon"><img src="${ctx}/themes/default/img/37.png" alt="" id="collect"></span>
+				</#if>
+				<span class="likeNum" id="collectnum">${collect.num}</span>
+			</div>
+		</div>
+		<div class="shopWrap">
+			<div class="shopDetail">
+				<p class="shopDetailTp">
+					${goods.name}[提货券]
+				</p>
+				<div class="shopIf">
+					<div class="shopIfLf">
+						市场价￥${proxyDate.mktprice}
+					</div>
+					<div class="shopIfRt">
+						优选价 <span class="">￥${proxyDate.price}</span>
+					</div>
+				</div>
+				<div class="shopIf">
+<#if proxyCanBuy.canbuy==1>
+					<div class="shopIfLf">
+						总销量 ${proxyDate.sale}
+					</div>
+					<div class="shopIfRt">
+						剩余 ${proxyDate.canbuy}
+					</div>
+</#if>
+<#if proxyCanBuy.canbuy==0>
+<p>
+该U品已下架或已过代理期
+</p>
+</#if>
+				</div>
+			</div>
+			<div class="peopleList">
+				<p class="peopleListHead">
+					${proxyDate.agentnum}位达人为该产品代言
+				</p>
+				<ul>
+			<#if proxyDate.agentnum==0>
+				<#else>	
+					<#list agentmap as agent>
+					<li class="peopleLi">
+						<a href="personCtList-${agent.memberid}.html">
+							<img src="${ctx}${agent.memberimg}" />
+						</a>
+					</li>	
+					</#list>
+					<#if (proxyDate.agentnum>5) >
+					<li class="peopleLi">
+						<a href="discountProxyList.html?goodsid=${goods.goods_id?c}">
+							+${proxyDate.agentnum-4}
+						</a>
+					</li>	
+					</#if>	
+			</#if>
+				</ul>
+			</div>
+<input type="hidden" id="proxyid" name="proxyid" value="${proxyDate.proxyid}">	
+<input type="hidden" id="login" name="login" value="<#if member?? >1<#else>0</#if>">	
+<#if proxyCanBuy.canbuy==1>	
+<form action="cart.html" id="goodsform" method="post">
+	<input type="hidden" id="goodsid" name="goodsid" value="${goods.goods_id?c}" />
+		<input type="hidden" name="action" value="addGoods" />			
+		    <div class="selectU">
+		    	<div class="selectULf">购买U品数量</div>				
+		    	<div class="selectURt">
+		    		<div class="shopNum">
+					<input class="Numinput" type="number" id="num" name="num" value="1" min="1" max="${proxyDate.canbuy}" style="width:74px;text-align:right;"></div>				
+		    	</div>
+		    </div>
+</form>
+</#if>
+		    <div class="UpinIf" style="padding-bottom: 40px;">
+		    	<p class="UpinIfH">U品详情</p>
+		    	<div class="UpinIfText">
+		    		${goods.intro}
+		    	</div>
+		    </div>
+		    <div class="goodsList UgoodList" style="display:none;">
+		        <ul>
+				    <li class="goodsLi">
+		                <div class="goodsImgBox">
+				            		<div class="goodsImg">
+					                	<img src="${ctx}/themes/default/img/p3.jpg"/>
+					                </div>
+					            </div>
+					            <div class="goodsText">
+						            <p class="goodsName">test[<span class="color1">提货券</span>]</p>
+					                <div class="goodsPrice">
+					    	            <span class="goodsPriceLf">
+					    		                      售价  ￥
+					    	            </span>
+					    	            <span class="goodsPriceRt">
+					    		                      优选价  ￥
+					    	            </span>
+					                </div>
+					                <div class="goodsNumber">已销售</div>
+					                <div class="goodsLiBt">
+					    	            <div class="goodsComment">
+					    		            <span><img src="${ctx}/themes/default/img/21.png" alt=""></span>
+					    	                    12
+					    	                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+					    	                <span><img src="${ctx}/themes/default/img/22.png" alt=""></span>
+					    	                    55
+					    	            </div>
+					    	            <div class="goodsSelect UListIcon">
+					    		            <img src="${ctx}/themes/default/img/more.png" />
+					    	            </div>
+					                </div>
+					            </div>
+				            </li>
+			    </ul>
+		    </div>
+<#if proxyCanBuy.canbuy==1>
+		    <div class="UpinBt">
+		    	<div class="buyBox">
+		    		<span class="buyBoxIcon">
+						
+							<img src="${ctx}/themes/default/img/33.png" alt="" style="padding-bottom: 8px;">
+							
+					</span>
+		    	</div>
+	<#if member?? >
+<#-- 创建订单价格标签 -->
+<#assign orderPiceTag= newTag("orderPriceTag") >
+<#--通过订单价标签获取订单价格 -->
+<#assign orderPrice = orderPiceTag() >	
+<#-- 创建购物车标签 -->
+<#assign cartTag= newTag("newCartTag")>
+<#--通过购物车标签获取购物项列表 -->
+<#assign cart = cartTag() >	
+				<div class="UpinSelect" style="padding-left: 20px;">
+		    	包含：&nbsp;${cart.count}&nbsp;&nbsp;种商品
+		   		</div>
+		    	<div class="UpinAll" >总计：${orderPrice.goodsPrice?string("currency")}</div>
+		    	<div class="buyBt" >
+		    		<a href="#" class="addtocart_btn" id="addbutton">加入购物车</a>
+		    	</div>
+		    </div>
+		    <#else>
+		    <div class="UpinSelect" style="padding-left: 20px;">
+		    	
+		   		</div>
+		    	<div class="UpinAll" ></div>
+		    	<div class="buyBt" >
+		    		<a href="#" class="addtocart_btn" id="addbutton">点击登陆</a>
+		    	</div>
+		    </div>
+	</#if>
+</#if>
+
+		</div>
+<script>
+var goodsid = ${goods.goods_id?c};
+$(function(){
+	Goods.init(${scroll});
+	CommentList.init();
+	CommentForm.init();	
+});	
+</script>
+<script type="text/javascript">
+	var Goods={
+		init:function(scroll){
+			var self=this;
+			//$(".Numinput").numinput({name:"num"});
+			Favorite.init();
+			
+			$('#addbutton').click(function(){
+				var login=$("#login").val();
+				if(login==0){
+					location.href="login.html";
+					return false;
+				}
+				var $this=$(this);
+				var input1 = $("#proxyid");
+				var input2 = $("#goodsid");
+				var proxyid = input1.val();
+				var goodsid = input2.val();
+				$.ajax({
+					url:"${ctx}/shop/ext/proxyCart!checkCart.do",
+					type:"POST",
+					data:"proxyid="+proxyid+"&goodsid="+goodsid,
+					dataType:"json",
+					success:function(json){
+						if(json.result==1){
+							self.addToCart($this);
+						}else{
+							var result = confirm("购物车内已有此商品，但来自不同网红，是否替换？");
+							if(result==true)
+							{
+								$.ajax({
+									url:"${ctx}/shop/ext/proxyCart!replace.do",
+									type:"POST",
+									data:"proxyid="+proxyid+"&goodsid="+goodsid,
+									dataType:"json",
+									success:function(json){
+										alert("替换完成！");
+										window.location.href="cart.html";
+									}
+									});
+							}
+							else{}
+						}
+					}
+				});
+			});
+		},
+		
+		addToCart:function(btn){
+			var self = this;
+			var id = btn.attr("id");
+			var num = $("#num").val();
+			var max = $("#num").attr("max");
+			if(parseInt(num) > parseInt(max)){
+				alert("库存不足!");
+				document.getElementById("num").value = max;
+				return false;
+			}else if(parseInt(num) < 1){
+				alert("数量输入有误！");
+				document.getElementById("num").value = "1";
+				return false;
+			}			
+			//$.Loading.show("请稍候...");
+			btn.attr("disabled",true);
+			var action = $("#goodsform [name='action']").val();
+			var options={
+				url:"api/shop/cart!" + action + ".do?ajax=yes",
+				dataType:"json",
+				//cache: false,             //清楚缓存，暂时测试，如果产生冲突，请优先考虑是否是这条语句。
+				success:function(result){
+					//$.Loading.hide();
+					if(result.result==1){
+						addProxyCart();
+						if(id!="buyNow"){
+							//self.showAddSuccess();
+							var result = confirm("加入成功，是否进入购物车查看？");
+							if(result==true)
+							{window.location.href="cart.html";}
+							else{location.reload();}
+						}else{
+							window.location.href="cart.html";
+						}
+					}else{
+						$.dialog.alert("发生错误:"+result.message); 
+					}
+					btn.attr("disabled",false);
+				},
+				error:function(){
+					//$.Loading.hide();
+					alert("抱歉,发生错误");
+					btn.attr("disabled",false);
+				}
+			}
+			$("#goodsform").ajaxSubmit(options);		
+		},				
+};
+	
+	function addProxyCart(){
+		var input1 = $("#proxyid");
+		var input2 = $("#goodsid");
+		var proxyid = input1.val();
+		var goodsid = input2.val();
+		$.ajax({
+			url:"${ctx}/shop/ext/proxyCart!addCart.do",
+			type:"POST",
+			data:"proxyid="+proxyid+"&goodsid="+goodsid,
+			dataType:"json",
+			success:function(json){
+				if(json.result==0){
+					alert("未找到购物车内信息");
+				}else{
+				}
+			}
+		});
+	}	
+$(function(){
+	$("#share").click(function(){
+		$("#share_div").css('display','block');
+	});
+	$("#hidden_div").click(function(){
+		$("#share_div").css('display','none');
+	});
+	$("#collect").click(function(){
+		var collectnum = $("#collectnum").text();
+		var proxyid = $("#proxyid").val();
+		$.ajax({
+			url:"${ctx}/shop/ext/collect!collect.do",
+			type:"POST",
+			data:"proxyid="+proxyid,
+			dataType:"json",
+			success:function(json){
+				if(json.result==1){
+					collectnum--;
+					$("#collectnum").text(collectnum);
+					$("#collect").attr("src","${ctx}/themes/default/img/34.png");
+				}else if(json.result==0){
+					collectnum++;
+					$("#collectnum").text(collectnum);
+					$("#collect").attr("src","${ctx}/themes/default/img/37.png");
+				}else{
+					alert("请先登录！");
+					location.href="login.html"; 
+				}
+			}
+		});
+	});
+});
+function copy(){
+		document.getElementById("shopurl").select();
+		document.execCommand("copy",false,null);
+		alert("复制成功！");
+};	
+</script>
+</#if>
+	</body>
+</html>

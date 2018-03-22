@@ -1,0 +1,41 @@
+<#include '/admin/header.html' > 
+
+<div class="main" style="background-color: white;">
+	<form id="editForm">
+		<table width="98%" border="0" cellspacing="0" cellpadding="8">
+			<input type="hidden" name="user_id" value="${agentUser.userid}" />
+			<tr>
+				<th width="25%">用户名：</th>
+				<td><input class="input_text easyui-validatebox" type="text"
+					id="username" name="username" data-options="required:true" value="${agentUser.username}" disabled></input>
+				</td>
+			</tr>
+			<tr>
+				<th>企业名称：</th>
+				<td><input class="input_text" type="text" name="name" data-options="required:true" value="${agentUser.name}"></input>
+				</td>
+			</tr>
+			<tr>
+				<th>邮箱：</th>
+				<td><input class="input_text easyui-validatebox" type="text"
+					id="email" validType="email" name="email"
+					data-options="required:false" value="${agentUser.email}"></input>
+				</td>
+			</tr>
+			<tr>
+				<th>联系方式：</th>
+				<td><input class="input_text easyui-validatebox" type="text"
+					id="mobile" validType="mobile" name="mobile"
+					data-options="required:false" maxlength="11" value="${agentUser.mobile}"></input>
+				</td>
+			</tr>
+			<tr>
+				<th>地址：</th>
+				<td><input class="input_text" type="text" name="address" value="${agentUser.address}"></input>
+				</td>
+			</tr>
+		</table>
+	</form>
+</div>
+
+<#include '/admin/footer.html' >

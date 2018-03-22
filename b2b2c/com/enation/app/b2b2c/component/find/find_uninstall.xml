@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dbsolution>
+	<action>
+		<command>alter</command>
+		<table>tags</table>
+		<field type="drop"><name>pic</name></field>
+	</action>
+	<action>
+		<command>alter</command>
+		<table>tags</table>
+		<field type="drop"><name>comment</name></field>
+	</action>
+</dbsolution>

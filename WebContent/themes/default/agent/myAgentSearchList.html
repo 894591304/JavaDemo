@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+		<link rel="stylesheet" href="${ctx}/themes/default/agent/css/reset.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/agent/css/common.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/agent/css/agent.css" />
+		<script type="text/javascript" src="${ctx}/themes/default/agent/js/jquery-3.1.0.min.js" ></script>
+<#if member?? >
+<#-- 创建我的代理标签 -->
+<#assign myAgentSearchGoodsTag= newTag("myAgentSearchGoodsTag") >
+<#-- 调用标签获取用户代理信息 -->
+<#assign myAgentList= myAgentSearchGoodsTag() >		
+
+<#-- 创建分类标签 -->
+<#assign myAgentCatListTag= newTag("myAgentCatListTag") >
+<#-- 调用分类信息 -->
+<#assign myAgentCat= myAgentCatListTag() >
+<#-- 获取一级分类列表 -->
+<#assign catlist1= myAgentCat.cat1list >
+<#-- 获取二级分类列表 -->
+<#assign catlist2= myAgentCat.cat2list >
+		<title>搜索列表</title>
+	</head>
+	<body>
+		<div class="publicHeader">
+		    <span class="f_l headIcon">
+				<a href="myAgent.html">
+					<img src="${ctx}/themes/default/img/2.png" alt="">
+				</a>
+			</span>
+				搜索列表
+	    </div>
+	    <div class="agentSearch">
+	    	<div class="agentSLf"  style="width:20%;">
+	    		<span class="agentSearchIcon"></span>
+	    	</div>
+	    	<div class="agentLInput" style="width:60%;" >
+	    		<input type="text" id="keyword" placeholder="搜索已代理的商品" style="text-indent: 3rem;"/>	    		
+	    	</div>
+	    	<div class="agentLInput" style="width:10%;padding: .7rem 0;">
+	    		<span class="agentSearchIcon"><img id="searchbtn" src="${ctx}/themes/default/img/3.png" alt=""></span>
+	    	</div>
+	    	<div class="agentSRt">
+	    		<span class="agentSRtIcon">
+	    			<img src="${ctx}/themes/default/img/4.png" alt="">
+	    		</span>
+	    		<span class="agentSRtIcon change">
+	    			<img src="${ctx}/themes/default/img/4-2.png" alt="">
+	    		</span>
+	    	</div>
+	    </div>	    
+	    <div class="agentNavigation" id="1cat">
+            <ul class="">
+			<#list catlist1 as cat1>	
+				<li class="cat1" catid="${cat1.catid}">${cat1.catname}</li>
+			</#list>
+            </ul>
+        </div>
+		<div class="agentNavigation" id="2cat" style="left: 75px;">
+            <ul class="">
+			<#list catlist2 as cat2>
+                <li class="cat2" pid="${cat2.pid}" catid="${cat2.catid}" onclick="window.location.href='catMyAgentList.html?catid=${cat2.catid}'">${cat2.catname}</li>
+			</#list>
+            </ul>
+        </div>
+<#if myAgentList.search==2>
+	参数错误！	
+</#if>
+<#if myAgentList.search==0>
+	未搜索到关键词商品！
+</#if>
+<#if myAgentList.search==3>
+	查询失败！请重新尝试！
+</#if>
+<#if myAgentList.search==1>
+<#-- 获取搜索可代理商品列表 -->
+<#-- 获取用户代理中商品信息 -->
+<#assign onsalelist= myAgentList.proxylist >
+<#-- 获取用户代理结束商品信息 -->
+<#assign endsalelist= myAgentList.proxyendlist >
+	    <div class="agentLMenu">
+	    	<div class="agentLMenuBox agentLMenuBoxS" id="onsale">
+	    		<div class="agentLMenuList">
+	    			销售中<span class="agentLMenuNum">(${myAgentList.total1})</span>
+	    		</div>
+	    	</div>
+	    	<div class="agentLMenuBox" id="endsale">
+	    		<div class="agentLMenuList">
+	    			已完成<span class="agentLMenuNum">(${myAgentList.total2})</span>
+	    		</div>
+	    	</div>
+	    </div>
+		
+		<div id="onsalelist" style="padding-bottom: 54px;">
+<#list onsalelist as onsale>
+	    <div class="agentList">
+	    	<div class="agentListPub">
+	    		<div class="agentListImg">
+	    			<div class="ALIBox">
+	    				<img src="${onsale.goodsimg}" />
+	    			</div>
+	    		</div>
+	    		<div class="agentListText">
+	    			<p class="agentListName">
+	    				${onsale.goodsname}
+	    			</p>
+	    			<div class="agentLTPub">
+	    				<div class="agentLTPubLf">
+	    					优选价 ￥${onsale.price}
+	    				</div>&nbsp;&nbsp;&nbsp;&nbsp;
+	    				<div class="agentLTPubLf">
+	    					预期利润 ￥${onsale.expectearn}
+	    				</div>
+	    			</div>
+	    			<div class="agentLTPub">
+	    				<div class="agentLTPubLf">
+	    					已销售 ${onsale.sold}
+	    				</div>&nbsp;&nbsp;&nbsp;&nbsp;
+	    				<div class="agentLTPubLf">
+	    					剩余 ${onsale.notsold}
+	    				</div>&nbsp;&nbsp;&nbsp;&nbsp;
+	    				<div class="agentLTPubLf">
+	    					未上架 <#if onsale.notonsale==0> ${onsale.notonsale}</#if><#if onsale.notonsale!=0><font color="#FF0000"> ${onsale.notonsale}</font></#if>
+	    				</div>
+	    			</div>
+	    			<div class="agentLTPub myAgentGet">
+	    				预期收入 ￥${onsale.earn}
+	    			</div>		
+	    		</div>
+	    	</div>
+<#if onsale.test!=2>
+	    	<div class="myAgentBox">
+	    		<div class="myAgentBoxLf">
+	    			试销期还剩&nbsp;&nbsp;&nbsp;&nbsp;${onsale.testlosttime+1}天
+	    		</div>
+	<#if onsale.test==1>
+	    		<div class="myAgentBoxRt1" >
+	    			<a class="agentBtn" value="${onsale.proxyid}" gname="${onsale.goodsname}">继续代理</a>
+	    		</div>
+	</#if>
+	<#if onsale.test==0>
+	    		<div class="myAgentBoxRt">
+	    			<a>继续代理</a>
+	    		</div>
+	</#if>
+	    	</div>
+</#if>
+<#if onsale.test==2>
+			<div class="myAgentBox">				
+					试销期已经延长至代理期				
+			</div>
+</#if>
+	    	<div class="myAgentBox">
+	    		<div class="myAgentBoxLf">
+	    			代理期还剩&nbsp;&nbsp;${onsale.losttime+1}天
+	    		</div>
+	    		<div class="myAgentBoxRt">
+	    			代理于<@dateformat time="${onsale.endtime}" pattern="yyyy年MM月dd日HH时"/>截止
+	    		</div>
+	    	</div>
+	        <div class="agentListBt">
+	        	<a href="agentShopSet-${onsale.goodsid}.html" class="agentListBtLf">编辑上架</a>
+	        	<a href="newUpin-${onsale.proxyid}.html?proxyid=${onsale.proxyid}" class="agentListBtRt">查看详情</a>
+	        </div>
+	    </div>
+</#list>
+		</div>
+		
+		<div id="endsalelist" style="display:none;padding-bottom: 54px;">
+<#list endsalelist as endsale>
+	    <div class="agentList">
+	    	<div class="agentListPub">
+	    		<div class="agentListImg">
+	    			<div class="ALIBox">
+	    				<img src="${endsale.goodsimg}" />
+	    			</div>
+	    		</div>
+	    		<div class="agentListText">
+	    			<p class="agentListName">
+	    				${endsale.goodsname}
+	    			</p>
+	    			<div class="agentLTPub">
+	    				<div class="agentLTPubLf">
+	    					优选价 ￥${endsale.price}
+	    				</div>&nbsp;&nbsp;&nbsp;&nbsp;
+	    				<div class="agentLTPubLf">
+	    					待结算利润 ￥${endsale.earn}
+	    				</div>
+	    			</div>
+	    			<div class="agentLTPub">
+	    				<div class="agentLTPubLf">
+	    					已销售 ${endsale.sold}
+	    				</div>&nbsp;&nbsp;&nbsp;&nbsp;
+	    				<div class="agentLTPubLf">
+	    					剩余 ${endsale.notsold}
+	    				</div>&nbsp;&nbsp;&nbsp;&nbsp;
+	    				<div class="agentLTPubLf">
+	    					未上架 ${endsale.notonsale}
+	    				</div>
+	    			</div>
+	    			<div class="agentLTPub myAgentGet">
+	    				收入 ￥${endsale.earn}
+	    			</div>
+	    		</div>
+	    	</div>
+	    	<div class="myAgentBox">
+	    		<div class="myAgentBoxLf">
+	    		</div>
+	    		<div class="myAgentBoxRt">
+	    			代理于<@dateformat time="${endsale.endtime}" pattern="yyyy年MM月dd日 HH时mm分"/>截止
+	    		</div>
+	    	</div>
+	        <div class="agentListBt">
+	        	<a href="signAgent-${endsale.goodsid}.html" class="agentListBtLf">再次申请</a>
+	        	<a href="myUpin-${endsale.proxyid}.html" class="agentListBtRt">查看详情</a>
+	        </div>
+	    </div>
+</#list>
+		</div>
+</#if>
+				<footer class="homeFooter">
+			<ul>
+			<a href="homePage.html">
+				<li class="tabLi">
+					<div class="tabIcon">
+						<img src="${ctx}/themes/default/img/customized.png" />
+					</div>
+					<span>定制</span>
+				</li>
+			</a>
+			<a href="discountHome.html">
+				<li class="tabLi">
+					<div class="tabIcon">
+						<img src="${ctx}/themes/default/img/discover.png" />
+					</div>
+					<span class="tabText">发现</span>
+				</li>
+			</a>
+			<a href="cart.html">
+				<li class="tabLi">
+					<div class="tabIcon">
+						<img src="${ctx}/themes/default/img/order.png" />
+					</div>
+					<span>购物车</span>
+				</li>
+			</a>
+			<a href="user.html">
+				<li class="tabLi numColor">
+					<div class="tabIcon">
+						<img src="${ctx}/themes/default/img/mine_sel.png" />
+					</div>
+					<span>我的</span>
+				</li>
+			</a>
+			</ul>
+		</footer>
+<script type="text/javascript">
+$(function(){
+	$("#onsale").click(function(){
+		$("#onsale").attr("class","agentLMenuBox agentLMenuBoxS");
+		$("#endsale").attr("class","agentLMenuBox");
+		$("#endsalelist").hide();
+		$("#onsalelist").show();
+	});
+	$("#endsale").click(function(){
+		$("#endsale").attr("class","agentLMenuBox agentLMenuBoxS");
+		$("#onsale").attr("class","agentLMenuBox");
+		$("#onsalelist").hide();
+		$("#endsalelist").show();
+	});
+	$(".agentBtn").click(function(){
+		var pid = $(this).attr("value");
+		var name = $(this).attr("gname");
+		if(confirm("是否继续代理？"))
+		{
+			$.ajax({
+				url:"${ctx}/shop/ext/goodsAgent!continueAgent.do",
+				type:"POST",
+				data:"proxyid="+pid,
+				dataType:"json",
+				success:function(json){
+					if(json.result==0){
+						alert("操作错误！");
+						window.location.reload();
+					}else if(json.result==2){
+						alert("请先登录！");
+						window.location.reload();
+					}else if(json.result==3){
+						alert("无法继续延期！");
+						window.location.reload();
+					}else if(json.result==4){
+						alert("只能在试销期结束前的三天内延期代理！");
+						window.location.reload();
+					}else if(json.result==1){
+						alert("延期成功！");
+						window.location.reload();
+					}
+				}
+			});
+		}else{
+			
+		}
+		
+	});
+	$(".agentSRt").click(function(){
+		$(".agentSRtIcon").toggleClass("change");
+        $("#1cat").slideToggle();
+        if($("#2cat").css("display")!="none"){
+        $("#2cat").slideToggle();}
+	});
+
+	$(".cat1").click(function(){
+		var id = $(this).attr("catid");
+
+		if($("#2cat").css("display")!="none"){
+			$("#2cat").slideToggle(function(){
+				$(".cat2").css("display","none");
+				$("li[pid="+id+"]").css("display","block");
+			});
+			$("#2cat").slideToggle();
+			}else{
+			$(".cat2").css("display","none");
+			$("li[pid="+id+"]").css("display","block");
+			$("#2cat").slideToggle();
+			}
+	});
+	$("#keyword").keydown(function(){
+		if(event.keyCode == "13"){
+			var keyword = $("#keyword").val();
+			if(keyword==null||keyword==""){
+				alert("请输入关键词！");
+				return false;
+			}
+			location.href="myAgentSearchList.html?keyword="+keyword;
+		}
+	});
+	$("#searchbtn").click(function(){
+		var keyword = $("#keyword").val();
+		if(keyword==null||keyword==""){
+			alert("请输入关键词！");
+			return false;
+		}
+		location.href="myAgentSearchList.html?keyword="+keyword;
+	});
+})
+</script>
+	</body>
+<#else>
+<script type="text/javascript"> 
+onload=function(){ 
+	setTimeout(go, 1);
+}; 
+function go(){ 
+	location.href="login.html"; 
+} 
+</script> 
+</#if>
+</html>

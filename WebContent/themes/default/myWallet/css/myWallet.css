@@ -1,0 +1,188 @@
+.numColor{color: #f05;}
+.myEarningBox{
+    /* padding: .5rem; */
+    background-color: #e8e9eb;
+    padding: .5rem .5rem 1rem .5rem;
+}
+.myEarning{
+    text-align: -webkit-center;
+    font-size: 1rem;
+    height: 9rem;
+    /* vertical-align: middle; */
+    background-color: #f05;
+    color: #fff;
+    border-radius: .5rem;
+    overflow: hidden;
+}
+.myEarning .myEarningText{
+    padding-top: 3rem;
+    display: block;
+}
+.myEarning .myEarningNum{
+    display: block;
+}
+.MWBox{
+    padding-bottom: 1rem;
+    background-color: #f7f7f6;
+}
+.MWBox .MWBoxLi{
+    overflow: hidden;
+    padding: .7rem 2rem;
+    border-bottom: 1px solid #ccc;
+    font-size: 1rem;
+    background-color: #fff;
+}
+.MWBox .MWBoxLi .MWText{
+    font-weight: 600;
+}
+.MWBox .MWBoxLi .MWRt{}
+.MWBox .MWBoxLi .MWRt .publicNum{
+    padding-right: 2rem;
+}
+.MWBox .MWBoxLi .MWRt .rightIcon{
+    color: #ccc;
+}
+.MWBoxHead{
+    padding: 0 1rem;
+    background-color: #fff;
+    color: #ccc;
+    font-size: .8rem;
+}
+/********************************line_of_credit*************************/
+.creditHead{
+    display: flex;
+    padding: .3rem 1rem;
+    border-bottom: 1px solid #ccc;
+}
+.creditHead .creditHeadLf{width: 15%;text-align: center;font-size: 1.3rem;height: 2.5rem;line-height: 2.5rem;color: #ccc;}
+.creditHead .creditHeadLf .creditHeadLfIc{}
+.creditHead .creditHeadRt{}
+.creditHead .creditHeadRt .creditHeadRtTp{
+    color: #ccc;
+}
+.creditHead .creditHeadRt .creditHeadRtNm{
+    font-weight: 700;
+}
+.SZWrap{
+   background-color: #F7F7F6;
+}
+.SZWrapHead{
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 0 1rem;
+}
+.SZDetail{}
+.SZDetailLiLf{
+    width: 70%;
+}
+.SZDetailLiRt{
+    width: 30%;
+    text-align: right;
+    padding-right: 2rem;
+}
+.SZDetail .SZDetailLi{
+    display: flex;
+    padding: .5rem 1rem;
+    border-bottom: 1px solid #ccc;
+    color: #CCCCCC;
+}
+.SZDetail .SZDetailLi .SZDetailLiLf .SZDetailNum{}
+/*****************************getEarn*******************************/
+.bank{
+    padding: 1rem 2rem;
+    display: flex;
+    border-bottom: 5px solid #e8e9eb;
+}
+.bank .bankLf{
+    width: 30%;
+    font-size: .8rem;
+}
+.bank .bankRt{
+    width: 70;
+}
+.bank .bankName{
+    height: 2rem;
+    font-size: .;
+}
+.bank .bankName a{
+    color: #0a8fe0;
+    font-size: .8rem;
+}
+.bank .bankRt .addBank{
+    font-size: .9rem;
+}
+.bank .bankRt .addBank .addIcon{
+    display: inline-block;
+    width: 1.3rem;
+    height: 1.3rem;
+    text-align: -webkit-center;
+    background-color: #0a8fe0;
+    line-height: 1.4rem;
+    color: #fff;
+    border-radius: 1rem;
+    margin-right: .5rem;
+    font-size: 1rem;
+}
+.getMoney{
+    padding: 1rem 2rem;
+}
+.getMoney .getMoneyH{
+    font-size: .8rem;
+}
+.getMoney .getBox{
+    border-bottom: 1px solid #000;
+    display: flex;
+    margin-top: 1rem;
+}
+.getMoney .getBox .moneyIcon{
+    font-size: 2rem;
+    width: 10%;
+}
+.getMoney .getBox input{
+    bo: none;
+    border: none;
+    with: 90%;
+    width: 90%;
+    font-size: 2rem;
+}
+.getMoney .getAll{
+    color: #0a8fe0;
+    padding-top: .5rem;
+    display: inline-block;
+    font-size: .8rem;
+}
+.getMoneyBt{
+    text-align: -webkit-center;
+}
+.getMoneyBt a{
+    display: inline-block;
+    width: 8rem;
+    height: 2.5rem;
+    line-height: 2.5rem;
+    text-align: center;
+    background-color: #f05;
+    color: #fff;
+    font-size: 1rem;
+    border-radius: 3rem;
+}
+.MWMd{
+    float: left;
+}
+.MWMd a{
+    font-size: .8rem;
+    color: #0a8fe0;
+    padding-left: 1rem;
+}
+.gerEarnBox{background: -webkit-linear-gradient(top,#e46c00,#e56c00)!important;}
+.creditHeadLfIc > img{
+    width:24px;
+    height:20px;
+}
+.MWRt > span >img{
+    width:12px;
+    height:16px;
+}
+.moneyIcon > img{
+    width:18px;
+    height:32px;
+}

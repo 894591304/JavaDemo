@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+		<link rel="stylesheet" href="${ctx}/themes/default/shop/css/reset.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/shop/css/common.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/shop/css/SHOP.css" />
+		<script type="text/javascript" src="${ctx}/themes/default/shop/js/jquery-3.1.0.min.js" ></script>
+		<title>订单</title>
+	</head>
+<#if member?? >
+	<body>
+		<div class="publicHeader">
+			<span class="headIcon f_l">
+				<a href="voucher.html">
+					<img src="${ctx}/themes/default/img/2.png" alt="">
+				</a>
+			</span>
+				订单
+		</div>
+<#--创建订单详细标签-->
+<#assign orderDetailTag = newTag("orderDetailTag") />
+<#--获取订单详细，传递参数orderid-->
+<#assign order = orderDetailTag("'orderid':${orderid}") />
+<#--创建订单状态标签-->
+<#assign orderStautsTag= newTag("orderStautsTag") />
+<#--获取订单状态 -->
+<#assign orderStauts= orderStautsTag() />
+<#if order.status==0>
+	<#assign stockUpdateTag = newTag("stockUpdateTag") />
+	<#assign stockUpdate= stockUpdateTag() />
+</#if>
+		<div class="orderList">
+			<ul class="orderListBox">			
+				<li class="orderListLi" >
+					<div class="orderText">
+						<div class="orderPrice" style="height: 110px;">
+							订单状态：<#if order.status==0>已提交</#if><#if order.status==8>已取消</#if></br>
+							订单号：${order.sn}</br>
+							应付金额：<span class="YXprice">${order.need_pay_money?string("currency")}</span>
+						</div>
+					</div>
+					<div class="numAdd" style="height: 110px;">
+						<div class="numAddNum" style="padding-top: 28px;">
+					<#if order.status==orderStauts.ORDER_NOT_PAY||order.status==orderStauts.ORDER_NOT_CONFIRM && !order.isCod >
+						<#if order.isOnlinePay >
+							<div class="orderBt" style="padding-left: 25px;margin-top: 22px;">
+								<a href='api/shop/payment.do?orderid=${order.order_id?c}' target="_blank">去付款</a>
+							</div>	
+						<#else>
+							
+						</#if>
+					</#if>
+						</div>
+					</div>
+				</li>		
+			</ul>
+			<ul class="orderListBox">
+				<li class="orderListLi">
+					<div class="orderText">
+						<p class="orderName">订单内容</p>
+					</div>
+				</li>
+			</ul>
+<!-- 创建订单内容标签 -->
+<#assign orderItemTag = newTag("orderItemTag")>
+<!--通过订单内容标签获取订单列表 -->
+<#assign orderList = orderItemTag() >
+<!--通过订单标签获取订单内容列表 -->
+<#assign orderitemlist = orderList.orderitemlist >
+
+
+<#if orderitemlist?exists && orderitemlist?size gt 0>			
+	<#list orderitemlist as orderitem >
+		<a href="Upin-${orderitem.proxyid}.html">	
+			<ul class="orderListBox">		
+				<li class="orderListLi" itemid="${orderitem.itemid}">
+					<div class="orderListImg">
+						<div class="orderImg">
+							<img src="${orderitem.img}"/>
+						</div>
+					</div>
+					<div class="orderText">
+						<p class="orderName">
+							${orderitem.name}
+						</p>
+						<div class="orderPrice">
+							单价：<span class="YXprice">￥${orderitem.price}</span>
+							&nbsp;&nbsp;&nbsp;&nbsp;购买数量：<span class="YXprice">${orderitem.num}</span>
+						</div>
+						<#if orderitem.ticket!=0>
+						现金券：${orderitem.ticket}元现金券				
+						</#if>
+						<div class="orderPrice">
+							总计：<span class="YXprice">￥${orderitem.pay}</span>
+						</div>
+					</div>
+					<div class="numAdd">
+					</div>
+				</li>			
+			</ul>
+		</a>
+	</#list>				
+</#if>	
+		</div>
+	</body>
+<#else>
+<script type="text/javascript"> 
+onload=function(){ 
+	setTimeout(go, 1);
+}; 
+function go(){ 
+	location.href="login.html"; 
+} 
+</script> 
+</#if>
+</html>

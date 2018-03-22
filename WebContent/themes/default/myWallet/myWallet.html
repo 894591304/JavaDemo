@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+		<link rel="stylesheet" href="${ctx}/themes/default/myWallet/css/reset.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/myWallet/css/common.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/myWallet/css/myWallet.css" />
+		<script type="text/javascript" src="${ctx}/themes/default/myWallet/js/jquery-3.1.0.min.js" ></script>
+<#if member?? >
+<#-- 创建用户基本信息标签 -->
+<#assign userBaseDataTag= newTag("userBaseDataTag") >
+<#-- 调用标签获取用户基本信息 -->
+<#assign user= userBaseDataTag() >
+<#if user.isCredit==1>
+	<#-- 创建vip用户钱包信息标签 -->
+	<#assign vipUserWalletTag= newTag("vipUserWalletTag") >
+	<#-- 调用标签获取vip用户钱包信息 -->
+	<#assign vipuserwallet= vipUserWalletTag() >
+</#if>
+		<title>我的钱包</title>
+	</head>
+	<body style="padding-bottom: 54px;">
+		<div class="publicHeader">
+		    <span class="f_l headIcon">
+				<a href="user.html">
+					<img src="${ctx}/themes/default/img/11.png" alt="">
+				</a>
+			</span>
+				我的钱包
+	    </div>
+<#if user.isCredit!=1>
+	您还不是授信用户，无法查看我的钱包！
+	<#else>
+	    <div class="myEarningBox">
+	    	<div class="myEarning">
+	    	    <span class="myEarningText">我的收入</span>       
+	    	    <span class="myEarningNum">￥${vipuserwallet.addEarn}</span>
+	        </div>
+	    </div>
+	    <ul class="MWBox">
+	    	<li class="MWBoxLi">
+	    		<div class="f_l MWText">授信余额</div>
+	    		<div class="f_r MWRt">
+	    			<span class="publicNum">
+	    				￥${vipuserwallet.remainCredit}
+	    			</span>
+	    		</div>
+	    	</li>
+	    	<li class="MWBoxLi">
+	    		<div class="f_l MWText">进行中的交易</div>
+	    		<div class="f_r MWRt">
+	    			<span class="publicNum">
+	    				￥${vipuserwallet.credit-vipuserwallet.remainCredit}
+	    			</span>
+	    		</div>
+	    	</li>
+			<li class="MWBoxLi">
+	    		<div class="f_l MWText">待审核可提现</div>
+	    		<div class="f_r MWRt">
+	    			<span class="publicNum">
+	    				￥${vipuserwallet.waitCash}
+	    			</span>
+	    		</div>
+	    	</li>
+	    	<li class="MWBoxLi">
+	    		<div class="f_l MWText">待转入可提现</div>
+	    		<div class="f_r MWRt">
+	    			<span class="publicNum">
+	    				￥${vipuserwallet.waitMoney}
+	    			</span>
+	    		</div>
+	    	</li>
+	    </ul>
+	    <ul class="MWBox">
+	    	<p class="MWBoxHead">绑定银行卡</p>
+	    	<li class="MWBoxLi" onclick="window.open('credit.html','_self')">
+	    	<#if vipuserwallet.level==1>
+	    		<div class="f_l MWText">汇聚优选达人金卡</div>
+			</#if>
+			<#if vipuserwallet.level==2>
+	    		<div class="f_l MWText">汇聚优选达人白金卡</div>
+			</#if>
+			<#if vipuserwallet.level==3>
+	    		<div class="f_l MWText">汇聚优选达人黑卡</div>
+			</#if>
+	    		<div class="f_r MWRt">
+					<a href="credit.html">
+						<span class="rightIcon"><img src="${ctx}/themes/default/img/18.png" alt=""></span>
+					</a>
+	    		</div>
+	    	</li>
+	    	<li class="MWBoxLi" onclick="window.open('bank_card.html','_self')">
+	    		<div class="f_l MWText">我的银行卡</div>
+	    		<div class="f_r MWRt">
+					<a>
+						<span class="rightIcon"><img src="${ctx}/themes/default/img/18.png" alt=""></span>
+					</a>
+	    		</div>
+	    	</li>
+	    </ul>
+				<footer class="homeFooter">
+			<ul>
+			<a href="homePage.html">
+				<li class="tabLi">
+					<div class="tabIcon">
+						<img src="${ctx}/themes/default/img/customized.png" />
+					</div>
+					<span>定制</span>
+				</li>
+			</a>
+			<a href="discountHome.html">
+				<li class="tabLi">
+					<div class="tabIcon">
+						<img src="${ctx}/themes/default/img/discover.png" />
+					</div>
+					<span class="tabText">发现</span>
+				</li>
+			</a>
+			<a href="cart.html">
+				<li class="tabLi">
+					<div class="tabIcon">
+						<img src="${ctx}/themes/default/img/order.png" />
+					</div>
+					<span>购物车</span>
+				</li>
+			</a>
+			<a href="user.html">
+				<li class="tabLi numColor">
+					<div class="tabIcon">
+						<img src="${ctx}/themes/default/img/mine_sel.png" />
+					</div>
+					<span>我的</span>
+				</li>
+			</a>
+			</ul>
+		</footer>
+	</#if>
+	</body>
+<#else>
+<script type="text/javascript"> 
+onload=function(){ 
+	setTimeout(go, 1);
+}; 
+function go(){ 
+	location.href="login.html"; 
+} 
+</script> 
+</#if>
+</html>

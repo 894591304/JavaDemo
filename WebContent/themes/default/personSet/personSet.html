@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+		<link rel="stylesheet" href="${ctx}/themes/default/personSet/css/reset.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/personSet/css/common.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/personSet/css/personSet.css" />
+		<script type="text/javascript" src="${ctx}/themes/default/personSet/js/jquery-3.1.0.min.js" ></script>
+		<title>个人设置</title>
+	</head>
+<#if member?? >
+<#-- 创建用户基本信息标签 -->
+<#assign userBaseDataTag= newTag("userBaseDataTag") >
+<#-- 调用标签获取用户基本信息 -->
+<#assign user= userBaseDataTag() >
+<#-- 个人资料标签 -->
+<#assign personSetTag= newTag("personSetTag") >
+<#-- 调用标签获取个人资料-->
+<#assign person= personSetTag() >
+	<body>
+		<div class="publicHeader">
+		    <span class="f_l headIcon">
+				<a href="user.html">
+					<img src="${ctx}/themes/default/img/27.png" alt="" width="7" height="19" >
+				</a>
+			</span>
+				<span class="personHead">
+					个人资料
+				</span>
+			<div class="achieveBt f_r">
+				<a href="changeSet.html" class="">
+                                    修改
+			    </a>	 
+			</div>
+	    </div>
+	    <div class="personWrap">
+	    	<div class="personImg">
+	    		<div class="personImgBox" style="margin:0 auto;">
+	    			<div class="personImgBoxC">
+	    				<img src="${ctx}${person.face}" />
+	    			</div>
+	    		</div>
+	    	</div>
+	    	<div class="personSPubBox">
+	    		<div class="personSPub">
+	    			<div class="personSPubLf">
+	    				用户名
+	    			</div>
+	    			<div class="personSPubText">
+	    				${person.name}
+	    			</div>
+	    		</div>
+	    		<div class="personSPub">
+	    			<div class="personSPubLf">
+	    				性别
+	    			</div>
+	    			<div class="personSPubText">
+	    				<#if person.sex==-1>
+	    				保密
+	    				</#if>
+	    				<#if person.sex==0>
+	    				女
+	    				</#if>
+	    				<#if person.sex==1>
+	    				男
+	    				</#if>
+	    			</div>
+	    		</div>
+	    		<div class="personSPub">
+	    			<div class="personSPubLf">
+	    				生日
+	    			</div>
+	    			<div class="personSPubText">
+	    				${person.birth}
+	    			</div>
+	    		</div>
+				<div class="personSPub">
+	    			<div class="personSPubLf">
+	    				手机号
+	    			</div>
+	    			<div class="personSPubText">
+	    				${person.mobile}
+	    			</div>
+	    		</div>				
+				<div class="personSPub">
+	    			<div class="personSPubLf">
+	    				地址管理
+	    			</div>
+					<div class="personSPubText">
+	    				
+	    			</div>
+					<div class="personSPubRt">
+						<a href="myAddress.html">
+	    					<img src="${ctx}/themes/default/img/edit.png"style="height:32px;width:32px;" />
+	    				</a>
+	    			</div>
+	    		</div>
+	    		<div class="personSPub">
+	    			<div class="personSPubLf">
+	    				修改密码
+	    			</div>
+					<div class="personSPubText">
+	    				
+	    			</div>
+					<div class="personSPubRt">
+						<a href="getPassword.html">
+	    					<img src="${ctx}/themes/default/img/edit.png"style="height:32px;width:32px;" />
+	    				</a>
+	    			</div>
+	    		</div>
+<#if user.isCredit==1||user.isCredit==3>	
+	    		<div class="personSPub">
+	    			<div class="personSPubLf">
+	    				编辑店铺信息
+	    			</div>
+					<div class="personSPubText">
+	    				
+	    			</div>
+					<div class="personSPubRt">
+						<a href="agentShopEdit.html">
+							<img src="${ctx}/themes/default/img/edit.png"style="height:32px;width:32px;" />
+						</a>
+	    			</div>
+	    		</div>
+	    		<div class="personSPub">
+	    			<div class="personSPubLf">
+	    				编辑VIP信息
+	    			</div>
+					<div class="personSPubText">
+	    				
+	    			</div>
+					<div class="personSPubRt">
+						<a href="vipInfoEdit.html">
+							<img src="${ctx}/themes/default/img/edit.png"style="height:32px;width:32px;" />
+						</a>
+	    			</div>
+	    		</div>
+</#if>
+	    	</div>
+	    <div class="homeExchangeBt">
+	    	<a id="logout">退出登录</a>
+	    </div>
+	    </div>
+<script type="text/javascript"> 
+$(function(){
+	$("#logout").click(function(){
+		if(confirm("确认登出？"))
+		{
+			$.ajax({
+				url:"${ctx}/api/shop/member!logout.do?ajax=yes",
+				type:"POST",
+				dataType:"json",
+				success:function(json){
+					if(json.result==1){
+						location.href = "login.html";
+					}else{
+						alert(json.message);
+					}
+				},
+				error:function(e){
+					alert("出现错误，请重试！");
+					window.location.reload();
+				}
+			});
+		};
+	});
+});
+</script>
+	</body>
+<#else>
+<script type="text/javascript"> 
+onload=function(){ 
+	setTimeout(go, 1);
+}; 
+function go(){ 
+	location.href="login.html"; 
+} 
+</script> 
+</#if>
+</html>

@@ -1,0 +1,128 @@
+<#if member?? >
+<#-- 创建我的代理标签 -->
+<#assign myAgentListTag= newTag("myAgentListTag") >
+<#-- 调用标签获取用户代理信息 -->
+<#assign myAgentList= myAgentListTag() >
+<#-- 获取用户代理中商品信息 -->
+<#assign onsalelist= myAgentList.proxylist >
+<#list onsalelist as onsale>
+	    <div class="agentList">
+	    	<div class="agentListPub">
+	    		<div class="agentListImg">
+	    			<div class="ALIBox">
+	    				<img src="${onsale.goodsimg}" />
+	    			</div>
+	    		</div>
+	    		<div class="agentListText">
+	    			<p class="agentListName">
+	    				${onsale.goodsname}
+	    			</p>
+	    			<div class="agentLTPub">
+	    				<div class="agentLTPubLf">
+	    					优选价 ￥${onsale.price}
+	    				</div>&nbsp;&nbsp;&nbsp;&nbsp;
+	    				<div class="agentLTPubLf">
+	    					预期利润 ￥${onsale.expectearn}
+	    				</div>
+	    			</div>
+	    			<div class="agentLTPub">
+	    				<div class="agentLTPubLf">
+	    					已销售 ${onsale.sold}
+	    				</div>&nbsp;&nbsp;&nbsp;&nbsp;
+	    				<div class="agentLTPubLf">
+	    					剩余 ${onsale.notsold}
+	    				</div>&nbsp;&nbsp;&nbsp;&nbsp;
+	    				<div class="agentLTPubLf">
+	    					未上架 <#if onsale.notonsale==0> ${onsale.notonsale}</#if><#if onsale.notonsale!=0><font color="#FF0000"> ${onsale.notonsale}</font></#if>
+	    				</div>
+	    			</div>
+	    			<div class="agentLTPub myAgentGet">
+	    				预期收入 ￥${onsale.earn}
+	    			</div>		
+	    		</div>
+	    	</div>
+<#if onsale.test!=2>
+	    	<div class="myAgentBox">
+	    		<div class="myAgentBoxLf">
+	    			试销期还剩&nbsp;&nbsp;&nbsp;&nbsp;${onsale.testlosttime+1}天
+	    		</div>
+	<#if onsale.test==1>
+	    		<div class="myAgentBoxRt1" >
+	    			<a class="agentBtn" value="${onsale.proxyid}" gname="${onsale.goodsname}">继续代理</a>
+	    		</div>
+	</#if>
+	<#if onsale.test==0>
+	    		<div class="myAgentBoxRt">
+	    			<a>继续代理</a>
+	    		</div>
+	</#if>
+	    	</div>
+</#if>
+<#if onsale.test==2>
+			<div class="myAgentBox">				
+					试销期已经延长至代理期				
+			</div>
+</#if>
+	    	<div class="myAgentBox">
+	    		<div class="myAgentBoxLf">
+	    			代理期还剩&nbsp;&nbsp;${onsale.losttime+1}天
+	    		</div>
+	    		<div class="myAgentBoxRt">
+	    			代理于<@dateformat time="${onsale.endtime}" pattern="yyyy年MM月dd日HH时"/>截止
+	    		</div>
+	    	</div>
+	        <div class="agentListBt">
+	        	<#if onsale.ticket==1><a href="myProxyTicket.html?proxyid=${onsale.proxyid}" class="agentListBtLf" style="background-color:#e0a341;">生成现金券</a></#if>
+	        	<a href="agentShopSet-${onsale.goodsid}.html" class="agentListBtLf">编辑上架</a>
+	        	<a href="newUpin-${onsale.proxyid}.html?proxyid=${onsale.proxyid}" class="agentListBtRt">查看详情</a>
+	        </div>
+	    </div>
+</#list>
+<div id="onsalepage${myAgentList.onsalenowpage}" style="display:none;"></div>
+<script type="text/javascript"> 
+	$(".agentBtn").click(function(){
+		var pid = $(this).attr("value");
+		var name = $(this).attr("gname");
+		if(confirm("是否继续代理？"))
+		{
+			$.ajax({
+				url:"${ctx}/shop/ext/goodsAgent!continueAgent.do",
+				type:"POST",
+				data:"proxyid="+pid,
+				dataType:"json",
+				success:function(json){
+					if(json.result==0){
+						alert("操作错误！");
+						window.location.reload();
+					}else if(json.result==2){
+						alert("请先登录！");
+						window.location.reload();
+					}else if(json.result==3){
+						alert("无法继续延期！");
+						window.location.reload();
+					}else if(json.result==4){
+						alert("只能在试销期结束前的三天内延期代理！");
+						window.location.reload();
+					}else if(json.result==1){
+						alert("延期成功！");
+						window.location.reload();
+					}
+				}
+			});
+		}else{
+			
+		}
+		
+	});
+</script>
+	<#else>
+<script type="text/javascript"> 
+	onload=function(){ 
+		setTimeout(go, 1);
+	}; 
+	function go(){ 
+		location.href="login.html"; 
+	} 
+	
+</script> 
+</#if>

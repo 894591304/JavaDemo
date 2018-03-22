@@ -1,0 +1,29 @@
+.shopImgWrap{
+    /* display: flex; */
+    padding: 2rem;
+    position: relative;
+}
+.shopImgWrap .ShopShow{
+     text-align: center;
+}
+.shopImgWrap > h1,.shopImgWrap > p{
+    color: #A5A5A5;
+    text-align:center;
+}
+.shopImgWrap > p{
+    text-align:center;
+    margin-top: 20px;
+}
+.showWrap{
+    width:100%;
+}
+.shopDetail{
+    width:85%;
+    margin:0 auto;
+}
+.shopDetail > p{
+    color: #A5A5A5;
+}
+.tiaokuan{
+    margin-top:10px;
+}

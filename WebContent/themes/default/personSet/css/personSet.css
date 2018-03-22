@@ -1,0 +1,134 @@
+/****************************personSet**************************/
+.personImg{
+    display: flex;
+    padding: .5rem 1rem;
+    border-bottom: 1px solid #f1f0ee;
+}
+.personImgIconM{
+    padding: 0 .7rem;
+}
+.personImgBox{
+
+}
+.personImgBoxC{
+    width: 3.5rem;
+    height: 3.5rem;
+    border: 3px solid #98948f;
+}
+.personImgText{/* height: 3.5rem; *//* line-height: 3.5rem; */width: 75%;margin: auto;}
+.personImgTextB{
+    color: #ccc;
+    border: 1px dashed #ccc;
+    border-radius: .5rem;
+    padding: 0 .5rem;
+    font-size: 1rem;
+    height: 3rem;
+    line-height: 3rem;
+}
+.personImgText .personImgIcon{
+    font-size: 1rem;
+    /* color: #ccc; */
+}
+.achieveBt{}
+.achieveBt a{color: #F05;background-color: #ffcadb;font-size: .8rem;border-radius: .3rem;display: inline-block;width: 3rem;height: 1.5rem;line-height: 1.5rem;}
+.personHead{margin-left: 3rem;}
+.personSPub{
+    display: flex;
+    padding: .7rem 1rem;
+    border-bottom: 1px solid #f1f0ee;
+}
+.personSPub .personSPubLf{
+    font-size: .8rem;
+    color: #ccc;
+    width: 25%;
+    height: 1.5rem;
+    line-height: 1.5rem;
+}
+.personSPub .personSPubRt{
+    width: 15%;
+    text-align: right;
+    font-size: 1.5rem;
+    color: #ccc;
+    height: 2rem;
+    line-height: 1.5rem;
+}
+.personSPub .personSPubText{
+    width: 60%;
+    font-size: 1rem;
+    height: 1.5rem;
+    line-height: 1.5rem;
+}
+/***********************personMessage********************/
+.personMessageBody{
+    background-color: #f1f0ee;
+}
+.personMessageH{
+    /* padding: 1rem; */
+    padding: 1rem 1rem .2rem 1rem;
+    font-size: .9rem;
+}
+.personMessageHN{
+    color: #f05;
+}
+.personMPub{}
+.personMPub ul{}
+.personMPub .personMPubLi{
+    display: flex;
+    padding: .5rem 1rem;
+    background-color: #fff;
+    margin-bottom: .5rem;
+}
+.personMPub .personMPubLi .personMPubLf{
+    width: 25%;
+    /* position: relative; */
+}
+.personMBox{position: relative;display: inline-block;}
+.personMPub .personMPubLi .personM{
+    width: 4rem;
+    height: 4rem;
+    border-radius: .5rem;
+    overflow: hidden;
+    /* position: relative; */
+}
+.personMPub .personMPubLi .circleIcon{
+    color: red;
+    position: absolute;
+    top: -2px;
+    right: -1px;
+    /* display: inline-block; */
+    background-color: red;
+    width: .6rem;
+    height: .6rem;
+    border-radius: 1rem;
+    /* border: 1px solid #fff; */
+    box-shadow: -1px 2px 9px #fff;
+}
+.personMPub .personMPubLi .personMPubRt{
+    width: 75%;
+}
+.personMPub .personMPubLi .personMPubRt .pMessage{
+    font-size: .8rem;
+    height: 1.3rem;
+    line-height: 1.3rem;
+}
+.personMPub .personMPubLi .personMPubRt .pMessage .messageNum{
+    font-size: .7rem;
+    color: #ccc;
+}
+.personMPub .personMPubLi .personMPubRt .pMessage .lookA{
+    width: 4.5rem;
+    height: 1.3rem;
+    background-color: #41ade0;
+    color: #fff;
+    display: inline-block;
+    line-height: 1.3rem;
+    text-align: -webkit-center;
+    border-radius: 1rem;
+    float: right;
+    font-size: .7rem;
+}
+.personImgTextB > span > img{
+    width:17px;
+    height:16px;
+    vertical-align: middle;
+}

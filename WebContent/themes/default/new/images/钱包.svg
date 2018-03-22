@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="192px" height="192px" viewBox="0 0 192 192" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 42 (36781) - http://www.bohemiancoding.com/sketch -->
+    <title>钱包</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="25" y="45" width="150" height="107" rx="21"></rect>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="150" height="107" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <path d="M96,99.5 C96,88.1781626 105.178165,79 116.498628,79 L175,79 L175,120 L116.498628,120 C105.177548,120 96,110.824327 96,99.5 L96,99.5 Z" id="path-3"></path>
+        <mask id="mask-4" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="79" height="41" fill="white">
+            <use xlink:href="#path-3"></use>
+        </mask>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="钱包" stroke="#979797">
+            <use id="Rectangle-2" mask="url(#mask-2)" stroke-width="20" xlink:href="#path-1"></use>
+            <use id="Rectangle" mask="url(#mask-4)" stroke-width="16" xlink:href="#path-3"></use>
+            <circle id="Oval" fill="#979797" cx="147.5" cy="99.5" r="8.5"></circle>
+        </g>
+    </g>
+</svg>

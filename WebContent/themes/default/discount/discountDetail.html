@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<#-- 创建商品基本信息标签 -->
+<#assign goodsBaseDataTag= newTag("goodsBaseDataTag") >
+<#-- 调用标签获取商品基本信息 -->
+<#assign goods= goodsBaseDataTag() >
+
+<#-- 创建代理用户列表标签 -->
+<#assign findGoodsTag= newTag("findGoodsTag") >
+<#-- 调用代理用户列表基本信息 -->
+<#assign proxy= findGoodsTag() >
+<#-- 获得代理网红列表 -->
+<#assign agentmap = proxy.agentmembermap>
+	
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+		<link rel="stylesheet" href="${ctx}/themes/default/discount/css/reset.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/discount/css/common.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/discount/css/discount.css" />
+		<script type="text/javascript" src="${ctx}/themes/default/discount/js/jquery-3.1.0.min.js" ></script>
+		<title>发现优惠</title>
+	</head>
+	<body>
+		<header>
+			<div class="publicHeader">
+				<span class="headIcon f_l">
+					<a href="javascript:" onclick="self.location=document.referrer;">
+						<img src="${ctx}/themes/default/img/11.png" alt="">
+					</a>
+				</span>
+				发现优惠
+			</div>
+		</header>
+		<div class="discountWrap">
+			<div class="discountImgBox" style="text-align:center;">
+				<img src="${goods.original}" style="height:160px;width:auto;"/>
+			</div>
+			<div class="shopDetail">
+				<div class="detailName">${goods.name}</div></br>
+				<div class="detailPrice">优选价 <span class="">￥${goods.price}</span></div>
+			</div>
+			<div class="peopleList">
+				<p class="peopleListHead">
+					${proxy.agentnum}位达人为该产品代言
+				</p>
+				<ul>
+		<#if proxy.agentnum==0>
+			<#else>			
+				<#list agentmap as agent>
+					<li class="peopleLi">
+						<a href="personCtList-${agent.memberid}.html">
+							<img src="${ctx}${agent.memberimg}" />
+						</a>
+					</li>
+				</#list>		
+				<#if (proxy.agentnum>5) >
+					<li class="peopleLi">
+						<a href="discountProxyList.html?goodsid=${goods.goods_id}">
+							+${proxy.agentnum-4}
+						</a>
+					</li>	
+				</#if>
+		</#if>
+				</ul>
+			</div>
+			<div class="detailText">
+				${goods.intro}
+			</div>
+		</div>
+		<footer class="homeFooter">
+			<ul>
+			<a href="homePage.html">
+				<li class="tabLi">
+					<div class="tabIcon">
+						<img src="${ctx}/themes/default/img/customized.png" />
+					</div>
+					<span>定制</span>
+				</li>
+			</a>
+			<a href="discountHome.html">
+				<li class="tabLi numColor">
+					<div class="tabIcon">
+						<img src="${ctx}/themes/default/img/discover_sel.png" />
+					</div>
+					<span class="tabText">发现</span>
+				</li>
+			</a>
+			<a href="cart.html">
+				<li class="tabLi">
+					<div class="tabIcon">
+						<img src="${ctx}/themes/default/img/order.png" />
+					</div>
+					<span>购物车</span>
+				</li>
+			</a>
+			<a href="user.html">
+				<li class="tabLi">
+					<div class="tabIcon">
+						<img src="${ctx}/themes/default/img/mine.png" />
+					</div>
+					<span>我的</span>
+				</li>
+			</a>
+			</ul>
+		</footer>
+	</body>
+</html>

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+		<link rel="stylesheet" href="${ctx}/themes/default/shop/css/reset.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/shop/css/common.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/shop/css/SHOP.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/login/css/loginPage.css" />
+		<script type="text/javascript" src="${ctx}/themes/default/shop/js/jquery-3.1.0.min.js" ></script>
+		<script type="text/javascript" src="${ctx}/themes/default/shop/js/distpicker.data.js" ></script>
+		<script type="text/javascript" src="${ctx}/themes/default/shop/js/distpicker.js" ></script>
+		<script src="${ctx}/themes/default/js/jquery-form.js"  type="text/javascript"></script>
+		<title>vip用户组信息录入</title>
+	</head>
+<#if member?? >
+<#-- 创建用户基本信息标签 -->
+<#assign userBaseDataTag= newTag("userBaseDataTag") >
+<#-- 调用标签获取用户基本信息 -->
+<#assign user= userBaseDataTag() >
+	<#if user.isCredit==1>
+	<#-- 创建用户基本信息标签 -->
+	<#assign vipInfoTag= newTag("vipInfoTag") >
+	<#-- 调用标签获取用户基本信息 -->
+	<#assign vipinfo= vipInfoTag() >
+		<div class="publicHeader">
+			<span class="headIcon f_l">
+				<a href="personSet.html">
+					<img src="${ctx}/themes/default/img/2.png" alt="">
+				</a>
+			</span>
+				vip用户组信息<#if vipinfo.re=="0">录入<#else>修改</#if>
+		</div>
+        <form action="" class="addAdressInput" method="post" id="vipinfo_form">
+        	<input type="hidden" id="vip1name" name="vip1name" value="${vipinfo.v1name}" />
+        	<input type="hidden" id="vip1info" name="vip1info" value="${vipinfo.v1info}" />
+        	<input type="hidden" id="vip2name" name="vip2name" value="${vipinfo.v2name}" />
+        	<input type="hidden" id="vip2info" name="vip2info" value="${vipinfo.v2info}" />
+        	<input type="hidden" id="vip3name" name="vip3name" value="${vipinfo.v3name}" />
+        	<input type="hidden" id="vip3info" name="vip3info" value="${vipinfo.v3info}" />
+        	<a style="color:#ff222e;padding-left:16px;font-size: 13px;">请编辑您的VIP用户组名称及说明信息。</a>
+        </form>
+	<div id="newAddress">
+		<div class="GPeopleDetail">
+			<div class="GPDText">
+				vip1会员组名称：
+			</div>
+			<div class="GPDInput">
+				<input type="text" id="v1name" maxlength="10" style="text-indent: 0.3rem;" placeholder="请输入vip1用户组名称" value="${vipinfo.v1name}"/>
+			</div>
+		</div>
+		<div class="GPeopleDetail">
+			<div class="GPDText">
+				vip1说明：
+			</div>
+			<div class="GPDInput">
+				<textarea id="v1info" style="border: none;width: 98%;background-color: #f1f0ee;border-radius: .3rem;height: 6rem;font-size: 1rem; text-indent: 0.2rem;" rows="3" maxlength="250" placeholder="请输入vip1用户组描述" >${vipinfo.v1info}</textarea>
+			</div>
+		</div>
+		<div class="GPeopleDetail">
+			<div class="GPDText">
+				vip2会员组名称：
+			</div>
+			<div class="GPDInput">
+				<input type="text" id="v2name" maxlength="10" style="text-indent: 0.3rem;" placeholder="请输入vip2用户组名称" value="${vipinfo.v2name}"/>
+			</div>
+		</div>
+		<div class="GPeopleDetail">
+			<div class="GPDText">
+				vip2说明：
+			</div>
+			<div class="GPDInput">
+				<textarea id="v2info" style="border: none;width: 98%;background-color: #f1f0ee;border-radius: .3rem;height: 6rem;font-size: 1rem; text-indent: 0.2rem;" rows="3" maxlength="250" placeholder="请输入vip2用户组描述" >${vipinfo.v2info}</textarea>
+			</div>
+		</div>
+		<div class="GPeopleDetail">
+			<div class="GPDText">
+				vip3会员组名称：
+			</div>
+			<div class="GPDInput">
+				<input type="text" id="v3name" maxlength="10" style="text-indent: 0.3rem;" placeholder="请输入vip3用户组名称" value="${vipinfo.v3name}"/>
+			</div>
+		</div>
+		<div class="GPeopleDetail">
+			<div class="GPDText">
+				vip3说明：
+			</div>
+			<div class="GPDInput">
+				<textarea id="v3info" style="border: none;width: 98%;background-color: #f1f0ee;border-radius: .3rem;height: 6rem;font-size: 1rem; text-indent: 0.2rem;" rows="3" maxlength="250" placeholder="请输入vip3用户组描述" >${vipinfo.v3info}</textarea>
+			</div>
+		</div>
+	</div>
+	<div class="getBt" style="text-align:-webkit-center;margin-top: 10px;">
+		<a id="save">保存信息</a>
+	</div>
+<script type="text/javascript">
+$(function(){
+	$("#save").click(function(){
+		var status = 1;
+		var v1name = $('#v1name').val();
+		var v1info = $('#v1info').val();
+		var v2name = $('#v2name').val();
+		var v2info = $('#v2info').val();
+		var v3name = $('#v3name').val();
+		var v3info = $('#v3info').val();
+		if($("#v1name").val()==null||$("#v1name").val()==""){
+			status = 0;
+			$("#vip1name").val("vip1");
+		}else{
+			$("#vip1name").val(v1name);
+		}
+		if($("#v1info").val()==null||$("#v1info").val()==""){
+			status = 0;
+			$("#vip1info").val("您的用户组为VIP1，您将享受VIP1的福利！");
+		}else{
+			$("#vip1info").val(v1info);
+		}
+		if($("#v2name").val()==null||$("#v2name").val()==""){
+			status = 0;
+			$("#vip2name").val("vip2");
+		}else{
+			$("#vip2name").val(v2name);
+		}
+		if($("#v2info").val()==null||$("#v2info").val()==""){
+			status = 0;
+			$("#vip2info").val("您的用户组为VIP2，您将享受VIP2的福利！");
+		}else{
+			$("#vip2info").val(v2info);
+		}
+		if($("#v3name").val()==null||$("#v3name").val()==""){
+			status = 0;
+			$("#vip3name").val("vip3");
+		}else{
+			$("#vip3name").val(v3name);
+		}
+		if($("#v3info").val()==null||$("#v3info").val()==""){
+			status = 0;
+			$("#vip3info").val("您的用户组为VIP3，您将享受VIP3的福利！");
+		}else{
+			$("#vip3info").val(v3info);
+		}
+		if(status==0){
+			if(confirm("未填写的信息将使用默认信息替代，是否保存？")){
+				$('#vipinfo_form').ajaxSubmit(options);
+			}
+		}else{
+			$('#vipinfo_form').ajaxSubmit(options);
+		}		
+	});
+	var options = {
+			url : "${ctx}/shop/ext/vipInfo!saveVipInfo.do",
+			type : "POST",
+			dataType : 'json',
+			success : function(data) {				
+				if(data.result==2){
+					alert("请先登录！");
+					window.location.reload();
+				}else if(data.result==3){
+					alert("请先申请授信！");
+					location.href="user.html";
+				}else if(data.result==1){
+					alert("保存成功！");
+					location.href="user.html";
+				}else{
+					alert(data.message);
+				}
+			},
+			error : function(e) {
+				alert("出现错误 ，请重试!");
+			}
+	};
+});
+</script>
+<#else>
+您需要首先完成授信，才能进行银行信息录入！
+<script type="text/javascript"> 
+onload=function(){ 
+	setTimeout(go, 1);
+}; 
+function go(){ 
+	location.href="user.html"; 
+} 
+</script>
+</#if>
+	</body>
+<#else>
+<script type="text/javascript"> 
+onload=function(){ 
+	setTimeout(go, 1);
+}; 
+function go(){ 
+	location.href="login.html"; 
+} 
+</script>
+</#if>
+</html>

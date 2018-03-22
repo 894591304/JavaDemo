@@ -1,0 +1,148 @@
+<#include '/admin/header.html'>
+<div class="main" style="background-color: white;">
+	<form id="setForm">
+		<input type="hidden" name="goodsid" id="goodsid" value="${goodsid}" /> 
+		<input type="hidden" name="proxyMembers" id="proxyMembers" value="${proxyMembers}" /> 
+		<input type="hidden" name="brokerageUsers" id="brokerageUsers" value="${brokerageUsers}" />
+	</form>
+	<div class="contentTab">
+		<ul class="tab">
+			<li tabid="2">网红用户</li>
+			<li tabid="3">经纪公司</li>
+		</ul>
+	</div>
+	<div class="shadowBoxWhite wf100 whiteBox">
+		<div class="text">
+			<div class="tab-page">
+				<div tabid="2" class="tab-panel" style="display: none">
+					<div class="shadowBoxWhite tableDiv">
+						<table class="easyui-datagrid"
+							data-options="pageList: [5,10,15,20],pageSize:${pageSize},fitColumns:'true'"
+							pagination="true" id="memberdata" sortName="member_id"
+							sortOrder="desc">
+							<thead>
+								<tr>
+									<th data-options="field:'member_id',checkbox:true"></th>
+									<th data-options="field:'uname',align:'center'">用户名</th>
+									<th data-options="field:'shopname',align:'center'">用户店铺</th>
+									<th data-options="field:'idcard',width:230,align:'center'">身份证号</th>
+								</tr>
+							</thead>
+						</table>
+					</div>
+				</div>
+				<div tabid="3" class="tab-panel" style="display: none">
+					<div class="shadowBoxWhite tableDiv">
+						<table class="easyui-datagrid"
+							data-options="pageList: [5,10,15,20],pageSize:${pageSize},fitColumns:'true'"
+							pagination="true" id="brokeragedata" sortName="userid"
+							sortOrder="desc">
+							<thead>
+								<tr>
+									<th data-options="field:'userid',checkbox:true"></th>
+									<th data-options="field:'username',width:200">用户名</th>
+									<th data-options="field:'name',width:200">企业名称</th>
+								</tr>
+							</thead>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+	$(function() {
+		$('.tab > li')
+				.click(
+						function() {
+							$(this).siblings().each(function() {
+								$(this).removeClass('active')
+							})
+							$(this).addClass('active');
+							$('.tab-panel').each(function() {
+								$(this).hide();
+							});
+							$('[tabid=' + $(this).attr('tabid') + ']').show();
+							if ($(this).attr('tabid') == 2) {
+								var options = {};
+								options.url = '${ctx}/shop/b2b2c/creditMember!creditMemberlistJson.do';
+								$('#memberdata').datagrid(options);
+							}
+							if ($(this).attr('tabid') == 3) {
+								var options = {};
+								options.url = '${ctx}/shop/b2b2c/brokerage!brokeragelistJson.do';
+								$('#brokeragedata').datagrid(options);
+							}
+						});
+		$('[tabid="2"]').click();
+		$('#memberdata').datagrid(
+				{
+					onLoadSuccess : function(data) {
+						for (var i = 0; i < data.rows.length; i++) {
+							if ($('#proxyMembers').val().split(',').indexOf(
+									data.rows[i].member_id.toString()) >= 0) {
+								$('#memberdata').datagrid('selectRow', i);
+							}
+						}
+					}
+				});
+		$('#memberdata').datagrid({
+			onSelect : function(rowIndex, rowData) {
+				var members = $('#proxyMembers').val()?$('#proxyMembers').val().split(','):[];
+				if (members.indexOf(rowData.member_id.toString()) < 0) {
+					members.push(rowData.member_id.toString())
+				}
+				$('#proxyMembers').val(members.toString())
+			}
+		});
+		$('#memberdata').datagrid({
+			onUnselect : function(rowIndex, rowData) {
+				var members = $('#proxyMembers').val().split(',');
+				members.remove(rowData.member_id.toString())
+				$('#proxyMembers').val(members.toString())
+			}
+		});
+		$('#brokeragedata').datagrid(
+				{
+					onLoadSuccess : function(data) {
+						for (var i = 0; i < data.rows.length; i++) {
+							if ($('#brokerageUsers').val().split(',').indexOf(
+									data.rows[i].userid.toString()) >= 0) {
+								$('#brokeragedata').datagrid('selectRow', i);
+							}
+						}
+					}
+				});
+		$('#brokeragedata').datagrid({
+			onSelect : function(rowIndex, rowData) {
+				var brokerageUsers = $('#brokerageUsers').val()?$('#brokerageUsers').val().split(','):[];
+				if (brokerageUsers.indexOf(rowData.userid.toString()) < 0) {
+					brokerageUsers.push(rowData.userid.toString())
+				}
+				$('#brokerageUsers').val(brokerageUsers.toString())
+			}
+		});
+		$('#brokeragedata').datagrid({
+			onUnselect : function(rowIndex, rowData) {
+				var brokerageUsers = $('#brokerageUsers').val().split(',');
+				brokerageUsers.remove(rowData.userid.toString())
+				$('#brokerageUsers').val(brokerageUsers.toString())
+			}
+		});
+		Array.prototype.indexOf = function(val) {
+			for (var i = 0; i < this.length; i++) {
+				if (this[i] == val)
+					return i;
+			}
+			return -1;
+		};
+		Array.prototype.remove = function(val) {
+			var index = this.indexOf(val);
+			if (index > -1) {
+				this.splice(index, 1);
+			}
+		};
+	})
+</script> 
+<#include '/admin/footer.html'>

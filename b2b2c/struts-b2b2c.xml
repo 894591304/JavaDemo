@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<!-- 后台action -->
+	<package name="b2b2c" extends="shop_default" namespace="/shop/b2b2c">
+
+		<action name="agent" class="agentAction">
+			<result name="agentList" type="freemarker">agent/agent_list.html</result>
+			<result name="add_agent" type="freemarker">agent/agent_add.html</result>
+			<result name="edit_agent" type="freemarker">agent/agent_edit.html</result>
+			<result name="agent_detail" type="freemarker">agent/agent_detail.html</result>
+		</action>
+		
+		<action name="brokerage" class="brokerageAction">
+			<result name="brokerageList" type="freemarker">brokerage/brokerage_list.html</result>
+			<result name="add_brokerage" type="freemarker">brokerage/brokerage_add.html</result>
+			<result name="edit_brokerage" type="freemarker">brokerage/brokerage_edit.html</result>
+			<result name="set_brokerage" type="freemarker">brokerage/brokerage_set.html</result>
+			<result name="brokerage_detail" type="freemarker">brokerage/brokerage_detail.html</result>
+		</action>
+		
+		<action name="creditMember" class="creditMemberAction">
+			<result name="creditMemberList" type="freemarker">creditMember/creditMember_list.html</result>
+			<result name="creditList" type="freemarker">creditMember/credit_list.html</result>
+			<result name="creditProxyList" type="freemarker">creditMember/creditProxy_list.html</result>
+			<result name="add_creditMember" type="freemarker">creditMember/creditMember_add.html</result>
+			<result name="edit_creditMember" type="freemarker">creditMember/creditMember_edit.html</result>
+			<result name="set_creditMember" type="freemarker">creditMember/creditMember_set.html</result>
+			<result name="credit_detail" type="freemarker">creditMember/credit_detail.html</result>
+			<result name="import_creditMember" type="freemarker">creditMember/creditMember_import.html</result>
+			<result name="set_shop_show_hide" type="freemarker">creditMember/set_shop_show_hide.html</result>
+		</action>
+		
+		<action name="creditMemberBank" class="creditMemberBankAction">
+		</action>
+		
+		<action name="creditMemberVip" class="creditMemberVipAction">
+		</action>
+		
+		<action name="goodsRules" class="goodsRulesAction">
+			<result name="set_goods_rules" type="freemarker">goods/set_goods_rules.html</result>
+		</action>
+		
+		<action name="ticket" class="goodsTicketAction">
+			<result name="goodsTicket" type="freemarker">ticket/ticket.html</result>
+		</action>
+		
+		<action name="orderExt" class="orderExtAction">
+		</action>
+		
+		<action name="indexItemsExt" class="shopIndexItemsExtAction">
+			<result name="order">index/order.jsp</result>
+			<result name="goods">index/goods.jsp</result>
+			<result name="sale">index/sale.jsp</result>
+			<result name="credit">index/credit.jsp</result>
+			<result name="proxy">index/proxy.jsp</result>
+			<result name="order_detail" type="freemarker">index/order_list.html</result>
+		</action>
+
+	</package>
+
+
+
+</struts>

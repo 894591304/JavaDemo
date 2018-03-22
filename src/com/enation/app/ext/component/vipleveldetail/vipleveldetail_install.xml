@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dbsolution>
+	<action>
+		<command>create</command>
+		<table>vip_leveldetail</table>
+		<field><name>id</name><type>int</type><size>8</size><option>11</option></field>
+		<field><name>proxyMemberId</name><type>int</type><size>8</size><option>00</option></field>
+		<field><name>v1Name</name><type>varchar</type><size>64</size><option>00</option></field>
+		<field><name>v2Name</name><type>varchar</type><size>64</size><option>00</option></field>
+		<field><name>v3Name</name><type>varchar</type><size>64</size><option>00</option></field>
+		<field><name>v1Content</name><type>varchar</type><size>255</size><option>00</option></field>
+		<field><name>v2Content</name><type>varchar</type><size>255</size><option>00</option></field>
+		<field><name>v3Content</name><type>varchar</type><size>255</size><option>00</option></field>
+	</action>
+</dbsolution>

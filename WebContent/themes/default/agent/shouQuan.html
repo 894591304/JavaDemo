@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+		<link rel="stylesheet" href="${ctx}/themes/default/agent/css/reset.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/agent/css/common.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/agent/css/agent.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/agent/css/diyUpload.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/agent/css/webuploader.css" />
+		<script type="text/javascript" src="${ctx}/themes/default/agent/js/jquery-3.1.0.min.js" ></script>
+		<script type="text/javascript" src="${ctx}/themes/default/agent/js/diyUpload.js" ></script>
+		<script type="text/javascript" src="${ctx}/themes/default/agent/js/webuploader.html5only.min.js" ></script>
+		<title>授权</title>
+	</head>
+	<body>
+		<div class="publicHeader">
+		    <span class="f_l headIcon">
+				<img src="${ctx}/themes/default/img/2.png" alt="">
+			</span>
+				授权
+	    </div>
+	    <div class="agentWrap">
+	    	<div class="agentImgBox">
+	    		
+	    	</div>
+	    	<div class="agentImgContainer">
+	    		<div class="agentImg">
+	    			<img src="${ctx}/themes/default/img/p3.jpg" />
+	    	    </div>
+	    	</div>
+	    	<div class="agentInput">
+	    		<p class="inputTitle">用户名</p>
+	    		<div class="agentAName">
+	    			梓熙
+	    		</div>
+	    	</div>
+	    	<div class="agentInput">
+	    		<p class="inputTitle f_l">性别</p>
+	    		<div class="agentSex">
+	    			<input type="radio" id="man" name="sex"/> 男
+	    		</div>
+	    		<div class="agentSex">
+	    			<input type="radio" id="woman" name="sex" />女
+	    		</div>
+	    	</div>
+	    	<div class="agentInput">
+	    		<p class="inputTitle">手机号</p>
+	    		<div class="inputBox">
+	    			<input type="number" placeholder="请输入手机号"/>
+	    			<a class="codeBt">发送验证码（54s）</a>
+	    		</div>
+	    		<div class="inputBox">
+	    			<input type="text" placeholder="输入验证码"/>
+	    			<a class="queren">确认</a>
+	    		</div>
+	    	</div>
+	    	<p class="yzRemind">验证成功</p>
+	    	<div class="agentInput">
+	    		<p class="inputTitle">姓名</p>
+	    		<div class="agentAName">
+	    			刘梓熙
+	    		</div>
+	    	</div>
+	    	<div class="agentInput">
+	    		<p class="inputTitle">身份证号码</p>
+	    		<div class="agentAName">
+	    			1101044199211230917
+	    		</div>
+	    	</div>
+	    	<div class="uploadPc">
+	    		<div class="loadBox" id="loadBox">
+	    			<span class="loadIcon"><img src="${ctx}/themes/default/img/28.png" alt=""></span>
+	    			<span class="loadIcon"><img src="${ctx}/themes/default/img/30.png" alt=""></span>
+	    			<span class="loadText">上传身份证照片</span>
+	    		</div>
+	    	</div>
+	    	<div class="agentAdress">
+	    		<p>通讯地址</p>
+	    		<select>
+	    			<option></option>
+	    		</select>
+	    	</div>
+	    	<div class="agentAdress">
+	    		<p>邮政编码</p>
+	    		<select>
+	    			<option></option>
+	    		</select>
+	    	</div>
+	    	<div class="agentNewBt">
+	    	    <a href="#" class="agentNewBtLf" >重新提交</a>
+	        	<a href="#" class="agentNewBtRt">确认提交</a>
+	        </div>
+	    </div>
+	</body>
+<script type="text/javascript">
+ 
+/*
+* 服务器地址,成功返回,失败返回参数格式依照jquery.ajax习惯;
+* 其他参数同WebUploader
+*/
+$('#loadBox').diyUpload({
+    url:'server/fileupload.php',
+    success:function( data ) {
+        console.info( data );
+    },
+    error:function( err ) {
+        console.info( err );  
+    },
+    chunked:true,
+    // 分片大小
+    chunkSize:512 * 1024,
+    //最大上传的文件数量, 总文件大小,单个文件大小(单位字节);
+    fileNumLimit:50,
+    fileSizeLimit:500000 * 1024,
+    fileSingleSizeLimit:50000 * 1024,
+    accept: {}
+});
+</script>
+</html>
+

@@ -1,0 +1,18 @@
+<table class="form-table" style="width: 100%">
+	<tr>
+		<td style="text-align: left;"><#list agentUserList as user> <input type="radio" name="agent_id"
+			value="${user.userid }" id="agent_${user.userid }" <#if isAgent==1>disabled</#if>
+			<#if currentUserid==user.userid>checked</#if> />&nbsp;${user.name}&nbsp;&nbsp; </#list></td>
+	</tr>
+</table>
+<script type="text/javascript">
+
+$( function() {
+	<#if agentid?exists >
+		$("#agent_${agentid}").attr("checked",true);
+	</#if>
+	$("#price").parent().prev().html('优选价：');
+	$("#cost").parent().prev().html('合作价：	');
+});
+
+</script>

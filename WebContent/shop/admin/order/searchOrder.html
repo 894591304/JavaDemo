@@ -1,0 +1,74 @@
+<form id="searchForm">
+	<div class="input">
+		<table cellspacing="1" cellpadding="3" width="100%" class="form-table">
+			<tr>
+				<th><label class="text">订单号:</label></th>
+				<td><input type="text" style="width: 150px" name="sn"  /></td>
+			</tr>
+			<tr>
+				<th><label class="text">物流单号:</label></th>
+				<td><input type="text" style="width: 150px" name="ship_no"  /></td>
+			</tr>
+			<tr>
+				<th><label class="text">订购人：</label></th>
+				<td><input type="text" style="width: 150px" name="member_name"  /> </td>
+			</tr>
+			<tr>
+				<th><label class="text">收货人：</label></th>
+				<td><input type="text" style="width: 150px" name="ship_name"  /></td>
+			</tr>
+			<tr>
+				<th><label class="text">下单时间：</label></th>
+				<td>
+				<input type="text" style="width: 100px" name="start"  class="dateinput" />--<input type="text" style="width: 100px" name="end"  class="dateinput"/>
+				</td>
+			</tr>
+			<tr>
+				<th><label class="text">发货时间：</label></th>
+				<td>
+				<input type="text" style="width: 100px" name="ship_start"  class="dateinput" />--<input type="text" style="width: 100px" name="ship_end"  class="dateinput"/>
+				
+				</td>
+			</tr>
+			<tr>
+				<th><label class="text">订单状态：</label></th>
+				<td> 
+				<select name="order_state" style="width: 150px;height:25px;font-size:14px;font-weight: bold;">
+					<option   value="">所有状态</option>
+					<option   value="0">未付款（新订单）</option>
+					<option   value="2">已确认支付</option>
+					<option   value="wait_ship">待发货</option>
+					<option   value="5">已发货</option>
+					<option   value="6">已收货</option>
+					<option   value="8">作废</option>
+					<option   value="9">订单已确认</option>
+					<option   value="-2">已退货</option>
+				</select>
+				</td>
+			</tr>
+			<tr>
+				<th><label class="text">配送方式：</label></th>
+				<td>
+					<select name="shiptype">
+						<option value="">全部</option>
+						<#list shipTypeList as shipType>
+							<option value="${shipType.type_id }"  >${shipType.name }</option>
+						</#list>
+					</select>	
+				</td>
+			</tr>
+			<tr>
+				<th><label class="text">支付方式：</label></th>
+				<td>
+					<select name="paytype">
+						<option value="">全部</option>
+						<#list payTypeList as payType>
+						<option value="${payType.id }" >${payType.name }</option>
+						</#list>
+					</select>	
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div style="clear: both"></div>
+</form>

@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+		<link rel="stylesheet" href="${ctx}/themes/default/shop/css/reset.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/shop/css/common.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/shop/css/SHOP.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/agent/css/agent.css" />
+		<script type="text/javascript" src="${ctx}/themes/default/shop/js/jquery-3.1.0.min.js" ></script>
+		<script type="text/javascript" src="${ctx}/themes/default/shop/js/distpicker.data.js" ></script>
+		<script type="text/javascript" src="${ctx}/themes/default/shop/js/distpicker.js" ></script>
+		<script src="${ctx}/themes/default/js/jquery-form.js"  type="text/javascript"></script>
+		<title>地址管理</title>
+	</head>
+<#if member?? >
+	<#--创建我的地址标签-->
+	<#assign myAddressTag = newTag("myAddressTag")/>
+	<#--调用我的地址标签-->
+	<#assign myAddress= myAddressTag()/>
+	<#--获取地址名称列表-->
+	<#assign namelist= myAddress.namelist/>
+	<#--获取地址详情列表-->
+	<#assign detailList= myAddress.detailList/>
+	
+	<body>
+		<div class="publicHeader">
+			<span class="headIcon f_l">
+				<a href="personSet.html">
+					<img src="${ctx}/themes/default/img/2.png" alt="">
+				</a>
+			</span>
+				地址管理
+		</div>
+		<div class="voucherAddress">
+			<p class="VDHead">请选择一个地址进行操作</p>
+			
+<#list detailList as detail>
+                <div class="addressSelect">
+                	<input type="hidden" id="${detail.id}detail" name="addressid" addid="${detail.id}" addmark="${detail.addressname}" addname="${detail.name}" addtel="${detail.tel}" addprovince="${detail.province}" addcity="${detail.city}" addarea="${detail.area}" addaddress="${detail.address}"/>
+                	<input type="radio" name="addresssel" value="${detail.id}" id="add${detail.id}">${detail.addressname}
+                </div>
+</#list>
+                <div class="addressSelect">
+                	<input type="radio" name="addresssel" value="0" id="add0">创建新地址
+                </div>
+            <form action="" class="addAdressInput" method="post" id="address_form">
+                <input type="hidden" id="addressid" name="addressid" value="" />
+                <input type="hidden" id="addressmark" name="addressmark" value="" />
+                <input type="hidden" id="name" name="name" value="" />
+                <input type="hidden" id="tel" name="tel" value="" />
+                <input type="hidden" id="province" name="province" value="" />
+                <input type="hidden" id="city" name="city" value="" />
+                <input type="hidden" id="area" name="area" value="" />
+                <input type="hidden" id="address" name="address" value="" />
+            </form>
+		</div>
+	<div id="newAddress" style="display:none;">
+		<div class="GPeopleDetail">
+			<div class="GPDText">
+				地址简称
+			</div>
+			<div class="GPDInput">
+				<input type="text" id="inmark"/>
+			</div>
+		</div>
+		<div class="GPeopleDetail">
+			<div class="GPDText">
+				收货人姓名
+			</div>
+			<div class="GPDInput">
+				<input type="text" id="inname"/>
+			</div>
+		</div>
+		<div class="GPeopleDetail">
+			<div class="GPDText">
+				收货人电话
+			</div>
+			<div class="GPDInput">
+				<input type="number" id="intel"/>
+			</div>
+		</div>
+		<div class="GPeopleDetail">
+			<div class="GPDText">
+				收货人地址
+			</div>
+			<div class="GPDInput">
+				<div data-toggle="distpicker" class="addressGetBox">
+                    <select class="addressGet" id="inprovince"></select>
+                    <select class="addressGet" id="incity"></select>
+                    <select class="addressGet" id="inarea"></select>
+                </div>
+			</div>
+		</div>
+		<div class="GPeopleDetail">
+			<div class="GPDText">
+
+			</div>
+			<div class="GPDInput">
+				<input type="text" placeholder="详细地址，街道/房间号" id="inaddress"/>
+			</div>
+		</div>
+	</div>
+		<div class="agentListBt" id="addbtn" style="display:none;">
+			<a id="delete"  class="agentListBtLf">删除地址</a>
+			<a id="save"  class="agentListBtRt">保存地址</a>
+		</div>
+<script type="text/javascript">
+$(function(){
+	$(":radio").click(function(){
+		var addid = $(this).val();
+		if(addid!=0){
+			$("#newAddress").css('display','block');
+			document.getElementById("save").innerHTML="保存修改";
+			$("#addbtn").css('display','');
+			$("#delete").css('display','');
+			var addid = $("#"+addid+"detail").attr("addid");
+			var addmark = $("#"+addid+"detail").attr("addmark")
+			var addname = $("#"+addid+"detail").attr("addname");
+			var addtel = $("#"+addid+"detail").attr("addtel");
+			var addprovince = $("#"+addid+"detail").attr("addprovince");
+			var addcity = $("#"+addid+"detail").attr("addcity");
+			var addarea = $("#"+addid+"detail").attr("addarea");
+			var addaddress = $("#"+addid+"detail").attr("addaddress");
+			$("#addressid").val(addid);
+			$("#addressmark").val(addmark);
+			$("#inmark").val(addmark);
+			$("#name").val(addname);
+			$("#inname").val(addname);
+			$("#tel").val(addtel);
+			$("#intel").val(addtel);
+			$("#province").val(addprovince);
+			$("#inprovince").val(addprovince);
+			$("#city").val(addcity);
+			$("#incity").val(addcity);
+			$("#area").val(addarea);
+			$("#inarea").val(addarea);
+			$("#address").val(addaddress);
+			$("#inaddress").val(addaddress);
+		}else{
+			$("#newAddress").css('display','block');
+			$("#addbtn").css('display','');
+			$("#delete").css('display','none');
+			document.getElementById("save").innerHTML="保存新地址";
+			$("#addressid").val("0");			
+			$("#addressmark").val("");
+			$("#inmark").val("");
+			$("#name").val("");
+			$("#inname").val("");
+			$("#tel").val("");
+			$("#intel").val("");
+			$("#province").val("");
+			$("#inprovince").val("—— 省 ——");
+			$("#city").val("");
+			$("#incity").val("—— 市 ——");
+			$("#area").val("");
+			$("#inarea").val("—— 区 ——");
+			$("#address").val("");
+			$("#inaddress").val("");
+		}
+	});
+	$("#delete").click(function(){
+		var addressid = $('#addressid').val();
+		var addname = $('#addressmark').val();
+		if(confirm("是否删除'"+addname+"'的地址？"))
+		{
+			$.ajax({
+				url:"${ctx}/shop/ext/address!delete.do",
+				type:"POST",
+				data:"addressid="+addressid,
+				dataType:"json",
+				success:function(json){
+					if(json.result==0){
+						alert("操作错误！");
+						window.location.reload();
+					}else if(json.result==2){
+						alert("请先登录！");
+						window.location.reload();
+					}else if(json.result==1){
+						alert("删除成功！");
+						window.location.reload();
+					}
+				}
+			});
+		}else{
+			
+		}
+		
+	});
+	$("#save").click(function(){
+		var addressid = $('#addressid').val();
+		var addressmark = $('#addressmark').val();
+		var name = $('#name').val();
+		var tel = $('#tel').val();
+		var province = $('#province').val();
+		var city = $('#city').val();
+		var area = $('#area').val();
+		var address = $('#address').val();
+		if($("#inmark").val()==null||$("#inmark").val()==""){
+			alert('地址简称不能为空!');
+			return false;
+		}else{
+			addressmark=$("#inmark").val();
+			$("#addressmark").val(addressmark);
+		}
+		if($("#inname").val()==null||$("#inname").val()==""){
+			alert('收货人姓名不能为空!');
+			return false;
+		}else{
+			name=$("#inname").val();
+			$("#name").val(name);
+		}
+		if($("#intel").val()==null||$("#intel").val()==""){
+			alert('收货人电话不能为空!');
+			return false;
+		}else{
+			tel=$("#intel").val();
+			$("#tel").val(tel);
+		}
+		if($("#inprovince").val()==null||$("#inprovince").val()==""||$("#inprovince").val()=="—— 省 ——"){
+			alert('请选择省!');
+			return false;
+		}else{
+			province=$("#inprovince").val();
+			$("#province").val(province);
+		}
+		if($("#incity").val()==null||$("#incity").val()==""||$("#incity").val()=="—— 市 ——"){
+			alert('请选择市！');
+			return false;
+		}else{
+			city=$("#incity").val();
+			$("#city").val(city);
+		}
+		if($("#inarea").val()==null||$("#inarea").val()==""||$("#inarea").val()=="—— 区 ——"){
+			alert('请选择区！');
+			return false;
+		}else{
+			area=$("#inarea").val();
+			$("#area").val(area);
+		}
+		if($("#inaddress").val()==null||$("#inaddress").val()==""){
+			alert('请输入详细地址！');
+			return false;
+		}else{
+			address=$("#inaddress").val();
+			$("#address").val(address);
+		}
+		$('#address_form').ajaxSubmit(options);
+	});
+	var options = {
+			url : "${ctx}/shop/ext/address!saveAddress.do",
+			type : "POST",
+			dataType : 'json',
+			success : function(data) {				
+				if(data.result==2){
+					alert("请先登录！");
+					window.location.reload();
+				}else if(data.result==1){
+					alert("保存成功！");
+					window.location.reload();
+				}else{
+					alert(data.message);
+				}
+			},
+			error : function(e) {
+				alert("出现错误 ，请重试!");
+			}
+	};
+});
+</script>		
+	</body>
+<#else>
+<script type="text/javascript"> 
+onload=function(){ 
+	setTimeout(go, 1);
+}; 
+function go(){ 
+	location.href="login.html"; 
+} 
+</script> 
+</#if>
+</html>

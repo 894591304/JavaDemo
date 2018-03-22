@@ -1,0 +1,22 @@
+<#include '/admin/header.html' > 
+
+<div class="main" style="background-color: white;">
+	<form id="setForm">
+		<table width="98%" border="0" cellspacing="0" cellpadding="8">
+			<input type="hidden" name="memberids" value="${memberids}" />
+			<tr>
+				<th>经济公司：</th>
+				<td>
+				<select class="easyui-validatebox"
+					name="user_id">
+						<#list brokerageList as item>
+							<option value="${item.userid}">${item.username}</option>
+						</#list>
+				</select>
+				</td>
+			</tr>
+		</table>
+	</form>
+</div>
+
+<#include '/admin/footer.html' >

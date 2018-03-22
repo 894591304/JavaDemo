@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+		<link rel="stylesheet" href="${ctx}/themes/default/Personal Center/css/reset.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/Personal Center/css/common.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/Personal Center/css/personalCenter.css" />
+		<script type="text/javascript" src="${ctx}/themes/default/Personal Center/js/jquery-3.1.0.min.js" ></script>
+		<script type="text/javascript" src="${ctx}/themes/default/js/jquery.qrcode.js" ></script>
+		<script type="text/javascript" src="${ctx}/themes/default/js/qrcode.js" ></script>
+
+<#if member?? >
+<#-- 创建用户基本信息标签 -->
+<#assign userBaseDataTag= newTag("userBaseDataTag") >
+<#-- 调用标签获取用户基本信息 -->
+<#assign user= userBaseDataTag() >
+
+<#assign checkErrorTag= newTag("checkErrorTag") >
+<#assign check= checkErrorTag() >
+
+<#-- 创建浏览记录标签 -->
+<#assign historyListTag= newTag("historyListTag") >
+<#-- 调用标签获取浏览记录信息 -->
+<#assign historyList= historyListTag() >
+<#-- 调用浏览记录信息 -->
+<#assign hlist= historyList.hlist >
+
+<#-- 创建U品收藏标签 -->
+<#assign collectListTag= newTag("collectListTag") >
+<#-- 调用标签获取U品收藏信息 -->
+<#assign collectListTag= collectListTag() >
+
+<#--创建我的卡券包标签-->
+<#assign myPayOrderTag = newTag("myPayOrderTag")/>
+<#--调用卡券包标签-->
+<#assign order= myPayOrderTag()/>
+
+<#assign myDiscountTicketListTag = newTag("myDiscountTicketListTag")/>
+<#assign ticketlist= myDiscountTicketListTag()/>
+
+<#if user.isCredit==1>
+	<#-- 创建vip用户信息标签 -->
+	<#assign vipUserTag= newTag("vipUserTag") >
+	<#-- 调用标签获取vip用户信息 -->
+	<#assign vipuser= vipUserTag() >
+	<#assign list1= vipuser.levellist >
+	<#assign list2= vipuser.levellist2 >
+</#if>
+		<title>${user.username}&nbsp;的个人空间</title>
+	</head>
+	<body>
+<#if user.isCredit==1>
+		<div class="hide" id="share_div">
+		<div class="publicHeader">
+		<span class="headIcon f_l">
+					<a href="javascript:;">
+						<div id="hidden_div">
+							<img src="${ctx}/themes/default/img/11.png" alt="">
+						</div>
+					</a>
+				</span>
+				分享
+	    </div>
+			<div class="title" style="margin-top: 50px;">
+				<div>
+					<img src="${ctx}${vipuser.face}" alt="">
+				</div>
+				<div>分享 ${user.username} 的店铺</div>
+			</div>
+			<div class="share">
+				<div class="erweima" id="qrcodeCanvas">
+				</div>
+				<script>
+   					 $('#qrcodeCanvas').qrcode({
+       					text: 'm.huijuyouxuan.com/javamall/personCtlist-${vipuser.memberid}.html',//二维码代表的字符串（本页面的URL）
+       					width: 250,//二维码宽度
+       					height: 250//二维码高度
+    					});
+				</script>
+				<p>长按图片以保存二维码</p>
+				<p>店铺链接</p>
+				<p><textarea id="shopurl" >http://m.huijuyouxuan.com/javamall/personCtlist-${vipuser.memberid}.html</textarea><p>
+				<div>
+					<div class="fuzhi" onclick="copy()">复制链接</div>					
+				</div>
+			</div>
+		</div>
+</#if>
+		<div class="publicHeader">
+		    <span class="f_r headIcon">
+		    	<a href="personSet.html">
+					<img src="${ctx}/themes/default/img/19.png" alt="">
+				</a>
+			</span>
+				我的
+			<span class="f_l headIcon">
+				<a href="javascript:" onclick="self.location=document.referrer;">
+						<img src="${ctx}/themes/default/img/11.png" alt="">
+				</a>
+			</span>
+	    </div>
+	    <div class="perCtWrap">
+            <div class="perBox">
+                <div class="perId">
+	    		    <div class="perIdLf">
+	    		    	<div class="imgBox">
+<#if user.isCredit==1>
+						<a href="vipInfo.html">
+	    			       <img src="${ctx}${user.face}" />
+						</a>
+	<#else>
+							<img src="${ctx}${user.face}" />
+</#if>	
+	    	      	    </div>
+	    		    </div>
+	        		<div class="perIdRt">
+	    	    		<div class="perIdRtTp">
+	    	    	    	<p class="id_name">${user.username}</p>
+	    	    			<div class="mesBox" style="display:none;">
+	    			    		<a href="#">
+	    			    			<span class="mesIcon"><img src="${ctx}/themes/default/img/20.png" alt=""></span>
+	    			    		</a>
+	    		    		</div>
+	    		    	</div>
+	    		        <ul class="perIdRtBt">
+	    		        	<li class="perIdRtBtLi">
+								<a href="homePage.html">
+									<span class="perIdRtBtLiNum">${user.follownum}</span>定制
+								</a>	
+	    		        	</li>
+<#if user.isCredit==1>		
+								<li class="perIdRtBtLi">
+									<a href="personCtlist-${vipuser.memberid}.html">
+										<span class="perIdRtBtLiNum">${vipuser.agentnum}</span>代理
+									</a>
+								</li>
+							
+</#if>							
+	    		        	<li class="perIdRtBtLi">
+								<a href="myCollect.html">
+									<span class="perIdRtBtLiNum">${collectListTag.total}</span>收藏
+								</a>
+	    		        	</li>
+	    		        </ul>
+	        		</div>
+	    	    </div>
+<#if user.isCredit==1>
+	    	    <div class="influence">
+	    	    	<span class="influenceText">影响力</span>
+	    	    	<ul>
+					<#list list1 as level1>
+						<li class="pubStar starColor"><img src="${ctx}/themes/default/img/25.png" alt=""></li>
+					</#list>
+					<#list list2 as level2>
+						<li class="pubStar"><img src="${ctx}/themes/default/img/26.png" alt=""></li>
+					</#list>	
+	    	    	</ul>
+	    	    </div>
+</#if>
+            </div>
+<#if user.isCredit!=1>			
+	        <div class="applyBox">
+	<#if user.isCredit==0>			
+				 <div class="applyText">开通达人授权，代言你喜欢的商品</div>
+				 <div class="applyBt">
+	    	        <a href="applyAgent.html">立即申请</a>
+	    	     </div>
+	</#if>
+	<#if user.isCredit==2>
+	    	    <div class="applyText">您已提交授信申请，请耐心等待</div>			
+				<div class="applyBt">
+	    	        <a href="applyAgent.html">重新提交</a>
+	    	    </div>
+	</#if>
+	<#if user.isCredit==3>
+	    	    <div class="applyText">您的授信已通过，请完善商铺信息</div>			
+				<div class="applyBt">
+	    	        <a href="agentShopEdit.html">点我去完善</a>
+	    	    </div>
+	</#if>
+	<#if user.isCredit==4>
+	    	    <div class="applyText">您的授信申请未通过，请重新填写</div>			
+				<div class="applyBt">
+	    	        <a href="applyAgent.html">重新填写</a>
+	    	    </div>
+	</#if>
+	    	</div>
+</#if>
+            <div class="pubbox">
+            	<div class="pubboxtext">
+            		<div class="pubboxtextLf">
+            			<div class="pubIcon"><img src="${ctx}/themes/default/img/kqb.png"/></div>卡券包
+            		</div>
+            		<div class="pubboxtextRt"><a href="voucher.html">全部卡券</a></div>
+            	</div>
+            	<ul class="pubboxBt">
+            		<a href="voucher.html"><li style="width:5.5rem;">已付款（${order.paycount}）</li></a>
+            		<a href="voucher.html"><li style="width:5.5rem;">未付款（${order.notpaycount}）</li></a>
+            		<a href="voucher.html"><li style="width:5.5rem;">已使用（${order.usedcount}）</li></a>
+            		<a href="voucher.html"><li style="width:5.5rem;">VIP券（${order.vipcount}）</li></a>
+            	</ul>
+            </div>
+            <div class="pubbox">
+            	<div class="pubboxtext">
+            		<div class="pubboxtextLf">
+            			<div class="pubIcon"><img src="${ctx}/themes/default/img/vip.png"/></div>我的VIP
+            		</div>
+            		<div class="pubboxtextRt"><a href="myVipList.html">查看</a></div>
+            	</div>
+            </div>
+            <div class="pubbox">
+            	<div class="pubboxtext">
+            		<div class="pubboxtextLf">
+            			<div class="pubIcon"><img src="${ctx}/themes/default/img/xjq.png"/></div>我的现金券
+            		</div>
+            		<div class="pubboxtextRt"><a href="myTicketList.html">查看全部</a></div>
+            	</div>
+            	<ul class="pubboxBt">
+            		<a href="myTicketList.html"><li style="width:5.5rem;">未使用（${ticketlist.notusecount}）</li></a>
+            		<a href="myTicketList.html"><li style="width:5.5rem;">已过期（${ticketlist.outoftimecount}）</li></a>
+            		<a href="myTicketList.html"><li style="width:5.5rem;">已使用（${ticketlist.usedcount}）</li></a>
+            	</ul>
+            </div>
+<#if user.isCredit==1>			
+            <div class="pubbox">
+            	<div class="pubboxtext">
+            		<div class="pubboxtextLf">
+            			<div class="pubIcon"><img src="${ctx}/themes/default/img/wallet.png"/></div>我的钱包
+            		</div>
+            		<div class="pubboxtextRt"><a href="myWallet.html">我的收入</a></div>
+            	</div>
+            	<ul class="pubboxBt">
+            		<li><span class="pubboxBtNum">${vipuser.remaincredit}</span>授信余额</li>
+            		<li><span class="pubboxBtNum">${vipuser.waitMoney}</span>可提现</li>
+            		<li><span class="pubboxBtNum">${vipuser.waitCash}</span>待结算</li>
+            	</ul>
+            </div>
+            <div class="pubbox">
+            	<div class="pubboxtext">
+            		<div class="pubboxtextLf">
+            			<div class="pubIcon"><img src="${ctx}/themes/default/img/member.png"/></div>我的会员
+            		</div>
+            		<div class="pubboxtextRt"><a href="myVipMember.html">查看全部</a></div>
+            	</div>
+            </div>			
+            <div class="pubbox">
+            	<div class="pubboxtext">
+            		<div class="pubboxtextLf">
+            			<div class="pubIcon"><img src="${ctx}/themes/default/img/agent.png"/></div>我的代理
+            		</div>
+            		<div class="pubboxtextRt"><a href="myAgent.html">查看代理</a></div>
+            	</div>
+            </div>
+            
+            <div class="pubbox">
+            	<div class="pubboxtext">
+            		<div class="pubboxtextLf">
+            			<div class="pubIcon"><img src="${ctx}/themes/default/img/share.png"/></div>分享获利
+            		</div>
+            		<div class="pubboxtextRt">
+            			<a href="javascript:;">
+            				<div id="share">
+            					点击分享
+            				</div>
+            			</a>
+            		</div>
+            	</div>
+            </div>
+</#if>			
+            <div class="lookHistory">
+            	<div class="lookHistoryTop">
+            		<div class="lookHistoryTopLf f_l">浏览历史</div>
+						<a href="javascript:;">
+							<div class="lookHistoryTopRt f_r" id="cleanHistory">
+							清空 
+							</div>
+						</a>
+            	</div>
+                <div class="goodsList">
+		            <ul>
+						<#list hlist as history>
+				            <li class="goodsLi">
+		             			<div class="goodsImgBox">
+				            		<div class="goodsImg">
+					                	<a href="Upin-${history.proxyid}.html"><img src="${history.goodsimg}"/></a>
+					                </div>
+					            </div>
+					            <div class="goodsText">
+						            <a href="Upin-${history.proxyid}.html"><p class="goodsName">${history.goodsname}</p></a>
+					                <div class="goodsPrice">
+					    	            <span class="goodsPriceLf">
+					    		                      市场价  ￥${history.Mktprice}
+					    	            </span>
+					    	            <span class="goodsPriceRt">
+					    		                      优选价  ￥${history.price}
+					    	            </span>
+					                </div>
+					                <div class="goodsNumber">商品总销量：${history.sold}</div>
+					                <div class="goodsLiBt">
+					    	        	<div class="goodsComment">
+					    	    			<div class="goodsCommentIconB f_r">
+					    	    				<div class="goodsCommentIcon">
+					    	    					<img src="${ctx}/themes/default/img/like.png"/>
+					    	    				</div> &nbsp;&nbsp;${history.count}
+					    	    			</div>
+					    				</div>
+											<div class="goodsSelect vipListIcon">
+												<a href="Upin-${history.proxyid}.html">
+													<img src="${ctx}/themes/default/img/more.png" />
+												</a>
+											</div>
+					                </div>
+					            </div>
+				            </li>
+						</#list>	
+			        </ul>
+		        </div>
+            </div>
+		<footer class="homeFooter">
+			<ul>
+			<a href="homePage.html">
+				<li class="tabLi">
+					<div class="tabIcon">
+						<img src="${ctx}/themes/default/img/customized.png" />
+					</div>
+					<span>定制</span>
+				</li>
+			</a>
+			<a href="discountHome.html">
+				<li class="tabLi">
+					<div class="tabIcon">
+						<img src="${ctx}/themes/default/img/discover.png" />
+					</div>
+					<span class="tabText">发现</span>
+				</li>
+			</a>
+			<a href="cart.html">
+				<li class="tabLi">
+					<div class="tabIcon">
+						<img src="${ctx}/themes/default/img/order.png" />
+					</div>
+					<span>购物车</span>
+				</li>
+			</a>
+			<a href="user.html">
+				<li class="tabLi numColor">
+					<div class="tabIcon">
+						<img src="${ctx}/themes/default/img/mine_sel.png" />
+					</div>
+					<span>我的</span>
+				</li>
+			</a>
+			</ul>
+		</footer>
+	    </div>
+	</body>
+<script type="text/javascript">
+$(function(){
+	$("#cleanHistory").click(function(){
+		var result = confirm("是否清空浏览记录？");
+		if(result==true){
+			$.ajax({
+				url:"${ctx}/shop/ext/history!clean.do",
+				type:"POST",
+				dataType:"json",
+				success:function(json){
+					if(json.result==0){
+						alert("请登录！");
+						window.location.reload();
+					}else{
+						window.location.reload();
+					}
+				}
+			});
+		}
+	});
+	$("#share").click(function(){
+		$("#share_div").css('display','block');
+	});
+	$("#hidden_div").click(function(){
+		$("#share_div").css('display','none');
+	});
+});
+function copy(){
+		document.getElementById("shopurl").select();
+		document.execCommand("copy",false,null);
+		alert("复制成功！");
+};
+
+</script> 
+<#else>
+<script type="text/javascript"> 
+onload=function(){ 
+	setTimeout(go, 1);
+}; 
+function go(){ 
+	location.href="login.html"; 
+} 
+</script> 
+</#if>
+</html>

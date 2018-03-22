@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+		<link rel="stylesheet" href="${ctx}/themes/default/new/css/reset.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/new/css/common.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/new/css/newStyle.css" />
+		<script type="text/javascript" src="${ctx}/themes/default/js/jquery-1.7.2.js" ></script>
+		<title>我的代理</title>
+	</head>
+	<body>
+    <header>
+      <div class="l"><a href="myAgentshop.html"><img src="${ctx}/themes/default/new/images/LeftArrow.png"/></a></div>
+      <div class="c">我的代理</div>
+      <div class="r"></div>
+    </header>
+<#if member?? >
+	<#assign discountTicketDetailTag = newTag("discountTicketDetailTag") >
+	<#assign discountTicketDetail= discountTicketDetailTag()>
+	
+	<#assign discountTicketDetail1Tag = newTag("discountTicketDetail1Tag") >
+	<#assign discountTicketDetail1= discountTicketDetail1Tag()> 
+	
+	<#assign discountTicketDetail2Tag = newTag("discountTicketDetail2Tag") >
+	<#assign discountTicketDetail2= discountTicketDetail2Tag()> 
+	
+	<#assign discountTicketDetail3Tag = newTag("discountTicketDetail3Tag") >
+	<#assign discountTicketDetail3= discountTicketDetail3Tag()>     	
+	<#if discountTicketDetail.re==2>
+	参数错误！
+		<#elseif discountTicketDetail.re==3>
+	此商品无法生成现金券！
+		<#else>
+    <div class="wrap mineAgent3">
+      <div class="top" style="margin-bottom:0;">
+        <ul class="detail">
+        	<li>
+            <div class="l">商品：</div>
+            <div class="r title">${discountTicketDetail.name}</div>
+          </li>
+          <li>
+            <div class="l">代理数量：</div>
+            <div class="r">${discountTicketDetail.goodsamount}</div>
+          </li>
+          <li>
+            <div class="l">可生成现金券数量：</div>
+            <div class="r">${discountTicketDetail.cancreate}</div>
+          </li>
+        </ul>
+        <div class="b">
+          <p class="tig">选择现金券金额</p>
+          <div class="choice">
+          <#assign valuelist= discountTicketDetail.valuelist> 
+          <#list valuelist as value>
+            <p><input id="value1" type="radio" name="value" value="${value.value}"/>${value.value}元</p>
+          </#list>
+          <input type="hidden" name="value" id="value" value="0">
+          <input type="hidden" name="proxyid" id="proxyid" value="${discountTicketDetail.proxyid?c}">
+          </div>
+          <div class="input">
+            <div class="l">生成数量</div>
+            <div class="r"><input type="num" id="createnum" min="1" max="${discountTicketDetail.cancreate}"/></div>
+          </div>
+        </div>
+      </div>
+      <div class="btn" style="background:#ffffff;padding-bottom: 0px;padding-top: 0px;padding-left: 0px;padding-right: 0px;">
+          	<a id="createTicket" style="margin-right: 0px;background:#e0a341;">生成现金券</a>
+      </div>
+<#if discountTicketDetail1.re==1||discountTicketDetail2.re==1||discountTicketDetail3.re==1>
+<div class="list">
+<#if discountTicketDetail1.re==1>
+	<#assign t1list= discountTicketDetail1.tlist>  
+        <div class="title">${discountTicketDetail1.ticketvalue}元现金券</div>
+        <ul>
+        <#list t1list as ticket>
+        	<li>
+            	<p>${ticket.ticketid}</p>
+            	<#if ticket.givestatus!=0><p class="Send">已发送</p><#else><p class="unSend">未发送</p></#if>
+            	<#if ticket.givestatus==0><p><input type="radio" name="ticketid" value="${ticket.id?c}"/>选择</p><#else><p></p></#if>
+          	</li>
+		</#list>
+        </ul>
+</#if>
+<#if discountTicketDetail2.re==1>
+	<#assign t2list= discountTicketDetail2.tlist> 
+        <div class="title">${discountTicketDetail2.ticketvalue}元现金券</div>
+        <ul>
+        <#list t2list as ticket>
+        	<li>
+            	<p>${ticket.ticketid}</p>
+            	<#if ticket.givestatus!=0><p class="Send">已发送</p><#else><p class="unSend">未发送</p></#if>
+            	<#if ticket.givestatus==0><p><input type="radio" name="ticketid" value="${ticket.id?c}"/>选择</p><#else><p></p></#if>
+          	</li>
+		</#list>
+        </ul>
+</#if>
+<#if discountTicketDetail3.re==1>
+	<#assign t3list= discountTicketDetail3.tlist> 
+        <div class="title">${discountTicketDetail3.ticketvalue}元现金券</div>
+        <ul>
+        <#list t3list as ticket>
+        	<li>
+            	<p>${ticket.ticketid}</p>
+            	<#if ticket.givestatus!=0><p class="Send">已发送</p><#else><p class="unSend">未发送</p></#if>
+            	<#if ticket.givestatus==0><p><input type="radio" name="ticketid" value="${ticket.id?c}"/>选择</p><#else><p></p></#if>
+          	</li>
+		</#list>
+		
+        </ul>
+</#if>
+		<input type="hidden" name="ticketid" id="ticketid" value="0">
+        <div class="btn">
+          	<a id="allSend">全部发送</a>
+          	<a id="oneSend">一对一发送</a>
+        </div>
+</#if>
+      </div>
+<script type="text/javascript">
+$(function(){
+	$("#createTicket").click(function(){
+		var value = $("#value").val();
+		if(value==0){
+			alert("请选择现金券金额！");
+			return false;
+		}
+		var max = ${discountTicketDetail.cancreate};
+		var createnum = $("#createnum").val();
+		if(createnum==null||createnum<1||createnum>max){
+			alert("生成数量有误！");
+			return false;
+		}
+		var proxyid = $("#proxyid").val();
+		$.ajax({
+			url:"${ctx}/shop/ext/discountTicket!createTicket.do",
+			type:"POST",
+			data:"proxyid="+proxyid+"&num="+createnum+"&ticketvalue="+value,
+			dataType:"json",
+			success:function(json){
+				if(json.result==0){
+					alert("用户不正确或商品不存在！");
+					window.location.reload();
+				}else if(json.result==2){
+					alert("请先登录！");
+					window.location.reload();
+				}else if(json.result==3){
+					alert("生成现金券数量超过代理商品剩余数量！");
+					window.location.reload();
+				}else if(json.result==4){
+					alert("此商品无法生成商品券！");
+					window.location.reload();
+				}else if(json.result==1){
+					alert("生成成功！");
+					window.location.reload();
+				}
+			}
+		});		
+	});	
+	$("#oneSend").click(function(){
+		var ticketid = $("#ticketid").val();
+		if(ticketid==null||ticketid==0){
+			alert("请选择想要发送的现金券！");
+			return false;
+		}else{
+			location.href="oneSend.html?ticketid="+ticketid;
+		}
+	});
+	$("#allSend").click(function(){
+		var proxyid = $("#proxyid").val();
+		location.href="allSend.html?proxyid="+proxyid;
+	});	
+	$('input[type=radio]').change(function(){
+		$('#value').val($('input[name=value]:checked').map(function(){return this.value}).get());
+		$('#ticketid').val($('input[name=ticketid]:checked').map(function(){return this.value}).get())
+	});
+});
+</script>
+      </#if>
+<#else>
+<script type="text/javascript"> 
+onload=function(){ 
+	setTimeout(go, 1);
+}; 
+function go(){ 
+	location.href="login.html"; 
+} 
+</script> 
+</#if>
+    </div>   
+ 		<footer class="homeFooter">
+			<ul>
+			<a href="homePage.html">
+				<li class="tabLi">
+					<div class="tabIcon">
+						<img src="${ctx}/themes/default/img/customized.png" />
+					</div>
+					<span>定制</span>
+				</li>
+			</a>
+			<a href="discountHome.html">
+				<li class="tabLi">
+					<div class="tabIcon">
+						<img src="${ctx}/themes/default/img/discover.png" />
+					</div>
+					<span class="tabText">发现</span>
+				</li>
+			</a>
+			<a href="cart.html">
+				<li class="tabLi">
+					<div class="tabIcon">
+						<img src="${ctx}/themes/default/img/order.png" />
+					</div>
+					<span>购物车</span>
+				</li>
+			</a>
+			<a href="user.html">
+				<li class="tabLi numColor">
+					<div class="tabIcon">
+						<img src="${ctx}/themes/default/img/mine_sel.png" />
+					</div>
+					<span>我的</span>
+				</li>
+			</a>
+			</ul>
+		</footer>
+	</body>
+</html>

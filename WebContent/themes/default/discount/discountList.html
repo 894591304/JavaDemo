@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+		<link rel="stylesheet" href="${ctx}/themes/default/discount/css/reset.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/discount/css/common.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/discount/css/discount.css" />
+		<script type="text/javascript" src="${ctx}/themes/default/discount/js/jquery-3.1.0.min.js" ></script>
+<#-- 创建发现详细标签 -->
+<#assign findDetailTag= newTag("findDetailTag") >
+<#-- 调用发现详细标签获取活动详情 -->
+<#assign finddetal= findDetailTag() >
+		<title>${finddetal.findname}</title>
+	</head>
+	<body>
+		<header>
+			<div class="publicHeader">
+				<div class="headIcon f_l">
+					<a href="discountHome.html">
+						<img src="${ctx}/themes/default/img/11.png" alt="">
+					</a>
+				</div>
+				${finddetal.findname}
+			</div>
+		</header>
+		<div class="discountWrap">
+			<div class="discountImgBox">
+				<img src="${finddetal.findimg}"/>
+			</div>
+			<div class="discountListText">
+				${finddetal.findcomment!''}
+			</div>
+			<div class="shopList">
+<#-- 获取发现活动商品列表 -->
+<#assign glist= finddetal.goodslist >	
+<#if !glist?exists || glist?size==0>	
+	<#else>
+		<#list glist as goods>
+			<#if goods.LorR=="l">
+				<ul>
+					<li>
+						<a href="discountDetail-${goods.goodsid}.html">
+							<div class="shopImg">
+								<img src="${goods.goodsimg}" />
+							</div>
+							<p class="shopVoucher">&nbsp;</p>
+							<p class="shopName" style="height: 0px;">${goods.goodsname}</p>
+							<p class="shopPrice">￥${goods.price}</p>
+						</a>
+					</li>
+			</#if>
+			<#if goods.LorR=="r">
+					<li>
+						<a href="discountDetail-${goods.goodsid}.html">
+							<div class="shopImg">
+								<img src="${goods.goodsimg}" />
+							</div>
+							<p class="shopVoucher">&nbsp;</p>
+							<p class="shopName" style="height: 0px;">${goods.goodsname}</p>
+							<p class="shopPrice">￥${goods.price}</p>
+						</a>
+					</li>
+				</ul>
+			</#if>
+			<#if goods.LorR=="e">
+				<ul>
+					<li>
+						<a href="discountDetail-${goods.goodsid}.html">
+							<div class="shopImg">
+								<img src="${goods.goodsimg}" />
+							</div>
+							<p class="shopVoucher">&nbsp;</p>
+							<p class="shopName" style="height: 0px;">${goods.goodsname}</p>
+							<p class="shopPrice">￥${goods.price}</p>
+						</a>
+					</li>
+				</ul>
+			</#if>	
+		</#list>
+</#if>				
+			</div>			
+		</div>
+		
+		<footer class="homeFooter">
+			<ul>
+			<a href="homePage.html">
+				<li class="tabLi">
+					<div class="tabIcon">
+						<img src="${ctx}/themes/default/img/customized.png" />
+					</div>
+					<span>定制</span>
+				</li>
+			</a>
+			<a href="discountHome.html">
+				<li class="tabLi numColor">
+					<div class="tabIcon">
+						<img src="${ctx}/themes/default/img/discover_sel.png" />
+					</div>
+					<span class="tabText">发现</span>
+				</li>
+			</a>
+			<a href="cart.html">
+				<li class="tabLi">
+					<div class="tabIcon">
+						<img src="${ctx}/themes/default/img/order.png" />
+					</div>
+					<span>购物车</span>
+				</li>
+			</a>
+			<a href="user.html">
+				<li class="tabLi">
+					<div class="tabIcon">
+						<img src="${ctx}/themes/default/img/mine.png" />
+					</div>
+					<span>我的</span>
+				</li>
+			</a>
+			</ul>
+		</footer>
+	</body>
+</html>

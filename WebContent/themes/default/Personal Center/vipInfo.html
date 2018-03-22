@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+		<link rel="stylesheet" href="${ctx}/themes/default/Personal Center/css/reset.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/Personal Center/css/common.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/Personal Center/css/personalCenter.css" />
+		<script type="text/javascript" src="${ctx}/themes/default/Personal Center/js/jquery-3.1.0.min.js" ></script>
+<#if member?? >
+<#-- 创建用户基本信息标签 -->
+<#assign userBaseDataTag= newTag("userBaseDataTag") >
+<#-- 调用标签获取用户基本信息 -->
+<#assign user= userBaseDataTag() >
+<#if user.isCredit==1>
+	<#-- 创建vip用户详细信息标签 -->
+	<#assign vipUserInfoTag= newTag("vipUserInfoTag") >
+	<#-- 调用标签获取vip用户详细信息 -->
+	<#assign vipuserinfo= vipUserInfoTag() >
+	<#assign list1= vipuserinfo.levellist >
+	<#assign list2= vipuserinfo.levellist2 >
+</#if>	
+		<title>达人资料</title>
+	</head>
+	<body class="bodyBg">
+<#if user.isCredit!=1>
+	您还不是授信用户，无法查看达人资料！
+	<#else>
+		<div class="publicHeader">
+				我的
+			<span class="f_l headIcon">
+				<a href="user.html">
+					<img src="${ctx}/themes/default/img/11.png" alt="">
+				</a>
+			</span>	
+	    </div>
+	    <div class="vipIfWrap">
+	    	<div class="vipTp">
+	    		<div class="vipImg">
+	    	    	<img src="${ctx}${vipuserinfo.face}" />
+	         	</div>
+	    	    <div class="vipName">${vipuserinfo.name}</div>
+	    	    <ul class="vipTpBt">
+	    		    <li class="vipTpBtLi">
+	    		    	<span class="vipTpBtLiNum">${vipuserinfo.sale}</span>
+	    		    	销量
+	    		    </li>
+	    		    <li class="vipTpBtLi">
+	    		    	<span class="vipTpBtLiNum">${vipuserinfo.agentnum}</span>
+	    		    	代言
+	    		    </li>  
+	    		    <li class="vipTpBtLi">
+	    		    	<span class="vipTpBtLiNum">${vipuserinfo.fans}</span>
+	    		    	粉丝
+	    		    </li>  
+	        	</ul>
+	    	</div>
+	    	<div class="influence">
+	    	    <span class="influenceText">影响力</span>
+	    	    <ul>
+				<#list list1 as level1>
+	    	    	<li class="pubStar starColor"><img src="${ctx}/themes/default/img/25.png" alt=""></li>
+				</#list>
+				<#list list2 as level2>
+	    	    	<li class="pubStar"><img src="${ctx}/themes/default/img/26.png" alt=""></li>
+				</#list>	
+	    	    </ul>
+	    	</div>	    	
+	        <ul class="vipIfliBox">
+	        	<li class="vipIfLi">
+	        		<a href="#">
+	        		    <div class="vipIfLiIcon"><img src="${ctx}/themes/default/img/blog.png"/></div>${vipuserinfo.weibo}
+	        	    </a>
+	        	</li>
+	        	<li class="vipIfLi">
+	        		<a href="#">
+	        		    <div class="vipIfLiIcon"><img src="${ctx}/themes/default/img/weixin.png"/></div>${vipuserinfo.weixin}
+	        	    </a>
+	        	</li>
+	        	<li class="vipIfLi">
+	        		<a href="#">
+	        		    <div class="vipIfLiIcon"><img src="${ctx}/themes/default/img/live.png"/></div>${vipuserinfo.zhibo}|${vipuserinfo.zhiboID}
+	        	    </a>
+	        	</li>
+	        </ul>
+	        <ul class="vipBt">
+	        	<li class="vipBtli">
+	        		<a href="#">
+	        		    <div class="vipBtliIcon"><img src="${ctx}/themes/default/img/person.png"/></div>汇聚优选实名认证
+	        	    </a>
+	        	</li>
+	        	<li class="vipBtli">
+	        		<a href="#">
+					<#if vipuserinfo.level==1>
+	        		    <div class="vipBtliIcon"><img src="${ctx}/themes/default/img/credit.png"/></div>交行授权汇聚优选达人金卡用户
+					</#if>
+					<#if vipuserinfo.level==2>
+	        		    <div class="vipBtliIcon"><img src="${ctx}/themes/default/img/credit.png"/></div>交行授权汇聚优选达人白金卡用户
+					</#if>
+					<#if vipuserinfo.level==3>
+	        		    <div class="vipBtliIcon"><img src="${ctx}/themes/default/img/credit.png"/></div>交行授权汇聚优选达人黑卡用户
+					</#if>
+	        	    </a>
+	        	</li>
+	        </ul>
+					<footer class="homeFooter">
+			<ul>
+			<a href="homePage.html">
+				<li class="tabLi">
+					<div class="tabIcon">
+						<img src="${ctx}/themes/default/img/customized.png" />
+					</div>
+					<span>定制</span>
+				</li>
+			</a>
+			<a href="discountHome.html">
+				<li class="tabLi">
+					<div class="tabIcon">
+						<img src="${ctx}/themes/default/img/discover.png" />
+					</div>
+					<span class="tabText">发现</span>
+				</li>
+			</a>
+			<a href="cart.html">
+				<li class="tabLi">
+					<div class="tabIcon">
+						<img src="${ctx}/themes/default/img/order.png" />
+					</div>
+					<span>购物车</span>
+				</li>
+			</a>
+			<a href="user.html">
+				<li class="tabLi numColor">
+					<div class="tabIcon">
+						<img src="${ctx}/themes/default/img/mine_sel.png" />
+					</div>
+					<span>我的</span>
+				</li>
+			</a>
+			</ul>
+		</footer>
+	    </div>
+</#if>
+	</body>
+<#else>
+<script type="text/javascript"> 
+onload=function(){ 
+	setTimeout(go, 1);
+}; 
+function go(){ 
+	location.href="login.html"; 
+} 
+</script> 
+</#if>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+		<link rel="stylesheet" href="${ctx}/themes/default/myWallet/css/reset.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/myWallet/css/common.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/myWallet/css/myWallet.css" />
+		<script type="text/javascript" src="${ctx}/themes/default/myWallet/js/jquery-3.1.0.min.js" ></script>
+<#if member?? >
+<#-- 创建用户基本信息标签 -->
+<#assign userBaseDataTag= newTag("userBaseDataTag") >
+<#-- 调用标签获取用户基本信息 -->
+<#assign user= userBaseDataTag() >
+<#if user.isCredit==1>
+	<#-- 创建vip用户钱包信息标签 -->
+	<#assign vipUserWalletTag= newTag("vipUserWalletTag") >
+	<#-- 调用标签获取vip用户钱包信息 -->
+	<#assign vipuserwallet= vipUserWalletTag() >
+</#if>
+		<title>账户详情</title>
+	</head>
+	<body>
+		<div class="publicHeader">
+		    <span class="f_l headIcon">
+				<a href="myWallet.html">
+					<img src="${ctx}/themes/default/img/11.png" alt="">
+				</a>
+			</span>
+				账户详情
+	    </div>
+<#if user.isCredit!=1>
+	您还不是授信用户，无法查看我的钱包！
+	<#else>
+	    <div class="creditHead">
+	    	<div class="creditHeadLf">
+	    		<span class="creditHeadLfIc">
+	    			<img src="${ctx}/themes/default/img/17.png" alt="">
+	    		</span>
+	    	</div>
+	    	<div class="creditHeadRt">
+	    	<#if vipuserwallet.level==1>
+	    		<p class="creditHeadRtTp">汇聚优选达人金卡</p>
+			</#if>
+			<#if vipuserwallet.level==2>
+	    		<p class="creditHeadRtTp">汇聚优选达人白金卡</p>
+			</#if>			
+			<#if vipuserwallet.level==3>
+	    		<p class="creditHeadRtTp">汇聚优选达人黑卡</p>
+			</#if>		
+	    		<p class="creditHeadRtNm">${vipuserwallet.accountid}</p>
+	    	</div>
+	    </div>
+		<ul class="MWBox">
+	    	<li class="MWBoxLi">
+	    		<div class="f_l MWText">授信总额</div>
+	    		<div class="f_r MWRt">
+	    			<span class="publicNum">
+	    				￥${vipuserwallet.credit}
+	    			</span>
+	    		</div>
+	    	</li>
+	    	<li class="MWBoxLi">
+	    		<div class="f_l MWText">授信余额</div>
+	    		<div class="f_r MWRt">
+	    			<span class="publicNum">
+	    				￥${vipuserwallet.remainCredit}
+	    			</span>
+	    		</div>
+	    	</li>
+	    	<li class="MWBoxLi">
+	    		<div class="f_l MWText">需偿还额度</div>
+	    		<div class="f_r MWRt">
+	    			<span class="publicNum">
+					<#if vipuserwallet.repayTime==0>
+					没有要偿还的保证金
+						<#else>
+	    				￥${vipuserwallet.repay}
+					</#if>
+	    			</span>
+	    		</div>
+	    	</li>
+	    	<li class="MWBoxLi">
+	    		<div class="f_l MWText">最后偿还时间</div>
+	    		<div class="f_r MWRt">
+	    			<span class="publicNum">
+					<#if vipuserwallet.repayTime==0>
+					没有要偿还的保证金
+						<#else>
+						<@dateformat time="${vipuserwallet.repayTime}" pattern="yyyy年MM月dd日-HH时mm分"/>
+	    			</#if>	
+	    			</span>
+	    		</div>
+	    	</li>
+	    </ul>
+	    <div class="SZWrap">
+	    	<p class="SZWrapHead">收支明细</p>
+	    	<ul class="SZDetail">
+			
+	    		<li class="SZDetailLi">
+	    			<div class="SZDetailLiLf">
+	    				<p class="SZDetailNum">
+	    					代理编号：HJYX883924839201
+	    				</p>
+	    				<p class="SZDetailText">
+	    					销售保证金
+	    				</p>
+	    			</div>
+	    			<div class="SZDetailLiRt">
+	    				<p class="SZDetailRtNum">2016-11-21</p>
+	    				<p class="SZDetailRtNum">-￥5000.00</p>
+	    			</div>
+	    		</li>
+				
+	    	</ul>
+					<footer class="homeFooter">
+			<ul>
+			<a href="homePage.html">
+				<li class="tabLi">
+					<div class="tabIcon">
+						<img src="${ctx}/themes/default/img/customized.png" />
+					</div>
+					<span>定制</span>
+				</li>
+			</a>
+			<a href="discountHome.html">
+				<li class="tabLi">
+					<div class="tabIcon">
+						<img src="${ctx}/themes/default/img/discover.png" />
+					</div>
+					<span class="tabText">发现</span>
+				</li>
+			</a>
+			<a href="cart.html">
+				<li class="tabLi">
+					<div class="tabIcon">
+						<img src="${ctx}/themes/default/img/order.png" />
+					</div>
+					<span>购物车</span>
+				</li>
+			</a>
+			<a href="user.html">
+				<li class="tabLi numColor">
+					<div class="tabIcon">
+						<img src="${ctx}/themes/default/img/mine_sel.png" />
+					</div>
+					<span>我的</span>
+				</li>
+			</a>
+			</ul>
+		</footer>
+	    </div>
+	</#if>	
+	</body>
+<#else>
+<script type="text/javascript"> 
+onload=function(){ 
+	setTimeout(go, 1);
+}; 
+function go(){ 
+	location.href="login.html"; 
+} 
+</script> 
+</#if>
+</html>

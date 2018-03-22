@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dbsolution>
+	<action>
+		<command>create</command>
+		<table>credit</table>
+		<field><name>id</name><type>int</type><size>8</size><option>11</option></field>
+		<field><name>memberId</name><type>int</type><size>8</size><option>00</option></field>
+		<field><name>mobile</name><type>varchar</type><size>16</size><option>00</option></field>
+		<field><name>name</name><type>varchar</type><size>255</size><option>00</option></field>
+		<field><name>idCard</name><type>varchar</type><size>32</size><option>00</option></field>
+		<field><name>idImg</name><type>varchar</type><size>500</size><option>00</option></field>
+		<field><name>weibo</name><type>varchar</type><size>64</size><option>00</option></field>
+		<field><name>fans</name><type>int</type><size>8</size><option>00</option></field>
+		<field><name>weixin</name><type>varchar</type><size>64</size><option>00</option></field>
+		<field><name>friends</name><type>int</type><size>8</size><option>00</option></field>
+		<field><name>live</name><type>varchar</type><size>64</size><option>00</option></field>
+		<field><name>liveId</name><type>varchar</type><size>64</size><option>00</option></field>
+		<field><name>liveFans</name><type>int</type><size>8</size><option>00</option></field>
+		<field><name>review</name><type>int</type><size>8</size><option>00</option></field>
+		<field><name>brokerageId</name><type>int</type><size>8</size><option>00</option></field>
+	</action>
+</dbsolution>

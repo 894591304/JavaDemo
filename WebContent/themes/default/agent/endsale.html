@@ -1,0 +1,68 @@
+<#if member?? >
+<#-- 创建我的代理标签 -->
+<#assign myAgentListTag= newTag("myAgentListTag") >
+<#-- 调用标签获取用户代理信息 -->
+<#assign myAgentList= myAgentListTag() >
+<#-- 获取用户代理结束商品信息 -->
+<#assign endsalelist= myAgentList.proxyendlist >
+<#list endsalelist as endsale>
+	    <div class="agentList">
+	    	<div class="agentListPub">
+	    		<div class="agentListImg">
+	    			<div class="ALIBox">
+	    				<img src="${endsale.goodsimg}" />
+	    			</div>
+	    		</div>
+	    		<div class="agentListText">
+	    			<p class="agentListName">
+	    				${endsale.goodsname}
+	    			</p>
+	    			<div class="agentLTPub">
+	    				<div class="agentLTPubLf">
+	    					优选价 ￥${endsale.price}
+	    				</div>&nbsp;&nbsp;&nbsp;&nbsp;
+	    				<div class="agentLTPubLf">
+	    					待结算利润 ￥${endsale.earn}
+	    				</div>
+	    			</div>
+	    			<div class="agentLTPub">
+	    				<div class="agentLTPubLf">
+	    					已销售 ${endsale.sold}
+	    				</div>&nbsp;&nbsp;&nbsp;&nbsp;
+	    				<div class="agentLTPubLf">
+	    					剩余 ${endsale.notsold}
+	    				</div>&nbsp;&nbsp;&nbsp;&nbsp;
+	    				<div class="agentLTPubLf">
+	    					未上架 ${endsale.notonsale}
+	    				</div>
+	    			</div>
+	    			<div class="agentLTPub myAgentGet">
+	    				收入 ￥${endsale.earn}
+	    			</div>
+	    		</div>
+	    	</div>
+	    	<div class="myAgentBox">
+	    		<div class="myAgentBoxLf">
+	    		</div>
+	    		<div class="myAgentBoxRt">
+	    			代理于<@dateformat time="${endsale.endtime}" pattern="yyyy年MM月dd日 HH时mm分"/>截止
+	    		</div>
+	    	</div>
+	        <div class="agentListBt">
+	        	<a href="signAgent-${endsale.goodsid}.html" class="agentListBtLf">再次申请</a>
+	        	<a href="myUpin-${endsale.proxyid}.html" class="agentListBtRt">查看详情</a>
+	        </div>
+	    </div>
+</#list>
+<div id="endsalepage${myAgentList.endsalenowpage}" style="display:none;"></div>	
+	<#else>
+<script type="text/javascript"> 
+	onload=function(){ 
+		setTimeout(go, 1);
+	}; 
+	function go(){ 
+		location.href="login.html"; 
+	} 
+	
+</script> 
+</#if>

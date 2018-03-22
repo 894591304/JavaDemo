@@ -1,0 +1,508 @@
+.numColor{color: #f05;}
+.shopImgWrap{
+    /* display: flex; */
+    padding: 2rem;
+    position: relative;
+}
+.shopImgWrap .ShopShow{
+    /* text-align: center; */
+    /* width: 75%; */
+}
+.shopImgWrap .ShopShow .ShopShowImg{
+    width: 13rem;
+    height: 13rem;
+    box-shadow: 0px 0px 40px #ccc;
+    margin: auto;
+}
+.likeShow{
+    /* width: 25%; */
+    /* vertical-align: bottom; */
+    /* height: 13rem; */
+    /* line-height: 25rem; */
+    position: absolute;
+    right: 1rem;
+    bottom: 1.5rem;
+    font-size: .8rem;
+}
+.likeShow .likeIcon{
+    font-size: 1.3rem;
+    color: #f05;
+}
+.likeShow .likeNum{}
+.shopWrap{}
+.shopDetail{
+    padding: .5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid #ccc;
+}
+.shopDetail .shopDetailTp{
+    font-size: 1rem;
+    max-height: auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.shopDetail .shopIf{
+    display: flex;
+    font-size: .8rem;
+    height: 2rem;
+    line-height: 2rem;
+}
+.shopDetail .shopIfLf{
+    padding-right: 2rem;
+}
+.shopDetail .shopIfRt{}
+.UpinIf{
+    border-top: 1px solid #ccc;
+    /* padding: 0rem 1rem; */
+}
+.UpinIf .UpinIfH{
+    height: 2rem;
+    line-height: 2rem;
+    color: #f05;
+    font-size: 1rem;
+    border-bottom: 1px solid #ccc;
+    padding: 0 1rem;
+    box-shadow: 0px 1px 11px #ccc;
+}
+.UpinIf .UpinIfText{
+    padding: .5rem 1rem;
+}
+.UpinBt{
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2.5rem;
+    background-color: #9797A5;
+    color: #fff;
+    padding: 0 1rem;
+    box-sizing: border-box;
+}
+.UpinBt .buyBox{
+    /* width: 10%; */
+    text-align: -webkit-left;
+    line-height: 2.5rem;
+    position: relative;
+    /* overflow: hidden; */
+}
+.UpinBt .buyBox .buyBoxIcon{
+    font-size: 1.3rem;
+}
+.UpinBt .buyBox .buyBoxNum{
+    position: absolute;
+    width: 1rem;
+    height: 1rem;
+    background-color: #f05;
+    line-height: 1rem;
+    text-align: -webkit-center;
+    border-radius: 1rem;
+    right:;
+    /* left: 0; */
+    right: -10px;
+    top: .3rem;
+}
+.UpinBt .UpinSelect{
+    width: 30%;
+    line-height: 2.5rem;
+    text-align: -webkit-center;
+}
+.UpinBt .UpinAll{
+    width: 30%;
+    line-height: 2.5rem;
+    text-align: -webkit-center;
+}
+.UpinBt .buyBt{
+    width: 30%;
+    line-height: 2.5rem;
+    text-align: -webkit-right;
+}
+.UpinBt .buyBt a{
+    color: #fff;
+    background-color: #f05;
+    height: 1.5rem;
+    width: 4rem;
+    display: inline-block;
+    line-height: 1.5rem;
+    border-radius: .3rem;
+    text-align: -webkit-center;
+}
+.selectU{
+    display: flex;
+    padding: .5rem 1rem;
+}
+.selectU .selectULf{
+    width: 80%;
+    font-size: .8rem;
+}
+.selectU .selectURt{
+    display: flex;
+    width: 20%;
+}
+.NumBoxLf{
+    border-radius: .3rem 0rem 0rem .3rem;
+}
+.NumBoxRt{
+    border-radius: 0 .3rem .3rem 0;
+}
+.selectU .selectURt .NumBox{}
+.selectU .selectURt .NumBox .NumBoxIcon{}
+.selectU .selectURt .shopNum{
+    border-bottom: 1px solid #dadfe3;
+    border-top: 1px solid #dadfe3;
+    height: 1.2rem;
+    line-height: 1.2rem;
+    width: 2rem;
+    text-align: -webkit-center;
+}
+.selectU .selectURt .NumBox{
+    width: 1.5rem;
+    height: 1.3rem;
+    text-align: -webkit-center;
+    background-color: #dadfe3;
+    color: #fff;
+    line-height: 1.3rem;
+    /* border-radius: .3rem 0 0 .3rem; */
+}
+.selectU .selectURt .NumBox .NumBoxIcon{}
+.UListIcon{color: #41ade0!important;}
+/**************************order****************************/
+.orderList{}
+.orderListBox{}
+.orderListLi{
+    display: flex;
+    padding: 0.5rem 1rem;
+    border-bottom: 1px solid #ccc;
+}
+.orderListLi .orderListImg{
+    width: 30%;
+    text-align: -webkit-center;
+}
+.orderListLi .orderListImg .orderImg{
+    width: 5rem;
+    height: 5rem;
+    border: 2px solid #ccc;
+    box-sizing: border-box;
+}
+.orderListLi .orderText{
+    width: 60%;
+}
+.orderListLi .orderText .orderName{
+    max-height: auto;
+    font-size: 1rem;
+}
+.orderListLi .orderText .orderPrice{
+    height: 2rem;
+    line-height: 2rem;
+    font-size: .8rem;
+}
+.orderListLi .orderText .orderPrice .YXprice{
+    color: #f05;
+    padding-right:;
+    /* display: inline-block; */
+    /* margin-right: 1rem; */
+}
+.orderListLi .numAdd{
+    text-align: -webkit-center;
+}
+.orderListLi .numAdd .numAddIconBox{
+    height: 2rem;
+    line-height: 2rem;
+    font-size: 1.1rem;
+    color: #f05;
+}
+.orderListLi .numAdd .numAddIconBoxIcon{}
+.orderListLi .numAdd .numAbateIconBoxIcon{}
+.orderListLi .numAdd .numAddNum{
+    height: 1rem;
+    line-height: 1rem;
+    font-size: 1.3rem;
+}
+.orderPub{
+    /* display: flex; */
+    overflow: hidden;
+    padding: .7rem 1rem;
+    font-weight: 600;
+    font-size: 1rem;
+    border-bottom: 1px solid #ccc;
+}
+.biref{
+	font-weight:100;
+	padding-left:22px;
+	margin-top:5px;
+	margin-bottom:5px;
+}
+.orderPub a{
+    /* display: flex; */
+}
+.orderPub .orderpubLf{
+    float: left;
+}
+.orderPub .orderpubRt{
+    float: right;
+}
+.orderPub .orderpubRt .orderRtIcon{
+    color: #ccc;
+    padding-left: 1rem;
+}
+.orderBt{
+    text-align: -webkit-right;
+    padding: 0 1rem;
+    margin-top: 3rem;
+}
+.orderBt a{
+    display: block;
+    width: 6rem;
+    height: 2rem;
+    background-color: #f05;
+    color: #fff;
+    line-height: 2rem;
+    text-align: center;
+    border-radius: .5rem;
+    font-size: 1rem;
+}
+/****************************voucher**************************/
+.voucherMenu{
+    /* padding: .5rem 1rem; */
+}
+.voucherMenu .voucherMenuWrap{
+    display: flex;
+    /* height: 2rem; */
+    /* line-height: 2rem; */
+}
+.voucherMenu .voucherMenuWrap .voucherMenuLiBox{
+    flex: 3;
+    text-align: -webkit-center;
+    /* height: 2rem; */
+    /* line-height: 2rem; */
+    /* padding: 1rem; */
+    box-sizing: border-box;
+    padding: 1rem 0;
+}
+.voucherMenu .voucherMenuWrap .voucherMenuLi{
+    /* flex: 3; */
+    /* text-align: -webkit-center; */
+    /* height: 2rem; */
+    /* line-height: 2rem; */
+    border-right: 2px dotted #ccc;
+    font-size: 1rem;
+    /* box-sizing: border-box; */
+    /* padding: 1rem 0; */
+}
+.voucherMenu .voucherMenuWrap .voucherMenuLi .voucherMenuNum{
+    color: #ccc;
+}
+.voucherListBox{}
+.voucherListBox .voucherList{background-color: #f0efed;padding: .5rem; */}
+.voucherListBox .voucherList ul{}
+.voucherListBox .voucherList .voucherListLi{
+    background-color: #fff;
+    padding: 0 .5rem 0 0;
+    margin-bottom: .3rem;
+}
+.voucherListBox .voucherList .voucherListLi a{
+    display: flex;
+    /* padding: .5rem 1rem; */
+    color:;
+}
+.voucherListBox .voucherList .voucherListLi .voucherImgBox{
+    width: 30%;
+    text-align: -webkit-center;
+    height: 6.5rem;
+    /* background-color: #35a7db; */
+    color: #fff;
+    border-right: 1px dashed #fff;
+    box-sizing: border-box;
+    border-groove: 10px;
+    groove: inherit;
+    border-left: 1px dashed #fff;
+}
+.voucherListBox .voucherList .voucherImgBox .voucherImg{}
+.voucherListBox .voucherList .voucherNumBox{
+    padding-top: 2.3rem;
+}
+.voucherListBox .voucherList .voucherNumBox .voucherNum{
+    font-size: 2rem;
+}
+.voucherListBox .voucherList .voucherImgText{
+    visibility:;
+    padding-top: 1rem;
+    text-align: -webkit-right;
+    padding-right: .5rem;
+}
+.voucherListBox .voucherList .voucherListText{
+    width: 70%;
+    padding-left: 1rem;
+}
+.voucherListBox .voucherList .voucherListText .voucherListTextH{
+    font-size: 1rem;
+    /* max-height: 2rem; */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 2.5rem;
+    padding-top: 1rem;
+}
+.voucherListBox .voucherList .voucherListText .voucherListTextB{
+    display: flex;
+    padding-top: rem;
+    /* height: 4rem; */
+    padding-top: 1rem;
+}
+.voucherListBox .voucherList .voucherListText .voucherLTHL{
+    width: 70%;
+    color: #ccc;
+    font-size: .8rem;
+}
+.voucherListBox .voucherList .voucherListText .voucherLTHL .voucherDate{
+    color: #000;
+    /* padding-left: .5rem; */
+}
+.voucherListBox .voucherList .voucherListText .voucherLTHR{width: 30%;text-align: center;background-color: #35a7db;color: #fff;border-radius: 1rem;height: 1.5rem;line-height: 1.5rem;}
+.voucherImgBg1{background-color: #35a7db;}
+.voucherImgBg2{background-color: #ff2e50 ;}
+.voucherMBClic{border-bottom: 3px solid #f05;}
+/************************getVoucher******************************/
+.voucherDetail{
+    padding: 1rem;
+}
+.voucherDetail .voucherDName{
+    font-size: 1rem;
+    height: 2.5rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.voucherDetail .voucherDNum{
+    display: flex;
+    color: #ddd;
+    padding-bottom: .5rem;
+}
+.voucherDetail .voucherDNumLf{
+    width: 70%;
+}
+.voucherDetail .voucherDNumRt{
+    width: 30%;
+    text-align: -webkit-center;
+}
+.voucherDetail .voucherDDate{
+    color: #ddd;
+}
+.voucherDetail .voucherDDate .voucherDDateNum{
+    color: #000;
+    font-size: .8rem;
+    padding-left: 1rem;
+}
+.voucherAddress{
+    padding: 1rem;
+    background-color: #f7f7f6;
+}
+.voucherAddress .VDHead{
+    font-size: .8rem;
+}
+.voucherAddress input{
+    /* padding-right: 1rem; */
+}
+.voucherAddress .addAdress{
+    font-size: 1rem;
+    /* padding-top: 1rem; */
+}
+.voucherAddress .addAdress .addAdressPlus{
+    display: inline-block;
+    width: 1.3rem;
+    height: 1.3rem;
+    /*background-color: #ccc;*/
+    line-height: 1.4rem;
+    text-align: center;
+    border-radius: 1rem;
+    color: #fff;
+    font-size: 1rem;
+}
+.GPeopleDetail{
+    display: flex;
+    padding: .5rem 1rem;
+}
+.GPeopleDetail .GPDText{
+    width: 30%;
+    font-size: .8rem;
+    height: 2rem;
+    line-height: 2rem;
+}
+.GPeopleDetail .GPDInput{
+    width: 70%;
+}
+.GPeopleDetail .GPDInput input{
+    border: none;
+    width: 100%;
+    background-color: #f1f0ee;
+    border-radius: .3rem;
+    height: 2rem;
+    text-indent: 1rem;
+    font-size: 1rem;
+}
+.GPeopleDetail .GPDInput textarea{
+    border: none;
+    width: 100%;
+    background-color: #f1f0ee;
+    border-radius: .3rem;
+    height: 2rem;
+    text-indent: 1rem;
+    font-size: 1rem;
+}
+.getBt{
+    text-align: -webkit-right;
+    padding: 0 1rem;
+    margin-top: 2rem;
+}
+.getBt a{
+    display: block;
+    width: 6rem;
+    height: 2rem;
+    background-color: #f05;
+    color: #fff;
+    font-size: 1rem;
+    line-height: 2rem;
+    text-align: center;
+    border-radius: 1rem;
+}
+.addAdressInput{
+    display: flex;
+    padding: 1rem 0;
+}
+.addressSelect{
+    padding-right: 2rem;
+    font-size: .8rem;
+}
+.addressGetBox{text-align: center;}
+.addressGet{border: none;background-color: #F1F0EE;height: 2rem;font-size: .8rem;width: 30%;border-radius: .3rem;}
+.orderRtIcon >img{
+    width:6px;
+    height:16px;
+}
+.numAddIconBoxIcon > img{
+    width:16px;
+    height:16px;
+}
+.numAbateIconBoxIcon > img{
+    width:16px;
+    height:16px;
+}
+.headIcon >img{
+    width:16px;
+    height:16px;
+}
+.likeIcon > img{
+    width:21px;
+    height:21px;
+}
+.buyBoxIcon >img{
+    width:20px;
+    height:21px;
+}
+.NumBoxIcon > img{
+    width:10px;
+    height:12px;
+}
+.goodsComment > span >img{
+    width:14px;
+    height:12px;
+}

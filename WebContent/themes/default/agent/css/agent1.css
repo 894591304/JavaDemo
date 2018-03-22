@@ -1,0 +1,830 @@
+.pt2r{/* padding-top: 2rem!important; */}
+/***************************applyAgent***********************************/
+.agentInput{
+    padding: .5rem 1rem;
+    border-bottom: 1px solid #ccc;
+    overflow: hidden;
+}
+.agentInput .inputTitle{
+    font-size: .8rem;
+    color: #ccc;
+}
+.agentInput .agentAName{
+    font-size: 1rem;
+}
+.agentSex{
+    float: left;
+    padding-left: 1.5rem;
+}
+.inputBox{
+    overflow: hidden;
+    padding-top: .5rem;
+}
+.inputBox input{
+    border: none;
+}
+.inputBox a{
+    float: right;
+    background-color: #ccc;
+    display: inline-block;
+    /* padding: .1rem .3rem; */
+    height: 1.5rem;
+    line-height: 1.5rem;
+    /* border-radius: .6rem; */
+}
+.inputBox .codeBt{
+    width: 7rem;
+    text-align: -webkit-center;
+    /* height: 1.5rem; */
+    /* line-height: 1.5rem; */
+    border-radius: .4rem;
+}
+.inputBox .queren{
+    width: 5rem;
+    text-align: -webkit-center;
+    border-radius: .4rem;
+}
+.yzRemind{
+    text-align: -webkit-center;
+    background-color: #f7f7f7;
+    height: 1.5rem;
+    color: #f05;
+    font-size: .8rem;
+}
+.agentAdress{
+    padding: .5rem 1rem;
+    border-bottom: 1px solid #ccc;
+}
+.agentAdress p{
+    color: #ccc;
+    font-size: .8rem;
+}
+.agentAdress select{
+    border: none;
+    width: 100%;
+}
+.applyAgree{
+    /* padding: .5rem 1rem; */
+}
+.applyAgree .applyAgreeH{
+    height: 2rem;
+    line-height: 2rem;
+    text-align: center;
+    font-size: .8rem;
+    background-color: #f7f7f7;
+    color: #ccc;
+}
+.applyAgree .appliNewBox{
+    padding: .5rem 1rem;
+    overflow: hidden;
+}
+.applyAgree .appliNewBox .appliNewBoxH{
+    color: #ccc;
+    font-size: .8rem;
+}
+.appliNews{
+    overflow: hidden;
+    float: left;
+    height: 1.5rem;
+    width: 50%;
+    display: flex;
+    padding-top: 1rem;
+}
+.appliNewInput{/* float: right; */border-bottom: 1px dashed #000!important;width: 60%;}
+.appliNewInput input{
+    border: none;
+    /* border-bottom: 1px dotted #000!important; */
+    /* width: 3rem; */
+    box-sizing: border-box;
+}
+.appliNewsName{
+    /* float: left; */
+    width: 30%;
+    text-align: -webkit-center;
+}
+.uploadPc{
+    padding: .5rem 1rem;
+    background-color: #f7f7f7;
+}
+.loadBox{
+    font-size: 1rem;
+    text-align: -webkit-center;
+    border: 1px dashed #ccc;
+    border-radius: .5rem;
+    padding: 1rem;
+}
+.loadBox .loadIcon{
+    font-size: 1.3rem;
+    color: #ccc;
+}
+.loadBox .loadText{
+    color: #ccc;
+}
+/**************************agentHome**************************/
+.agentImgBox{
+    background: #f7f7f6;
+    height: 6rem;
+    position: relative;
+}
+.agentImgContainer{position: absolute;width: 100%;top: 6.5rem;}
+.agentImg{
+    width: 5rem;
+    height: 5rem;
+    border-radius: 5rem;
+    overflow: hidden;
+    border: 2px solid #ccc;
+    margin: auto;
+}
+.agentBox{
+    padding: .5rem 1.5rem;
+    border-bottom: 1px solid #ccc;
+    background-color: #fff;
+}
+.agentBox > img{
+    width:1.5rem;
+    float: right;
+}
+.agentBox > input{
+    border:none;
+}
+.agentBox .agentBoxH{
+    color: #ccc;
+    font-size: .8rem;
+}
+.agentBox .agentBoxText{
+    font-size: 1rem;
+    font-weight: 600;
+}
+.agentBox > textarea{
+    border:none;
+}
+.masterCardBox{
+    background-color: #fafafa;
+    padding: .5rem;
+}
+.masterCardBox .masterCard{
+    padding: .5rem 1rem;
+    background-color: background;
+    -webkit-linear-gradient(left,#ff4100,#ff0055);
+    background: -webkit-linear-gradient(top,#ff434f,#f50052);
+    color: #fff;
+    border-radius: .5rem;
+}
+.masterCardBox .masterCard .masterCardIcon{
+    text-align: -webkit-right;
+    font-size: 1.5rem;
+    color: #fff;
+    height: 1.5rem;
+}
+.masterCardIcon >span{
+    display: block;
+    width:31px;
+    height:21px;
+}
+.masterCardBox .masterCard .masterName{
+    font-size: 1rem;
+}
+.masterCardBox .masterCard .masterNum{
+    font-size: 1.3rem;
+    padding: .5rem 0 0;
+}
+.masterCardBox .masterCard .masterCardBt{
+    color: #ccc;
+    font-size: .8rem;
+    padding: 1rem 0 .2rem;
+}
+
+.masterCardBox .masterCard .masterCardBt .MCBL{
+    padding-right: 1rem;
+}
+.masterCardBox .masterCard .masterCardBt .MCBM{}
+.masterCardBox .masterCard .masterCardBt .MCBR{
+    float: right;
+}
+.agentBbox{
+    display: flex;
+    padding: .5rem 1rem;
+}
+.agentBbox .agentBboxLf{
+    width: 20%;
+    text-align: center;
+    font-size: 1.3rem;
+    height: 3rem;
+    line-height: 3rem;
+}
+.agentBbox .agentBboxLf .agentBboxLfIcon{}
+.agentBbox .agentBboxRt{
+    width: 80%;
+    height: 3rem;
+    border-bottom: 1px solid #ccc;
+}
+.agentBbox .agentBboxRt .agentBboxH{}
+.agentBbox .agentBboxRt .cardSelect{
+    border: none;
+    width: 100%;
+    font-size: 1rem;
+}
+.agentBbox .agentBboxRt .agentBboxH{}
+.agentBbox .agentBboxRt .agentBboxRtText{
+    font-size: 1rem;
+}
+.begainAgent{ 
+    font-size: 1rem;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: -webkit-center;
+}
+.begainAgent a{
+    display: block;
+    height: 3rem;
+    line-height: 3rem;
+    background-color: #ff2f52;
+    color: #fff;
+    font-size: 1rem;
+}
+.agentHomeWrap{padding-bottom: 3rem;}
+/****************************agentNews****************************/
+.agentNewBody{background-color: #F7F7F6;}
+.agentNewTp{
+    padding: 1rem;
+    font-size: .8rem;
+}
+.agentNewText{
+    font-weight: normal!important;
+}
+.agreeBox{
+    padding: .5rem 1.5rem;
+}
+.agreeLf{
+    width: 1rem;
+    height: 1rem;
+    background-color: #41ade0;
+    border-radius: .3rem;
+    border: 1px solid #ccc;
+    margin-right: 1rem;
+}
+.agreeBox a{color: #41ade0;text-decoration: underline;font-size: .8rem;}
+.agentNewBt{
+    text-align: -webkit-center;
+    background-color: #fafafa;
+    padding: 3rem 0;
+}
+.agentNewBt a{
+    width: 6rem;
+    height: 2.5rem;
+    display: inline-block;
+    line-height: 2.5rem;
+    text-align: center;
+    font-size: 1rem;
+    color: #fff;
+    border-radius: .5rem;
+}
+.agentNewBt .agentNewBtLf{
+    background: #9c9893;
+    margin-right: 3rem;
+}
+.agentNewBt .agentNewBtRt{
+    /*background-color: width: 6rem;*/
+    background-color: #41ade0;
+}
+/************************agentlist**************************/
+.agentSearch{
+    display: flex;
+}
+.agentSearchIcon{
+    display: block;
+    width: 16px;
+    height: 15px;
+}
+.agentSRtIcon{
+    display: block;
+    width: 21px;
+    height: 31px;
+    /*padding-top: 5px;*/
+}
+/*右上角的点击图表*/
+.change{
+    display: none;
+}
+.agentSRt > span:nth-of-type(2){
+    width:31px;
+}
+.agentSearch .agentSLf{
+    width: 30%;
+    text-align: -webkit-right;
+    font-size: 1rem;
+    background-color: #f7f7f6;
+    height: 2.5rem;
+    line-height: 2.5rem;
+}
+/*侧边导航跳转*/
+.agentNavigation{
+    display: none;
+    width:20%;
+    position: absolute;
+    top:5.5rem;
+}
+.agentNavigation ul{
+    width:100%;
+    overflow: visible;
+    background: #fff;
+    position: relative;
+}
+.agentNavigation li{
+    height:3rem;
+    width:100%;
+    line-height:3rem;
+    text-align: center;
+    border-bottom:1px solid #ccc;
+    z-index:999999;
+}
+.agentNavigation li:first-child{
+    border-top:1px solid #ccc;
+}
+.agentNavigation ul > li >div{
+    width:100px;
+    height:18.5rem;
+    background: #fff;
+    position: absolute;
+    top:0;
+    left:-7rem;
+    z-index:1;
+    transition: all 1s;
+    border:1px solid #ccc;
+}
+.agentNavigation li:hover > div{
+    position: absolute;
+    top:0;
+    left:4rem;
+    display: block;
+ }
+
+
+
+.agentSearch .agentSearchIcon{}
+.agentSearch .agentLInput{
+    width: 56%;
+    background-color: #f7f7f6;
+}
+.agentSearch .agentLInput input{
+    border: none;
+    width: 100%;
+    background-color: #f7f7f6;
+    height: 2.5rem;
+    line-height: 2.5rem;
+    color: #000;
+    text-indent: 1rem;
+    font-size: .8rem;
+}
+.agentSearch .agentSRt{
+    width: 15%;
+    font-size: 1.5rem;
+    text-align: -webkit-center;
+    line-height: 2.5rem;
+    height: 2.5rem;
+}
+.agentSearch .agentSRt .agentSearchIcon{}
+.agentLMenu{
+    display: flex;
+}
+.agentLMenu .agentLMenuBox{
+    flex: 2;
+    text-align: center;
+    font-size: 1rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid #ccc;
+}
+.agentLMenu .agentLMenuList:first-child{border-right: 1px dotted #CCCCCC;}
+.agentLMenu .agentLMenuList{
+}
+.agentLMenu .agentLMenuList .agentLMenuNum{
+    color: #ccc;
+    margin-left: 1rem;
+}
+.agentList{
+    padding: .5rem;
+    border-bottom: 1px solid #ccc;
+}
+.agentList .agentListPub{
+    display: flex;
+}
+.agentList .agentListImg{
+    width: 30%;
+    text-align: -webkit-center;
+}
+.agentList .ALIBox{
+    width: 6rem;
+    height: 6rem;
+    border: 1px solid #ccc;
+}
+.agentList .agentListText{
+    width: 70%;
+    padding-left: 1rem;
+}
+.agentList .agentListText .agentListName{
+    font-size: 1rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 1.5rem;
+}
+.agentList .agentListText .agentLTPub{
+    display: flex;
+    padding-top: .3rem;
+    font-size: .8rem;
+}
+.agentList .agentListText .agentLTPubLf{/* margin-right: 1rem; */}
+.agentListBt{
+    text-align: -webkit-right;
+    padding-top: 1rem;
+    padding-bottom: .5rem;
+}
+.agentListBt a{
+    width: 6rem;
+    height: 2rem;
+    text-align: -webkit-center;
+    line-height: 2rem;
+    display: inline-block;
+    font-size: 1rem;
+    color: #fff;
+    border-radius: .5rem;
+    margin-right: .5rem;
+}
+.agentLMenuBoxS{border-bottom: 3px solid #f05!important;}
+.agentListBtLf{
+    background-color: #41ade0;
+}
+.agentListBtRt{
+    background-color: #f05;
+}
+/**************************signAgent*************************/
+.signPL{border-radius: .4rem 0 0 .4rem;}
+.signPr{border-radius: 0 .4rem .4rem 0;}
+.signGBox{
+    display: flex;
+    font-size: 1rem;
+    padding: .7rem 1rem;
+    border-bottom: 1px solid #ccc;
+}
+.signGBox .signGBoxLf{
+    width: 60%;
+}
+.signGBox .signGBoxRt{
+    width: 40%;
+    text-align: -webkit-right;
+}
+.signGBox .signP{
+    /*width: 1.5rem;*/
+    /*height: 1.5rem;*/
+    background-color: #d8d8d8;
+    display: inline-block;
+    line-height: 1.5rem;
+    text-align: -webkit-center;
+}
+.signGBox .signNum{
+    background-color: #f6f6f6;
+    display: inline-block;
+    height: 1.5rem;
+    line-height: 1.5rem;
+    width: 2.5rem;
+    text-align: -webkit-center;
+    margin: 0 -.3rem;
+}
+.signSelect{
+    display: flex;
+    padding: .7rem 1rem;
+    border-bottom: 1px solid #ccc;
+    font-size: 1rem;
+}
+.signSelect .signSLf{
+    width: 30%;
+}
+.signSelect .signSBox{
+    display: flex;
+}
+.signSelect .signSBox .signInput{padding-right: .9rem;}
+.signTextBox{}
+.signTextBox .signTextBoxH{
+    font-size: 1rem;
+    padding: .5rem 1rem;
+    background-color: #f7f7f7;
+}
+.signTextBox .signTextTp{
+    display: flex;
+    padding: .5rem 1rem;
+    border-bottom: 1px solid #ccc;
+    font-size: .8rem;
+}
+.signTextBox .signTextTp .signTextTpLf{
+    width: 40%;
+}
+.signTextBox .signTextTp .signTextTpRt{
+    width: 60%;
+}
+.signTextBox .signTextBt{
+    display: flex;
+    font-size: .8rem;
+    padding: .5rem 1rem .5rem 6rem;
+    border-bottom: 1px solid #ccc;
+}
+.signTextBox .signTextBt .signTextBtLf{
+    width: 4.5rem;
+}
+.signTextBox .signTextBt .signTextBtRt{
+}
+.signGgree{padding-bottom: 6rem;}
+/****************************agentShopSet***************************/
+.aBg{background-color: #f05!important;}
+.agentSetText{
+    padding: 1rem 1.5rem;
+    font-size: .8rem;
+}
+.agentSetText p{}
+.agentShopNews .agentShopNewsH{
+    background-color: #f7f7f6;
+    padding: .5rem 1.5rem;
+    font-size: 1rem;
+}
+.agentShopNews .agentShopPub{
+    padding: .5rem 1.5rem;
+    overflow: hidden;
+    border-bottom: 1px solid #ccc;
+    font-size: .8rem;
+}
+.agentShopNews .agentShopPub .agentShopPubLf{
+    float: left;
+}
+.agentShopNews .agentShopPub .agentShopPubLf .shopHave{margin-left: 2rem;color: #ccc;}
+.agentShopNews .agentShopPub .agentShopPubRt{
+    float: right;
+}
+.agentShopNews .agentShopPub .agentShopPubRt .shopNumInput{
+    border: none;
+    background-color: #f1f0ee;
+    border-radius: 1rem;
+    width: 5rem;
+    text-align: -webkit-center;
+}
+.agentShopPub .fenleiLf{
+    float: left;
+}
+.agentShopPub .selectShop{
+    float: left;
+    padding-left: 1rem;
+}
+.agentShopPub .selectShop select{
+    border: none;
+    background-color: #f1f0ee;
+    border-radius: .2rem;
+}
+.agentShopPub .addSelect{
+    float: right;
+    font-size: 1rem;
+}
+.agentShopPub .addSelect .addSelectIcon{
+    font-size: 1rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    text-align: -webkit-center;
+    line-height: 1.5rem;
+    display: inline-block;
+    /*background-color: #41ade0;*/
+    color: #fff;
+    border-radius: 1rem;
+    margin-right: .5rem;
+}
+.agentShopPub .shopTitle{
+    float: left;
+}
+.agentShopPub .addTitle{
+    float: left;
+    margin-left: 1rem;
+}
+.agentShopPub .addTitle input{
+    border: none;
+    background-color: #f1f0ee;
+    border-radius: .5rem;
+    text-align: -webkit-center;
+}
+.agentShopPub .titleShow{
+    color: #41ade0;
+    font-size: .8rem;
+    margin-right: 1rem;
+}
+.agentShopPub .shopTimeLf{
+    float: left;
+}
+.agentShopPub .shopTime{}
+.agentShopPub .shopTimeInput{
+    float: left;
+    padding-left: 3rem;
+}
+.agentShopPub .shopTimeInput input{}
+.agentShopNews{}
+.titleShowBox{background-color: #F7F7F6;}
+/**************************myAgentShop**************************/
+.myAgentBox{
+    padding: .5rem;
+    font-size: .8rem;
+    overflow: hidden;
+    border-bottom: 1px solid #ccc;
+}
+.myAgentBox .myAgentBoxLf{
+    float: left;
+    height: 1.7rem;
+    line-height: 1.7rem;
+    width: 40%;
+}
+.myAgentBox .myAgentBoxRt{
+    float: right;
+    height: 1.7rem;
+    line-height: 1.7rem;
+    width: 60%;
+    text-align: -webkit-right;
+}
+.myAgentBox .myAgentBoxRt a{
+    display: inline-block;
+    width: 6rem;
+    height: 1.7rem;
+    line-height: 1.7rem;
+    background-color: #f1f0ee;
+    text-align: -webkit-center;
+    border-radius: 2rem;
+    color: #ccc;
+    font-size: 1rem;
+}
+.filecontent{
+    background: #f1f1f1;
+}
+.agentBox >.tofile{
+    font-size: 1.1rem;
+}
+.filebox {
+    width: 100%;
+    margin-top: 12px;
+    overflow: hidden;
+}
+.filebox > div {
+    width: 100%;
+    height:60px;
+}
+.filebox > div > div{
+    float: left;
+}
+.touxiang {
+    overflow: hidden;
+    -webkit-border-radius:40px;
+    -moz-border-radius:40px;
+    border-radius:40px;
+}
+.headefile{
+    width:55%;
+    margin-left: 3%;
+    height:2rem;
+    padding:0.5rem;
+    border:1px dashed darkgray;
+    margin-top:1rem;
+}
+.headefile > img{
+    width:16px;
+    height:16px;
+    margin: 0 0.4rem;
+}
+.webuploader_pick{
+    width:55%;
+    margin-left: 3%;
+    height:2rem;
+    padding:0.5rem;
+    border:1px dashed darkgray;
+}
+.webuploader_pick > img{
+    width:16px;
+    height:16px;
+    margin: 0 0.4rem;
+}
+.beijing,.touxiang {
+    width: 50px;
+    height:50px;
+}
+.myAgentGet{color: #f05!important;font-size: 1rem!important;}
+/******************************UpinSale**************************/
+.UpinText{
+    font-size: .8rem;
+}
+.ucolor{color: #f05;}
+.UpinPub{
+    padding: .5rem 1rem;
+    font-size: 1rem;
+    overflow: hidden;
+    border-bottom: 1px solid #ccc;
+}
+.UpinPub .UpinPubLf{
+    float: left;
+}
+.UpinPub .UpinPubRt{
+    float: right;
+}
+.UpinPub .UpinPubRt .UpinPubRtNum{
+    margin-right: 1rem;
+}
+.UpinPub .UpinPubRt .UpinPubRtIcon{
+    color: #ccc;
+}
+.UpinPubBt{}
+.UpinPubBt .UpinPubBtH{
+    padding: .5rem 1rem;
+    overflow: hidden;
+    box-shadow: 0px 0px 15px #ccc;
+    font-size: 1rem;
+}
+.UpinPubBt .UpinPubBtH .UpinPubBtHL{
+    float: left;
+    color: #ddd;
+}
+.UpinPubBt .UpinPubBtH .UpinPubBtHR{
+    float: right;
+    color: #ddd;
+}
+.UpinPubBt .UpinPubBtH .UpinPubBtHR .UpinPubRtIcon{}
+.UpinOrder{
+    overflow: hidden;
+    padding: .2rem 0;
+    color: #ccc;
+}
+.UpinOrderLf{
+    float: left;
+}
+.UpinOrderRt{
+    float: right;
+}
+.UpinPubBtText{
+    padding: .5rem 1rem;
+    border-bottom: 1px solid #ccc;
+}
+.UpinOrderBtRtIcon{
+    font-size: 1.3rem;
+    color: #41ade0;
+}
+/****************************myAgent***************************/
+.myAgentBox1{
+    height: 11rem;
+    background-image:url(../images/p2.jpg);
+    border-bottom: 4px solid #fff;
+    overflow: hidden;
+    box-sizing: border-box;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.myAgentBox1 a{
+    display: block;
+    color: #fff;
+    text-align: -webkit-center;
+    overflow: hidden;
+    height: 11rem;
+}
+.myAgentBox1 .textTp{
+    font-size: 1.2rem;
+    padding-top: 4.5rem;
+}
+.myAgentBox1 .textBt{
+    font-size: 1rem;
+}
+.myAgentBox1 .signTextBt{}
+.myAgentBox2{
+    display: flex;
+}
+.myAgentBox2 a{
+    height: 11rem;
+    color: #fff;
+    display: block;
+    /* background-repeat: no-repeat; */
+    /* background-size: cover; */
+}
+.myAgentBox2 .textTp{
+    font-size: 1.2rem;
+    padding-top: 4.5rem;
+}
+.myAgentBox2 .textBt{
+    font-size: 1rem;
+}
+.myAgentBox2 .signTextBt{}
+.myAgentBox2Lf{width: 50%;height: 11rem;text-align: -webkit-center;background-image:url(../images/p1.jpg);border-bottom: 3px solid #fff;border-right: 3px solid #fff;background-repeat: no-repeat;background-size: cover;}
+.myAgentBox2Rt{
+    width: 50%;
+    height: 11rem;
+    text-align: -webkit-center;
+    background-image:url(../images/p3.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.agentBboxIcon{width: 2rem;height: 3rem;margin: auto;}
+/*imgwid*/
+.UpinPubRtIcon > img{
+    width:6px;
+    height:16px;
+}
+.agentBboxIcon > img{
+    width:32px;
+    height:32px;
+}

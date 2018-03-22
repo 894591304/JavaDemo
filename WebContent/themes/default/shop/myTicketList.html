@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+		<link rel="stylesheet" href="${ctx}/themes/default/shop/css/reset.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/shop/css/common.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/shop/css/SHOP.css" />
+		<script type="text/javascript" src="${ctx}/themes/default/shop/js/jquery-3.1.0.min.js" ></script>
+		<title>卡券包</title>
+	</head>
+<#if member?? >
+	<#--创建我的现金券标签-->
+	<#assign myDiscountTicketListTag = newTag("myDiscountTicketListTag")/>
+	<#--调用现金券标签-->
+	<#assign ticketlist= myDiscountTicketListTag()/>
+	<#--调用未使用现金券列表-->
+	<#assign notuselist= ticketlist.notuselist/>
+	<#--调用已过期现金券列表-->
+	<#assign outoftimelist=ticketlist.outoftimelist/>
+	<#--调用已使用现金券列表-->
+	<#assign usedlist= ticketlist.usedlist/>
+
+	<body>
+		<div class="publicHeader">
+			<span class="headIcon f_l">
+				<a href="user.html">
+					<img src="${ctx}/themes/default/img/2.png" alt="">
+				</a>
+			</span>
+				现金券卡券包
+		</div>
+		<div class="voucherMenu">
+			<div class="voucherMenuWrap">
+				<div class="voucherMenuLiBox voucherMBClic" id="notuse">
+					<div class="voucherMenuLi" >
+					未使用<span class="voucherMenuNum">(${ticketlist.notusecount})</span>
+				    </div>
+				</div>
+				<div class="voucherMenuLiBox" id="outoftime">
+					<div class="voucherMenuLi" >
+					已过期<span class="voucherMenuNum">(${ticketlist.outoftimecount})</span>
+				    </div>
+				</div>
+				<div class="voucherMenuLiBox" id="used">
+					<div class="voucherMenuLi" >
+					已使用<span class="voucherMenuNum">(${ticketlist.usedcount})</span>
+				    </div>
+				</div>
+			</div>
+		</div>
+
+		<div class="voucherListBox" id="notuselist">
+			<div class="voucherList">
+				<ul>
+<#list notuselist as notuse>
+					<li class="voucherListLi">
+						<a>
+							<div class="voucherImgBox voucherImgBg1" onclick="window.open('Upin-${notuse.proxyid?c}.html','_self')">
+								<div class="voucherImg">
+									<p class="voucherNumBox">￥<span class="voucherNum">${notuse.value}</span></p>
+								    <p class="voucherImgText">现金券</p>
+								</div>
+							</div>
+							<div class="voucherListText">
+								<p class="voucherListTextH" onclick="window.open('Upin-${notuse.proxyid?c}.html','_self')">
+									${notuse.name}
+								</p>
+								<div class="voucherListTextB">
+									<div class="voucherLTHL">
+										有效期至&nbsp&nbsp<span class="voucherDate">${notuse.endtime}</span>
+									</div>
+									<div class="voucherLTHR" onclick="window.open('myTicketInfo.html?ticketid=${notuse.ticketid?c}','_self')">
+										查看卡券
+									</div>
+								</div>
+							</div>
+						</a>
+					</li>
+</#list>
+				</ul>
+			</div>
+		</div>
+		<div class="voucherListBox" style="display:none;" id="outoftimelist">
+			<div class="voucherList">
+				<ul>
+<#list outoftimelist as outoftime>
+					<li class="voucherListLi">
+						<a>
+							<div class="voucherImgBox voucherImgBg1" onclick="window.open('Upin-${outoftime.proxyid?c}.html','_self')">
+								<div class="voucherImg">
+									<p class="voucherNumBox">￥<span class="voucherNum">${outoftime.value}</span></p>
+								    <p class="voucherImgText">现金券</p>
+								</div>
+							</div>
+							<div class="voucherListText">
+								<p class="voucherListTextH" onclick="window.open('Upin-${outoftime.proxyid?c}.html','_self')">
+									${outoftime.name}
+								</p>
+								<div class="voucherListTextB">
+									<div class="voucherLTHL">
+										有效期至&nbsp&nbsp<span class="voucherDate">${outoftime.endtime}</span>
+									</div>
+								</div>
+							</div>
+						</a>
+					</li>
+</#list>
+				</ul>
+			</div>
+		</div>
+		<div class="voucherListBox" style="display:none;" id="usedlist">
+			<div class="voucherList">
+				<ul>
+<#list usedlist as used>
+					<li class="voucherListLi">
+						<a>
+							<div class="voucherImgBox voucherImgBg1" onclick="window.open('Upin-${used.proxyid?c}.html','_self')">
+								<div class="voucherImg">
+									<p class="voucherNumBox">￥<span class="voucherNum">${used.value}</span></p>
+								    <p class="voucherImgText">现金券</p>
+								</div>
+							</div>
+							<div class="voucherListText">
+								<p class="voucherListTextH" onclick="window.open('Upin-${used.proxyid?c}.html','_self')">
+									${used.name}
+								</p>
+								<div class="voucherListTextB">
+									<div class="voucherLTHL">
+										有效期至&nbsp&nbsp<span class="voucherDate">${used.endtime}</span>
+									</div>
+								</div>
+							</div>
+						</a>
+					</li>
+</#list>
+				</ul>
+			</div>
+		</div>
+<script type="text/javascript">
+$(function(){
+	$("#notuse").click(function(){
+		$("#notuse").attr("class","voucherMenuLiBox voucherMBClic");
+		$("#outoftime").attr("class","voucherMenuLiBox");
+		$("#used").attr("class","voucherMenuLiBox");
+		$("#notuselist").show();
+		$("#outoftimelist").hide();
+		$("#usedlist").hide();
+	});
+	$("#outoftime").click(function(){
+		$("#notuse").attr("class","voucherMenuLiBox");
+		$("#outoftime").attr("class","voucherMenuLiBox voucherMBClic");
+		$("#used").attr("class","voucherMenuLiBox");
+		$("#notuselist").hide();
+		$("#outoftimelist").show();
+		$("#usedlist").hide();
+	});
+	$("#used").click(function(){
+		$("#notuse").attr("class","voucherMenuLiBox");
+		$("#outoftime").attr("class","voucherMenuLiBox");
+		$("#used").attr("class","voucherMenuLiBox voucherMBClic");
+		$("#notuselist").hide();
+		$("#outoftimelist").hide();
+		$("#usedlist").show();
+	});
+})
+</script>	
+	</body>
+<#else>
+<script type="text/javascript"> 
+onload=function(){ 
+	setTimeout(go, 1);
+}; 
+function go(){ 
+	location.href="login.html"; 
+} 
+</script> 
+</#if>
+</html>

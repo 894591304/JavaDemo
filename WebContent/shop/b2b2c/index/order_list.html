@@ -1,0 +1,186 @@
+<#include '/admin/header.html' > 
+<#assign dateFormat="com.enation.framework.directive.DateformateDirective"?new()>
+<style>
+.input_text{
+	width: 150px;
+}
+</style>
+<div id="loading"></div>
+<div class="main">
+	<form id="orderform">
+		<div>
+			<input id="Advanced" name="Advanced" type="hidden" value="1" />
+			<table width="98%" border="0" cellspacing="0" cellpadding="8">
+				<tr>
+					<td width="70" align="right">开始日期</td>
+					<td width="250" ><input class="easyui-datebox" style="width: 90px;height: 28px;"
+						id="start_time" data-options="buttons:buttons" /> <span>结束日期</span>
+						<input class="easyui-datebox" style="width: 90px;height: 28px;" id="end_time"
+						data-options="buttons:e_buttons" /></td>
+					<td width="40">关键字</td>
+					<td align="left"><input id="searchKeyword" class="input_text mr5" type="text" value="" size="30" placeholder="请输入订单号" name="searchKeyWord" /></td>
+				</tr>
+				<tr>
+					<td width="70" align="right">订单状态</td>
+					<td colspan="3" >
+						<#if statusMap??>
+							<#list statusMap?keys as key>
+								<input type="checkbox" id="status" name="status" value="${key}" />${statusMap.get(key)}
+							</#list>
+						</#if>
+					</td>
+				</tr>
+				<tr>	
+					<td width="70" align="right">发货状态</td>
+					<td colspan="3">
+						<#if shipMap??>
+							<#list shipMap?keys as key>
+								<input type="checkbox" id="shipstatus" name="shipstatus" value="${key}" />${shipMap.get(key)}
+							</#list>
+						</#if>
+					</td>
+				</tr>
+				<tr>
+					<td width="70" align="right"></td>
+					<td colspan="3" align="center"><a id="searchAdvance"
+						class="button blueButton" onclick="searchOrder()"
+						href="javascript:;">开始搜索</a></td>
+				</tr>
+			</table>
+		</div>
+
+		<div class="clear height10"></div>
+		<div class="shadowBoxWhite tableDiv">
+			<table class="easyui-datagrid"
+				data-options="url:'${ctx}/shop/b2b2c/orderExt!listJson2.do?order_state=${orderstate!''}',pageList: [5,10,15,20],pageSize:${pageSize},fitColumns:'true',queryParams:{'complete':'${complete!''}'}"
+				pagination="true" width="width" id="orderdata" sortName="order_id" sortOrder="desc">
+				<thead>
+					<tr>
+						<th data-options="field:'uname',width:150">商家名称</th>
+						<th data-options="field:'sn',width:150,sortable:'true'" formatter="forsn">订单号</th>
+						<th data-options="field:'need_pay_money',width:100,sortable:'true'" formatter="forMoney">订单总额</th>
+						<th data-options="field:'paymoney',width:100,sortable:'true'" formatter="forMoney">实付金额</th>
+						<th data-options="field:'create_time',width:100,sortable:'true'" formatter="formatDate">售出日期</th>
+					</tr>
+				</thead>
+			</table>
+		</div>
+	</form>
+</div>
+<script type="text/javascript">
+	function forsn(value,row,index){
+		var val="<a href='#' onclick=\"newTab('查看订单详细"+(row.sn).substring(0,6)+"','${ctx}/shop/admin/order!detail.do?orderId="+row.order_id+"&sn="+row.sn+"&logi_no="+row.logi_no+"&uname="+row.uname+"&ship="+row.ship_name+"&status="+row.status+"')\">"+row.sn+"</a>"
+		return val;
+	}
+	function forMoney(value, row, index) {
+		var val = "￥" + value;
+		return val;
+	}
+	function formatDate(value,row,index){
+		if(value==null){
+			return "";
+		}
+		else{
+			return getFormatDateByLong(value, "yyyy-MM-dd");
+		}
+		
+	}
+	
+	//订单状态
+	function forStruts(value, row, index) {
+		var val;
+		val = getType(${status_Json!''},value);
+		return val;
+	}
+	
+	//付款状态
+	function forpay(value,row,index){
+		var val;
+		val = getType(${payStatus_Json!''},value);
+		return val;
+	}
+	
+	//发货状态
+	function forship(value,row,index){
+		var val;
+		val = getType(${ship_Json!''},value);
+		return val;
+	}
+	
+	
+	function getType(exMap,value){
+		var val;
+		$.each(exMap,function(key,values){ 
+		    if(value==key){
+		    	val=values;
+		    }
+		});
+		return val;
+	}
+
+	var buttons = $.extend([], $.fn.datebox.defaults.buttons);
+	buttons.splice(1, 0, {
+		text: '清空',
+		handler: function(target){
+			 $('#start_time').datebox('setValue',"");
+		}
+	});
+	
+	var e_buttons = $.extend([], $.fn.datebox.defaults.buttons);
+	e_buttons.splice(1, 0, {
+		text: '清空',
+		handler: function(target){
+			 $('#end_time').datebox('setValue',"");
+		}
+	});
+    
+   
+	function searchOrder(){
+		var searchtype = $("#Advanced").val();
+		var keyword = $("#searchKeyword").val();
+		var start_time = $('#start_time').datebox('getValue');
+		var end_time = $('#end_time').datebox('getValue');  
+
+		var status_array=new Array();  
+		$('input[name="status"]:checked').each(function(){  
+			status_array.push($(this).val());//向数组中添加元素  
+		});  
+		var status=status_array.join(',');
+		
+		var shipstatus_array=new Array();  
+		$('input[name="shipstatus"]:checked').each(function(){  
+			shipstatus_array.push($(this).val());//向数组中添加元素  
+		});  
+		var shipstatus=shipstatus_array.join(',');
+		
+		$("#orderdata").datagrid('load', {
+			 stype:searchtype,
+			 keyword:keyword,
+			 start_time:start_time,
+			 end_time:end_time,
+			 status_arr:status,
+			 shipstatus_arr:shipstatus,
+			 page:1
+	    });
+	}
+
+	function formatTime(value,row,index){
+		var val = getFormatDateByLong(value, "yyyy-MM-dd");
+		return val;
+	}
+	$(function(){
+		if('${type}'=='2'){
+			$('#start_time').datebox('setValue','${today}');
+			$('#end_time').datebox('setValue','${today}');  
+		}
+		if('${type}'=='3'){
+			$('#start_time').datebox('setValue','${firstday}');
+			$('#end_time').datebox('setValue','${lastday}');  
+		}
+		searchOrder();
+	})
+</script>
+
+<#include '/admin/footer.html' >
+
+

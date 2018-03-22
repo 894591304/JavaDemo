@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+		<link rel="stylesheet" href="${ctx}/themes/default/shop/css/reset.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/shop/css/common.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/shop/css/SHOP.css" />
+		<script type="text/javascript" src="${ctx}/themes/default/shop/js/jquery-3.1.0.min.js" ></script>
+		<title>卡券包</title>
+	</head>
+<#if member?? >
+	<#--创建我的卡券包标签-->
+	<#assign myPayOrderTag = newTag("myPayOrderTag")/>
+	<#--调用卡券包标签-->
+	<#assign order= myPayOrderTag()/>
+	<#--调用已支付卡券列表-->
+	<#assign paylist= order.paylist/>
+	<#--调用未支付订单列表-->
+	<#assign orderlist=order.notpayorderlist/>
+	<#--调用已使用卡券列表-->
+	<#assign usedlist= order.usedlist/>
+	<#--调用VIP卡列表-->
+	<#assign viplist= order.viporderlist/>
+	<body>
+		<div class="publicHeader">
+			<span class="headIcon f_l">
+				<a href="user.html">
+					<img src="${ctx}/themes/default/img/2.png" alt="">
+				</a>
+			</span>
+				卡券包
+		</div>
+		<div class="voucherMenu">
+			<div class="voucherMenuWrap">
+				<div class="voucherMenuLiBox voucherMBClic" id="pay">
+					<div class="voucherMenuLi" >
+					已付款<span class="voucherMenuNum">(${order.paycount})</span>
+				    </div>
+				</div>
+				<div class="voucherMenuLiBox" id="notpay">
+					<div class="voucherMenuLi" >
+					未付款<span class="voucherMenuNum">(${order.notpaycount})</span>
+				    </div>
+				</div>
+				<div class="voucherMenuLiBox" id="used">
+					<div class="voucherMenuLi" >
+					已使用<span class="voucherMenuNum">(${order.usedcount})</span>
+				    </div>
+				</div>
+				<div class="voucherMenuLiBox" id="vip">
+					<div class="voucherMenuLi" >
+					VIP券<span class="voucherMenuNum">(${order.vipcount})</span>
+				    </div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="voucherListBox" style="display:none;" id="notpaylist">
+			<div class="voucherList">
+				<ul>
+<#list orderlist as order>
+					<li class="voucherListLi">
+						<a href="order_create_success.html?orderid=${order.orderid}">
+							<div class="voucherListText">
+								<p class="voucherListTextH">
+									订单编号：${order.ordersn}
+								</p>
+								<div class="voucherListTextB" style="width: 330px;">
+									<div class="voucherLTHL">
+										订单金额：<span class="voucherDate">￥${order.money}</span>
+									</div>
+									<div class="voucherLTHR">
+										点击查看订单
+									</div>
+								</div>
+							</div>
+						</a>
+					</li>
+</#list>	
+				</ul>
+			</div>
+		</div>
+
+		<div class="voucherListBox" style="display:none;" id="usedlist">
+			<div class="voucherList">
+				<ul>
+<#list usedlist as used>
+					<li class="voucherListLi">
+						<a>
+							<div class="voucherImgBox voucherImgBg1" onclick="window.open('Upin-${used.proxyid}.html','_self')">
+								<div class="voucherImg">
+									<p class="voucherNumBox">￥<span class="voucherNum">${used.price}</span></p>
+								    <p class="voucherImgText">提货券</p>
+								</div>
+							</div>
+							<div class="voucherListText">
+								<p class="voucherListTextH" onclick="window.open('Upin-${used.proxyid}.html','_self')">
+									${used.name}
+								</p>
+								<div class="voucherListTextB">
+									<div class="voucherLTHL">
+										有效期至&nbsp&nbsp<span class="voucherDate">${used.limittime}</span>
+									</div>
+									<div class="voucherLTHR" onclick="window.open('voucherDetail-${used.proxyorderid}.html','_self')">
+										查看卡券
+									</div>
+								</div>
+							</div>
+						</a>
+					</li>	
+</#list>
+				</ul>
+			</div>
+		</div>
+
+		<div class="voucherListBox" id="paylist">
+			<div class="voucherList">
+				<ul>
+<#list paylist as pay>
+					<li class="voucherListLi">		
+						<a>				
+							<div class="voucherImgBox voucherImgBg1" onclick="window.open('Upin-${pay.proxyid}.html','_self')">
+								<div class="voucherImg">
+									<p class="voucherNumBox">￥<span class="voucherNum">${pay.price}</span></p>
+								    <p class="voucherImgText">提货券</p>
+								</div>
+							</div>
+							<div class="voucherListText" >
+								<p class="voucherListTextH" onclick="window.open('Upin-${pay.proxyid}.html','_self')">
+									${pay.name}
+								</p>
+								<div class="voucherListTextB">
+									<div class="voucherLTHL">
+										有效期至&nbsp&nbsp<span class="voucherDate">${pay.limittime}</span>
+									</div>
+	<#if pay.canuse==1 >						
+									<div class="voucherLTHR" onclick="window.open('voucherDetail-${pay.proxyorderid}.html','_self')">
+										点击使用
+									</div>
+	</#if>
+	<#if pay.canuse==2 >						
+									<div class="voucherLTHR" onclick="window.open('voucherDetail-${pay.proxyorderid}.html','_self')">
+										点击查看
+									</div>
+	</#if>
+	<#if pay.canuse==0 >						
+									<div class="voucherLTHR" onclick="window.open('voucherDetail-${pay.proxyorderid}.html','_self')">
+										点击查看
+									</div>
+	</#if>
+								</div>
+							</div>	
+						</a>					
+					</li>
+</#list>	
+				</ul>
+			</div>
+		</div>
+		
+		<div class="voucherListBox" style="display:none;" id="viplist">
+			<div class="voucherList">
+				<ul>
+<#list viplist as vip>
+					<li class="voucherListLi">
+						<a>
+							<div class="voucherImgBox voucherImgBg1" onclick="window.open('Upin-${vip.proxyid}.html','_self')">
+								<div class="voucherImg">
+									<p class="voucherNumBox">￥<span class="voucherNum">${vip.price}</span></p>
+								    <p class="voucherImgText">提货券</p>
+								</div>
+							</div>
+							<div class="voucherListText">
+								<p class="voucherListTextH" onclick="window.open('Upin-${vip.proxyid}.html','_self')">
+									${vip.name}
+								</p>
+								<div class="voucherListTextB">
+									<div class="voucherLTHL">
+										有效期至&nbsp&nbsp<span class="voucherDate">${vip.limittime}</span>
+									</div>
+									<div class="voucherLTHR" onclick="window.open('vipCard-${vip.proxyorderid}.html','_self')">
+										查看卡券
+									</div>
+								</div>
+							</div>
+						</a>
+					</li>	
+</#list>
+				</ul>
+			</div>
+		</div>
+<script type="text/javascript">
+$(function(){
+	$("#pay").click(function(){
+		$("#pay").attr("class","voucherMenuLiBox voucherMBClic");
+		$("#notpay").attr("class","voucherMenuLiBox");
+		$("#used").attr("class","voucherMenuLiBox");
+		$("#vip").attr("class","voucherMenuLiBox");
+		$("#paylist").show();
+		$("#notpaylist").hide();
+		$("#usedlist").hide();
+		$("#viplist").hide();
+	});
+	$("#notpay").click(function(){
+		$("#pay").attr("class","voucherMenuLiBox");
+		$("#notpay").attr("class","voucherMenuLiBox voucherMBClic");
+		$("#used").attr("class","voucherMenuLiBox");
+		$("#vip").attr("class","voucherMenuLiBox");
+		$("#paylist").hide();
+		$("#notpaylist").show();
+		$("#usedlist").hide();
+		$("#viplist").hide();
+	});
+	$("#used").click(function(){
+		$("#pay").attr("class","voucherMenuLiBox");
+		$("#notpay").attr("class","voucherMenuLiBox");
+		$("#used").attr("class","voucherMenuLiBox voucherMBClic");
+		$("#vip").attr("class","voucherMenuLiBox");
+		$("#paylist").hide();
+		$("#notpaylist").hide();
+		$("#usedlist").show();
+		$("#viplist").hide();
+	});
+	$("#vip").click(function(){
+		$("#pay").attr("class","voucherMenuLiBox");
+		$("#notpay").attr("class","voucherMenuLiBox");
+		$("#used").attr("class","voucherMenuLiBox");
+		$("#vip").attr("class","voucherMenuLiBox voucherMBClic");
+		$("#paylist").hide();
+		$("#notpaylist").hide();
+		$("#usedlist").hide();
+		$("#viplist").show();
+	});
+})
+</script>	
+	</body>
+<#else>
+<script type="text/javascript"> 
+onload=function(){ 
+	setTimeout(go, 1);
+}; 
+function go(){ 
+	location.href="login.html"; 
+} 
+</script> 
+</#if>
+</html>

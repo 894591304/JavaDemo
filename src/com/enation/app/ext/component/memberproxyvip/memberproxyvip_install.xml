@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dbsolution>
+	<action>
+		<command>create</command>
+		<table>member_proxyvip</table>
+		<field><name>id</name><type>int</type><size>8</size><option>11</option></field>
+		<field><name>memberId</name><type>int</type><size>8</size><option>00</option></field>
+		<field><name>proxyMemberId</name><type>int</type><size>8</size><option>00</option></field>
+		<field><name>vipBT</name><type>varchar</type><size>32</size><option>00</option></field>
+		<field><name>v1LT</name><type>varchar</type><size>32</size><option>00</option></field>
+		<field><name>v2LT</name><type>varchar</type><size>32</size><option>00</option></field>
+		<field><name>v3LT</name><type>varchar</type><size>32</size><option>00</option></field>
+		<field><name>vipEX</name><type>int</type><size>16</size><option>00</option></field>
+	</action>
+</dbsolution>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+		<link rel="stylesheet" href="${ctx}/themes/default/shop/css/reset.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/shop/css/common.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/shop/css/SHOP.css" />
+		<script type="text/javascript" src="${ctx}/themes/default/shop/js/jquery-3.1.0.min.js" ></script>
+		<title>兑换信息</title>
+	</head>
+	<body>
+		<div class="publicHeader">
+			<span class="headIcon f_l">
+				<a href="voucher.html">
+					<img src="${ctx}/themes/default/img/2.png" alt="">
+				</a>
+			</span>
+				兑换信息
+		</div>
+<#if member?? >
+<#--创建订单状态标签-->
+<#assign ticketExchangeDetailTag= newTag("ticketExchangeDetailTag") />
+<#--获取订单状态 -->
+<#assign ticketDetail= ticketExchangeDetailTag() />
+	<#if ticketDetail.re==0>
+			参数错误！
+	</#if>
+	<#if ticketDetail.re==1>
+		<div class="orderList">
+			<ul class="orderListBox">			
+				<li class="orderListLi" >
+					<div class="orderText" style="width:100%">
+						<div class="orderPrice" style="height: 110px;">
+							兑换成功！</br>
+							商品提货券已加入到您的“<a href="voucher.html">卡券包</a>”中，点击进入查看！</br>
+						</div>
+					</div>
+				</li>		
+			</ul>
+			<ul class="orderListBox">
+				<li class="orderListLi">
+					<div class="orderText">
+						<p class="orderName">兑换券内容</p>
+					</div>
+				</li>
+			</ul>
+		<a href="Upin-${ticketDetail.proxyid}.html">	
+			<ul class="orderListBox">		
+				<li class="orderListLi">
+					<div class="orderListImg">
+						<div class="orderImg">
+							<img src="${ticketDetail.img}"/>
+						</div>
+					</div>
+					<div class="orderText">
+						<p class="orderName">
+							${ticketDetail.name}
+						</p>
+						<div class="orderPrice">
+							商品数量：<span class="YXprice">${ticketDetail.num}</span>
+						</div>							
+					</div>
+					<div class="numAdd">
+					</div>
+				</li>			
+			</ul>
+		</a>		
+		</div>
+	</#if>
+<#else>
+<script type="text/javascript"> 
+onload=function(){ 
+	setTimeout(go, 1);
+}; 
+function go(){ 
+	location.href="login.html"; 
+} 
+</script> 
+</#if>
+	</body>
+</html>

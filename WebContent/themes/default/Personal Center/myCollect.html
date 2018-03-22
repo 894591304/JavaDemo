@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+		<link rel="stylesheet" href="${ctx}/themes/default/Personal Center/css/reset.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/Personal Center/css/common.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/Personal Center/css/personalCenter.css" />
+		<script type="text/javascript" src="${ctx}/themes/default/Personal Center/js/jquery-3.1.0.min.js" ></script>
+<#if member?? >		
+
+<#-- 创建U品收藏标签 -->
+<#assign collectListTag= newTag("collectListTag") >
+<#-- 调用标签获取U品收藏信息 -->
+<#assign collectListTag= collectListTag() >
+<#-- 调用U品收藏信息 -->
+<#assign ctList= collectListTag.ctList >
+		
+		<title>我的</title>
+	</head>
+	<body>
+		<div class="publicHeader">
+			<span class="headIcon f_l">
+				<a href="user.html">
+					<img src="${ctx}/themes/default/img/11.png" alt="" alt="" width="7" height="19">
+				</a>
+			</span>
+			<div class="achieveBt f_r">
+				<a href="javascript:;" class="cleanBtn" id="cleanBtn">清空</a>	 
+			</div>
+			我的收藏
+	    </div>
+	    <div class="perCtWrap">
+            <div class="lookHistory"style="padding-bottom: 0px;">
+                <div class="goodsList" style="padding-bottom: 0px;">
+		            <ul>
+						<#list ctList as collect>
+				            <li class="goodsLi">
+		             			<div class="goodsImgBox">
+				            		<div class="goodsImg">
+					                	<a href="Upin-${collect.proxyid}.html"><img src="${collect.goodsimg}"/></a>
+					                </div>
+					            </div>
+					            <div class="goodsText">
+						            <a href="Upin-${collect.proxyid}.html"><p class="goodsName">${collect.goodsname}</p></a>
+					                <div class="goodsPrice">
+					    	            <span class="goodsPriceLf">
+					    		                      市场价  ￥${collect.Mktprice}
+					    	            </span>
+					    	            <span class="goodsPriceRt">
+					    		                      优选价  ￥${collect.price}
+					    	            </span>
+					                </div>
+					                <div class="goodsNumber">已销售${collect.sold}</div>
+					                <div class="goodsLiBt">
+					    	        	<div class="goodsComment">
+					    	    			<div class="goodsCommentIconB f_r">
+					    	    				<div class="goodsCommentIcon">
+					    	    					<img src="${ctx}/themes/default/img/like.png"/>
+					    	    				</div> &nbsp;&nbsp;${collect.count}
+					    	    			</div>
+					    				</div>
+					    	           	<div class="goodsSelect vipListIcon">
+											<a href="Upin-${collect.proxyid}.html">
+												<img src="${ctx}/themes/default/img/more.png" />
+											</a>
+					    	            </div>
+					                </div>
+					            </div>
+				            </li>
+						</#list>
+			    	</ul>
+		    	</div>
+            </div>
+	    </div>
+	</body>
+<script type="text/javascript">
+$(function(){
+	$("#cleanBtn").click(function(){
+		var result = confirm("是否清空收藏记录？");
+		if(result==true){
+			$.ajax({
+				url:"${ctx}/shop/ext/collect!clean.do",
+				type:"POST",
+				dataType:"json",
+				success:function(json){
+					if(json.result==0){
+						alert("请登录！");
+						location.href="login.html";
+					}else{
+						window.location.reload();
+					}
+				}
+			});
+		}
+	});
+});
+</script> 
+<#else>
+<script type="text/javascript"> 
+onload=function(){ 
+	setTimeout(go, 1);
+}; 
+function go(){ 
+	location.href="login.html"; 
+} 
+</script> 
+</#if>
+</html>

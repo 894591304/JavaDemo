@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+		<link rel="stylesheet" href="${ctx}/themes/default/login/css/reset.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/login/css/loginPage.css" />
+		<script type="text/javascript" src="${ctx}/themes/default/login/js/jquery-3.1.0.min.js" ></script>
+		<title>订单支付结果</title>
+	</head>
+<#if member?? >
+	<#--创建支付结果标签-->
+	<#assign paymentResultTag = newTag("newPaymentResultTag")   />
+	<#--获取支付结果-->
+	<#assign paymentResult= paymentResultTag()   />
+	<body>
+		<header>
+			<div class="publicHeader">
+			<span class="headIcon f_l">
+				<a href="voucher.html">
+					<img src="${ctx}/themes/default/img/2.png" alt="">
+				</a>
+			</span>
+				订单支付结果
+			</div>
+		</header>
+		<div class="Wrap">
+			<div style="text-align:center;font-size:16px;">
+<#if paymentResult.payment==1>
+			订单支付成功！</br>
+			点击进入“<a href="voucher.html">我的卡券</a>”中查看！
+</#if>
+<#if paymentResult.payment==0>
+			订单支付失败！</br>
+			点击进入“<a href="voucher.html">我的卡券</a>”中查看！
+</#if>
+<#if paymentResult.payment==2>
+			未查询到订单信息！</br>
+			点击进入“<a href="voucher.html">我的卡券</a>”！
+</#if>
+			</div>
+		</div>
+	</body>
+<#else>
+<script type="text/javascript"> 
+onload=function(){ 
+	setTimeout(go, 1);
+}; 
+function go(){ 
+	location.href="login.html"; 
+} 
+</script> 
+</#if>
+</html>
+	

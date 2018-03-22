@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+		<link rel="stylesheet" href="${ctx}/themes/default/new/css/reset.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/new/css/common.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/new/css/newStyle.css" />
+		<script type="text/javascript" src="${ctx}/themes/default/shop/js/jquery-3.1.0.min.js" ></script>
+		<title>我的现金券</title>
+	</head>
+<#if member?? >
+	<#--创建我的现金券标签-->
+	<#assign myDiscountTicketListTag = newTag("myDiscountTicketListTag")/>
+	<#--调用现金券标签-->
+	<#assign ticketlist= myDiscountTicketListTag()/>
+	<#--调用未使用现金券列表-->
+	<#assign notuselist= ticketlist.notuselist/>
+	<#--调用已过期现金券列表-->
+	<#assign outoftimelist=ticketlist.outoftimelist/>
+	<#--调用已使用现金券列表-->
+	<#assign usedlist= ticketlist.usedlist/>
+	<body>
+    <header>
+      <div class="l"><a href="user.html"><img src="${ctx}/themes/default/new/images/LeftArrow.png"/></a></div>
+      <div class="c">我的现金券</div>
+      <div class="r"></div>
+    </header>
+    
+    <div class="wrap mineCoupon">
+      <div class="banner" style="display:none;">
+        <img src="${ctx}/themes/default/Personal Center/images/p1.jpg"/>
+      </div>
+      
+      <div class="tab">
+        <a class="tabBtn" style="margin-right: 3.2px;" id="notuse">未使用</a>
+        <a class="tabBtn gray" style="margin-right: 3.2px;" id="outoftime">已过期</a>
+        <a class="tabBtn gray" id="used">已使用</a>        
+      </div>
+      
+      <div class="list" id="notuselist">
+        <ul>
+<#list notuselist as notuse>        
+        	<li>
+            <div class="l">
+              <div class="t">
+                <span>￥</span><span>${notuse.value}</span>
+              </div>
+              <div class="b">现金券</div>
+            </div>
+            <div class="c" onclick="window.open('Upin-${notuse.proxyid?c}.html','_self')">
+              <p class="t">${notuse.name}</p>
+              <p class="b">有效期：${notuse.endtime}</p>
+            </div>
+            <div class="r">
+              <a href="myTicketInfo.html?ticketid=${notuse.ticketid?c}">点击查看</a>
+            </div>
+          </li>
+</#list>
+        </ul>
+      </div>
+     
+      <div class="list" style="display:none;" id="outoftimelist">
+        <ul>
+<#list outoftimelist as outoftime>        
+        	<li>
+            <div class="l">
+              <div class="t">
+                <span>￥</span><span>${outoftime.value}</span>
+              </div>
+              <div class="b">现金券</div>
+            </div>
+            <div class="c" onclick="window.open('Upin-${outoftime.proxyid?c}.html','_self')">
+              <p class="t">${outoftime.name}</p>
+              <p class="b">有效期：${outoftime.endtime}</p>
+            </div>
+            <div class="r">
+            </div>
+          </li>
+</#list>          
+        </ul>
+      </div>
+<#list usedlist as used>
+      <div class="list" style="display:none;" id="usedlist">
+        <ul>
+        
+        	<li>
+            <div class="l">
+              <div class="t">
+                <span>￥</span><span>${used.value}</span>
+              </div>
+              <div class="b">现金券</div>
+            </div>
+            <div class="c" onclick="window.open('Upin-${used.proxyid?c}.html','_self')">
+              <p class="t">${used.name}</p>
+              <p class="b">有效期：${used.endtime}</p>
+            </div>
+            <div class="r">
+            </div>
+          </li>
+</#list>
+        </ul>
+      </div> 
+    </div>
+<script type="text/javascript">
+$(function(){
+	$("#notuse").click(function(){
+		$("#notuse").attr("class","tabBtn");
+		$("#outoftime").attr("class","tabBtn gray");
+		$("#used").attr("class","tabBtn gray");
+		$("#notuselist").show();
+		$("#outoftimelist").hide();
+		$("#usedlist").hide();
+	});
+	$("#outoftime").click(function(){
+		$("#notuse").attr("class","tabBtn gray");
+		$("#outoftime").attr("class","tabBtn");
+		$("#used").attr("class","tabBtn gray");
+		$("#notuselist").hide();
+		$("#outoftimelist").show();
+		$("#usedlist").hide();
+	});
+	$("#used").click(function(){
+		$("#notuse").attr("class","tabBtn gray");
+		$("#outoftime").attr("class","tabBtn gray");
+		$("#used").attr("class","tabBtn");
+		$("#notuselist").hide();
+		$("#outoftimelist").hide();
+		$("#usedlist").show();
+	});
+})
+</script>    
+	</body>
+	<#else>
+<script type="text/javascript"> 
+onload=function(){ 
+	setTimeout(go, 1);
+}; 
+function go(){ 
+	location.href="login.html"; 
+} 
+</script> 
+</#if>
+</html>

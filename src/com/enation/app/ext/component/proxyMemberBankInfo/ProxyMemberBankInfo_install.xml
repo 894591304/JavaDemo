@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dbsolution>
+	<action>
+		<command>create</command>
+		<table>proxymemberbankinfo</table>
+		<field><name>id</name><type>int</type><size>8</size><option>11</option></field>
+		<field><name>proxyMemberId</name><type>int</type><size>8</size><option>00</option></field>
+		<field><name>payeeBankAccountType</name><type>int</type><size>2</size><option>00</option></field>
+		<field><name>payeeBankCard</name><type>varchar</type><size>32</size><option>00</option></field>
+		<field><name>payeeBankNum</name><type>varchar</type><size>16</size><option>00</option></field>
+		<field><name>payeeCardHolder</name><type>varchar</type><size>32</size><option>00</option></field>
+		<field><name>payeeBankBranchName</name><type>varchar</type><size>64</size><option>00</option></field>
+		<field><name>payeeBankProvinceName</name><type>varchar</type><size>16</size><option>00</option></field>
+		<field><name>payeeBankCityName</name><type>varchar</type><size>16</size><option>00</option></field>
+	</action>
+</dbsolution>

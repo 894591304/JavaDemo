@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+		<link rel="stylesheet" href="${ctx}/themes/default/agent/css/reset.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/agent/css/common.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/agent/css/agent.css" />
+		<script type="text/javascript" src="${ctx}/themes/default/agent/js/jquery-3.1.0.min.js" ></script>
+		<script>
+			var ctx="${ctx}";
+		</script>
+		<script src="${ctx}/themes/default/js/CartBar.js"  type="text/javascript"></script>
+		<script src="${ctx}/themes/default/js/jquery-form.js"  type="text/javascript"></script>
+		<script src="${ctx}/themes/default/js/DropDownMenu.js"  type="text/javascript"></script>
+		<script src="${ctx}/themes/default/js/ui.datepicker.js"  type="text/javascript"></script>
+		<script src="${ctx}/themes/default/js/DatePicker.js"  type="text/javascript"></script>
+		<script src="${ctx}/themes/default/js/LoginDialog.js"  type="text/javascript"></script>
+		<title>我的店铺信息</title>
+	</head>
+	<body class="agentNewBody">
+<!-- 创建会员信息标签 -->
+<#assign memberIsLoginTag=newTag("memberIsLoginTag")>
+<!-- 调用会员登录标签 -->
+<#assign isLogin=memberIsLoginTag()>
+	<#if isLogin >
+		<div class="publicHeader">
+		    <span class="f_l headIcon">
+				<a href="javascript:;" onclick="window.history.back();">
+					<img src="${ctx}/themes/default/img/2.png" alt="">
+				</a>
+			</span>
+				我的店铺信息
+	    </div>
+	    <div class="agentNewTp">
+	    	此内容为您代理商品后在你的个人主页所展示的内容，以及在用户查看时所显示的内容。
+	    </div>
+		<form action="shopInfo.html" method="post" id="shopInfo_form" >
+			<div class="agentBox">
+	    		<p class="agentBoxH">店铺用户名</p>
+	    		<div class="agentBoxText">
+					<input type="text" name ="shopName" placeholder="请输入店铺名"/>
+	    		</div>
+	    	</div>
+	    	<div class="agentBox">
+	    		<p class="agentBoxH">店铺关键字</p>
+	    		<div class="agentBoxText agentNewText">
+	    			<input type="text" name ="label" placeholder="请输入店铺关键字" style="width: 300px;"/>
+	    		</div>
+	    	</div>
+	    	<div class="agentBox">
+	    		<p class="agentBoxH">店铺描述</p>
+	    		<div class="agentBoxText agentNewText">
+	    			<input type="text" name ="shopIntro" placeholder="请输入店铺描述" style="width: 300px;"/>
+	    		</div>
+	    	</div>
+			<div class="agentBox">
+	    		<p class="agentBoxH">上传用户头像及店铺背景图</p>	
+			<div class="personImg">
+	    		<div class="personImgBox">
+	    			<div class="personImgBoxC">
+	    				<img src="${ctx}/themes/default/img/p1.jpg" />
+	    			</div>
+	    		</div>
+	    		<div class="personImgText">
+	    			<div class="personImgTextB">
+	    				<span class="personImgIcon"><img src="${ctx}/themes/default/img/28.png" alt=""></span>
+	    				<span class="personImgIcon personImgIconM"><img src="${ctx}/themes/default/img/29.png" alt=""></span>
+	    			    <span class="personImgIcon"><img src="${ctx}/themes/default/img/30.png" alt=""></span>
+	                             上传头像图片
+	    			</div>
+	    		</div>
+	    	</div>
+			<div class="personImg">
+	    		<div class="personImgBox">
+	    			<div class="personImgBoxC">
+	    				<img src="${ctx}/themes/default/img/p1.jpg" />
+	    			</div>
+	    		</div>
+	    		<div class="personImgText">
+	    			<div class="personImgTextB">
+	    				<span class="personImgIcon"><img src="${ctx}/themes/default/img/28.png" alt=""></span>
+	    				<span class="personImgIcon personImgIconM"><img src="${ctx}/themes/default/img/29.png" alt=""></span>
+	    			    <span class="personImgIcon"><img src="${ctx}/themes/default/img/30.png" alt=""></span>
+	                             上传背景图片
+	    			</div>
+	    		</div>
+	    	</div>
+			</div>
+	    	<div class="agentBox">
+	    		<p class="agentBoxH">联系电话</p>
+	    		<div class="agentBoxText agentNewText">
+	    			<input type="text" name ="mobile" placeholder="请输入联系电话" "/>
+	    		</div>
+	    	</div>
+	    	<div class="agentBox">
+	    		<p class="agentBoxH">客服QQ</p>
+	    		<div class="agentBoxText agentNewText">
+	    			<input type="text" name ="qq" placeholder="请输入客服QQ" "/>
+	    		</div>
+	    	</div>
+	    	<div class="agentNewBt" id="shopInfo_submit">
+	    		<a href="javascript:" onclick="self.location=document.referrer;" class="agentNewBtLf" >取消</a>
+	    		<a href="javascript:;" class="agentNewBtRt">提交</a>
+	    	</div>	
+		</form>			
+<script type="text/javascript">
+$(function(){
+	 var options = {
+			url : "${ctx}/shop/ext/memberShop!submit.do" ,
+			type : "POST",
+			dataType : 'json',
+			success : function(result) {
+ 				if(result.result==1){
+	 				location.href="${ctx}/user.html";
+	 			}else{
+	 				alert(result.message);
+		 		} 
+			},
+			error : function(e) {
+				$.alert("出现错误 ，请重试");
+			}
+	};
+	$("#shopInfo_submit a").click(function(){
+		$('#shopInfo_form').ajaxSubmit(options);	
+	})
+});
+</script>
+<#else>
+	<script language='javascript'>document.location = "login.html"</script>
+</#if>
+
+	</body>
+</html>

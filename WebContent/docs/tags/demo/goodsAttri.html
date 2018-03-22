@@ -1,0 +1,12 @@
+
+<!--创建"商品基本信息"标签-->
+<#assign goodsBaseDataTag = newTag("goodsBaseDataTag")>
+<!--调用"商品基本信息"标签，并传递参数-->
+<#assign goodsBaseData = goodsBaseDataTag("{'goodsid':137}")>  
+<!--创建"商品属性"标签-->
+<#assign goodsAttributeTag = newTag("goodsAttributeTag")>
+
+商品名称：${goodsBaseData.p1!''}</br>
+
+商品功效：${goodsBaseData.p2!''}
+

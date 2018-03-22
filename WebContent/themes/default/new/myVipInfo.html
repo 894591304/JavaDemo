@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+		<link rel="stylesheet" href="${ctx}/themes/default/new/css/reset.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/new/css/common.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/new/css/newStyle.css" />
+		<script type="text/javascript" src="${ctx}/themes/default/js/jquery-1.7.2.js" ></script>
+		<title>我的Vip</title>
+	</head>
+	<body>
+    <header>
+      <div class="l"><a href="myVipList.html"><img src="${ctx}/themes/default/new/images/LeftArrow.png"/></a></div>
+      <div class="c">我的VIP</div>
+      <div class="r"></div>
+    </header>
+<#if member?? >
+	<div class="wrap mylevel">
+	<#-- 创建用户基本信息标签 -->
+	<#assign memberProxyVipInfoTag= newTag("memberProxyVipInfoTag") >
+	<#-- 调用标签获取用户基本信息 -->
+	<#assign memberProxyVipInfo= memberProxyVipInfoTag() > 
+		<#if memberProxyVipInfo.re==3>     
+      <div class="head">
+        <div class="img">
+          <img src="${ctx}/themes/default/new/images/vipOld.png"/>
+        </div>
+        <div class="txt">
+          <span>用户等级</span>
+          <span>已过期</span>
+        </div>
+      </div>
+      		<#elseif memberProxyVipInfo.re==2>
+      		<#elseif memberProxyVipInfo.re==0>
+     		<#elseif memberProxyVipInfo.re==1> 
+      	<div class="head">
+       		<div class="img">
+          		<img src="<#if memberProxyVipInfo.level==1>${ctx}/themes/default/new/images/v1.png<#elseif memberProxyVipInfo.level==2>${ctx}/themes/default/new/images/v2.png<#else>${ctx}/themes/default/new/images/v3.png</#if>"/>
+        	</div>
+        	<div class="txt">
+          		<span>用户等级</span>
+          		<span>${memberProxyVipInfo.vname}</span>
+        	</div>
+      	</div>
+      
+      <div class="intro">
+        <p class="title"><#if memberProxyVipInfo.level==1>VIP1<#elseif memberProxyVipInfo.level==2>VIP2<#else>VIP3</#if> 说明：</p>
+        <p class="txt"><#if memberProxyVipInfo.level==1>VIP1<#elseif memberProxyVipInfo.level==2>VIP2<#else>VIP3</#if> 说明：${memberProxyVipInfo.vcontent}</p>
+      </div>
+      </#if>
+      <#-- 创建用户基本信息标签 -->
+	<#assign memberProxyVipListTag= newTag("memberProxyVipListTag") >
+	<#-- 调用标签获取用户基本信息 -->
+	<#assign memberproxylist= memberProxyVipListTag() >
+	<#assign proxylist= memberproxylist.alist >    
+    	<div class="shop">
+        	<div class="top">
+         		<p class="img"><img src="${ctx}/themes/default/new/images/vipStore.png"/></p>
+         		<p class="title">网红店铺</p>
+        	</div>
+        	<div class="bottom">
+        		<ul>
+	<#if memberproxylist.count==0>
+		对不起，您还没有购买网红VIP，请去您关注的网红店铺进行购买！
+		<#else>
+			<#list proxylist as proxy>
+          			<li>
+              			<div onclick="window.open('personCtList-${proxy.proxymemberid?c}.html','_self')" class="l"><img src="${ctx}${proxy.shopimg}"/></div>
+              			<div onclick="window.open('myVipInfo.html?proxyid=${proxy.proxymemberid?c}','_self')" class="r" style="line-height: 1.5rem;">
+                			<p class="title">${proxy.shopname}</p>
+               				<p class="tig"><span>${proxy.label}</span></p>               
+              			</div>
+              			<p onclick="window.open('personCtList-${proxy.proxymemberid?c}.html','_self')" class="img"><img style="width: 30px;height: 30px;" src="<#if proxy.level==1>${ctx}/themes/default/new/images/v1.png<#elseif proxy.level==2>${ctx}/themes/default/new/images/v2.png<#elseif proxy.level==3>${ctx}/themes/default/new/images/v3.png<#else>${ctx}/themes/default/new/images/vipOld.png</#if>"/></p>
+            		</li>
+            </#list>
+     </#if>
+          		</ul>
+        	</div>
+      	</div>      
+    </div>
+<#else>
+<script type="text/javascript"> 
+onload=function(){ 
+	setTimeout(go, 1);
+}; 
+function go(){ 
+	location.href="login.html"; 
+} 
+</script> 
+</#if>	        
+		<footer class="homeFooter">
+			<ul>
+			<a href="homePage.html">
+				<li class="tabLi">
+					<div class="tabIcon">
+						<img src="${ctx}/themes/default/img/customized.png" />
+					</div>
+					<span>定制</span>
+				</li>
+			</a>
+			<a href="discountHome.html">
+				<li class="tabLi">
+					<div class="tabIcon">
+						<img src="${ctx}/themes/default/img/discover.png" />
+					</div>
+					<span class="tabText">发现</span>
+				</li>
+			</a>
+			<a href="cart.html">
+				<li class="tabLi">
+					<div class="tabIcon">
+						<img src="${ctx}/themes/default/img/order.png" />
+					</div>
+					<span>购物车</span>
+				</li>
+			</a>
+			<a href="user.html">
+				<li class="tabLi numColor">
+					<div class="tabIcon">
+						<img src="${ctx}/themes/default/img/mine_sel.png" />
+					</div>
+					<span>我的</span>
+				</li>
+			</a>
+			</ul>
+		</footer>
+	</body>
+</html>

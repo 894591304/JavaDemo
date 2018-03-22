@@ -1,0 +1,46 @@
+<#include '/admin/header.html' > 
+
+<div class="main" style="background-color: white;">
+	<form id="addForm">
+		<table width="98%" border="0" cellspacing="0" cellpadding="8">
+			<tr>
+				<th width="25%">用户名：</th>
+				<td><input class="input_text easyui-validatebox" type="text"
+					id="username" name="agentUser.username" data-options="required:true"></input>
+				</td>
+			</tr>
+			<tr>
+				<th>密码：</th>
+				<td><input class="input_text easyui-validatebox"
+					type="password" name="agentUser.password" data-options="required:true"></input>
+				</td>
+			</tr>
+			<tr>
+				<th>企业名称：</th>
+				<td><input class="input_text" type="text" name="agentUser.name" data-options="required:true"></input>
+				</td>
+			</tr>
+			<tr>
+				<th>邮箱：</th>
+				<td><input class="input_text easyui-validatebox" type="text"
+					id="email" validType="email" name="agentUser.email"
+					data-options="required:false"></input>
+				</td>
+			</tr>
+			<tr>
+				<th>联系方式：</th>
+				<td><input class="input_text easyui-validatebox" type="text"
+					id="mobile" validType="mobile" name="agentUser.mobile"
+					data-options="required:false" maxlength="11"></input>
+				</td>
+			</tr>
+			<tr>
+				<th>地址：</th>
+				<td><input class="input_text" type="text" name="agentUser.address"></input>
+				</td>
+			</tr>
+		</table>
+	</form>
+</div>
+
+<#include '/admin/footer.html' >

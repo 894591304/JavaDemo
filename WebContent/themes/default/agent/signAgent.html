@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<#if member?? >
+<!-- 创建商品基本信息标签 -->
+<#assign goodsBaseDataTag= newTag("goodsBaseDataTag") >
+<!-- 调用标签获取商品基本信息 -->
+<#assign goods= goodsBaseDataTag() >
+<#if goods.page_title!="">
+		<#assign  title="${goods.page_title}" />
+		<#else>
+		<#assign  title="${goods.name}" />
+</#if>
+<#if goods.meta_keywords!="">
+	<#assign  keywords="${goods.meta_keywords}" />
+</#if>
+<#if goods.meta_description!="">
+	<#assign  description="${goods.meta_description}" />
+</#if>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+		<link rel="stylesheet" href="${ctx}/themes/default/agent/css/reset.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/agent/css/common.css" />
+		<link rel="stylesheet" href="${ctx}/themes/default/agent/css/agent.css" />
+		<script type="text/javascript" src="${ctx}/themes/default/agent/js/jquery-3.1.0.min.js" ></script>
+		<script src="${ctx}/themes/default/js/jquery-form.js"  type="text/javascript"></script>
+		<title>签署代理</title>
+	</head>
+<!-- 创建代理商品信息标签 -->
+<#assign goodsAgentTag= newTag("goodsAgentTag") >
+<!-- 调用代理商品信息标签-->
+<#assign goodsAgentInfo= goodsAgentTag() >
+<!-- 获取代理商品信息 -->
+<#assign goodsInfo = goodsAgentInfo.goodsAgent>
+<!-- 获取时间选项信息 -->
+<#assign timeList = goodsAgentInfo.timeList>
+	<body>
+		<div class="publicHeader">
+		    <span class="f_l headIcon">
+				<a href="javascript:;" onclick="window.history.back();">
+					<img src="${ctx}/themes/default/img/2.png" alt="">
+				</a>
+			</span>
+				签署代理
+	    </div>
+	    <div class="agentList">
+<#list goodsInfo as good>
+	    	<div class="agentListPub">
+	    		<div class="agentListImg">
+	    			<div class="ALIBox">
+	    				<img src="${goods.original}" />
+	    			</div>
+	    		</div>
+	    		<div class="agentListText">
+	    			<p class="agentListName">
+	    				${goods.name}
+	    			</p>
+	    			<div class="agentLTPub">
+	    				<div class="agentLTPubLf">
+	    					市场价 ￥${good.mktprice}
+	    				</div>&nbsp;&nbsp;&nbsp;&nbsp;
+	    				<div class="agentLTPubLf">
+	    					优选价 ￥${good.price}
+	    				</div>
+	    			</div><div class="agentLTPub">
+	    				<div class="agentLTPubLf">
+						<#if goodsAgentInfo.level==1>
+	    					金卡代理价 ￥${good.goldprice}
+						</#if>
+						<#if goodsAgentInfo.level==2>
+	    					白金卡代理价 ￥${good.platinumprice}
+						</#if>
+						<#if goodsAgentInfo.level==3>
+	    					黑卡代理价 ￥${good.blackprice}
+						</#if>
+	    				</div>&nbsp;&nbsp;&nbsp;&nbsp;
+	    				<div class="agentLTPubLf">
+	    				<#if goodsAgentInfo.level==1>
+	    					利润空间 ￥${good.price-good.goldprice}
+						</#if>
+						<#if goodsAgentInfo.level==2>
+	    					利润空间 ￥${good.price-good.platinumprice}
+						</#if>
+						<#if goodsAgentInfo.level==3>
+	    					利润空间 ￥${good.price-good.blackprice}
+						</#if>
+	    				</div>
+	    			</div>
+	    			<div class="agentLTPub">
+	    				<div class="agentLTPubLf">
+	    					已代理 ${goodsAgentInfo.onsale}
+	    				</div>&nbsp;&nbsp;&nbsp;&nbsp;
+	    				<div class="agentLTPubLf">
+	    					剩余 ${goodsAgentInfo.store-goodsAgentInfo.onsale}
+	    				</div>
+	    			</div>
+	    		</div>
+	    	</div>
+	    </div>
+<form action="signAgent.html" method="post" id="signAgent_form" >
+	<input type="hidden" name="goodsid" id="goodsid" value="${good.goodsid?c}">
+	    <div class="signGBox">
+	    	<div class="signGBoxLf">
+	    		您的授权信用余额
+	    	</div>
+	    	<div class="signGBoxRt">
+	    		￥${goodsAgentInfo.remain}
+	    	</div>
+	    </div>
+	    <div class="signGBox">
+	    	<div class="signGBoxLf">
+	    		申请代理本商品
+	    	</div>
+	    	<div class="signGBoxRt">
+	    		<input type="number" name="agentnum" id="agentnum" min="0" max="${goodsAgentInfo.store-goodsAgentInfo.onsale}" style="width: 70px;text-align:right;"/>件
+	    	</div>
+	    </div>
+	    <div class="signGBox">
+	    	<div class="signGBoxLf">
+			<#if goodsAgentInfo.level==1>
+	    		金卡代理价
+			</#if>
+			<#if goodsAgentInfo.level==2>
+	    		白金卡代理价
+			</#if>
+			<#if goodsAgentInfo.level==3>
+	    		黑卡代理价
+			</#if>
+	    	</div>
+	    	<div class="signGBoxRt">
+			<#if goodsAgentInfo.level==1>
+	    		￥${good.goldprice}/件
+			</#if>
+			<#if goodsAgentInfo.level==2>
+	    		￥${good.platinumprice}/件
+			</#if>
+			<#if goodsAgentInfo.level==3>
+	    		￥${good.blackprice}/件
+			</#if>
+	    	</div>
+	    </div>
+		<div class="signGBox">
+	    	<div class="signGBoxLf">
+			<#if goodsAgentInfo.level==1>
+	    		金卡预计利润
+			</#if>
+			<#if goodsAgentInfo.level==2>
+	    		白金卡预计利润
+			</#if>
+			<#if goodsAgentInfo.level==3>
+	    		黑卡预计利润
+			</#if>			
+	    	</div>
+	    	<div class="signGBoxRt">
+	    	<#if goodsAgentInfo.level==1>
+	    		￥${good.price-good.goldprice}/件
+			</#if>
+			<#if goodsAgentInfo.level==2>
+	    		￥${good.price-good.platinumprice}/件
+			</#if>
+			<#if goodsAgentInfo.level==3>
+				￥${good.price-good.blackprice}/件
+			</#if>			
+	    	</div>
+	    </div>
+		<div class="signGBox">
+	    	<div class="signGBoxLf">
+			<#if goodsAgentInfo.level==1>
+	    		金卡销售保证金
+			</#if>
+			<#if goodsAgentInfo.level==2>
+	    		白金卡销售保证金
+			</#if>
+			<#if goodsAgentInfo.level==3>
+	    		黑卡销售保证金
+			</#if>	
+	    	</div>
+	    	<div class="signGBoxRt">
+			<#if goodsAgentInfo.level==1>
+	    		￥${good.goldprice/10}/件
+			</#if>
+			<#if goodsAgentInfo.level==2>
+	    		￥${good.platinumprice/10}/件
+			</#if>
+			<#if goodsAgentInfo.level==3>
+	    		￥${good.blackprice/10}/件
+			</#if>
+	    	</div>
+	    </div>
+	    <input type="hidden" name="nobzj" id="nobzj" value="0">
+	    <div class="signSelect">
+	    	<div class="signSLf">
+	    		销售期限
+	    	</div>
+	    	<div class="signSBox">
+	<#list timeList as time>	    	
+	    		<div class="signInput">
+	    			<input id="xsqx1" type="radio" name="xsqx1" value="${time.time}"/> ${time.time}天
+	    		</div>
+	</#list>
+				<input type="hidden" name="xsqx" id="xsqx" value="0">
+	    	</div>	
+	    </div>
+	    <div class="signTextBox" >
+	    	<p class="signTextBoxH" style="display:none;">签署代理协议</p>
+	    	<div class="signTextTp">
+	    		<div class="signTextTpLf">商品提供企业</div>
+	    		<div class="signTextTpRt">
+	    			${goodsAgentInfo.agentname}
+	    		</div>
+	    	</div>
+	    	<div class="signTextTp" style="display:none;">
+	    		<div class="signTextTpLf">乙方企业（个人）</div>
+	    		<div class="signTextTpRt">
+	    			${goodsAgentInfo.memberName}
+	    		</div>
+	    	</div>
+	    	<div class="signTextBt" style="display:none;">
+	    		<div class="signTextBtLf">身份证号码</div>
+	    		<div class="signTextBtRt">${goodsAgentInfo.idCard}</div>
+	    	</div>
+	    	<div class="signTextBt" style="display:none;">
+	    		<div class="signTextBtLf">联系方式</div>
+	    		<div class="signTextBtRt">${goodsAgentInfo.mobile}</div>
+	    	</div>
+	    	<div class="signTextBt" style="display:none;">
+	    		<div class="signTextBtLf">信贷账户</div>
+	    		<div class="signTextBtRt">${goodsAgentInfo.accountId}</div>
+	    	</div>
+	    	<div class="signTextTp" style="display:none;">
+	    		<div class="signTextTpLf">签署时间</div>
+	    		<div class="signTextTpRt">
+	    			${goodsAgentInfo.signTime}
+	    		</div>
+	    	</div>
+	    </div>
+	    <div class="agreeBox signGgree" style="display:none;">
+			<input id="iread1" name="iread1" type="checkbox" value="1"/> 
+			<input type="hidden" name="iread" id="iread" value="1">
+	    	我已经阅读<a href="#">个人代理协议,查看协议内容</a>
+	    </div>
+	    <div class="begainAgent">
+	    	<a href="#" id="sign">确定代理</a>
+	    </div>
+</form>			
+		
+		<script type="text/javascript">
+			$(function(){
+				$('#sign').click(function(){
+					var iread = $('#iread').val(),
+						num = $('#agentnum').val(),
+						xsqx = $('#xsqx').val();
+					if($.trim(iread) == ''||$.trim(iread) == 0){
+						alert('请同意个人代理协议!');
+						return false;
+					}else if($.trim(num) == ''){
+						alert('代理数量不能为空!')
+						return false;
+					}else if($.trim(xsqx) == ''||$.trim(xsqx)==0){
+						alert('请输入代理期限!')
+						return false;
+					}else{
+						$('#signAgent_form').ajaxSubmit(options);
+					}
+				});
+				var options = {
+					url : "${ctx}/shop/ext/goodsAgent!signAgent.do",
+					type : "POST",
+					dataType : 'json',
+					success : function(data) {	
+								if(data.result==1){
+									var forward='${ctx}/agentShopSet-${good.goodsid?c}.html'; 					 
+									location.href =forward;
+								}else if(data.result==3){
+									alert("请完善银行信息后再代理VIP卡！");
+									location.href = "bankInfoEdit.html";
+								}else if(data.result==4){
+									alert("对不起，您无法申请代理此商品！");
+									location.href = "myAgent.html";
+								}else{
+									alert(data.message)
+								}
+							},
+					error : function(e) {
+								alert("出现错误 ，请重试");
+							}
+					};
+			})	
+				
+		$('input[type=checkbox]').change(function(){
+		$('#nobzj').val($('input[name="nobzj1"]:checked').map(function(){return this.value}).get())
+		})
+		$('input[type=radio]').change(function(){
+		$('#xsqx').val($('input[type=radio]:checked').map(function(){return this.value}).get())
+		})
+		$('input[type=checkbox]').change(function(){
+		$('#iread').val($('input[name="iread1"]:checked').map(function(){return this.value}).get())
+		})
+		</script>
+</#list>		
+	</body>
+<#else>
+<script type="text/javascript"> 
+	onload=function(){ 
+		setTimeout(go, 1);
+	}; 
+	function go(){ 
+		location.href="login.html"; 
+	} 
+</script> 
+</#if>
+</html>

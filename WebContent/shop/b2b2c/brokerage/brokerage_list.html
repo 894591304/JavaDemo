@@ -1,0 +1,210 @@
+<#include '/admin/header.html' >
+<style>
+.input_text{
+	width: 95%;
+}
+</style>
+<div id="loading"></div>
+<div class="main">
+	<form id="brokerageform">
+		<div id="tb" style="height: auto">
+			<a href="javascript:void(0)" class="easyui-linkbutton"
+				data-options="plain:true" onclick="append()">添加</a>
+			<a href="javascript:void(0)" class="easyui-linkbutton"
+				data-options="plain:true" onclick="del()">删除</a>
+				
+			<span style="float: right;"> 
+				<span id="simpleSearch">
+					<input id="searchKeyword" class="input_text" type="text" value="" size="30" style="width: 300px;"
+					placeholder="请输入经纪公司名称、电话" name="searchKeyWord"> 
+					<a href="javascript:void(0)" class="easyui-linkbutton" 
+					data-options="plain:true" onclick="searchBrokerage()">搜索</a>
+				</span>
+			</span>
+		</div>
+		<div class="clear height10"></div>
+		<div class="shadowBoxWhite tableDiv">
+		<table class="easyui-datagrid"
+			data-options="url:'brokerage!brokeragelistJson.do',pageList: [5,10,15,20],pageSize:${pageSize},fitColumns:'true'"
+			pagination="true" id="brokeragedata" sortName="userid" sortOrder="desc" >
+			<thead>
+				<tr>
+					<th data-options="field:'userid',checkbox:true"></th>
+					<th data-options="field:'username',width:200">用户名</th>
+					<th data-options="field:'name',width:200">企业名称</th>
+					<th data-options="field:'mobile',width:200">联系方式</th>
+					<th data-options="field:'address',width:200">地址</th>
+					<th data-options="field:'email',width:200">邮箱</th>
+					<th data-options="field:'action',width:100,align:'center'"
+						formatter="formatOperation">操作</th>
+				</tr>
+			</thead>
+		</table>
+		</div>
+	</form>
+	<div id="divdia" style="display: none;"></div>
+
+</div>
+<script type="text/javascript">
+	function append(id) {
+		var map = {}; // Map map = new HashMap();
+		if (!id) {
+			map["href"] = "brokerage!add_brokerage.do";
+			map["formId"] = "#addForm";
+			map["url"] = "brokerage!saveBrokerage.do?ajax=yes";
+			map["title"] = "添加经纪公司";
+			map["loadshow"] = "正在添加......";
+		} else {
+			map["href"] = "brokerage!edit_brokerage.do?user_id=" + id;
+			map["formId"] = "#editForm";
+			map["url"] = "brokerage!saveEditBrokerage.do?ajax=yes";
+			map["title"] = "修改经纪公司";
+			map["loadshow"] = "正在修改......";
+		}
+		map["divDialog"] = "#divdia";
+		map["gridreload"] = "#brokeragedata";
+
+		//需要验证的参数
+		map["nameId"] = "#name";
+		map["urlId"] = "#url";
+
+		addDialog(map);
+	}
+	function addDialog(map) {
+		$(map["divDialog"]).show();
+		$(map["divDialog"]).dialog({
+			title : map["title"],
+			width : 600,
+			height : 400,
+			closed : false,
+			cache : false,
+			href : map["href"],
+			modal : true,
+			buttons : [ {
+				text : '保存',
+				iconCls : 'icon-ok',
+				handler : function() {
+					submitForm(map);
+				}
+			}, {
+				text : '清空',
+				handler : function() {
+					clearForm(map);
+				}
+			} ]
+		});
+	}
+	function submitForm(map) {
+		var formflag = $(map["formId"]).form().form('validate');
+		if (formflag) {
+			$.Loading.show(map["loadshow"]);
+			var options = {
+				url : map["url"],
+				type : "POST",
+				dataType : 'json',
+				success : function(result) {
+					if (result.result == 1) {
+						$.Loading.show(result.message);
+						$(map["divDialog"]).dialog('close');
+						$(map["gridreload"]).datagrid('reload');
+					}
+					if (result.result == 0) {
+						$.Loading.error(result.message);
+					}
+					$.Loading.hide();
+				},
+				error : function(e) {
+					alert("出现错误 ，请重试");
+				}
+			};
+			$(map["formId"]).ajaxSubmit(options);
+		}
+	}
+
+	function clearForm(map) {
+		$(map["formId"]).form('clear');
+	}
+
+	function formatOperation(value, row, index) {
+		var val = "<a class='edit' title='修改' href='javascript:void(0);' onclick='append(\""
+				+ row.userid + "\")' ></a>";
+		return val;
+	}
+
+	function formatRegtime(value, row, index) {
+		return getFormatDateByLong(value, "yyyy-MM-dd hh:mm:ss");
+	}
+
+	function formatLastlogin(value, row, index) {
+		return getFormatDateByLong(value, "yyyy-MM-dd hh:mm:ss");
+	}
+
+	function formatArea(value, row, index) {
+		var val = "";
+		if(row.province!=null && row.province!="请选择" ){
+			val=val+row.province;
+		}
+		if(row.city!=null && row.city!="请选择"){
+			val=val+"-"+row.city;
+		}
+		if(row.region!=null && row.region!="请选择"){
+			val=val+"-"+row.region;
+		}
+		if(val==""){
+			val="未选择城市";
+		}
+		return val;
+	}
+
+	function formatSex(value, row, index) {
+		var val;
+		if (value == 1) {
+			val = "男";
+		} else {
+			val = "女";
+		}
+		return val;
+	}
+
+	function del() {
+		var rows = $('#brokeragedata').datagrid("getSelections");
+		if (rows.length < 1) {
+			$.Loading.error("请选择要删除的经纪公司");
+			return;
+		}
+		if (!confirm("确认要将删除经纪公司吗？")) {
+			return;
+		}
+		var options = {
+			url : "brokerage!delete.do?ajax=yes",
+			type : "POST",
+			dataType : 'json',
+			success : function(result) {
+				$.Loading.success(result.message);
+				if (result.result == 1) {
+					var rows = $('#brokeragedata').datagrid("getSelections");
+					for ( var i = 0; i < rows.length; i++) {
+						var index = $('#brokeragedata').datagrid('getRowIndex',
+								rows[i]);
+						$('#brokeragedata').datagrid('deleteRow', index);
+					}
+				}
+			},
+			error : function(e) {
+				$.Loading.error("出现错误 ，请重试");
+			}
+		};
+		$('#brokerageform').ajaxSubmit(options);
+	}
+	
+	function searchBrokerage(){	
+		var keyword = $("#searchKeyword").val();
+		$("#brokeragedata").datagrid('load', {
+			 keyword:keyword,
+			 page:1
+	    });
+	}
+	
+	
+</script>
+<#include '/admin/footer.html' >

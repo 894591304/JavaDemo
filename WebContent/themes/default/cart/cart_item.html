@@ -1,0 +1,72 @@
+<#-- 创建购物车标签 -->
+<#assign cartTag= newTag("newCartTag")>
+<#--通过购物车标签获取购物项列表 -->
+<#assign cart = cartTag() >	
+<#--通过购物车标签获取购物项列表 -->
+<#assign itemList = cart.goodsList >	
+<#-- 创建会员是否登录标签 -->
+<#assign memberIsLoginTag= newTag("memberIsLoginTag")>
+<#-- 获取是否登录  -->
+<#assign isLogin = memberIsLoginTag() >	
+<script type="text/javascript">
+var isLogin = ${isLogin?string};
+</script>
+<#if itemList?exists && itemList?size gt 0>
+		<div class="orderList">
+			<ul class="orderListBox">
+			
+<#list itemList as item >	
+				<li class="orderListLi" itemid="${item.id}" productid="${item.product_id}" price="${item.price}" proxyid="${item.addon}">
+					<div class="orderListImg">
+						<div class="orderImg">
+							<a target="_blank" href="Upin-${item.addon}.html">
+								<img src="${item.image_default}"/>
+							</a>
+						</div>
+					</div>
+					<div class="orderText">
+						<p class="orderName">
+							<a target="_blank" href="Upin-${item.addon}.html">${item.name}</a>
+						</p>
+						<div class="orderPrice"style="padding-top: 10px;">
+							<span class="YXprice">优选价 ￥${item.coupPrice}/件</span>
+							<br/>总计 <span class="itemTotal">${item.subtotal?string("currency")}</span>
+						</div>
+					</div>
+					<div id="num" class="numAdd" value="${item.num}" itemid="${item.id}" productid="${item.product_id}" price="${item.coupPrice}" proxyid="${item.addon}">
+						<div class="numAddIconBox" >
+							<span class="numAddIconBoxIcon"><img src="${ctx}/themes/default/img/31.png" alt=""></span>
+						</div>
+						<div class="numAddNum">
+							<input size="5" name="num" autocomplete="off" type="text" value="${item.num}" style="text-align:center;width: 30px;border-top-width: 2px;height: 30px;">
+						</div>
+						<div class="numAddIconBox" style="padding-top: 13px;height: 16px;">
+							<span class="numAbateIconBoxIcon"><img src="${ctx}/themes/default/img/32.png" alt=""></span>
+						</div>						
+					</div>
+				</li>	
+</#list>
+				
+
+			</ul>
+		</div>		
+		<div id="UpinBt" class="UpinBt" style="padding-bottom: 92px;">
+		    <div class="buyBox">
+		    	<span class="buyBoxIcon"><img src="${ctx}/themes/default/img/33.png" alt="" style="padding-bottom: 8px;"></span>		    		
+		    </div>
+		    <div class="UpinSelect" style="padding-left: 20px;">
+		    	包含：&nbsp;${cart.count}&nbsp;&nbsp;种商品	
+		    </div>
+			<div class="UpinAll">
+		    <#include '/cart/cartTotal.html'>
+			</div>
+		    <div class="buyBt">
+		    	<a type="button" class="checkout_btn">立刻下单</a>
+		    </div>
+		</div>
+<#else>
+	<div class="NoUpin" style="padding-left: 20px;padding-top: 30px;">
+		您的购物车中暂无商品。</br>
+		点击进入“<a href="discountHome.html">发现</a>”频道去挑选心爱的商品吧！
+	</div>
+</#if>		

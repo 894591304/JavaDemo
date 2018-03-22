@@ -1,0 +1,480 @@
+<#include '/admin/header.html' > 
+<script>
+	window.BASE_URL = '${ctx}/';
+</script>
+<link rel="stylesheet" type="text/css"
+	href="${ctx}/editor/ueditor/third-party/webuploader/webuploader.css">
+<script type="text/javascript"
+	src="${ctx}/editor/ueditor/third-party/webuploader/webuploader.min.js"></script>
+<div id="loading"></div>
+<div class="main">
+	<div style="display: block;" class="member_detail">
+		<div class="contentTab">
+			<ul class="tab">
+				<li tabid="1" class="active">基本信息</li>
+				<li tabid="2">他的银行卡</li>
+				<li tabid="3">他的会员</li>
+			</ul>
+		</div>
+		
+		<div class="shadowBoxWhite wf100 whiteBox">
+			<div class="text">
+				<div class="tab-page">
+					<div tabid="1" class="tab-panel">
+						<form id="editForm">
+							<table width="98%" border="0" cellspacing="0" cellpadding="8">
+								<thead>
+									<th colspan="4" style="background:#F7F7F7">网红信息</th>
+								</thead>
+								<input type="hidden" name="memberId" value="${credit.memberId}" />
+								<tr>
+									<th>身份证号：</th>
+									<td><input class="input_text easyui-validatebox" type="text"
+										id="idCard" name="idCard"
+										data-options="required:true" maxlength="18" value="${credit.idCard}"></input>
+									</td>
+								</tr>
+								<tr>	
+									<th>身份证照片：</th>
+									<td><input type="hidden" id="idImg" name="idImg">
+										<div id="fileList" class="uploader-list" style="display:inline-flex">
+											<#list idImgList as idImg>
+												<#if idImg!="">
+												<div class="file-item thumbnail" style="margin-right:10px;">
+												<img src="${ctx}/${idImg}" style="width:200px;"/>
+												</div>
+												</#if>
+											</#list>
+										</div>
+									</td>
+									<td><div id="filePicker">身份证上传</div></td>
+								</tr>
+								<tr>
+									<th>微博：</th>
+									<td><input class="input_text easyui-validatebox" type="text"
+										id="weibo" name="weibo" data-options="required:true"  value="${credit.weibo}"></input>
+									</td>
+									<th>粉丝数：</th>
+									<td><input class="input_text easyui-validatebox" type="text"
+										id="fans" name="fans" data-options="required:true"  value="${credit.fans}"></input>
+									</td>
+								</tr>
+								<tr>
+									<th>微信：</th>
+									<td><input class="input_text easyui-validatebox" type="text"
+										id="weixin" name="weixin" data-options="required:true"  value="${credit.weixin}"></input>
+									</td>
+									<th>粉丝数：</th>
+									<td><input class="input_text easyui-validatebox" type="text"
+										id="friends" name="friends" data-options="required:true"  value="${credit.friends}"></input>
+									</td>
+								</tr>
+								<tr>
+									<th>直播：</th>
+									<td><input class="input_text easyui-validatebox" type="text"
+										id="live" name="live" data-options="required:true"  value="${credit.live}"></input>
+									</td>
+								</tr>
+								<tr>	
+									<th>直播间id：</th>
+									<td><input class="input_text easyui-validatebox" type="text"
+										id="liveId" name="liveId" data-options="required:true"  value="${credit.liveId}"></input>
+									</td>
+									<th>直播粉丝数：</th>
+									<td><input class="input_text easyui-validatebox" type="text"
+										id="liveFans" name="liveFans" data-options="required:true"  value="${credit.liveFans}"></input>
+									</td>
+								</tr>
+								
+							</table>
+							<table width="98%" border="0" cellspacing="0" cellpadding="8">
+								<thead>
+									<th colspan="4" style="background:#F7F7F7">网红店铺信息</th>
+								</thead>
+								<tr>
+									<th>店铺名称：</th>
+									<td><input class="input_text easyui-validatebox" type="text"
+										id="shopName" name="shopName"
+										data-options="required:true" value="${memberShop.shopName!''}"></input>
+									</td>
+								</tr>
+								<tr>	
+									<th>店铺标签：</th>
+									<td><input class="input_text easyui-validatebox" type="text"
+										id="label" name="label"
+										data-options="required:true" value="${memberShop.label!''}"></input>
+									</td>
+								</tr>
+								<tr>
+									<th>店铺描述：</th>
+									<td><textarea class="input_text easyui-validatebox" style="width: 300px; height: 100px" type="text"
+										id="shopIntro" name="shopIntro" data-options="required:true"  >${memberShop.shopIntro!''}</textarea>
+									</td>
+									<th></th>
+									<td></td>
+								</tr>
+								<tr>
+									<th>用户头像：</th>
+									<td>
+									<div id="memberfileList" class="uploader-list" style="display:inline-flex">
+									<#if memberShop.memberImg?exists>
+										<div class="file-item thumbnail" style="margin-right:10px;">
+										<img src="${ctx}/${memberShop.memberImg}" style="width:100px;"/>
+										</div>
+									</#if>
+									</div>
+										<input type="hidden" id="memberImg" name="memberImg" data-options="required:true"  value="${memberShop.memberImg!''}"></input>
+										<div id="memberPicker">修改头像</div>
+									</td>
+									<th>背景图片：</th>
+									<td>
+									<div id="shopfileList" class="uploader-list" style="display:inline-flex">
+									<#if memberShop.shopImg?exists>
+										<div class="file-item thumbnail" style="margin-right:10px;">
+										<img src="${ctx}/${memberShop.shopImg}" style="width:100px;"/>
+										</div>
+									</#if>
+									</div>
+										<input type="hidden" id="shopImg" name="shopImg" data-options="required:true"  value="${memberShop.shopImg!''}"></input>
+										<div id="shopPicker">修改背景</div>
+									</td>
+								</tr>
+								<tr>
+									<th>联系电话：</th>
+									<td><input class="input_text easyui-validatebox" type="text"
+										id="phone" name="phone" data-options="required:true"  value="${memberShop.mobile!''}"></input>
+									</td>
+									<th>客服qq：</th>
+									<td><input class="input_text easyui-validatebox" type="text"
+										id="qq" name="qq" data-options="required:true"  value="${memberShop.qq!''}"></input>
+									</td>
+								</tr>
+							</table>
+						</form>
+						<a id="searchAdvance" class="easyui-linkbutton" onclick="submitForm()"
+								href="javascript:;">修改</a>
+					</div>
+					<div tabid="2" class="tab-panel" style="display:none">
+						<div class="shadowBoxWhite tableDiv">
+							<table class="easyui-datagrid" id="memberBankData">
+								<thead>
+									<tr>
+										<th data-options="field:'payeeBankCard',width:200,align:'center'">银行卡号码</th>
+										<th data-options="field:'payeeBankBranchName',width:200,align:'center'">银行名称</th>
+										<th data-options="field:'payeeCardHolder',width:200,align:'center'">银行账户名</th>
+										<th data-options="field:'payeeBankName',width:100,align:'center'">开户支行名称</th>
+										<th data-options="field:'payeeBankProvinceName',width:100,align:'center'">开户行所在省</th>
+										<th data-options="field:'payeeBankCityName',width:100,align:'center'">开户行所在市</th>
+									</tr>
+								</thead>
+							</table>
+						</div>
+					</div>
+					<div tabid="3" class="tab-panel" style="display:none">
+						<div class="shadowBoxWhite tableDiv">
+							<table class="easyui-datagrid" id="memberVipData" data-options="pageList: [5,10,15,20],pageSize:${pageSize},fitColumns:'true'" pagination="true" >
+								<thead>
+									<tr>
+										<th data-options="field:'member_id',checkbox:true"></th>
+										<th data-options="field:'uname',width:200">用户名</th>
+										<th data-options="field:'mobile',width:200">手机</th>
+										<th data-options="field:'vipbt',sortable:'true',width:200" formatter="formatTime">vip开始时间</th>
+										<th data-options="field:'v1lt',sortable:'true',width:200"formatter="formatEndTime">v1到期时间</th>
+										<th data-options="field:'v2lt',sortable:'true',width:200"formatter="formatEndTime">v2到期时间</th>
+										<th data-options="field:'v2lt',sortable:'true',width:200"formatter="formatEndTime">v3到期时间</th>
+										<th data-options="field:'logincount',width:200,sortable:'true'">本月登录次数</th>
+									</tr>
+								</thead>
+							</table>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	</div>
+</div>	
+<script>
+function formatTime(value, row, index) {
+	return value&&value>0?getFormatDateByLong(value, "yyyy-MM-dd hh:mm:ss"):"";
+}
+function formatEndTime(value, row, index) {
+	return value&&value>0?getFormatDateByLong(parseInt(row.vipbt)+parseInt(value), "yyyy-MM-dd hh:mm:ss"):"";
+}
+$(function(){
+	$('.tab > li').click(function(){
+		$(this).siblings().each(function(){
+			$(this).removeClass('active')
+		})
+		$(this).addClass('active');
+		$('.tab-panel').each(function(){
+			$(this).hide();
+		});
+		$('[tabid='+$(this).attr('tabid')+']').show();
+		if($(this).attr('tabid')==2){
+			var options = {};
+		    options.url = '${ctx}/shop/b2b2c/creditMemberBank!creditMemberBanklistJson.do';
+		    options.queryParams = { memberId: ${credit.memberId} };
+		    $('#memberBankData').datagrid(options);
+		}
+		if($(this).attr('tabid')==3){
+			var options = {};
+		    options.url = '${ctx}/shop/b2b2c/creditMemberVip!creditProxyViplistJson.do';
+		    options.queryParams = { memberId: ${credit.memberId} };
+		    $('#memberVipData').datagrid(options);
+		}
+	});
+})
+	function submitForm() {
+		$('#filePicker').find('input').remove();
+		$('#memberPicker').find('input').remove();
+		$('#shopPicker').find('input').remove();
+		var formflag = $("#editForm").form().form('validate');
+		if (formflag) {
+			$.Loading.show("正在修改......");
+			var options = {
+				url : "${ctx}/shop/b2b2c/creditMember!saveEditcreditMember.do",
+				type : "POST",
+				dataType : 'json',
+				success : function(result) {
+					if (result.result == 1) {
+						$.Loading.success(result.message);
+						parent.CloseTabByTitle("网红信息修改");
+											}
+					if (result.result == 0) {
+						$.Loading.error(result.message);
+					}
+				},
+				error : function(e) {
+					alert("出现错误 ，请重试");
+				}
+			};
+			$("#editForm").ajaxSubmit(options);
+		}
+	}
+	$(function(){
+		// 初始化Web Uploader
+		var uploader = WebUploader
+				.create({
+					// 选完文件后，是否自动上传。
+					auto : true,
+					// swf文件路径
+					swf : BASE_URL
+							+ '${ctx}/editor/ueditor/third-party/webuploader/Uploader.swf',
+					// 文件接收服务端。
+					server : '${ctx}/editor/ueditor/jsp/controller.jsp?action=uploadimage',
+					// 选择文件的按钮。可选。
+					// 内部根据当前运行是创建，可能是input元素，也可能是flash.
+					pick : '#filePicker',
+					// 只允许选择图片文件。
+					accept : {
+						title : 'Images',
+						extensions : 'gif,jpg,jpeg,bmp,png',
+						mimeTypes : 'image/*'
+					}
+				});
+		// 初始化Web Uploader
+		var uploader1 = WebUploader
+				.create({
+					// 选完文件后，是否自动上传。
+					auto : true,
+					// swf文件路径
+					swf : BASE_URL
+							+ '${ctx}/editor/ueditor/third-party/webuploader/Uploader.swf',
+					// 文件接收服务端。
+					server : '${ctx}/editor/ueditor/jsp/controller.jsp?action=uploadimage',
+					// 选择文件的按钮。可选。
+					// 内部根据当前运行是创建，可能是input元素，也可能是flash.
+					pick : '#memberPicker',
+					// 只允许选择图片文件。
+					accept : {
+						title : 'Images',
+						extensions : 'gif,jpg,jpeg,bmp,png',
+						mimeTypes : 'image/*'
+					}
+				});
+		// 初始化Web Uploader
+		var uploader2 = WebUploader
+				.create({
+					// 选完文件后，是否自动上传。
+					auto : true,
+					// swf文件路径
+					swf : BASE_URL
+							+ '${ctx}/editor/ueditor/third-party/webuploader/Uploader.swf',
+					// 文件接收服务端。
+					server : '${ctx}/editor/ueditor/jsp/controller.jsp?action=uploadimage',
+					// 选择文件的按钮。可选。
+					// 内部根据当前运行是创建，可能是input元素，也可能是flash.
+					pick : '#shopPicker',
+					// 只允许选择图片文件。
+					accept : {
+						title : 'Images',
+						extensions : 'gif,jpg,jpeg,bmp,png',
+						mimeTypes : 'image/*'
+					}
+				});
+		// 当有文件添加进来的时候
+		uploader
+				.on(
+						'fileQueued',
+						function(file) {
+							var $li = $('<div id="' + file.id + '" class="file-item thumbnail" style="margin-right:10px;">'
+									+ '<img>'
+									+ '<div class="info" style="text_algin:center;">'
+									+ file.name + '</div>' + '</div>'), $img = $li
+									.find('img');
+
+							// $list为容器jQuery实例
+							if($('#fileList').children().length>1){
+								$('#fileList').html($li);
+							}else{
+								$('#fileList').append($li);
+							}
+
+							// 创建缩略图
+							// 如果为非图片文件，可以不用调用此方法。
+							// thumbnailWidth x thumbnailHeight 为 100 x 100
+							uploader.makeThumb(file, function(error, src) {
+								if (error) {
+									$img.replaceWith('<span>不能预览</span>');
+									return;
+								}
+
+								$img.attr('src', src);
+							}, 100, 100);
+						});
+		// 当有文件添加进来的时候
+		uploader1
+				.on(
+						'fileQueued',
+						function(file) {
+							var $li = $('<div id="' + file.id + '" class="file-item thumbnail" style="margin-right:10px;">'
+									+ '<img>'
+									+ '<div class="info" style="text_algin:center;">'
+									+ file.name + '</div>' + '</div>'), $img = $li
+									.find('img');
+
+							// $list为容器jQuery实例
+							$('#memberfileList').html($li);
+
+							// 创建缩略图
+							// 如果为非图片文件，可以不用调用此方法。
+							// thumbnailWidth x thumbnailHeight 为 100 x 100
+							uploader.makeThumb(file, function(error, src) {
+								if (error) {
+									$img.replaceWith('<span>不能预览</span>');
+									return;
+								}
+
+								$img.attr('src', src);
+							}, 100, 100);
+						});
+		// 当有文件添加进来的时候
+		uploader2
+				.on(
+						'fileQueued',
+						function(file) {
+							var $li = $('<div id="' + file.id + '" class="file-item thumbnail" style="margin-right:10px;">'
+									+ '<img>'
+									+ '<div class="info" style="text_algin:center;">'
+									+ file.name + '</div>' + '</div>'), $img = $li
+									.find('img');
+
+							// $list为容器jQuery实例
+							$('#shopfileList').html($li);
+
+							// 创建缩略图
+							// 如果为非图片文件，可以不用调用此方法。
+							// thumbnailWidth x thumbnailHeight 为 100 x 100
+							uploader.makeThumb(file, function(error, src) {
+								if (error) {
+									$img.replaceWith('<span>不能预览</span>');
+									return;
+								}
+
+								$img.attr('src', src);
+							}, 100, 100);
+						});
+		// 文件上传过程中创建进度条实时显示。
+		uploader.on('uploadProgress', function(file, percentage) {
+			var $li = $('#' + file.id), $percent = $li.find('.progress span');
+
+			// 避免重复创建
+			if (!$percent.length) {
+				$percent = $('<p class="progress"><span></span></p>').appendTo(
+						$li).find('span');
+			}
+
+			$percent.css('width', percentage * 100 + '%');
+		});
+		// 文件上传过程中创建进度条实时显示。
+		uploader1.on('uploadProgress', function(file, percentage) {
+			var $li = $('#' + file.id), $percent = $li.find('.progress span');
+
+			// 避免重复创建
+			if (!$percent.length) {
+				$percent = $('<p class="progress"><span></span></p>').appendTo(
+						$li).find('span');
+			}
+
+			$percent.css('width', percentage * 100 + '%');
+		});
+		// 文件上传过程中创建进度条实时显示。
+		uploader2.on('uploadProgress', function(file, percentage) {
+			var $li = $('#' + file.id), $percent = $li.find('.progress span');
+
+			// 避免重复创建
+			if (!$percent.length) {
+				$percent = $('<p class="progress"><span></span></p>').appendTo(
+						$li).find('span');
+			}
+
+			$percent.css('width', percentage * 100 + '%');
+		});
+
+		// 文件上传成功，给item添加成功class, 用样式标记上传成功。
+		uploader.on('uploadSuccess', function(file, response) {
+			$('#' + file.id).addClass('upload-state-done');
+			if($('#idImg').val().indexOf(',')>0){
+				$('#idImg').val($('#idImg').val());
+			}else{
+				$('#idImg').val($('#idImg').val()+","+response.url);
+			}
+		});
+		
+		// 文件上传成功，给item添加成功class, 用样式标记上传成功。
+		uploader1.on('uploadSuccess', function(file, response) {
+			$('#' + file.id).addClass('upload-state-done');
+			$('#memberImg').val(response.url);
+		});
+		
+		// 文件上传成功，给item添加成功class, 用样式标记上传成功。
+		uploader2.on('uploadSuccess', function(file, response) {
+			$('#' + file.id).addClass('upload-state-done');
+			$('#shopImg').val(response.url);
+		});
+
+		// 文件上传失败，显示上传出错。
+		uploader.on('uploadError', function(file) {
+			var $li = $('#' + file.id), $error = $li.find('div.error');
+
+			// 避免重复创建
+			if (!$error.length) {
+				$error = $('<div class="error"></div>').appendTo($li);
+			}
+
+			$error.text('上传失败');
+		});
+
+		// 完成上传完了，成功或者失败，先删除进度条。
+		uploader.on('uploadComplete', function(file) {
+			$('#' + file.id).find('.progress').remove();
+		});
+		uploader1.on('uploadComplete', function(file) {
+			$('#' + file.id).find('.progress').remove();
+		});
+		uploader2.on('uploadComplete', function(file) {
+			$('#' + file.id).find('.progress').remove();
+		});
+	})
+</script>
+<#include '/admin/footer.html' >
