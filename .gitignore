@@ -22,3 +22,5 @@
 hs_err_pid*
 *.properties
 /WebContent/config/*
+/build
+/.settings
