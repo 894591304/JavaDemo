@@ -54,7 +54,7 @@ public class MyVipTicketTag extends BaseFreeMarkerTag{
 		try {
 			Integer proxyorderid = getUrlId();
 			ProxyOrder proxyOrder = this.proxyOrderManager.get(proxyorderid);
-			if(proxyOrder.getGoodsId()!=99999999&&proxyOrder.getGoodsId()!=99999998&&proxyOrder.getGoodsId()!=99999997){
+			if(proxyOrder.getGoodsId()!=499&&proxyOrder.getGoodsId()!=498&&proxyOrder.getGoodsId()!=497){
 				result.put("ticketget",0);
 				return result;
 			}
@@ -119,9 +119,9 @@ public class MyVipTicketTag extends BaseFreeMarkerTag{
 							result.put("notuse",0);
 						}
 					}
-					if(proxyOrder.getGoodsId()==99999999){
+					if(proxyOrder.getGoodsId()==499){
 						result.put("viptime", 360);
-					}else if(proxyOrder.getGoodsId()==99999998){
+					}else if(proxyOrder.getGoodsId()==498){
 						result.put("viptime", 90);
 					}else{
 						result.put("viptime", 30);

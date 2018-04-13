@@ -78,7 +78,10 @@ public class GoodsAgentHotListTag extends BaseFreeMarkerTag{
 					
 					Goods goods = this.goodsProxyManager.getGoods(pList.get(i).getGoodsId());
 					Credit credit = this.creditManager.get(member.getMember_id());
-					boolean b = this.proxyManager.checkCanProxy(member.getMember_id(),credit.getBrokerageId(),goods.getGoods_id());
+					boolean b = false;
+					if(goods!=null){
+						b = this.proxyManager.checkCanProxy(member.getMember_id(),credit.getBrokerageId(),goods.getGoods_id());
+					}
 					if(goods!=null&&goods.getDisabled()!=1&&goods.getMarket_enable()==1&&b==true){
 					if(pn<(page-1)*listnum){pn++;}else{
 						GoodsAgent goodsAgent = this.goodsAgentManager.get(pList.get(i).getGoodsId());
@@ -118,7 +121,10 @@ public class GoodsAgentHotListTag extends BaseFreeMarkerTag{
 					GoodsAgent goodsAgent = this.goodsAgentManager.get(pList.get(i).getGoodsId());
 					Goods goods = this.goodsProxyManager.getGoods(pList.get(i).getGoodsId());
 					Credit credit = this.creditManager.get(member.getMember_id());
-					boolean b = this.proxyManager.checkCanProxy(member.getMember_id(),credit.getBrokerageId(),goods.getGoods_id());
+					boolean b = false;
+					if(goods!=null){
+						b = this.proxyManager.checkCanProxy(member.getMember_id(),credit.getBrokerageId(),goods.getGoods_id());
+					}
 					if(goods!=null&&goods.getDisabled()!=1&&goods.getMarket_enable()==1&&b==true){
 						Map tlist = new HashMap();
 						tlist.put("name", goods.getName());

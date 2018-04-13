@@ -121,7 +121,7 @@ public class GoodsAgentAction extends WWAction {
 			return "json_message";
 		}
 		Goods goods = this.goodsProxyManager.getGoods(this.goodsid);
-		if(goods.getGoods_id()==99999999||goods.getGoods_id()==99999998||goods.getGoods_id()==99999997){
+		if(goods.getGoods_id()==499||goods.getGoods_id()==498||goods.getGoods_id()==497){
 			List<ProxyMemberBankInfo> plist = this.proxyMemberBankInfoManager.getByMemberId(member.getMember_id());
 			int count = plist.size();
 			if(count==0){
@@ -231,7 +231,7 @@ public class GoodsAgentAction extends WWAction {
 		this.proxyManager.edit(proxy);
 		this.followManager.msgUp(member.getMember_id());
 		VipLevelDetail vipLevelDetail = this.vipLevelDetailManager.getByMemberId(member.getMember_id());
-		if(proxy.getGoodsId()==99999999||proxy.getGoodsId()==99999998||proxy.getGoodsId()==99999997){
+		if(proxy.getGoodsId()==499||proxy.getGoodsId()==498||proxy.getGoodsId()==497){
 			if(vipLevelDetail==null){
 				this.json=JsonMessageUtil.getStringJson("result", "2");
 				return "json_message";

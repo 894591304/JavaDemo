@@ -75,7 +75,7 @@ public class MyPayOrderTag extends BaseFreeMarkerTag{
 			ProxyOrder proxyOrder2 = this.proxyOrderManager.get(ticketGive2.getProxyorderId());
 			TicketDetail ticketDetail2 = this.ticketDetailManager.get(proxyOrder2.getTicketId());
 			OrderItem orderItem2 = this.newOrderItemsManager.get(proxyOrder2.getItemId());
-			if(orderItem2.getGoods_id()!=99999999&&orderItem2.getGoods_id()!=99999998&&orderItem2.getGoods_id()!=99999997)
+			if(orderItem2.getGoods_id()!=499&&orderItem2.getGoods_id()!=498&&orderItem2.getGoods_id()!=497)
 			{
 				Goods goods2 = this.goodsProxyManager.getGoods(orderItem2.getGoods_id());
 				SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy年MM月dd日");
@@ -141,7 +141,7 @@ public class MyPayOrderTag extends BaseFreeMarkerTag{
 			Map payMap = new HashMap();
 			TicketDetail ticketDetail = this.ticketDetailManager.get(pList.get(i).getTicketId());
 			OrderItem orderItem = this.newOrderItemsManager.get(pList.get(i).getItemId());
-			if(orderItem.getGoods_id()!=99999999&&orderItem.getGoods_id()!=99999998&&orderItem.getGoods_id()!=99999997)
+			if(orderItem.getGoods_id()!=499&&orderItem.getGoods_id()!=498&&orderItem.getGoods_id()!=497)
 			{
 				Goods goods = this.goodsProxyManager.getGoods(orderItem.getGoods_id());
 				SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy年MM月dd日");

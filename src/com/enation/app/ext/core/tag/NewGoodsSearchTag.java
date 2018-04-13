@@ -76,7 +76,10 @@ public class NewGoodsSearchTag extends BaseFreeMarkerTag{
 				Map gMap = new HashMap();
 				Goods goods = gList.get(i);
 				Credit credit = this.creditManager.get(member.getMember_id());
-				boolean b = this.proxyManager.checkCanProxy(member.getMember_id(),credit.getBrokerageId(),goods.getGoods_id());
+				boolean b = false;
+				if(goods!=null){
+					b = this.proxyManager.checkCanProxy(member.getMember_id(),credit.getBrokerageId(),goods.getGoods_id());
+				}
 				if(this.proxyManager.checkProxy(goods.getGoods_id(), member.getMember_id())!=1&&b==true)
 				{
 					if(goods!=null&&goods.getDisabled()!=1&&goods.getMarket_enable()==1){

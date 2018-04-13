@@ -86,7 +86,7 @@ public class WapAction extends WWAction{
 					int id3 = 0;
 					for(int o=0;o<os;o++){
 						OrderItem oItem = oList.get(o);
-						if(oItem.getGoods_id()==99999999){
+						if(oItem.getGoods_id()==499){
 							money1 = money1+oItem.getNum()*oItem.getPrice();
 							id1 = Integer.valueOf(oItem.getAddon());
 							Proxy proxy = this.proxyManager.get(id1);
@@ -100,7 +100,7 @@ public class WapAction extends WWAction{
 							zsyDetail.setStatus(0);
 							this.zsyDetailManager.add(zsyDetail);						
 						}
-						if(oItem.getGoods_id()==99999998){
+						if(oItem.getGoods_id()==498){
 							money2 = money2+oItem.getNum()*oItem.getPrice();
 							id2 = Integer.valueOf(oItem.getAddon());
 							Proxy proxy = this.proxyManager.get(id2);
@@ -114,7 +114,7 @@ public class WapAction extends WWAction{
 							zsyDetail.setStatus(0);
 							this.zsyDetailManager.add(zsyDetail);
 						}
-						if(oItem.getGoods_id()==99999997){
+						if(oItem.getGoods_id()==497){
 							money3 = money3+oItem.getNum()*oItem.getPrice();
 							id3 = Integer.valueOf(oItem.getAddon());
 							Proxy proxy = this.proxyManager.get(id3);

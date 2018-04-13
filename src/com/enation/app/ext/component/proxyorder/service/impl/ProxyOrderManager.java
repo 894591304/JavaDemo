@@ -48,7 +48,7 @@ public class ProxyOrderManager extends BaseSupport<ProxyOrder> implements IProxy
 
 
 	public List<ProxyOrder> getVipCardOutOfTime() {
-		String sql = "select * from proxyorder where goodsId=99999999 or goodsId=9999998 or goodsId=99999997 and soldTime < ?";
+		String sql = "select * from proxyorder where goodsId=499 or goodsId=498 or goodsId=497 and soldTime < ?";
 		long time = System.currentTimeMillis()/1000;
 		time = time-10*24*60*60;
 		List<ProxyOrder> pList = this.baseDaoSupport.queryForList(sql,ProxyOrder.class,new Object[]{time});

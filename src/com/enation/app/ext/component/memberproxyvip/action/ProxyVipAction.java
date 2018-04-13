@@ -76,13 +76,13 @@ public class ProxyVipAction extends WWAction{
 			long now = System.currentTimeMillis();
 			String ntime = String.valueOf(now/1000);
 			memberProxyVip.setVipBT(ntime);
-			if(orderItem.getGoods_id()==99999999){
+			if(orderItem.getGoods_id()==499){
 				memberProxyVip.setV1LT(String.valueOf(360*24*60*60));
 				memberProxyVip.setVipEX("360");
-			}else if(orderItem.getGoods_id()==99999998){
+			}else if(orderItem.getGoods_id()==498){
 				memberProxyVip.setV1LT(String.valueOf(90*24*60*60));
 				memberProxyVip.setVipEX("90");
-			}else if(orderItem.getGoods_id()==99999997){
+			}else if(orderItem.getGoods_id()==497){
 				memberProxyVip.setV1LT(String.valueOf(30*24*60*60));
 				memberProxyVip.setVipEX("30");
 			}else{
@@ -102,13 +102,13 @@ public class ProxyVipAction extends WWAction{
 			long now = System.currentTimeMillis();
 			String ntime = String.valueOf(now/1000);
 			memberProxyVip.setVipBT(ntime);
-			if(orderItem.getGoods_id()==99999999){
+			if(orderItem.getGoods_id()==499){
 				memberProxyVip.setV1LT(String.valueOf(360*24*60*60));
 				memberProxyVip.setVipEX(String.valueOf(Integer.valueOf(memberProxyVip.getVipEX())+360));
-			}else if(orderItem.getGoods_id()==99999998){
+			}else if(orderItem.getGoods_id()==498){
 				memberProxyVip.setV1LT(String.valueOf(90*24*60*60));
 				memberProxyVip.setVipEX(String.valueOf(Integer.valueOf(memberProxyVip.getVipEX())+90));
-			}else if(orderItem.getGoods_id()==99999997){
+			}else if(orderItem.getGoods_id()==497){
 				memberProxyVip.setV1LT(String.valueOf(30*24*60*60));
 				memberProxyVip.setVipEX(String.valueOf(Integer.valueOf(memberProxyVip.getVipEX())+30));
 			}else{
@@ -125,13 +125,13 @@ public class ProxyVipAction extends WWAction{
 		}else{
 			int time = 0;
 			long timestamp = 0;
-			if(orderItem.getGoods_id()==99999999){
+			if(orderItem.getGoods_id()==499){
 				time=360;
 				timestamp = 360*24*60*60;
-			}else if(orderItem.getGoods_id()==99999998){
+			}else if(orderItem.getGoods_id()==498){
 				time=90;
 				timestamp = 90*24*60*60;
-			}else if(orderItem.getGoods_id()==99999997){
+			}else if(orderItem.getGoods_id()==497){
 				time=30;
 				timestamp = 30*24*60*60;
 			}else{

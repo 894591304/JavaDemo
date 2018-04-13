@@ -55,7 +55,7 @@ public class MyTicketTag extends BaseFreeMarkerTag{
 		try {
 			Integer proxyorderid = getUrlId();
 			ProxyOrder proxyOrder = this.proxyOrderManager.get(proxyorderid);
-			if(proxyOrder.getGoodsId()==99999999||proxyOrder.getGoodsId()==99999998||proxyOrder.getGoodsId()==99999997){
+			if(proxyOrder.getGoodsId()==499||proxyOrder.getGoodsId()==498||proxyOrder.getGoodsId()==497){
 				result.put("ticketget",0);
 				return result;
 			}
